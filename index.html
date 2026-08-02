@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>ポーカー・トレーナー｜ゼロから対人デビューまで</title>
+<meta name="description" content="テキサスホールデム・ポーカーのルールを全くの初心者向けに解説。役の強さ・ゲームの流れを学び、神視点デモとクイズで理解し、CPU対戦＋AIコーチで実戦練習。すべて無料のポーカー学習サイトです。">
+<style>
+:root{
+  --bg0:#05070f; --panel:rgba(17,24,48,.72); --panel2:rgba(28,38,74,.82);
+  --line:#233158; --line2:#31427a;
+  --txt:#eaefff; --sub:#8fa0cf;
+  --cyan:#29e0ff; --magenta:#ff2d95; --gold:#ffd23e; --mint:#59f5c0; --purple:#8a6cff;
+  --red:#ff5470; --ok:#59f5c0; --ng:#ff5470;
+  --card-w:46px; --card-h:64px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  background:#05070f;
+  background-image:
+    radial-gradient(900px 520px at 88% -10%, rgba(255,45,149,.16), transparent 60%),
+    radial-gradient(820px 520px at -12% 18%, rgba(41,224,255,.13), transparent 55%),
+    radial-gradient(760px 760px at 50% 118%, rgba(138,108,255,.14), transparent 62%);
+  background-attachment:fixed;
+  color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
+  line-height:1.65;-webkit-tap-highlight-color:transparent}
+header{padding:18px 16px 12px;text-align:center;border-bottom:1px solid rgba(41,224,255,.18)}
+header h1{font-size:21px;font-weight:800;letter-spacing:.06em;display:inline-block;
+  background:linear-gradient(90deg,#29e0ff,#8a6cff 55%,#ff2d95);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 0 14px rgba(41,224,255,.35))}
+header p{font-size:12px;color:var(--sub);letter-spacing:.05em;margin-top:2px}
+/* tabs */
+nav{display:flex;gap:6px;padding:12px 10px 2px;max-width:860px;margin:0 auto;overflow-x:auto}
+nav button{flex:1;min-width:64px;min-height:46px;background:var(--panel);color:var(--sub);
+  border:1px solid var(--line);border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;
+  padding:7px 4px;backdrop-filter:blur(6px);transition:box-shadow .2s,color .2s}
+nav button.on{color:#fff;border-color:rgba(41,224,255,.75);
+  box-shadow:0 0 14px rgba(41,224,255,.35), inset 0 0 16px rgba(41,224,255,.12)}
+nav button .sm{display:block;font-size:10px;font-weight:400;color:var(--sub)}
+main{max-width:860px;margin:0 auto;padding:14px 12px 60px}
+.tabpane{display:none}
+.tabpane.on{display:block}
+/* onboarding path */
+.path{display:flex;gap:6px;margin-bottom:14px}
+.path .st{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:7px 5px;text-align:center;font-size:11px;color:var(--sub);cursor:pointer;min-height:46px;backdrop-filter:blur(6px)}
+.path .st b{display:block;font-size:12px;color:var(--txt)}
+.path .st.done{border-color:rgba(89,245,192,.6);box-shadow:0 0 12px rgba(89,245,192,.18)}
+.path .st.done b::after{content:" ✓";color:var(--mint)}
+/* generic panel */
+.box{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px;backdrop-filter:blur(6px)}
+.box h2{font-size:16px;margin-bottom:8px;color:var(--gold);letter-spacing:.03em;text-shadow:0 0 12px rgba(255,210,62,.35)}
+.box h3{font-size:14px;margin:12px 0 6px;color:#cfe0ff}
+.box p{font-size:14px;margin-bottom:8px}
+.box ul,.box ol{font-size:14px;padding-left:20px;margin-bottom:8px}
+.box li{margin-bottom:4px}
+.note{background:rgba(41,224,255,.08);border-left:3px solid var(--cyan);padding:9px 11px;border-radius:0 10px 10px 0;font-size:13px;margin:8px 0}
+.warn{background:rgba(255,84,112,.09);border-left:3px solid var(--red);padding:9px 11px;border-radius:0 10px 10px 0;font-size:13px;margin:8px 0}
+/* accordion rules */
+.acc{border:1px solid var(--line);border-radius:14px;margin-bottom:10px;overflow:hidden;background:var(--panel);backdrop-filter:blur(6px);transition:border-color .2s,box-shadow .2s}
+.acc.open{border-color:rgba(41,224,255,.55);box-shadow:0 0 14px rgba(41,224,255,.14)}
+.acc>button{width:100%;text-align:left;background:none;border:none;color:var(--txt);font-size:15px;font-weight:700;padding:13px 14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;min-height:48px;gap:6px}
+.acc>button .num{color:var(--cyan);margin-right:8px;text-shadow:0 0 8px rgba(41,224,255,.5)}
+.acc>button .chev{color:var(--sub);transition:.2s}
+.acc.open>button .chev{transform:rotate(90deg)}
+.acc .body{display:none;padding:0 14px 14px;border-top:1px solid var(--line)}
+.acc.open .body{display:block}
+.acc>button .read{font-size:11px;color:var(--mint);margin-left:auto;margin-right:6px;display:none;white-space:nowrap}
+.acc.readed>button .read{display:inline}
+/* playing cards */
+.pcard{display:inline-flex;flex-direction:column;justify-content:space-between;width:var(--card-w);height:var(--card-h);
+  background:linear-gradient(170deg,#ffffff,#e9eeff);border-radius:7px;border:1px solid #b9c4e8;color:#141b38;font-weight:800;
+  padding:3px 4px;margin:2px;vertical-align:middle;box-shadow:0 2px 7px rgba(0,0,0,.5);font-size:15px;line-height:1.05;position:relative}
+.pcard .r{font-size:15px}
+.pcard .s{font-size:17px;align-self:flex-end}
+.pcard.red{color:#e02458}
+.pcard.back{background:linear-gradient(135deg,#3346b5,#7b2fb3);border-color:#5a6ae0;box-shadow:0 2px 7px rgba(0,0,0,.5), inset 0 0 12px rgba(255,255,255,.14)}
+.pcard.back::after{content:"";position:absolute;inset:3px;border:1px solid rgba(255,255,255,.35);border-radius:4px}
+.pcard.dim{opacity:.35}
+.pcard.hi{outline:2px solid var(--gold);outline-offset:-1px;box-shadow:0 0 12px rgba(255,210,62,.65)}
+.cards{display:inline-block;white-space:nowrap}
+.crow{margin:6px 0}
+/* hand ranking table */
+.ranktbl{width:100%;border-collapse:collapse;font-size:13px}
+.ranktbl td,.ranktbl th{border-bottom:1px solid var(--line);padding:7px 4px;text-align:left;vertical-align:middle}
+.ranktbl .nm{font-weight:700;white-space:nowrap;color:#dfe8ff}
+.ranktbl .pr{color:var(--sub);font-size:11px}
+.ranktbl .cards .pcard{--card-w:34px;--card-h:48px;font-size:12px;margin:1px}
+.ranktbl .cards .pcard .r{font-size:12px}.ranktbl .cards .pcard .s{font-size:13px}
+/* flow diagram */
+.flow{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.flow .fstep{background:var(--panel2);border:1px solid var(--line2);border-radius:12px;padding:8px 10px;font-size:12px;flex:1;min-width:110px}
+.flow .fstep b{display:block;color:var(--cyan);font-size:13px;text-shadow:0 0 8px rgba(41,224,255,.4)}
+/* poker table */
+.ptable{background:radial-gradient(ellipse at 50% 32%, #133a63 0%, #0b2140 56%, #071527 100%);
+  border:2px solid rgba(41,224,255,.45);border-radius:130px;padding:16px 10px;margin:10px 0;position:relative;min-height:330px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  box-shadow:0 0 26px rgba(41,224,255,.2), inset 0 0 70px rgba(0,0,0,.55), inset 0 0 20px rgba(41,224,255,.1)}
+.seatrow{display:flex;justify-content:space-around;align-items:flex-start;gap:4px}
+.seat{text-align:center;min-width:96px;max-width:150px;position:relative;padding:6px 4px 4px;border-radius:12px}
+.seat .nm{font-size:12px;font-weight:800;letter-spacing:.04em;color:#dfe8ff}
+.seat .chips{font-size:11px;color:#ffe9a8;text-shadow:0 0 8px rgba(255,210,62,.3)}
+.seat .tag{display:inline-block;font-size:11px;background:rgba(6,10,24,.68);border:1px solid var(--line);border-radius:9px;padding:1px 8px;margin-top:3px;min-height:18px;color:#dfe6ff;max-width:100%;line-height:1.45}
+.seat .tag.act-fold{color:#ff9db4;border-color:rgba(255,84,112,.45)}
+.seat .tag.act-raise,.seat .tag.act-bet,.seat .tag.act-allin{color:#ffe9a8;border-color:rgba(255,210,62,.5)}
+.seat .tag.act-call{color:#aee9ff;border-color:rgba(41,224,255,.45)}
+.seat .tag.act-win{color:var(--mint);border-color:rgba(89,245,192,.65);box-shadow:0 0 12px rgba(89,245,192,.35);font-weight:800}
+.seat.folded{opacity:.4}
+.seat.turn{box-shadow:0 0 0 2px rgba(41,224,255,.85), 0 0 18px rgba(41,224,255,.45);background:rgba(41,224,255,.07);animation:turnpulse 1.6s ease-in-out infinite}
+@keyframes turnpulse{50%{box-shadow:0 0 0 2px rgba(41,224,255,.45), 0 0 8px rgba(41,224,255,.2)}}
+.seat .btnmark{display:inline-block;background:linear-gradient(#ffffff,#d9e2ff);color:#1a2247;font-size:9px;font-weight:900;border-radius:50%;width:16px;height:16px;line-height:16px;margin-right:4px;vertical-align:1px;box-shadow:0 0 8px rgba(255,255,255,.5);text-align:center}
+.seat .betchip{font-size:12px;color:#ffe9a8;background:rgba(255,210,62,.13);border:1px solid rgba(255,210,62,.5);border-radius:10px;padding:0 8px;display:inline-block;margin-top:3px;box-shadow:0 0 8px rgba(255,210,62,.2)}
+.seat .hole .pcard{--card-w:38px;--card-h:54px;font-size:13px}
+.seat .hole .pcard .r{font-size:13px}.seat .hole .pcard .s{font-size:14px}
+.boardarea{text-align:center;padding:4px 0}
+.boardarea .pot{font-size:13px;font-weight:800;color:#ffe9a8;margin-bottom:2px;text-shadow:0 0 12px rgba(255,210,62,.45);letter-spacing:.04em}
+.boardarea .street{font-size:11px;color:#9fc5ef;letter-spacing:.14em}
+.board .pcard{--card-w:44px;--card-h:62px}
+.board .slot{display:inline-block;width:44px;height:62px;border:1px dashed rgba(130,160,230,.45);border-radius:7px;margin:2px;vertical-align:middle}
+/* demo */
+.demolist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
+.demolist button{background:var(--panel);border:1px solid var(--line);border-radius:14px;color:var(--txt);padding:10px 12px;font-size:13px;font-weight:700;cursor:pointer;min-height:52px;text-align:left;backdrop-filter:blur(6px);transition:border-color .2s,box-shadow .2s}
+.demolist button .sm{display:block;font-size:11px;font-weight:400;color:var(--sub)}
+.demolist button.on{border-color:rgba(41,224,255,.75);box-shadow:0 0 14px rgba(41,224,255,.28)}
+.demolist button.done::after{content:" ✓";color:var(--mint)}
+.narr{background:var(--panel2);border:1px solid var(--line2);border-left:3px solid var(--cyan);border-radius:12px;padding:12px;font-size:14px;min-height:76px;margin:8px 0}
+.narr b{color:var(--gold)}
+.stepnav{display:flex;gap:8px;align-items:center}
+.stepnav button{flex:1;min-height:48px;border-radius:13px;border:none;font-size:15px;font-weight:800;cursor:pointer}
+.stepnav .next{background:linear-gradient(135deg,#ffd23e,#ff9d2e);color:#221503;box-shadow:0 0 18px rgba(255,170,50,.35)}
+.stepnav .prev{background:var(--panel);color:var(--txt);border:1px solid var(--line);max-width:110px}
+.stepnav .cnt{font-size:12px;color:var(--sub);min-width:52px;text-align:center}
+/* quiz */
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+.qopts button{min-height:48px;background:var(--panel2);border:1px solid var(--line2);border-radius:13px;color:var(--txt);font-size:14px;font-weight:700;cursor:pointer;padding:8px}
+.qopts button.correct{background:rgba(89,245,192,.12);border-color:rgba(89,245,192,.7);box-shadow:0 0 12px rgba(89,245,192,.25);color:#c9ffe9}
+.qopts button.wrong{background:rgba(255,84,112,.12);border-color:rgba(255,84,112,.7);color:#ffc9d4}
+.qopts button:disabled{cursor:default}
+.qresult{font-size:14px;min-height:24px;margin:6px 0;font-weight:800}
+.qresult.ok{color:var(--mint);text-shadow:0 0 10px rgba(89,245,192,.4)}
+.qresult.ng{color:var(--ng)}
+.qstat{font-size:12px;color:var(--sub)}
+.segbar{display:flex;gap:6px;margin-bottom:10px}
+.segbar button{flex:1;min-height:44px;background:var(--panel);border:1px solid var(--line);border-radius:12px;color:var(--sub);font-size:13px;font-weight:700;cursor:pointer;backdrop-filter:blur(6px)}
+.segbar button.on{color:#fff;border-color:rgba(255,210,62,.7);box-shadow:0 0 12px rgba(255,210,62,.25)}
+/* play actions */
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;justify-content:center}
+.actions button{min-height:52px;min-width:96px;border-radius:14px;font-size:15px;font-weight:800;cursor:pointer;padding:6px 14px;backdrop-filter:blur(6px)}
+.actions .a-fold{background:linear-gradient(160deg,rgba(255,84,112,.24),rgba(255,84,112,.07));border:1px solid rgba(255,84,112,.6);color:#ffb9c8}
+.actions .a-check,.actions .a-call{background:linear-gradient(160deg,rgba(41,224,255,.22),rgba(41,224,255,.06));border:1px solid rgba(41,224,255,.6);color:#bdefff}
+.actions .a-raise,.actions .a-bet{background:linear-gradient(160deg,rgba(255,210,62,.24),rgba(255,157,46,.08));border:1px solid rgba(255,210,62,.6);color:#ffe9a8}
+.actions .a-allin{background:linear-gradient(160deg,rgba(255,45,149,.26),rgba(138,108,255,.12));border:1px solid rgba(255,45,149,.6);color:#ffc7e5}
+.actions .a-next{background:linear-gradient(135deg,#ffd23e,#ff9d2e);border:none;color:#221503;box-shadow:0 0 18px rgba(255,170,50,.4)}
+.actions button:disabled{opacity:.4;cursor:default}
+.coach{background:rgba(9,26,46,.78);border:1px solid rgba(41,224,255,.5);border-radius:14px;padding:12px;font-size:13px;margin:8px 0;box-shadow:0 0 16px rgba(41,224,255,.14)}
+.coach h3{color:var(--cyan);font-size:13px;margin:0 0 6px;text-shadow:0 0 8px rgba(41,224,255,.5)}
+.coach .adv{font-weight:800;color:#ffe9a8;text-shadow:0 0 8px rgba(255,210,62,.35)}
+.playlog{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:10px 12px;font-size:12px;color:var(--sub);max-height:150px;overflow-y:auto;margin-top:8px}
+.playopts{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:13px;margin-bottom:8px}
+.playopts select{background:var(--panel2);color:var(--txt);border:1px solid var(--line2);border-radius:9px;padding:8px;font-size:14px;min-height:40px}
+.playopts label{display:flex;align-items:center;gap:6px;min-height:40px}
+.playopts input[type=checkbox]{width:20px;height:20px;accent-color:#29e0ff}
+.playopts #newGameBtn{min-height:40px;border-radius:10px;border:1px solid var(--line2);background:var(--panel2);color:var(--txt);padding:0 14px;font-size:13px;cursor:pointer}
+.bigmsg{text-align:center;font-size:15px;font-weight:800;color:var(--gold);min-height:24px;margin:4px 0;text-shadow:0 0 12px rgba(255,210,62,.4)}
+/* cheat sheet */
+.gloss dt{font-weight:800;color:var(--cyan);font-size:13px;margin-top:8px;text-shadow:0 0 8px rgba(41,224,255,.35)}
+.gloss dd{font-size:13px;margin-left:0;color:var(--txt)}
+.starttbl{width:100%;border-collapse:collapse;font-size:12px}
+.starttbl th,.starttbl td{border:1px solid var(--line2);padding:5px 6px;text-align:left}
+.starttbl th{background:var(--panel2);white-space:nowrap;color:#cfe0ff}
+.badge{display:inline-block;background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:1px 8px;font-size:11px;color:var(--sub);margin-left:6px}
+footer{max-width:860px;margin:0 auto;padding:0 12px 40px;color:var(--sub);font-size:11px;text-align:center}
+a{color:var(--cyan)}
+@media (max-width:560px){
+  nav button .sm{display:none}
+  nav button{min-width:56px;font-size:13px}
+  main{padding:10px 8px 50px}
+  .box{padding:12px}
+  .path .st{font-size:10px;padding:6px 3px}
+  .ptable{border-radius:70px;padding:12px 4px;min-height:300px}
+  .seat{min-width:72px;max-width:118px}
+  .seat .hole .pcard{--card-w:32px;--card-h:46px;font-size:11px}
+  .seat .hole .pcard .r{font-size:11px}.seat .hole .pcard .s{font-size:12px}
+  .board .pcard{--card-w:31px;--card-h:45px;font-size:12px;margin:1px}
+  .board .pcard .r{font-size:12px}.board .pcard .s{font-size:12px}
+  .board .slot{width:31px;height:45px;margin:1px}
+  .demolist{grid-template-columns:1fr}
+  .qopts{grid-template-columns:1fr}
+  .actions button{min-width:86px;font-size:14px;flex:1}
+  .ranktbl .pr{display:none}
+  .ranktbl .cards .pcard{--card-w:30px;--card-h:42px;margin:1px}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>ポーカー・トレーナー <span class="suit">♥</span>♠</h1>
+  <p>テキサスホールデムをゼロから覚えて、対人デビューまで</p>
+</header>
+<nav id="tabs">
+  <button data-tab="rules" class="on">ルール<span class="sm">まずここから</span></button>
+  <button data-tab="demo">デモ<span class="sm">見て覚える</span></button>
+  <button data-tab="quiz">クイズ<span class="sm">役を判定</span></button>
+  <button data-tab="play">実戦<span class="sm">CPUと対戦</span></button>
+  <button data-tab="sheet">虎の巻<span class="sm">早見表</span></button>
+</nav>
+<main>
+<div class="path" id="path">
+  <div class="st" data-go="rules"><b>① ルール</b>読んで知る</div>
+  <div class="st" data-go="demo"><b>② デモ</b>見て理解</div>
+  <div class="st" data-go="quiz"><b>③ クイズ</b>役を覚える</div>
+  <div class="st" data-go="play"><b>④ 実戦</b>CPUで練習</div>
+</div>
+
+<!-- ============ RULES ============ -->
+<section class="tabpane on" id="pane-rules">
+  <div class="box" style="padding:12px 16px">
+    <p style="margin:0;font-size:13px;color:var(--sub)">世界で一番遊ばれているポーカー「<b style="color:var(--txt)">テキサスホールデム</b>」を覚えます。8つのセクションを上から順に読めばOK。読んだところには ✓ が付きます。</p>
+  </div>
+  <div id="ruleList"></div>
+</section>
+
+<!-- ============ DEMO ============ -->
+<section class="tabpane" id="pane-demo">
+  <div class="box" style="padding:12px 16px">
+    <p style="margin:0;font-size:13px;color:var(--sub)">実際の1ハンドを<b style="color:var(--txt)">1手ずつ解説付き</b>で再生します。全員の手札が見える「神視点」なので、なぜその行動をするのかが分かります。6本すべて見るのがおすすめ。</p>
+  </div>
+  <div class="demolist" id="demoList"></div>
+  <div id="demoStage" style="display:none">
+    <div class="ptable" id="demoTable"></div>
+    <div class="narr" id="demoNarr"></div>
+    <div class="stepnav">
+      <button class="prev" id="demoPrev">← 戻る</button>
+      <span class="cnt" id="demoCnt"></span>
+      <button class="next" id="demoNext">次へ →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ QUIZ ============ -->
+<section class="tabpane" id="pane-quiz">
+  <div class="segbar">
+    <button id="qm-name" class="on">役あてクイズ</button>
+    <button id="qm-win">どっちが勝ち？</button>
+  </div>
+  <div class="box">
+    <p id="quizQuestion" style="font-weight:700"></p>
+    <div id="quizCards"></div>
+    <div class="qopts" id="quizOpts"></div>
+    <div class="qresult" id="quizResult"></div>
+    <div id="quizExplain" style="font-size:13px;color:var(--sub)"></div>
+    <div class="actions"><button class="a-next" id="quizNext">次の問題 →</button></div>
+    <div class="qstat" id="quizStat"></div>
+  </div>
+</section>
+
+<!-- ============ PLAY ============ -->
+<section class="tabpane" id="pane-play">
+  <div class="playopts box" style="margin-bottom:10px;padding:10px 14px">
+    <label>相手の人数
+      <select id="oppCount"><option value="1">1人</option><option value="2" selected>2人</option><option value="3">3人</option></select>
+    </label>
+    <label><input type="checkbox" id="coachOn" checked> コーチ表示</label>
+    <button id="newGameBtn" style="min-height:40px;border-radius:10px;border:1px solid var(--line);background:var(--panel2);color:var(--txt);padding:0 14px;font-size:13px;cursor:pointer">リセット</button>
+  </div>
+  <div class="ptable" id="playTable"></div>
+  <div class="bigmsg" id="playMsg"></div>
+  <div class="coach" id="coachBox" style="display:none"></div>
+  <div class="actions" id="playActions"></div>
+  <div class="playlog" id="playLog"></div>
+</section>
+
+<!-- ============ SHEET ============ -->
+<section class="tabpane" id="pane-sheet">
+  <div class="box">
+    <h2>役の強さ 早見表（上ほど強い）</h2>
+    <table class="ranktbl" id="sheetRanks"></table>
+  </div>
+  <div class="box">
+    <h2>最初に参加していい手札（超シンプル版）</h2>
+    <p style="font-size:13px">迷ったらこの表だけ守ればOK。「これ以外は全部フォールド」でも初心者は十分勝負になります。</p>
+    <table class="starttbl">
+      <tr><th>ペア</th><td>AA・KK・QQ・JJ・TT は<b>レイズ</b>。99〜22は安くならコール</td></tr>
+      <tr><th>Aの入った手</th><td>AK・AQ・AJ は<b>レイズ</b>。A+小さい数字は同じマーク（スーテッド）ならコール</td></tr>
+      <tr><th>絵札同士</th><td>KQ・KJ・QJ はコール〜レイズ</td></tr>
+      <tr><th>連続した数字</th><td>同じマークの T9・98・87 など（スーテッドコネクター）は安くならコール</td></tr>
+      <tr><th>それ以外</th><td><b>フォールド</b>。特に「バラバラで小さい2枚」（例 7♦2♣）は即降り</td></tr>
+    </table>
+    <div class="note">T=10のこと。「AK」のように書いたら数字の組み合わせを指します（マークは問わない）。</div>
+  </div>
+  <div class="box">
+    <h2>アクションの選び方（困ったら）</h2>
+    <ul style="font-size:13px">
+      <li><b>誰もベットしていない</b> → 自信あり＝ベット／なし＝チェック</li>
+      <li><b>誰かがベットしてきた</b> → 強い＝レイズ／五分＝コール／弱い＝フォールド</li>
+      <li><b>迷ったら</b> → フォールド。降りてもそのハンドの損はブラインドだけ</li>
+    </ul>
+  </div>
+  <div class="box">
+    <h2>用語ミニ辞典</h2>
+    <dl class="gloss" id="glossary"></dl>
+  </div>
+</section>
+</main>
+<footer>ポーカー・トレーナー — 学習用コンテンツです。金銭を賭ける行為は推奨しません。<br>
+<span style="display:inline-block;margin-top:6px"><a href="privacy.html" style="color:var(--sub);margin:0 5px">プライバシーポリシー</a>｜<a href="disclaimer.html" style="color:var(--sub);margin:0 5px">免責事項</a>｜<a href="about.html" style="color:var(--sub);margin:0 5px">運営者情報</a>｜<a href="contact.html" style="color:var(--sub);margin:0 5px">お問い合わせ</a></span></footer>
+<script>
+/* ================= utils & cards ================= */
+const SUITS=['s','h','d','c'];
+const SUIT_CH={s:'♠',h:'♥',d:'♦',c:'♣'};
+const RANK_CH={2:'2',3:'3',4:'4',5:'5',6:'6',7:'7',8:'8',9:'9',10:'10',11:'J',12:'Q',13:'K',14:'A'};
+const RANK_JA={14:'エース(A)',13:'キング(K)',12:'クイーン(Q)',11:'ジャック(J)',10:'10',9:'9',8:'8',7:'7',6:'6',5:'5',4:'4',3:'3',2:'2'};
+function pc(str){ // 'As' -> {r:14,s:'s'}
+  const m=str.trim();
+  const sch=m[m.length-1];
+  let rs=m.slice(0,-1);
+  const map={A:14,K:13,Q:12,J:11,T:10};
+  const r=map[rs]||parseInt(rs,10);
+  return {r,s:sch};
+}
+function pcs(str){ return str.trim()? str.trim().split(/\s+/).map(pc):[]; }
+function cstr(c){ return (c.r===10?'T':RANK_CH[c.r])+c.s; }
+function cardHTML(c,cls){
+  if(c==='back') return '<span class="pcard back '+(cls||'')+'"></span>';
+  const red=(c.s==='h'||c.s==='d')?' red':'';
+  return '<span class="pcard'+red+(cls?' '+cls:'')+'"><span class="r">'+RANK_CH[c.r]+'</span><span class="s">'+SUIT_CH[c.s]+'</span></span>';
+}
+function cardsHTML(arr,hiSet){
+  return '<span class="cards">'+arr.map(c=>{
+    if(c==='back')return cardHTML('back');
+    const hi=hiSet&&hiSet.has(cstr(c));
+    return cardHTML(c,hi?'hi':'');
+  }).join('')+'</span>';
+}
+function newDeck(){
+  const d=[];
+  for(const s of SUITS)for(let r=2;r<=14;r++)d.push({r,s});
+  return d;
+}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function removeCards(deck,used){const u=new Set(used.map(cstr));return deck.filter(c=>!u.has(cstr(c)));}
+
+/* ================= hand evaluator ================= */
+const HAND_NAMES=['ハイカード','ワンペア','ツーペア','スリーカード','ストレート','フラッシュ','フルハウス','フォーカード','ストレートフラッシュ'];
+function rank5(cs){
+  const rs=cs.map(c=>c.r).sort((a,b)=>b-a);
+  const flush=cs.every(c=>c.s===cs[0].s);
+  const cnt={};rs.forEach(r=>cnt[r]=(cnt[r]||0)+1);
+  const groups=Object.keys(cnt).map(r=>[+r,cnt[r]]).sort((a,b)=>b[1]-a[1]||b[0]-a[0]);
+  const uniq=[...new Set(rs)];
+  let sh=0;
+  if(uniq.length===5){
+    if(uniq[0]-uniq[4]===4)sh=uniq[0];
+    else if(uniq[0]===14&&uniq[1]===5&&uniq[4]===2)sh=5;
+  }
+  if(flush&&sh)return[8,sh];
+  if(groups[0][1]===4)return[7,groups[0][0],groups[1][0]];
+  if(groups[0][1]===3&&groups[1][1]===2)return[6,groups[0][0],groups[1][0]];
+  if(flush)return[5].concat(rs);
+  if(sh)return[4,sh];
+  if(groups[0][1]===3)return[3,groups[0][0],groups[1][0],groups[2][0]];
+  if(groups[0][1]===2&&groups[1][1]===2)return[2,groups[0][0],groups[1][0],groups[2][0]];
+  if(groups[0][1]===2)return[1,groups[0][0],groups[1][0],groups[2][0],groups[3][0]];
+  return [0].concat(rs);
+}
+function cmpRank(a,b){
+  for(let i=0;i<Math.max(a.length,b.length);i++){
+    const x=a[i]||0,y=b[i]||0;
+    if(x!==y)return x-y;
+  }
+  return 0;
+}
+const COMBO5_7=(()=>{const r=[];for(let a=0;a<3;a++)for(let b=a+1;b<4;b++)for(let c=b+1;c<5;c++)for(let d=c+1;d<6;d++)for(let e=d+1;e<7;e++)r.push([a,b,c,d,e]);return r;})();
+const COMBO5_6=(()=>{const r=[];for(let a=0;a<2;a++)for(let b=a+1;b<3;b++)for(let c=b+1;c<4;c++)for(let d=c+1;d<5;d++)for(let e=d+1;e<6;e++)r.push([a,b,c,d,e]);return r;})();
+function bestHand(cards){ // 5-7 cards -> {rank, five}
+  if(cards.length===5)return{rank:rank5(cards),five:cards.slice()};
+  const combos=cards.length===7?COMBO5_7:COMBO5_6;
+  let best=null,bestFive=null;
+  for(const idx of combos){
+    const five=idx.map(i=>cards[i]);
+    const r=rank5(five);
+    if(!best||cmpRank(r,best)>0){best=r;bestFive=five;}
+  }
+  return {rank:best,five:bestFive};
+}
+function handNameJa(rank){
+  if(rank[0]===8&&rank[1]===14)return 'ロイヤルフラッシュ';
+  let n=HAND_NAMES[rank[0]];
+  if(rank[0]===1||rank[0]===3||rank[0]===7)n+='（'+RANK_CH[rank[1]]+'）';
+  if(rank[0]===2)n+='（'+RANK_CH[rank[1]]+'と'+RANK_CH[rank[2]]+'）';
+  if(rank[0]===0)n+='（'+RANK_CH[rank[1]]+'ハイ）';
+  return n;
+}
+/* equity by Monte Carlo */
+function equityMC(hole,board,nOpp,iters){
+  iters=iters||200;
+  let win=0,tie=0;
+  const base=removeCards(newDeck(),hole.concat(board));
+  for(let it=0;it<iters;it++){
+    const d=shuffle(base.slice());
+    let k=0;
+    const opps=[];
+    for(let o=0;o<nOpp;o++)opps.push([d[k++],d[k++]]);
+    const fullBoard=board.slice();
+    while(fullBoard.length<5)fullBoard.push(d[k++]);
+    const my=bestHand(hole.concat(fullBoard)).rank;
+    let beat=true,tied=false;
+    for(const oh of opps){
+      const or=bestHand(oh.concat(fullBoard)).rank;
+      const c=cmpRank(my,or);
+      if(c<0){beat=false;tied=false;break;}
+      if(c===0)tied=true;
+    }
+    if(beat&&!tied)win++;else if(beat&&tied)tie++;
+  }
+  return (win+tie*0.5)/iters;
+}
+
+/* ================= storage ================= */
+const STORE_KEY='poker_trainer_v1';
+let store={rulesRead:{},demosDone:{},quiz:{name:{ok:0,total:0},win:{ok:0,total:0}},hands:0,handsWon:0};
+try{const s=localStorage.getItem(STORE_KEY);if(s)store=Object.assign(store,JSON.parse(s));}catch(e){}
+function save(){try{localStorage.setItem(STORE_KEY,JSON.stringify(store));}catch(e){}}
+
+/* ================= tabs & path ================= */
+const tabs=document.querySelectorAll('#tabs button');
+function showTab(name){
+  tabs.forEach(b=>b.classList.toggle('on',b.dataset.tab===name));
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.toggle('on',p.id==='pane-'+name));
+  window.scrollTo(0,0);
+}
+tabs.forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.querySelectorAll('#path .st').forEach(el=>el.addEventListener('click',()=>showTab(el.dataset.go)));
+function refreshPath(){
+  const sts=document.querySelectorAll('#path .st');
+  const rulesDone=Object.keys(store.rulesRead).length>=8;
+  const demosDone=Object.keys(store.demosDone).length>=6;
+  const quizDone=(store.quiz.name.ok+store.quiz.win.ok)>=10;
+  const playDone=store.hands>=5;
+  [rulesDone,demosDone,quizDone,playDone].forEach((d,i)=>sts[i].classList.toggle('done',d));
+}
+
+/* ================= RULES content ================= */
+const RULES=[
+{t:'ポーカーってどんなゲーム？',b:`
+<p>このアプリで覚えるのは、世界標準のポーカー「<b>テキサスホールデム</b>」。友だちとの対戦もアミューズメントポーカーも、ほぼ全部これです。</p>
+<p>ルールの骨格はたった2つ：</p>
+<ol>
+<li>自分だけの手札<b>2枚</b>と、みんなで使う共有カード<b>5枚</b>の合計7枚から、<b>一番強い5枚の組み合わせ（役）</b>を作る</li>
+<li>カードが配られるたびに<b>チップを賭け合う</b>。最後まで残った人の中で一番強い役の人が、賭けられたチップ（ポット）を総取り</li>
+</ol>
+<div class="crow">手札2枚 → ${'CARDS:As Kd'}　共有5枚 → ${'CARDS:Ah 7c 3s 9d 4c'}</div>
+<p>そして超重要ポイント。勝ち方は2通りあります。</p>
+<ul>
+<li><b>① 最後の見せ合い（ショーダウン）で一番強い役を持っている</b></li>
+<li><b>② 相手を全員降ろす（フォールドさせる）</b> — 役がなくても勝てる！</li>
+</ul>
+<div class="note">「強いカードを引くゲーム」ではなく「チップの賭け合いで駆け引きするゲーム」。だから運だけでなく実力が出ます。</div>`},
+{t:'役の強さを覚えよう（これが9割）',b:`
+<p>初心者が最初に覚えるべきはこれだけ。<b>役の強さの順番</b>です。全10種類、上ほど強い。</p>
+<div id="ruleRankTbl"></div>
+<div class="note">最初は「<b>ワンペア＜ツーペア＜スリーカード＜ストレート＜フラッシュ</b>」の並びだけ覚えればOK。フルハウス以上はめったに出ません。迷ったら「虎の巻」タブでいつでも見られます。</div>
+<p>役が同じ場合は<b>数字の大きさ</b>で勝負（Aが最強、2が最弱）。それも同じなら残りのカード（<b>キッカー</b>）で決まります。デモ⑤で実例を見られます。</p>`},
+{t:'1ハンドの流れ（4回の賭けタイム）',b:`
+<p>1回の勝負を「ハンド」と呼びます。共有カードが少しずつ開かれ、そのたびに賭けのターン（ベッティングラウンド）があります。</p>
+<div class="flow">
+<div class="fstep"><b>① プリフロップ</b>手札2枚が配られた直後に1回目の賭け</div>
+<div class="fstep"><b>② フロップ</b>共有カード3枚が開く → 2回目の賭け</div>
+<div class="fstep"><b>③ ターン</b>4枚目が開く → 3回目の賭け</div>
+<div class="fstep"><b>④ リバー</b>5枚目が開く → 4回目の賭け</div>
+<div class="fstep"><b>⑤ ショーダウン</b>残った人で手札を見せ合い、最強の役がポット総取り</div>
+</div>
+<p>途中で1人以外全員が降りたら、その時点で残った1人の勝ち。<b>手札を見せずに</b>ポットをもらえます。</p>
+<div class="note">つまり最大4回、チップを賭けるチャンス（＝降りるチャンス）がある。「行くか、降りるか」を4回判断するゲームです。</div>`},
+{t:'5つのアクション',b:`
+<p>自分の番でできることは5つだけ。状況によって使えるものが変わります。</p>
+<ul>
+<li><b>フォールド（降りる）</b>：手札を捨てて勝負から抜ける。それまで賭けたチップは戻らないが、追加の損もない</li>
+<li><b>チェック（パス）</b>：誰もベットしていないとき限定。賭けずに次の人へ回す</li>
+<li><b>ベット（賭ける）</b>：誰もベットしていないとき、先にチップを賭ける</li>
+<li><b>コール（受ける）</b>：相手のベットと同じ額を払って勝負を続ける</li>
+<li><b>レイズ（上乗せ）</b>：相手のベットにさらに上乗せして返す</li>
+</ul>
+<p>持っているチップを全部賭けるのが<b>オールイン</b>です。</p>
+<div class="note">整理すると──誰もベットしていない：<b>チェック or ベット</b>／誰かがベットした：<b>フォールド or コール or レイズ</b>。この2パターンだけ！</div>`},
+{t:'ブラインドとポジション',b:`
+<p>全員が「いい手が来るまで待つ」と勝負が始まらないので、<b>強制参加費</b>があります。</p>
+<ul>
+<li><b>ディーラーボタン（D）</b>：親の位置を示すマーク。1ハンドごとに左隣へ移動</li>
+<li><b>スモールブラインド（SB）</b>：ボタンの左隣の人が強制で払う（例：10）</li>
+<li><b>ビッグブラインド（BB）</b>：さらに左隣の人が倍額を払う（例：20）</li>
+</ul>
+<p>賭けの順番は時計回り。そして大事なのが<b>ポジション（席順）</b>の考え方：</p>
+<div class="note"><b>後に行動できる人ほど有利。</b>相手の出方を見てから決められるからです。ボタンの位置が一番有利。逆に最初に動く人は情報ゼロで判断させられるので、早い順番のときほど強い手だけで参加するのがセオリー。</div>`},
+{t:'ショーダウンと勝敗の決まり方',b:`
+<p>リバーの賭けが終わったら、残っている人で手札を見せ合います（ショーダウン）。</p>
+<ul>
+<li>手札2枚＋共有5枚＝<b>7枚の中から最強の5枚</b>が自動的にあなたの役になる（宣言ミスしても大丈夫。カードが全て）</li>
+<li>手札を2枚使っても、1枚だけ使っても、<b>0枚（共有5枚がそのまま最強）</b>でもOK</li>
+<li>役も数字も完全に同じなら<b>引き分け（チョップ）</b>でポットを山分け</li>
+</ul>
+<p>例：手札 ${'CARDS:As Kd'}、共有 ${'CARDS:Ah 7c 3s 9d 4c'} → 最強の5枚は A・A・K・9・7 で「<b>Aのワンペア</b>」。</p>
+<div class="note">負けが確定している側は手札を見せずに捨ててもOK（マック）。ただし練習中は見せ合うと勉強になります。</div>`},
+{t:'初心者が勝つための3原則',b:`
+<p>ルールを覚えたら、次はこの3つだけ意識してください。これだけで「カモ」を卒業できます。</p>
+<h3>① 参加するハンドを絞る</h3>
+<p>配られた2枚が弱ければ<b>すぐフォールド</b>。目安は虎の巻の表のとおり。初心者は「7割降りる」くらいでちょうどいいです。</p>
+<h3>② 降りる勇気を持つ</h3>
+<p>一度コールしても、途中で「負けてそう」と思ったら降りてOK。<b>すでに払ったチップは取り返そうとしない</b>。これが上手い人と下手な人の一番の差です。</p>
+<h3>③ 強い手は強く打つ</h3>
+<p>いい役ができたら遠慮せずベット・レイズ。チェックばかりだと、勝てるハンドで稼げません。</p>
+<div class="warn">やりがちなNG：「ここまで賭けたからもったいない」で全部コール／どんな2枚でも参加／強い役なのにずっとチェック。</div>`},
+{t:'対人デビューのマナー＆作法',b:`
+<p>ルールと同じくらい大事なのが<b>テーブルマナー</b>。これを守れば初心者でも歓迎されます。</p>
+<ul>
+<li><b>順番を守る</b>：自分の番が来るまでアクションしない（先に降りるのもNG）</li>
+<li><b>口に出したら有効</b>：「コール」「レイズ」と言葉で宣言するのが確実。宣言はチップより優先される</li>
+<li><b>レイズは一度に</b>：チップを何回かに分けて出す「ストリングベット」は反則。宣言してから一度に出す</li>
+<li><b>手札は伏せて手元に</b>：見せない・卓から離さない。カードの上にチップを1枚置くと誤回収防止（カードプロテクト）</li>
+<li><b>チップは自分の前に置く</b>：ポットに投げ込まない（スプラッシュ禁止）</li>
+<li><b>降りたら口出ししない</b>：進行中のハンドの感想・自分の捨てた手札の話はNG</li>
+<li><b>勝っても負けても淡々と</b>：わざと長考して焦らす（スローロール）は最も嫌われる行為</li>
+</ul>
+<div class="note">分からなくなったら「すみません、今いくらコールですか？」と聞けば大丈夫。聞くのはマナー違反ではありません。</div>
+<div class="warn">日本では現金を賭けるポーカーは違法です。遊ぶならチップだけのホームゲームや、アミューズメントポーカー店（入場料制・換金なし）で。</div>
+<h3>準備ができたら対人デビュー！</h3>
+<p>このアプリの「実戦」タブでCPU相手に数十ハンド練習したら、<a href="https://poke-chip.onrender.com" target="_blank" rel="noopener" style="color:var(--gold)">ポケチップ</a>（ブラウザだけで友だちとオンライン対戦できる無料ポーカールーム）で本物の対人戦へ。スマホでルームを作って招待リンクを送るだけで始められます。</p>`},
+];
+/* render rules */
+(function(){
+  const wrap=document.getElementById('ruleList');
+  RULES.forEach((r,i)=>{
+    const d=document.createElement('div');
+    d.className='acc'+(store.rulesRead[i]?' readed':'');
+    const body=r.b.replace(/CARDS:([2-9TJQKA][shdc](?: [2-9TJQKA][shdc])*)/g,(m,g)=>cardsHTML(pcs(g)));
+    d.innerHTML='<button><span><span class="num">'+(i+1)+'</span>'+r.t+'</span><span class="read">✓ 読了</span><span class="chev">▶</span></button><div class="body">'+body+'</div>';
+    d.querySelector('button').addEventListener('click',()=>{
+      const open=d.classList.toggle('open');
+      if(open){store.rulesRead[i]=1;d.classList.add('readed');save();refreshPath();}
+    });
+    wrap.appendChild(d);
+  });
+  /* rank table inside rule 2 */
+  const rt=document.getElementById('ruleRankTbl');
+  rt.innerHTML=rankTableHTML();
+})();
+function rankTableHTML(){
+  const rows=[
+    ['ロイヤルフラッシュ','同じマークのA-K-Q-J-10','As Ks Qs Js Ts','約65万回に1回'],
+    ['ストレートフラッシュ','同じマークで数字が連続','9h 8h 7h 6h 5h','約7万回に1回'],
+    ['フォーカード','同じ数字4枚','Qs Qh Qd Qc 3s','約4千回に1回'],
+    ['フルハウス','スリーカード＋ワンペア','Js Jh Jd 8c 8s','約700回に1回'],
+    ['フラッシュ','同じマーク5枚','Ad Jd 8d 6d 2d','約500回に1回'],
+    ['ストレート','数字が5つ連続（マーク不問）','8s 7h 6d 5c 4s','約250回に1回'],
+    ['スリーカード','同じ数字3枚','7s 7h 7d Kc 2s','約47回に1回'],
+    ['ツーペア','ペアが2組','As Ah 9d 9c 5s','約21回に1回'],
+    ['ワンペア','同じ数字2枚','Ks Kh Td 7c 3s','約2.4回に1回'],
+    ['ハイカード','役なし。一番大きい数字で勝負','Ad Qs 9h 6c 3d','—'],
+  ];
+  return '<table class="ranktbl"><tr><th>役</th><th>例</th></tr>'+rows.map((r,i)=>
+    '<tr><td><span class="nm">'+(10-i>1?'':'')+r[0]+'</span><br><span class="pr">'+r[1]+'・出る確率 '+r[3]+'</span></td><td class="cards">'+cardsHTML(pcs(r[2]))+'</td></tr>'
+  ).join('')+'</table>';
+}
+document.getElementById('sheetRanks').outerHTML=rankTableHTML();
+/* glossary */
+(function(){
+  const G=[
+    ['ハンド','1回の勝負。また、自分の手札2枚のこと'],
+    ['ポット','全員が賭けたチップの合計。勝者が総取り'],
+    ['ブラインド','SB/BBが払う強制ベット。ゲームを動かすための参加費'],
+    ['ディーラーボタン','親の位置マーク。ここが一番有利な席'],
+    ['プリフロップ／フロップ／ターン／リバー','賭けラウンドの名前。共有カードが0→3→4→5枚と開く'],
+    ['ショーダウン','最後に手札を見せ合って勝敗を決めること'],
+    ['キッカー','役に使わない残りのカード。同じ役同士の勝敗を決める'],
+    ['スーテッド','手札2枚が同じマークのこと（例 A♥9♥）。フラッシュの可能性が上がる'],
+    ['オフスート','手札2枚のマークがバラバラのこと'],
+    ['ドロー','あと1枚で役が完成する状態（フラッシュドロー等）'],
+    ['アウツ','役を完成させてくれる残りカードの枚数'],
+    ['オールイン','持ちチップ全部を賭けること'],
+    ['チョップ','引き分け。ポットを山分け'],
+    ['マック','手札を見せずに捨てて負けを認めること'],
+    ['ブラフ','弱い手なのに強いふりでベットし、相手を降ろす技'],
+    ['バリューベット','強い手で相手からチップを引き出すためのベット'],
+    ['ポジション','行動する順番のこと。後ろの席ほど有利'],
+    ['スタック','手持ちのチップ総量'],
+    ['ニット／フィッシュ','堅すぎる人／弱い人の俗称。フィッシュ＝カモ'],
+    ['GTO','理論上最適な戦略のこと。初心者はまず基本3原則でOK'],
+  ];
+  document.getElementById('glossary').innerHTML=G.map(g=>'<dt>'+g[0]+'</dt><dd>'+g[1]+'</dd>').join('');
+})();
+/* ================= shared table renderer ================= */
+/* state: {btn,turn,street,pot,board:[c],seats:[{name,chips,bet,cards,folded,tag,tagCls}]} cards: array | 'back' | null */
+function seatHTML(s,idx,st){
+  const cls='seat'+(s.folded?' folded':'')+(st.turn===idx?' turn':'');
+  let hole='';
+  if(s.cards==='back')hole=cardHTML('back')+cardHTML('back');
+  else if(Array.isArray(s.cards))hole=s.cards.map(c=>cardHTML(c)).join('');
+  const btn=st.btn===idx?'<span class="btnmark">D</span>':'';
+  const bet=s.bet>0?'<span class="betchip">'+s.bet+'</span>':'';
+  const tag=s.tag?'<span class="tag '+(s.tagCls||'')+'">'+s.tag+'</span>':'<span class="tag" style="background:none;border:none"></span>';
+  return '<div class="'+cls+'"><div class="nm">'+btn+s.name+'</div><div class="chips">'+s.chips+'</div><div class="hole">'+hole+'</div>'+bet+tag+'</div>';
+}
+function renderTable(el,st){
+  const boardCards=st.board.map(c=>cardHTML(c)).join('');
+  let slots='';
+  for(let i=st.board.length;i<5;i++)slots+='<span class="slot"></span>';
+  /* seats layout: [0]=top, [1]=left, [2]=right, [3]=bottom(you). If fewer seats, adapt */
+  const n=st.seats.length;
+  let topSeats=[],midL=null,midR=null,bottom=null;
+  if(n===4){topSeats=[0];midL=1;midR=2;bottom=3;}
+  else if(n===3){topSeats=[];midL=0;midR=1;bottom=2;}
+  else {topSeats=[0];bottom=1;}
+  let html='<div class="seatrow">'+topSeats.map(i=>seatHTML(st.seats[i],i,st)).join('')+'</div>';
+  html+='<div class="seatrow" style="align-items:center">';
+  if(midL!==null)html+=seatHTML(st.seats[midL],midL,st);
+  html+='<div class="boardarea"><div class="pot">ポット '+st.pot+'</div><div class="board">'+boardCards+slots+'</div><div class="street">'+(st.street||'')+'</div></div>';
+  if(midR!==null)html+=seatHTML(st.seats[midR],midR,st);
+  html+='</div>';
+  html+='<div class="seatrow">'+(bottom!==null?seatHTML(st.seats[bottom],bottom,st):'')+'</div>';
+  el.innerHTML=html;
+}
+
+/* ================= DEMO mode ================= */
+/* steps built from base + patches; each built step is a FULL snapshot (declarative, no runtime diffing) */
+function buildDemo(names,basePatch,stepDefs){
+  const mk=()=>({btn:-1,turn:-1,street:'',pot:0,board:[],seats:names.map(nm=>({name:nm,chips:1000,bet:0,cards:null,folded:false,tag:'',tagCls:''}))});
+  let cur=mk();
+  applyPatch(cur,basePatch);
+  const steps=[];
+  for(const [text,patch] of stepDefs){
+    cur=JSON.parse(JSON.stringify(cur));
+    /* clear one-shot action tags each step unless patch re-sets them */
+    cur.seats.forEach(s=>{if(s.tagCls==='act-once'){s.tag='';s.tagCls='';}});
+    applyPatch(cur,patch||{});
+    steps.push({t:text,st:cur});
+  }
+  return steps;
+}
+function applyPatch(st,p){
+  for(const k of ['btn','turn','street','pot'])if(p[k]!==undefined)st[k]=p[k];
+  if(p.board!==undefined)st.board=pcs(p.board);
+  for(let i=0;i<st.seats.length;i++){
+    const sp=p['s'+i];
+    if(!sp)continue;
+    const s=st.seats[i];
+    for(const k of ['chips','bet','folded','tag','tagCls'])if(sp[k]!==undefined)s[k]=sp[k];
+    if(sp.cards!==undefined)s.cards=sp.cards==='back'?'back':(sp.cards===null?null:pcs(sp.cards));
+  }
+}
+const NAMES4=['タクミ','ユキ','リナ','あなた'];
+/* helper shorthands for patches */
+const A=(tag,cls)=>({tag,tagCls:cls||'act-once'});
+const DEMOS=[
+{title:'① 基本の流れ',sub:'配る→賭ける→ショーダウンまで通しで見る',steps:buildDemo(NAMES4,{btn:2},[
+ ['4人テーブルです。<b>D</b>マークが<b>ディーラーボタン</b>（親の位置）。今回はリナがボタンで、賭けの順番はあなた→ユキ→タクミ→リナの時計回りです。',{}],
+ ['まず強制参加費。ボタンの左隣のあなたが<b>スモールブラインド(SB) 10</b>、その隣のユキが<b>ビッグブラインド(BB) 20</b>を払います。これがこのハンドの参加費のベースになります。',{pot:30,s3:{chips:990,bet:10,tag:'SB',tagCls:''},s1:{chips:980,bet:20,tag:'BB',tagCls:''}}],
+ ['手札が2枚ずつ配られました（デモなので全員の手札が見えています）。あなたは<b>A♠K♦</b>＝トップクラスの手！ タクミの7♦2♣は最弱クラス、ユキの9♥8♥とリナの8♠7♠はそこそこの投機ハンドです。',{s0:{cards:'7d 2c'},s1:{cards:'9h 8h'},s2:{cards:'8s 7s'},s3:{cards:'As Kd'}}],
+ ['<b>プリフロップ</b>の賭け開始。最初はBBの左隣のタクミから。7♦2♣は勝負にならないので<b>フォールド</b>（降り）。弱い手をすぐ捨てるのは正しいプレイです。',{street:'プリフロップ',turn:0,s0:{folded:true,tag:'フォールド',tagCls:'act-fold'}}],
+ ['リナは8♠7♠で<b>コール</b>。BBと同じ20を払って参加します。',{turn:2,pot:50,s2:{chips:980,bet:20,tag:'コール',tagCls:'act-call'}}],
+ ['あなたの番。A♠K♦は強いので、コールではなく<b>レイズ</b>で上乗せします（合計60に）。強い手は強く打つ——参加者を絞り、ポットを育てる狙いです。',{turn:3,pot:100,s3:{chips:940,bet:60,tag:'レイズ 60',tagCls:'act-raise'}}],
+ ['ユキは9♥8♥で40を追加して<b>コール</b>（合計60）。',{turn:1,pot:140,s1:{chips:940,bet:60,tag:'コール',tagCls:'act-call'}}],
+ ['リナも40追加でコール。全員の賭け額が60で揃ったのでプリフロップ終了。賭けたチップは中央の<b>ポット</b>に集まります（合計180）。',{turn:-1,pot:180,s2:{chips:940,bet:60,tag:'コール',tagCls:'act-call'}}],
+ ['<b>フロップ</b>：共有カードが3枚オープン！ A♥7♣3♠。あなたはAのペア（一番大きい数字のペア＝<b>トップペア</b>）ができました。リナは7のペア。ユキは何もなし。',{street:'フロップ',board:'Ah 7c 3s',s1:{bet:0,tag:''},s2:{bet:0,tag:''},s3:{bet:0,tag:''}}],
+ ['フロップ以降はボタンに近い順…ではなく<b>ボタンの左隣から</b>。あなたから行動です。トップペアは十分強いので<b>ベット100</b>。',{turn:3,pot:280,s3:{chips:840,bet:100,tag:'ベット 100',tagCls:'act-bet'}}],
+ ['ユキは役なし＆見込み薄なのでフォールド。',{turn:1,s1:{folded:true,tag:'フォールド',tagCls:'act-fold'}}],
+ ['リナは7のペアで様子見コール。',{turn:2,pot:380,s2:{chips:840,bet:100,tag:'コール',tagCls:'act-call'}}],
+ ['<b>ターン</b>：4枚目は9♦。状況は変わらず、あなたが引き続きリード。<b>ベット150</b>。',{street:'ターン',board:'Ah 7c 3s 9d',turn:3,pot:530,s2:{bet:0,tag:''},s3:{chips:690,bet:150,tag:'ベット 150',tagCls:'act-bet'}}],
+ ['リナ、またもコール。ポットは680まで育ちました。',{turn:2,pot:680,s2:{chips:690,bet:150,tag:'コール',tagCls:'act-call'}}],
+ ['<b>リバー</b>：最後の1枚は4♣。今回はお互い<b>チェック</b>（賭けずにパス）して、いよいよショーダウンへ。',{street:'リバー',board:'Ah 7c 3s 9d 4c',turn:-1,s2:{bet:0,tag:'チェック',tagCls:'act-once'},s3:{bet:0,tag:'チェック',tagCls:'act-once'}}],
+ ['<b>ショーダウン！</b> あなたの最強5枚は A・A・K・9・7 の「<b>Aのワンペア</b>」、リナは「7のワンペア」。Aペア＞7ペアであなたの勝ち！ ポット680を獲得です（収支+370）。',{street:'ショーダウン',pot:680,s3:{chips:1370,tag:'WIN！ Aのペア',tagCls:'act-win'},s2:{tag:'7のペア',tagCls:''}}],
+])},
+{title:'② 強い役はベットで育てる',sub:'バリューベット＝勝ちハンドで稼ぐ技術',steps:buildDemo(NAMES4,{btn:0},[
+ ['今回のボタンはタクミ。リナがSB10、あなたがBB20を払ってスタートです。',{pot:30,s2:{chips:990,bet:10,tag:'SB',tagCls:''},s3:{chips:980,bet:20,tag:'BB',tagCls:''}}],
+ ['あなたの手札は<b>K♥K♠</b>！ AAに次ぐ2番目に強い手です。ユキはA♦9♦、タクミとリナは弱め。',{s0:{cards:'Jc 4s'},s1:{cards:'Ad 9d'},s2:{cards:'Kc 3d'},s3:{cards:'Kh Ks'}}],
+ ['ユキがコール20、タクミとリナはフォールド。リナが払ったSB10はポットに残ります（降りても賭けた分は戻りません）。',{street:'プリフロップ',pot:50,s1:{chips:980,bet:20,tag:'コール',tagCls:'act-call'},s0:{folded:true,tag:'フォールド',tagCls:'act-fold'},s2:{folded:true,tag:'フォールド',tagCls:'act-fold'}}],
+ ['あなたの番。BBはこのままチェックもできますが……KKなら<b>レイズ一択</b>（合計80に）。「強い手は強く打つ」が今回のテーマです。',{turn:3,pot:110,s3:{chips:920,bet:80,tag:'レイズ 80',tagCls:'act-raise'}}],
+ ['ユキはA♦9♦でコール。ヘッズアップ（1対1）でフロップへ。',{turn:1,pot:170,s1:{chips:920,bet:80,tag:'コール',tagCls:'act-call'}}],
+ ['フロップは<b>K♦9♣2♥</b>。あなたはKの<b>スリーカード</b>（手札ペア＋ボード1枚＝セットと呼びます）！ ユキも9のペアができています。',{street:'フロップ',board:'Kd 9c 2h',s1:{bet:0,tag:''},s3:{bet:0,tag:''}}],
+ ['ここで大事な考え方。「強い役ができたら、隠すよりベットで<b>払ってくれる相手から取る</b>」。ユキは9ペアがあるのでコールしてくれそう。あなた、ベット100。',{turn:3,pot:270,s3:{chips:820,bet:100,tag:'ベット 100',tagCls:'act-bet'}}],
+ ['ユキ、コール。（実はこのコールが典型的な「コールしすぎ」。9ペアはKペアにもAペアにも負けています）',{turn:1,pot:370,s1:{chips:820,bet:100,tag:'コール',tagCls:'act-call'}}],
+ ['ターン7♠。あなたはさらにベット250。ポットが大きくなるほど、後のベットも大きくできます。これが「ポットを育てる」ということ。',{street:'ターン',board:'Kd 9c 2h 7s',turn:3,pot:620,s1:{bet:0,tag:''},s3:{chips:570,bet:250,tag:'ベット 250',tagCls:'act-bet'}}],
+ ['ユキ、またコール。',{turn:1,pot:870,s1:{chips:570,bet:250,tag:'コール',tagCls:'act-call'}}],
+ ['リバー3♣。最後まで価値を取り切ります。ベット300。',{street:'リバー',board:'Kd 9c 2h 7s 3c',turn:3,pot:1170,s1:{bet:0,tag:''},s3:{chips:270,bet:300,tag:'ベット 300',tagCls:'act-bet'}}],
+ ['ユキ、意地のコール。ショーダウンです。',{turn:1,pot:1470,s1:{chips:270,bet:300,tag:'コール',tagCls:'act-call'}}],
+ ['あなたの「Kの<b>スリーカード</b>」＞ユキの「9のワンペア」。ポット1470を獲得！ もし全部チェックしていたらポットは170のまま。<b>同じ勝ちでも、ベットしたかどうかで儲けが8倍違う</b>——これがバリューベットです。',{street:'ショーダウン',turn:-1,s3:{chips:1740,tag:'WIN！ Kの3カード',tagCls:'act-win'},s1:{tag:'9のペア',tagCls:''}}],
+])},
+{title:'③ 降りる勇気',sub:'負けを小さくするのが一番の上達',steps:buildDemo(NAMES4,{btn:1},[
+ ['ボタンはユキ。タクミSB10、リナBB20。あなたの手札はQ♠J♦——悪くはないが、過信は禁物の中くらいの手です。',{pot:30,s0:{chips:990,bet:10,tag:'SB',tagCls:'',cards:'back'},s2:{chips:980,bet:20,tag:'BB',tagCls:'',cards:'back'},s3:{cards:'Qs Jd'},s1:{cards:'Th 9h'}}],
+ ['（神視点：タクミはA♠K♥という超強い手を持っています）まずあなたから。QJでコール20。ここまでは普通です。',{street:'プリフロップ',turn:3,pot:50,s0:{cards:'As Kh'},s2:{cards:'6c 6d'},s3:{chips:980,bet:20,tag:'コール',tagCls:'act-call'}}],
+ ['ユキもT♥9♥でコール。',{turn:1,pot:70,s1:{chips:980,bet:20,tag:'コール',tagCls:'act-call'}}],
+ ['タクミが<b>100へ大きくレイズ</b>！ 空気が変わりました。',{turn:0,pot:160,s0:{chips:900,bet:100,tag:'レイズ 100',tagCls:'act-raise'}}],
+ ['リナは66を諦めてフォールド。さて、あなたの番です。追加80を払ってコールする？',{turn:2,s2:{folded:true,tag:'フォールド',tagCls:'act-fold'}}],
+ ['ここが今日のポイント。大きなレイズをする相手の手は AA・KK・AK・AQ など。<b>QJはそのほぼ全部に負けています</b>。「もう20払ったから」は続ける理由になりません（払った分は戻らない＝サンクコスト）。',{turn:3}],
+ ['あなた、<b>フォールド</b>。損失はコールした20だけで確定。これが正解です。ユキも降りました。',{turn:-1,s3:{folded:true,tag:'フォールド',tagCls:'act-fold'},s1:{folded:true,tag:'フォールド',tagCls:'act-fold'}}],
+ ['タクミが残り、ポット160を獲得。<b>結果として負けを20で抑えたあなたの勝ち（損の最小化）です。</b>ポーカーは「勝つハンドで多く取り、負けるハンドで少なく払う」ゲーム。降りは敗北ではなく守備です。',{s0:{chips:1060,bet:0,tag:'ポット獲得',tagCls:'act-win'},pot:160}],
+])},
+{title:'④ ブラフ：役なしで勝つ',sub:'ポーカーにしかない勝ち方',steps:buildDemo(NAMES4,{btn:3},[
+ ['今回はあなたがボタン（一番有利な席）。ユキSB10、タクミBB20。手札は6♥5♥——弱い手です。でも今日はこれで勝ちます。',{pot:30,s1:{chips:990,bet:10,tag:'SB',tagCls:'',cards:'back'},s0:{chips:980,bet:20,tag:'BB',tagCls:'',cards:'back'},s3:{cards:'6h 5h'},s2:{cards:'Kc 3d'}}],
+ ['リナはフォールド。あなたはボタンからコール20。ユキも10追加でコール、タクミはチェック。3人でフロップへ（神視点：ユキQ♠8♣、タクミJ♦4♠と、実は全員大したことありません）。',{street:'プリフロップ',pot:60,s2:{folded:true,tag:'フォールド',tagCls:'act-fold'},s3:{chips:980,bet:20,tag:'コール',tagCls:'act-call'},s1:{chips:980,bet:20,cards:'Qs 8c',tag:'コール',tagCls:'act-call'},s0:{cards:'Jd 4s',tag:'チェック',tagCls:'act-once'}}],
+ ['フロップは<b>A♦9♠2♣</b>。あなたは6ハイの役なし。ユキ・タクミも何もヒットせず、2人とも<b>チェック</b>。',{street:'フロップ',board:'Ad 9s 2c',s1:{bet:0,tag:'チェック',tagCls:'act-once'},s0:{bet:0,tag:'チェック',tagCls:'act-once'},s3:{bet:0}}],
+ ['ここであなたの読み：「2人ともチェック＝Aを持っていなさそう。自分はボタンでコールしていた＝<b>Aを持っていてもおかしくない</b>と見られている」。役はないけど……<b>ベット40！</b>',{turn:3,pot:100,s3:{chips:940,bet:40,tag:'ベット 40',tagCls:'act-bet'}}],
+ ['ユキ、フォールド。「Aがあるかも」と思えばQハイでは戦えません。',{turn:1,s1:{folded:true,tag:'フォールド',tagCls:'act-fold'}}],
+ ['タクミもフォールド！ あなたは<b>6ハイ（役なし）のままポット100を獲得</b>。手札を見せる必要もありません。',{turn:-1,pot:100,s0:{folded:true,tag:'フォールド',tagCls:'act-fold'},s3:{chips:1040,tag:'WIN！ 役なしで勝利',tagCls:'act-win'}}],
+ ['これが<b>ブラフ</b>。「相手が弱そう」×「自分が強く見える状況（ポジション・ボード）」が揃ったときだけ効きます。注意：初心者のうちは乱発しないこと。バレると逆にコールされてカモにされます。まずは1セッションに数回まで。',{}],
+])},
+{title:'⑤ キッカーの怖さ',sub:'同じペアなのに負ける理由',steps:buildDemo(NAMES4,{btn:0},[
+ ['ボタンはタクミ、リナSB10、あなたBB20。あなたの手札は<b>A♠Q♦</b>。そして神視点——ユキも<b>A♦T♣</b>とAを持っています。この2人の勝負に注目。',{pot:30,s2:{chips:990,bet:10,tag:'SB',tagCls:'',cards:'back'},s3:{chips:980,bet:20,tag:'BB',tagCls:'',cards:'As Qd'},s1:{cards:'Ad Tc'},s0:{cards:'8c 7d'}}],
+ ['ユキ、コール20。タクミとリナはフォールドしました。',{street:'プリフロップ',pot:50,s1:{chips:980,bet:20,tag:'コール',tagCls:'act-call'},s0:{folded:true,tag:'フォールド',tagCls:'act-fold'},s2:{folded:true,cards:null,tag:'フォールド',tagCls:'act-fold'},s3:{cards:'As Qd'}}],
+ ['あなたはAQなのでレイズ（合計60）。ユキもコールして2人でフロップへ。',{pot:130,s3:{chips:940,bet:60,tag:'レイズ 60',tagCls:'act-raise'},s1:{chips:940,bet:60,tag:'コール',tagCls:'act-call'}}],
+ ['フロップ<b>A♣8♦3♥</b>。2人とも「Aのペア」！ 同じ役ができてしまいました。こうなると勝負を分けるのは……？',{street:'フロップ',board:'Ac 8d 3h',s1:{bet:0,tag:''},s3:{bet:0,tag:''}}],
+ ['あなたベット80、ユキコール。（ユキ視点では降りにくい状況です。Aペア同士の戦いはお互い気づきにくい）',{pot:290,s3:{chips:860,bet:80,tag:'ベット 80',tagCls:'act-bet'},s1:{chips:860,bet:80,tag:'コール',tagCls:'act-call'}}],
+ ['ターン6♠。あなたベット120、ユキコール。ポットは530まで膨らみました。',{street:'ターン',board:'Ac 8d 3h 6s',pot:530,s3:{chips:740,bet:120,tag:'ベット 120',tagCls:'act-bet'},s1:{chips:740,bet:120,tag:'コール',tagCls:'act-call'}}],
+ ['リバー2♣は両者チェック。ショーダウンです。',{street:'リバー',board:'Ac 8d 3h 6s 2c',pot:530,s3:{bet:0,tag:'チェック',tagCls:'act-once'},s1:{bet:0,tag:'チェック',tagCls:'act-once'}}],
+ ['両者「Aのワンペア」で同じ役！ この場合、<b>役に使わない残りのカード＝キッカー</b>で勝負します。あなたの5枚は A・A・<b>Q</b>・8・6、ユキは A・A・<b>T</b>・8・6。QがTに勝ち、あなたの勝利！',{street:'ショーダウン',s3:{chips:1270,tag:'WIN！ キッカーQ',tagCls:'act-win'},s1:{tag:'キッカーT で負け',tagCls:''}}],
+ ['教訓：<b>A+強いカード（AK・AQ）は安心、A+弱いカード（A5とか）はキッカー負けの危険</b>。「Aのペアができたのに負けた」の正体はほぼこれです。逆に自分がAQ側なら、堂々と価値を取りにいきましょう。',{}],
+])},
+{title:'⑥ ドローとアウツ',sub:'「あと1枚」の価値を数える',steps:buildDemo(NAMES4,{btn:2},[
+ ['ボタンはリナ。あなたSB10、ユキBB20。あなたの手札は<b>J♥T♥</b>——同じマークの連番（スーテッドコネクター）。今は弱いけど大化けする可能性を秘めた手です。',{pot:30,s3:{chips:990,bet:10,tag:'SB',tagCls:'',cards:'Jh Th'},s1:{chips:980,bet:20,tag:'BB',tagCls:'',cards:'back'},s0:{cards:'Ac Qs'},s2:{cards:'Kd 8c'}}],
+ ['タクミ（A♣Q♠）がレイズ60。リナはフォールド。あなたは50追加でコール。「安く見られるなら化ける手で参加」です。ユキ（5♦5♣）もコールで3人。ポット180。',{street:'プリフロップ',pot:180,s0:{chips:940,bet:60,tag:'レイズ 60',tagCls:'act-raise'},s2:{folded:true,tag:'フォールド',tagCls:'act-fold'},s3:{chips:940,bet:60,tag:'コール',tagCls:'act-call'},s1:{chips:940,bet:60,cards:'5d 5c',tag:'コール',tagCls:'act-call'}}],
+ ['フロップ<b>9♥4♥Q♦</b>。あなたはまだ役なし。でもハートが4枚揃っています＝<b>フラッシュドロー</b>！ あと1枚♥が来ればフラッシュ完成。残りの♥は13−4＝<b>9枚（アウツ9）</b>です。',{street:'フロップ',board:'9h 4h Qd',s0:{bet:0,tag:''},s1:{bet:0,tag:''},s3:{bet:0,tag:''}}],
+ ['覚えておくと便利な暗算：<b>アウツ×4≒ターンとリバー2枚での完成率(%)</b>。9×4＝約36%。3回に1回は完成します。',{}],
+ ['あなたチェック、ユキチェック。Qペアができたタクミがベット100。ポット280。',{pot:280,s3:{tag:'チェック',tagCls:'act-once'},s1:{tag:'チェック',tagCls:'act-once'},s0:{chips:840,bet:100,tag:'ベット 100',tagCls:'act-bet'}}],
+ ['あなたの判断：280のポットに100払えば、勝てば380相当。完成率36%なら割に合う計算（<b>ポットオッズ</b>という考え方）。コール！ ユキは降りました。',{pot:380,s3:{chips:840,bet:100,tag:'コール',tagCls:'act-call'},s1:{folded:true,tag:'フォールド',tagCls:'act-fold'}}],
+ ['ターンは2♣……♥は来ず。お互いチェックで、タダでリバーを見られました（ラッキー！）。',{street:'ターン',board:'9h 4h Qd 2c',s0:{bet:0,tag:'チェック',tagCls:'act-once'},s3:{bet:0,tag:'チェック',tagCls:'act-once'}}],
+ ['リバーは……<b>7♥！ フラッシュ完成！！</b> 今度はあなたからベット250で価値を取りにいきます。',{street:'リバー',board:'9h 4h Qd 2c 7h',turn:3,pot:630,s3:{chips:590,bet:250,tag:'ベット 250',tagCls:'act-bet'}}],
+ ['Qペアのタクミはコール。ショーダウン——あなたの<b>フラッシュ（♥のJハイ）</b>がQペアを撃破！ ポット880を獲得です。',{turn:-1,pot:880,s0:{chips:590,bet:250,tag:'コール',tagCls:'act-call'},s3:{chips:1470,tag:'WIN！ フラッシュ',tagCls:'act-win'},s0_:{}}],
+ ['まとめ：役がなくても「<b>ドロー＝将来性</b>」には価値がある。アウツを数えて（×4か×2）、払う額とポットを比べる。これができれば初心者卒業です。',{}],
+])},
+];
+/* demo UI */
+let demoIdx=-1,demoStep=0;
+(function(){
+  const list=document.getElementById('demoList');
+  DEMOS.forEach((d,i)=>{
+    const b=document.createElement('button');
+    b.innerHTML=d.title+'<span class="sm">'+d.sub+'</span>';
+    if(store.demosDone[i])b.classList.add('done');
+    b.addEventListener('click',()=>{startDemo(i);});
+    list.appendChild(b);
+  });
+  document.getElementById('demoNext').addEventListener('click',()=>{
+    if(demoStep<DEMOS[demoIdx].steps.length-1){demoStep++;renderDemo();}
+    else{store.demosDone[demoIdx]=1;save();refreshPath();refreshDemoList();
+      if(demoIdx<DEMOS.length-1)startDemo(demoIdx+1);
+      else{document.getElementById('demoNarr').innerHTML='<b>全デモ完了！🎉</b> 次は「クイズ」タブで役の判定練習をしましょう。';}}
+  });
+  document.getElementById('demoPrev').addEventListener('click',()=>{if(demoStep>0){demoStep--;renderDemo();}});
+})();
+function refreshDemoList(){
+  document.querySelectorAll('#demoList button').forEach((b,i)=>{
+    b.classList.toggle('done',!!store.demosDone[i]);
+    b.classList.toggle('on',i===demoIdx);
+  });
+}
+function startDemo(i){
+  demoIdx=i;demoStep=0;
+  document.getElementById('demoStage').style.display='block';
+  refreshDemoList();
+  renderDemo();
+  document.getElementById('demoStage').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderDemo(){
+  const d=DEMOS[demoIdx];
+  const s=d.steps[demoStep];
+  renderTable(document.getElementById('demoTable'),s.st);
+  document.getElementById('demoNarr').innerHTML=s.t;
+  document.getElementById('demoCnt').textContent=(demoStep+1)+' / '+d.steps.length;
+  const last=demoStep===d.steps.length-1;
+  document.getElementById('demoNext').textContent=last?(demoIdx<DEMOS.length-1?'次のデモへ →':'デモ完了！'):'次へ →';
+  document.getElementById('demoPrev').style.visibility=demoStep===0?'hidden':'visible';
+}
+/* ================= QUIZ ================= */
+let quizMode='name';
+let quizCur=null;
+document.getElementById('qm-name').addEventListener('click',()=>{quizMode='name';segQuiz();newQuiz();});
+document.getElementById('qm-win').addEventListener('click',()=>{quizMode='win';segQuiz();newQuiz();});
+document.getElementById('quizNext').addEventListener('click',newQuiz);
+function segQuiz(){
+  document.getElementById('qm-name').classList.toggle('on',quizMode==='name');
+  document.getElementById('qm-win').classList.toggle('on',quizMode==='win');
+}
+function dealRandom(n){const d=shuffle(newDeck());return d.slice(0,n);}
+function genNameQuiz(){
+  /* bias toward variety: pick a target category then try to find it */
+  const targets=[1,1,2,2,3,4,5,0,6,2,3,4,5,1];
+  const target=targets[Math.floor(Math.random()*targets.length)];
+  let cards,bh;
+  for(let t=0;t<400;t++){
+    cards=dealRandom(7);
+    bh=bestHand(cards);
+    if(bh.rank[0]===target)break;
+  }
+  return {cards,bh};
+}
+function newQuiz(){
+  const qc=document.getElementById('quizCards'),qo=document.getElementById('quizOpts');
+  document.getElementById('quizResult').textContent='';
+  document.getElementById('quizResult').className='qresult';
+  document.getElementById('quizExplain').innerHTML='';
+  if(quizMode==='name'){
+    const {cards,bh}=genNameQuiz();
+    quizCur={cards,bh};
+    document.getElementById('quizQuestion').textContent='手札2枚＋共有5枚。この7枚で作れる一番強い役は？';
+    qc.innerHTML='<div class="crow">手札　'+cardsHTML(cards.slice(0,2))+'</div><div class="crow">共有　'+cardsHTML(cards.slice(2))+'</div>';
+    const correct=bh.rank[0];
+    const opts=new Set([correct]);
+    while(opts.size<4)opts.add(Math.floor(Math.random()*9));
+    const arr=shuffle([...opts]);
+    qo.innerHTML='';
+    arr.forEach(cat=>{
+      const b=document.createElement('button');
+      b.textContent=HAND_NAMES[cat];
+      b.addEventListener('click',()=>answerName(cat===correct,b,qo));
+      qo.appendChild(b);
+    });
+  }else{
+    const d=dealRandom(9);
+    const hA=d.slice(0,2),hB=d.slice(2,4),board=d.slice(4,9);
+    const rA=bestHand(hA.concat(board)),rB=bestHand(hB.concat(board));
+    const c=cmpRank(rA.rank,rB.rank);
+    quizCur={hA,hB,board,rA,rB,c};
+    document.getElementById('quizQuestion').textContent='共有カードは同じ。勝つのはどっち？';
+    qc.innerHTML='<div class="crow">共有　'+cardsHTML(board)+'</div><div class="crow">A さん　'+cardsHTML(hA)+'</div><div class="crow">B さん　'+cardsHTML(hB)+'</div>';
+    qo.innerHTML='';
+    [['Aさんの勝ち',1],['Bさんの勝ち',-1],['引き分け（チョップ）',0]].forEach(([label,val])=>{
+      const b=document.createElement('button');
+      b.textContent=label;
+      b.addEventListener('click',()=>answerWin(Math.sign(quizCur.c)===val,b,qo));
+      qo.appendChild(b);
+    });
+  }
+  refreshQuizStat();
+}
+function answerName(ok,btn,qo){
+  if(quizCur.answered)return;quizCur.answered=true;
+  qo.querySelectorAll('button').forEach(b=>{b.disabled=true;if(b.textContent===HAND_NAMES[quizCur.bh.rank[0]])b.classList.add('correct');});
+  if(!ok)btn.classList.add('wrong');
+  const res=document.getElementById('quizResult');
+  res.textContent=ok?'正解！':'ざんねん…';
+  res.className='qresult '+(ok?'ok':'ng');
+  const hi=new Set(quizCur.bh.five.map(cstr));
+  document.getElementById('quizExplain').innerHTML=
+    '答え：<b>'+handNameJa(quizCur.bh.rank)+'</b><br>使う5枚（金枠）：<div class="crow">手札　'+cardsHTML(quizCur.cards.slice(0,2),hi)+'</div><div class="crow">共有　'+cardsHTML(quizCur.cards.slice(2),hi)+'</div>';
+  store.quiz.name.total++;if(ok)store.quiz.name.ok++;save();refreshQuizStat();refreshPath();
+}
+function answerWin(ok,btn,qo){
+  if(quizCur.answered)return;quizCur.answered=true;
+  const correctLabel=quizCur.c>0?'Aさんの勝ち':(quizCur.c<0?'Bさんの勝ち':'引き分け（チョップ）');
+  qo.querySelectorAll('button').forEach(b=>{b.disabled=true;if(b.textContent===correctLabel)b.classList.add('correct');});
+  if(!ok)btn.classList.add('wrong');
+  const res=document.getElementById('quizResult');
+  res.textContent=ok?'正解！':'ざんねん…';
+  res.className='qresult '+(ok?'ok':'ng');
+  const hiA=new Set(quizCur.rA.five.map(cstr)),hiB=new Set(quizCur.rB.five.map(cstr));
+  let why='';
+  if(quizCur.c===0)why='役も数字も同じなのでポットは山分けです。';
+  else if(quizCur.rA.rank[0]===quizCur.rB.rank[0])why='同じ「'+HAND_NAMES[quizCur.rA.rank[0]]+'」同士なので、数字の大きさ（キッカー含む）で決まります。';
+  document.getElementById('quizExplain').innerHTML=
+    'A さん：<b>'+handNameJa(quizCur.rA.rank)+'</b><div class="crow">'+cardsHTML(quizCur.hA,hiA)+'</div>'+
+    'B さん：<b>'+handNameJa(quizCur.rB.rank)+'</b><div class="crow">'+cardsHTML(quizCur.hB,hiB)+'</div>'+
+    '<div class="crow">共有　'+cardsHTML(quizCur.board,new Set([...hiA,...hiB]))+'</div>'+why;
+  store.quiz.win.total++;if(ok)store.quiz.win.ok++;save();refreshQuizStat();refreshPath();
+}
+function refreshQuizStat(){
+  const q=store.quiz;
+  document.getElementById('quizStat').textContent='成績 — 役あて：'+q.name.ok+'/'+q.name.total+'　勝敗：'+q.win.ok+'/'+q.win.total+'（合計10問正解で③クリア）';
+}
+
+/* ================= PLAY (vs CPU) ================= */
+const SB=10,BB=20;
+const CPU_NAMES=['ユキ','タクミ','リナ'];
+let P=null;
+const elPT=document.getElementById('playTable'),elPA=document.getElementById('playActions'),
+      elPM=document.getElementById('playMsg'),elPL=document.getElementById('playLog'),elCB=document.getElementById('coachBox');
+document.getElementById('newGameBtn').addEventListener('click',()=>initPlay(true));
+document.getElementById('oppCount').addEventListener('change',()=>initPlay(true));
+document.getElementById('coachOn').addEventListener('change',()=>{if(P&&P.phase==='human')showCoach();else elCB.style.display='none';});
+function initPlay(reset){
+  const nOpp=+document.getElementById('oppCount').value;
+  P={seats:[{name:'あなた',isHuman:true,chips:1000}],deck:[],board:[],btn:0,street:0,
+     currentBet:0,minRaise:BB,current:-1,phase:'idle',timer:null};
+  for(let i=0;i<nOpp;i++)P.seats.push({name:CPU_NAMES[i],isHuman:false,chips:1000});
+  P.seats.forEach(s=>{s.hole=[];s.folded=true;s.allin=false;s.bet=0;s.contrib=0;s.acted=false;s.reveal=false;s.result='';});
+  P.btn=Math.floor(Math.random()*P.seats.length);
+  elPL.innerHTML='';
+  plog(reset?'チップをリセットしました（全員1000点）。':'ようこそ！ ブラインドは10/20、持ち点1000でスタート。');
+  elPM.textContent='「次のハンド」を押して開始！';
+  elCB.style.display='none';
+  P.phase='idle';
+  playRender();renderIdleActions();
+}
+function plog(t){const d=document.createElement('div');d.innerHTML=t;elPL.prepend(d);while(elPL.children.length>50)elPL.lastChild.remove();}
+function nx(i){return (i+1)%P.seats.length;}
+function potTotal(){return P.seats.reduce((a,s)=>a+s.contrib,0);}
+function pay(s,amt){const p=Math.min(amt,s.chips);s.chips-=p;s.bet+=p;s.contrib+=p;if(s.chips===0){s.allin=true;}return p;}
+function r10(x){return Math.max(BB,Math.round(x/10)*10);}
+function startHand(){
+  const n=P.seats.length;
+  P.seats.forEach(s=>{if(s.chips<=0){s.chips=1000;plog(s.name+'のチップがなくなったので1000点でリバイ。');}});
+  P.btn=nx(P.btn);
+  P.deck=shuffle(newDeck());
+  P.board=[];P.street=0;P.currentBet=BB;P.minRaise=BB;
+  P.seats.forEach(s=>{s.hole=[P.deck.pop(),P.deck.pop()];s.folded=false;s.allin=false;s.bet=0;s.contrib=0;s.acted=false;s.reveal=false;s.result='';});
+  let sb,bb;
+  if(n===2){sb=P.btn;bb=nx(P.btn);}
+  else{sb=nx(P.btn);bb=nx(sb);}
+  pay(P.seats[sb],SB);pay(P.seats[bb],BB);
+  P.sb=sb;P.bb=bb;
+  P.current=nx(bb);
+  P.phase='betting';
+  plog('<b>―― 新しいハンド ――</b> ボタン:'+P.seats[P.btn].name+'／SB:'+P.seats[sb].name+' 10／BB:'+P.seats[bb].name+' 20');
+  elPM.textContent='プリフロップ：手札が配られました';
+  playRender();proceed();
+}
+function streetName(){return ['プリフロップ','フロップ','ターン','リバー','ショーダウン'][P.street];}
+function needsAction(s){return !s.folded&&!s.allin&&(!s.acted||s.bet<P.currentBet);}
+function findNext(from){
+  for(let k=1;k<=P.seats.length;k++){const i=(from+k)%P.seats.length;if(needsAction(P.seats[i]))return i;}
+  return -1;
+}
+function aliveCount(){return P.seats.filter(s=>!s.folded).length;}
+function proceed(){
+  if(P.phase!=='betting')return;
+  if(aliveCount()===1){winByFold();return;}
+  if(P.current===-1||!needsAction(P.seats[P.current])){
+    const nxt=findNext(P.current===-1?P.btn:P.current);
+    if(nxt===-1){endStreet();return;}
+    P.current=nxt;
+  }
+  const s=P.seats[P.current];
+  playRender();
+  if(s.isHuman){P.phase='human';elPM.textContent=streetName()+'：あなたの番です';renderHumanActions();showCoach();}
+  else{elPM.textContent=streetName()+'：'+s.name+'が考え中…';elPA.innerHTML='';elCB.style.display='none';
+    P.timer=setTimeout(()=>{cpuAct(P.current);},650);}
+}
+function act(i,type,amount){
+  const s=P.seats[i];
+  const toCall=P.currentBet-s.bet;
+  if(type==='fold'){s.folded=true;s.acted=true;plog(s.name+'：フォールド');}
+  else if(type==='check'){s.acted=true;plog(s.name+'：チェック');}
+  else if(type==='call'){const p=pay(s,toCall);s.acted=true;plog(s.name+'：コール '+p+(s.allin?'（オールイン）':''));}
+  else if(type==='raise'){
+    const target=Math.min(amount,s.bet+s.chips);
+    pay(s,target-s.bet);
+    const isRaise=target>P.currentBet;
+    if(isRaise){
+      P.minRaise=Math.max(P.minRaise,target-P.currentBet);
+      P.currentBet=target;
+      P.seats.forEach((o,k)=>{if(k!==i&&!o.folded&&!o.allin)o.acted=false;});
+    }
+    s.acted=true;
+    plog(s.name+'：'+(toCall>0?'レイズ':'ベット')+' '+target+(s.allin?'（オールイン）':''));
+  }
+  P.phase='betting';
+  playRender();
+  if(aliveCount()===1){winByFold();return;}
+  const nxt=findNext(i);
+  if(nxt===-1){endStreet();}
+  else{P.current=nxt;proceed();}
+}
+function endStreet(){
+  P.seats.forEach(s=>{s.bet=0;s.acted=false;});
+  P.currentBet=0;P.minRaise=BB;P.current=-1;
+  if(P.street===3){showdown();return;}
+  P.street++;
+  if(P.street===1)P.board.push(P.deck.pop(),P.deck.pop(),P.deck.pop());
+  else P.board.push(P.deck.pop());
+  plog('<b>'+streetName()+'</b>：'+P.board.map(c=>RANK_CH[c.r]+SUIT_CH[c.s]).join(' '));
+  const canAct=P.seats.filter(s=>!s.folded&&!s.allin).length;
+  playRender();
+  if(canAct<2){/* runout */
+    elPM.textContent=streetName()+'（全員オールイン→自動でオープン）';
+    P.seats.forEach(s=>{if(!s.folded)s.reveal=true;});
+    playRender();
+    setTimeout(endStreet,900);
+    return;
+  }
+  /* first to act = left of btn (heads-upではBB=非ボタン側) — findNextはbtnの左隣から走査するのでどちらも正しい */
+  P.current=findNext(P.btn);
+  P.phase='betting';
+  elPM.textContent=streetName();
+  proceed();
+}
+function winByFold(){
+  const w=P.seats.find(s=>!s.folded);
+  const pot=potTotal();
+  w.chips+=pot;
+  w.result='WIN +'+pot;
+  plog('<b>'+w.name+'が残り全員を降ろしてポット'+pot+'を獲得！</b>'+(w.isHuman?'（手札は見せなくてOK）':''));
+  elPM.textContent=w.name+'の勝ち！ ポット'+pot+'獲得';
+  finishHand(w.isHuman);
+}
+function showdown(){
+  P.phase='showdown';
+  const alive=P.seats.filter(s=>!s.folded);
+  alive.forEach(s=>{s.reveal=true;s.bh=bestHand(s.hole.concat(P.board));s.result=handNameJa(s.bh.rank);});
+  /* side-pot aware distribution */
+  const levels=[...new Set(P.seats.map(s=>s.contrib).filter(x=>x>0))].sort((a,b)=>a-b);
+  let prev=0;const won={};
+  for(const lv of levels){
+    let pot=0;
+    P.seats.forEach(s=>{pot+=Math.max(0,Math.min(s.contrib,lv)-prev);});
+    const elig=alive.filter(s=>s.contrib>=lv);
+    if(elig.length&&pot>0){
+      const best=elig.reduce((a,s)=>cmpRank(s.bh.rank,a.bh.rank)>0?s:a,elig[0]);
+      const winners=elig.filter(s=>cmpRank(s.bh.rank,best.bh.rank)===0);
+      const share=Math.floor(pot/winners.length);
+      winners.forEach((s,i2)=>{const amt=share+(i2===0?pot-share*winners.length:0);s.chips+=amt;won[s.name]=(won[s.name]||0)+amt;});
+    }
+    prev=lv;
+  }
+  const names=Object.keys(won);
+  alive.forEach(s=>{plog(s.name+'：'+cardsHTML(s.hole)+' → '+s.result+(won[s.name]?'　<b>+'+won[s.name]+'</b>':''));});
+  alive.forEach(s=>{if(won[s.name])s.result='WIN！ '+s.result+' +'+won[s.name];});
+  const humanWon=!!won['あなた'];
+  if(names.length>1)elPM.textContent='ショーダウン：'+names.join('と')+'がポットを分けました';
+  else{const w=alive.find(s=>s.name===names[0]);elPM.textContent='ショーダウン：'+w.name+'の勝ち！（'+handNameJa(w.bh.rank)+'）';}
+  finishHand(humanWon);
+}
+function finishHand(humanWon){
+  P.phase='handend';
+  store.hands++;if(humanWon)store.handsWon++;save();refreshPath();
+  playRender();
+  elCB.style.display='none';
+  renderIdleActions();
+}
+function renderIdleActions(){
+  elPA.innerHTML='';
+  const b=document.createElement('button');
+  b.className='a-next';b.textContent=P&&P.phase==='handend'?'次のハンド →':'ハンド開始！';
+  b.addEventListener('click',startHand);
+  elPA.appendChild(b);
+}
+function renderHumanActions(){
+  const me=P.seats[0];
+  const toCall=P.currentBet-me.bet;
+  elPA.innerHTML='';
+  const mk=(cls,label,fn)=>{const b=document.createElement('button');b.className=cls;b.innerHTML=label;b.addEventListener('click',fn);elPA.appendChild(b);};
+  if(toCall>0){
+    mk('a-fold','フォールド',()=>act(0,'fold'));
+    if(toCall>=me.chips)mk('a-call','コール '+me.chips+'<br><span style="font-size:11px">(オールイン)</span>',()=>act(0,'call'));
+    else{
+      mk('a-call','コール '+toCall,()=>act(0,'call'));
+      const minR=Math.min(P.currentBet+P.minRaise,me.bet+me.chips);
+      const potR=Math.min(r10(P.currentBet+potTotal()+toCall),me.bet+me.chips);
+      if(me.chips>toCall){
+        mk('a-raise','レイズ '+minR,()=>act(0,'raise',minR));
+        if(potR>minR+9)mk('a-raise','レイズ '+potR,()=>act(0,'raise',potR));
+        mk('a-allin','オールイン',()=>act(0,'raise',me.bet+me.chips));
+      }
+    }
+  }else{
+    mk('a-check','チェック',()=>act(0,'check'));
+    const small=Math.min(r10(Math.max(BB*2,potTotal()*0.5)),me.bet+me.chips);
+    const big=Math.min(r10(potTotal()),me.bet+me.chips);
+    mk('a-bet','ベット '+small,()=>act(0,'raise',small));
+    if(big>small+9)mk('a-bet','ベット '+big,()=>act(0,'raise',big));
+    mk('a-allin','オールイン',()=>act(0,'raise',me.bet+me.chips));
+  }
+}
+function cpuAct(i){
+  if(!P||P.phase!=='betting'||P.current!==i)return;
+  const s=P.seats[i];
+  const opps=P.seats.filter(o=>o!==s&&!o.folded).length;
+  const eq=equityMC(s.hole,P.board,opps,120);
+  const toCall=P.currentBet-s.bet;
+  const pot=potTotal();
+  const rnd=Math.random();
+  if(toCall<=0){
+    if(eq>0.5+0.12*opps&&rnd<0.85){
+      const bet=Math.min(r10(Math.max(BB*2,pot*0.55)),s.bet+s.chips);
+      act(i,'raise',bet);return;
+    }
+    if(P.street>0&&eq<0.3&&rnd<0.10){
+      const bet=Math.min(r10(pot*0.5),s.bet+s.chips);
+      act(i,'raise',bet);return; /* occasional bluff */
+    }
+    act(i,'check');return;
+  }
+  const need=toCall/(pot+toCall);
+  if(eq>need+0.30&&rnd<0.65&&s.chips>toCall){
+    const target=Math.min(r10(P.currentBet+Math.max(P.minRaise,pot*0.5)),s.bet+s.chips);
+    act(i,'raise',target);return;
+  }
+  if(eq>=need*0.95||toCall<=BB&&eq>=need*0.8){act(i,'call');return;}
+  act(i,'fold');
+}
+function showCoach(){
+  if(!document.getElementById('coachOn').checked){elCB.style.display='none';return;}
+  const me=P.seats[0];
+  const opps=P.seats.filter(o=>!o.isHuman&&!o.folded).length;
+  const eq=equityMC(me.hole,P.board,opps,300);
+  const toCall=P.currentBet-me.bet;
+  const pot=potTotal();
+  let made;
+  if(P.board.length===0){
+    const [a,b]=me.hole;
+    if(a.r===b.r)made=RANK_CH[a.r]+'のポケットペア';
+    else made=RANK_CH[Math.max(a.r,b.r)]+RANK_CH[Math.min(a.r,b.r)]+(a.s===b.s?'スーテッド（同マーク）':'オフスート');
+  }else{
+    made=handNameJa(bestHand(me.hole.concat(P.board)).rank);
+    const suitCnt={};me.hole.concat(P.board).forEach(c=>suitCnt[c.s]=(suitCnt[c.s]||0)+1);
+    if(P.board.length<5&&Object.values(suitCnt).some(v=>v===4))made+='＋フラッシュドロー';
+  }
+  let adv,why;
+  const eqPct=Math.round(eq*100);
+  if(toCall>0){
+    const need=Math.round(toCall/(pot+toCall)*100);
+    why='勝率およそ'+eqPct+'%。コールに必要な勝率（ポットオッズ）は'+need+'%（'+pot+'のポットに'+toCall+'）。';
+    if(eq*100>need+20&&eq>0.5)adv='レイズ推奨 — 十分有利。強い手は強く打とう';
+    else if(eq*100>=need)adv='コールOK — 割に合う勝負';
+    else adv='フォールド推奨 — 割に合わない。降りて次のハンドへ';
+  }else{
+    const base=1/(opps+1);
+    why='勝率およそ'+eqPct+'%（'+(opps+1)+'人勝負の平均は'+Math.round(base*100)+'%）。';
+    if(eq>base*1.35)adv='ベット推奨 — 平均より強い。価値を取りにいこう';
+    else adv='チェックでOK — 無理に賭ける場面ではない';
+  }
+  elCB.innerHTML='<h3>💡 コーチ</h3>いまの手：<b>'+made+'</b><br>'+why+'<br>→ <span class="adv">'+adv+'</span>';
+  elCB.style.display='block';
+}
+function playRender(){
+  if(!P)return;
+  const n=P.seats.length;
+  const order=n===2?[1,0]:(n===3?[1,2,0]:[2,1,3,0]);
+  const showAll=P.phase==='showdown'||P.phase==='handend';
+  const st={
+    btn:order.indexOf(P.btn),
+    turn:(P.phase==='betting'||P.phase==='human')&&P.current>=0?order.indexOf(P.current):-1,
+    street:P.phase==='idle'?'':streetName(),
+    pot:potTotal(),
+    board:P.board,
+    seats:order.map(pi=>{
+      const s=P.seats[pi];
+      let cards=null;
+      if(s.hole&&s.hole.length){
+        if(s.isHuman)cards=s.hole;
+        else if(s.reveal||(showAll&&!s.folded))cards=s.hole;
+        else cards='back';
+      }
+      return {name:s.name,chips:s.chips,bet:s.bet,cards,folded:s.folded,
+        tag:s.result||'',tagCls:s.result&&s.result.indexOf('WIN')>=0?'act-win':''};
+    })
+  };
+  renderTable(elPT,st);
+}
+initPlay(false);
+
+/* ================= init ================= */
+newQuiz();
+refreshPath();
+</script>
+</body>
+</html>
