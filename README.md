@@ -3,7 +3,7 @@
 テキサスホールデムを全くの初心者向けに解説する学習サイト。単一HTML・依存ゼロ・静的配信のみ。
 
 - 本番（予定）: https://rule.shoubu-lab.com （Cloudflare Pages）
-- 旧URL: https://fujiken1016.github.io/poker-trainer/ （移行後に案内を設置）
+- 旧URL: GitHub Pages の旧URL（移行後に案内を設置）
 
 ## 構成
 
