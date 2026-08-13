@@ -1,0 +1,7 @@
+# リポジトリ直下＝Cloudflare Pages の公開ディレクトリなので、運用ドキュメント(.md)も
+# URLとして生きてしまう。消すと履歴が失われるため、検索インデックスからだけ外す。
+# （robots.txt の Disallow は使わない。クロールを止めると noindex を読んでもらえないため）
+/*.md
+  X-Robots-Tag: noindex
+/README.md
+  X-Robots-Tag: noindex
