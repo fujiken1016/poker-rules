@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rule.shoubu-lab.com/sitemap.xml
