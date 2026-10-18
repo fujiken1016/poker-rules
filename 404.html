@@ -5,26 +5,29 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ページが見つかりません | ポーカー・トレーナー</title>
 <meta name="robots" content="noindex,follow">
-<meta name="theme-color" content="#05070f">
+<meta name="theme-color" content="#101018">
 <style>
-  :root{--bg0:#05070f;--txt:#eaefff;--sub:#8fa0cf;--cyan:#29e0ff}
+  /* 若者向けの型（2026-10-19）＝ memory/design_guidelines.md Y-0〜Y-7 */
+  :root{--y-bg:#101018;--y-surface:#1a1a26;--y-text:#f2f2f7;--y-muted:#a9a9be;--y-gold:#ffd23e;--y-primary:#3ddc97;--y-edge:#1f9d63;--txt:#f2f2f7;--sub:#a9a9be;--line:#2b2b3a;--gold:#ffd23e}
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:#05070f;
-    background-image:
-      radial-gradient(900px 520px at 88% -10%, rgba(255,45,149,.16), transparent 60%),
-      radial-gradient(820px 520px at -12% 18%, rgba(41,224,255,.13), transparent 55%),
-      radial-gradient(760px 760px at 50% 118%, rgba(138,108,255,.14), transparent 62%);
-    color:var(--txt);min-height:100vh;line-height:1.8;
-    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif;
-    display:flex;align-items:center;justify-content:center}
-  .nf{max-width:560px;padding:48px 22px;text-align:center}
-  .code{font-size:3.4rem;font-weight:800;color:var(--cyan);letter-spacing:.04em}
-  h1{font-size:1.2rem;margin:10px 0 8px}
-  p{color:var(--sub);font-size:.92rem}
-  .back{display:inline-block;margin-top:28px;
-    background:linear-gradient(135deg,var(--cyan),#8a6cff);color:#04121f;
-    text-decoration:none;font-weight:800;font-size:.95rem;border-radius:12px;padding:14px 32px;
-    box-shadow:0 4px 16px rgba(41,224,255,.3)}
+  body{background:var(--y-bg);color:var(--y-text);min-height:100vh;line-height:1.8;font-size:1rem;
+    font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",sans-serif}
+  :focus-visible{outline:2px solid #fff;outline-offset:0;box-shadow:0 0 0 4px #1d1d1d}
+  .nf{max-width:560px;margin:0 auto;padding:64px 22px 24px;text-align:center}
+  .code{font-size:4rem;line-height:1.2;font-weight:700;color:var(--y-gold);letter-spacing:.04em}
+  h1{font-size:2rem;line-height:1.4;font-weight:700;margin:10px 0 8px;word-break:auto-phrase;text-wrap:balance;line-break:strict}
+  p{color:var(--y-muted);font-size:1rem;word-break:auto-phrase;line-break:strict}
+  .back{display:inline-block;margin-top:28px;background:var(--y-primary);color:#08241a;text-decoration:none;font-weight:700;
+    font-size:1rem;border-radius:16px;min-height:52px;line-height:52px;padding:0 32px;box-shadow:0 4px 0 var(--y-edge)}
+  .back:active{transform:translateY(3px);box-shadow:0 1px 0 var(--y-edge)}
+  @media (prefers-reduced-motion:reduce){.back:active{transform:none}}
+  nav.sl-tools{max-width:860px;margin:8px auto 20px;padding:20px 16px 2px}
+  nav.sl-tools a,nav.sl-tools .sl-tools__cur{background:var(--y-surface);border:0;border-radius:16px;min-height:56px}
+  nav.sl-tools .sl-tools__cur{border:2px dashed #606076}
+  nav.sl-tools .sl-tools__lead{font-size:1.125rem}
+  nav.sl-tools .sl-tools__list{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+  nav.sl-tools .sl-tools__d{font-size:.875rem;word-break:auto-phrase;line-break:strict;text-wrap:balance}
+  nav.sl-tools .sl-tools__t{word-break:auto-phrase;line-break:strict;text-wrap:balance}
 </style>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2VF02QTTNV');</script>
