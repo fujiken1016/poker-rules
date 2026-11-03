@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ポーカーのキッカーとは？同じ役の勝ち負けの決め方と、AK対AQを全部数えた結果</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/kicker/">
+<meta name="description" content="ポーカーのキッカーを、定義・役ごとに効く枚数・勝敗が決まる順番・実例5つで。AKとAQなど6組をボードの出方を全部数えて、キッカーで決まる割合と引き分けの割合も出した。">
+<meta property="og:title" content="ポーカーのキッカーとは？同じ役の勝ち負けの決め方と、AK対AQを全部数えた結果">
+<meta property="og:description" content="ポーカーのキッカーを、定義・役ごとに効く枚数・勝敗が決まる順番・実例5つで。AKとAQなど6組をボードの出方を全部数えて、キッカーで決まる割合と引き分けの割合も出した。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/kicker/">
+<link rel="stylesheet" href="/_legal.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2VF02QTTNV');
+</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+@media(min-width:640px){.tw::before{display:none}}
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 3.4em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px}
+.b5{background:var(--gold)}
+.b7{background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+.src li{overflow-wrap:anywhere}
+</style>
+<style>
+.calc{background:var(--panel);border-radius:16px;padding:16px;margin:8px 0 16px}
+.calc label{display:block;font-weight:700;margin:0 0 4px}
+.calc input{display:block;width:100%;min-height:48px;padding:8px 12px;font-size:16px;color:var(--txt);background:var(--panel2);border:1px solid var(--line2);border-radius:12px;margin:0 0 14px}
+.calc .res{background:var(--panel2);border-radius:12px;padding:12px 14px;margin:0}
+.calc .res p{margin:0 0 6px}
+.calc .res p:last-child{margin:0}
+.calc .big{font-size:1.5rem;font-weight:700;color:var(--gold)}
+.ex{margin:0 0 6px;font-weight:700}
+.lnk{display:block;margin:0 0 6px}
+.tw.nr th[scope=row]{white-space:nowrap}
+.tw.cmp table{min-width:0}
+.tw.cmp::before{display:none}
+.tw.cmp table{font-size:.875rem}
+.tw.cmp th,.tw.cmp td{padding:10px 5px;text-align:right;white-space:nowrap}
+.tw.cmp th:first-child,.tw.cmp td:first-child{text-align:left}
+.tw.cmp td.hd{white-space:normal}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月4日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ポーカーのキッカーとは？同じ役の勝ち負けの決め方</h1>
+<div class="key"><p class="lead">キッカーは、役を作っていない残りの札のうち、勝ち負けを決める札です。役が同じなら、役を作る数字を先に比べ、それも同じならキッカーを大きい順に比べます。全部同じなら引き分けで、ポットを分けます。</p></div>
+<p>この記事では、キッカーが何枚効くかを役ごとに表にして、実例5つを順に追います。最後に、ホールデムで「AKとAQ」など6組を、ボードの出方を全部数えて、キッカーで決まる割合と引き分けの割合を出しました。</p>
+<p>役の順番そのものは<a href="/yaku/">ポーカーの役の強さ一覧</a>にまとめています。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-what">キッカーとは何か</a></li>
+<li><a href="#h-count">役ごとにキッカーが何枚効くか</a></li>
+<li><a href="#h-order">勝ち負けを決める順番</a></li>
+<li><a href="#h-ex">実例5つ</a></li>
+<li><a href="#h-enum">AKとAQなど6組を全部数えた結果</a></li>
+<li><a href="#h-avoid">キッカー負けを減らす考え方</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+</ol></nav>
+<h2 id="h-what">キッカーとは何か</h2>
+<p>最終的な5枚のうち、役の名前を決めていない札がキッカーです。たとえばワンペアなら、ペアの2枚が役で、残りの3枚がキッカーです。WSOP の説明も、役を構成しない側の札で、同じ役どうしの勝敗を決めるときに使う、という扱いです。</p>
+<p>ホールデムでは、手札2枚とボード5枚の計7枚から最強の5枚を選びます。ボードの札もキッカーになるので、自分の手札のキッカーが小さくても、ボードに大きい札があればそれが使われます。</p>
+
+<h2 id="h-count">役ごとにキッカーが何枚効くか</h2>
+<p>キッカーが出てくる役と出てこない役があります。5枚の中で、役を作る札の数と、残りの札の数を並べました。</p>
+<div class="tw nr"><table><caption>最終5枚のうち、役を作る札とキッカーの枚数</caption><tr><th scope="col">役</th><th scope="col">役を作る札</th><th scope="col">キッカー</th><th scope="col">同じ役のときの決め方</th></tr><tr><th scope="row">フォーカード</th><td>4枚</td><td>1枚</td><td>4枚組の数字 → 残り1枚</td></tr><tr><th scope="row">フルハウス</th><td>5枚</td><td>0枚</td><td>3枚組の数字 → 2枚組の数字</td></tr><tr><th scope="row">フラッシュ</th><td>5枚</td><td>0枚</td><td>5枚を大きい順に1枚ずつ</td></tr><tr><th scope="row">ストレート</th><td>5枚</td><td>0枚</td><td>一番上の数字だけ</td></tr><tr><th scope="row">スリーカード</th><td>3枚</td><td>2枚</td><td>3枚組の数字 → 残り2枚を大きい順に</td></tr><tr><th scope="row">ツーペア</th><td>4枚</td><td>1枚</td><td>高いほうのペア → 低いほうのペア → 残り1枚</td></tr><tr><th scope="row">ワンペア</th><td>2枚</td><td>3枚</td><td>ペアの数字 → 残り3枚を大きい順に</td></tr><tr><th scope="row">ハイカード</th><td>なし</td><td>5枚</td><td>5枚を大きい順に1枚ずつ</td></tr></table></div>
+<p>キッカーがいちばん多く出てくるのはワンペアです。ペアが同じ数字になる勝負では、3枚目のキッカーまで見ることがあります（例2）。ストレートとフルハウスにはキッカーがありません。ストレートは、余った札がどれだけ大きくても関係ありません（例5）。</p>
+
+<h2 id="h-order">勝ち負けを決める順番</h2>
+<ol>
+<li>役の種類を比べます。強い役が勝ちです。</li>
+<li>同じ役なら、役を作っている数字を強い組から順に比べます。</li>
+<li>それも同じなら、キッカーを大きい順に1枚ずつ比べます。</li>
+<li>5枚の数字が全部同じなら引き分けで、ポットを等分します。マークの強弱はありません。</li>
+</ol>
+<p>全部の役の比べ方は<a href="/yaku/#h-tie">役の強さ一覧の「同じ役のときの決め方」</a>にも表で出しています。</p>
+
+<h2 id="h-ex">実例5つ</h2>
+<p>どれも、ボードの5枚と手札2枚から、最強の5枚を選んで比べます。</p>
+<p class="ex">例1</p><p>ボード：<span class="cd">A<span class="r">♦</span> 7♣ 4<span class="r">♥</span> 9♠ 2<span class="r">♦</span></span></p><div class="tw w2"><table><caption>例1のふたりの手札と最強の5枚</caption><tr><th scope="col">手札</th><th scope="col">最強の5枚と役</th></tr><tr><td class="cd">A♠ K<span class="r">♦</span></td><td>A A K 9 7（Aのワンペア）</td></tr><tr><td class="cd">A<span class="r">♥</span> Q♣</td><td>A A Q 9 7（Aのワンペア）</td></tr></table></div><p><strong>前者の勝ちです。</strong>ペアのAは同じなので、1枚目のキッカーを比べ、KがQに勝っています。これがいちばん典型的な、キッカー負けです。</p><p class="ex">例2</p><p>ボード：<span class="cd">K<span class="r">♦</span> K♣ 9<span class="r">♥</span> 6♠ 2<span class="r">♦</span></span></p><div class="tw w2"><table><caption>例2のふたりの手札と最強の5枚</caption><tr><th scope="col">手札</th><th scope="col">最強の5枚と役</th></tr><tr><td class="cd">A♠ 8<span class="r">♦</span></td><td>K K A 9 8（Kのワンペア）</td></tr><tr><td class="cd">A<span class="r">♥</span> 7♣</td><td>K K A 9 7（Kのワンペア）</td></tr></table></div><p><strong>前者の勝ちです。</strong>ペアはボードのKでふたりとも同じです。キッカーは、A と 9 が同じで、3枚目の 8 と 7 で決まりました。ボードにペアがあるときは、手札のキッカーの勝負になりやすくなります。</p><p class="ex">例3</p><p>ボード：<span class="cd">K♠ K<span class="r">♦</span> 7♣ 7<span class="r">♥</span> 2♠</span></p><div class="tw w2"><table><caption>例3のふたりの手札と最強の5枚</caption><tr><th scope="col">手札</th><th scope="col">最強の5枚と役</th></tr><tr><td class="cd">A♣ 3<span class="r">♦</span></td><td>K K 7 7 A（ツーペア）</td></tr><tr><td class="cd">9♣ 8<span class="r">♦</span></td><td>K K 7 7 9（ツーペア）</td></tr></table></div><p><strong>前者の勝ちです。</strong>ボードだけでツーペアができていて、2組のペアは同じです。残りの1枚（キッカー）がAと9で、Aが勝ちます。</p><p class="ex">例4</p><p>ボード：<span class="cd">A♠ K<span class="r">♦</span> Q♣ J<span class="r">♥</span> 9♠</span></p><div class="tw w2"><table><caption>例4のふたりの手札と最強の5枚</caption><tr><th scope="col">手札</th><th scope="col">最強の5枚と役</th></tr><tr><td class="cd">3♣ 2<span class="r">♦</span></td><td>A K Q J 9（ハイカード）</td></tr><tr><td class="cd">4♣ 5<span class="r">♦</span></td><td>A K Q J 9（ハイカード）</td></tr></table></div><p><strong>引き分けです。</strong>ボードの5枚がふたりにとって最強の5枚になっていて、手札は使われません。ポットは半分ずつに分けます。マークは関係がないので、手札のマークが違っても同じです。</p><p class="ex">例5</p><p>ボード：<span class="cd">9♣ 8<span class="r">♦</span> 7<span class="r">♥</span> 2♠ 2<span class="r">♦</span></span></p><div class="tw w2"><table><caption>例5のふたりの手札と最強の5枚</caption><tr><th scope="col">手札</th><th scope="col">最強の5枚と役</th></tr><tr><td class="cd">5♣ 6♠</td><td>9 8 7 6 5（ストレート）</td></tr><tr><td class="cd">10♣ 6<span class="r">♦</span></td><td>10 9 8 7 6（ストレート）</td></tr></table></div><p><strong>後者の勝ちです。</strong>どちらもストレートで、一番上の数字が 9 と 10 です。ストレートにはキッカーがなく、余った札は見ません。</p>
+<h2 id="h-enum">AKとAQなど6組を全部数えた結果</h2>
+<p>「キッカーで決まる勝負」が実際にどれくらいあるのかを、ふたりのプリフロップ（ヘッズアップ）で全部数えました。手札2組を固定して、ボードの5枚の出方1,712,304通りを全部判定した結果です。「勝つ」「負ける」は、前の列の手札から見た割合です。</p>
+<div class="tw cmp"><table><caption>手札2組を固定して、ボードの1,712,304通りを全部判定した結果（前の手札から見た割合）。引分＝引き分け、決着＝キッカーで決まった割合</caption><tr><th scope="col">手札の組</th><th scope="col">勝つ<br>（%）</th><th scope="col">引分<br>（%）</th><th scope="col">負ける<br>（%）</th><th scope="col">決着<br>（%）</th></tr><tr><td><span class="cd">A♠K<spanclass="r">♦</span></span> 対<br><span class="cd">A<spanclass="r">♥</span>Q♣</span></td><td>71.7</td><td>4.6</td><td>23.7</td><td>29.8</td></tr><tr><td><span class="cd">A♠K<spanclass="r">♦</span></span> 対<br><span class="cd">A<spanclass="r">♥</span>J♣</span></td><td>71.4</td><td>4.6</td><td>24.0</td><td>29.7</td></tr><tr><td><span class="cd">A♠K<spanclass="r">♦</span></span> 対<br><span class="cd">A<spanclass="r">♥</span>10♣</span></td><td>71.1</td><td>4.6</td><td>24.3</td><td>29.7</td></tr><tr><td><span class="cd">A♠K<spanclass="r">♦</span></span> 対<br><span class="cd">A<spanclass="r">♥</span>5♣</span></td><td>69.9</td><td>4.7</td><td>25.4</td><td>28.5</td></tr><tr><td><span class="cd">A♠Q<spanclass="r">♦</span></span> 対<br><span class="cd">A<spanclass="r">♥</span>J♣</span></td><td>70.7</td><td>5.7</td><td>23.6</td><td>28.8</td></tr><tr><td><span class="cd">K♠Q<spanclass="r">♦</span></span> 対<br><span class="cd">K<spanclass="r">♥</span>J♣</span></td><td>70.8</td><td>5.5</td><td>23.7</td><td>28.9</td></tr></table></div><figure><div class="bg"><p class="bn">A♠ K<span class="r">♦</span> 対 A<span class="r">♥</span> Q♣</p><div class="br"><span class="bl" style="flex-basis:5.2em">決着※</span><span class="bt"><i class="b7" style="width:59.57%"></i></span><span class="bv">29.8%</span></div></div><div class="bg"><p class="bn">A♠ K<span class="r">♦</span> 対 A<span class="r">♥</span> J♣</p><div class="br"><span class="bl" style="flex-basis:5.2em">決着※</span><span class="bt"><i class="b7" style="width:59.47%"></i></span><span class="bv">29.7%</span></div></div><div class="bg"><p class="bn">A♠ K<span class="r">♦</span> 対 A<span class="r">♥</span> 10♣</p><div class="br"><span class="bl" style="flex-basis:5.2em">決着※</span><span class="bt"><i class="b7" style="width:59.38%"></i></span><span class="bv">29.7%</span></div></div><div class="bg"><p class="bn">A♠ K<span class="r">♦</span> 対 A<span class="r">♥</span> 5♣</p><div class="br"><span class="bl" style="flex-basis:5.2em">決着※</span><span class="bt"><i class="b7" style="width:56.97%"></i></span><span class="bv">28.5%</span></div></div><div class="bg"><p class="bn">A♠ Q<span class="r">♦</span> 対 A<span class="r">♥</span> J♣</p><div class="br"><span class="bl" style="flex-basis:5.2em">決着※</span><span class="bt"><i class="b7" style="width:57.60%"></i></span><span class="bv">28.8%</span></div></div><div class="bg"><p class="bn">K♠ Q<span class="r">♦</span> 対 K<span class="r">♥</span> J♣</p><div class="br"><span class="bl" style="flex-basis:5.2em">決着※</span><span class="bt"><i class="b7" style="width:57.83%"></i></span><span class="bv">28.9%</span></div></div><figcaption>※キッカーの違いで勝敗が決まった割合（全数え上げの実測値。表の最後の列と同じ）。棒は50%を満幅としています。</figcaption></figure><figure><div class="bg"><p class="bn">AK対A5：A5の側から見た結果</p><div class="br"><span class="bl" style="flex-basis:5.2em">勝つ※</span><span class="bt"><i class="b7" style="width:25.43%"></i></span><span class="bv">25.4%</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">引き分け※</span><span class="bt"><i class="b5" style="width:4.67%"></i></span><span class="bv">4.7%</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">負ける※</span><span class="bt"><i class="b5" style="width:69.90%"></i></span><span class="bv">69.9%</span></div></div><figcaption>※全数え上げの実測値（1,712,304通り）。棒は100%を満幅としています。</figcaption></figure>
+<p>この表から読めることを3つ挙げます。</p>
+<ul>
+<li><strong>キッカーで決まる勝負は、全体の約28〜30%です。</strong>ここでの「キッカーで決まる」は、ふたりが同じ種類の役（ペア・ツーペア・スリーカード・フォーカード）で、役を作る数字が同じなのに、キッカーの違いで勝敗がついた場合です。</li>
+<li><strong>キッカーで決まった勝負は、キッカーの大きい側が必ず勝っています。</strong>キッカーの小さい側が、キッカー勝負で勝ったケースは、6組とも0通りでした。</li>
+<li><strong>引き分けも約4.6〜5.7%あります。</strong>AQ対AJとKQ対KJは5.5%を超えていて、ほかの4組より少し多くなっています。</li>
+</ul>
+<p>キッカーの弱いほうも、完全に負けるわけではありません。AK対A5で、A5の側から見ると、勝つのが25.4%、引き分けが4.7%、負けるのが69.9%です。キッカーで負ける形以外（ツーペア以上や、ストレート・フラッシュなど）で上回ったときは勝てます。</p>
+
+<h2 id="h-avoid">キッカー負けを減らす考え方</h2>
+<p>ペアになったときに、自分のキッカーが相手より小さいと負けやすい、という形です。数え上げの結果からは、次のことが言えます。</p>
+<ul>
+<li>Aと小さい札の組み合わせ（A-5など）は、Aのペアができても、相手のAとKのような組にキッカーで負けます。AK対A5で、A5のほうは70%の勝負で負けています。</li>
+<li>ボードにペアや大きい札があると、勝負が手札のキッカーに寄ります。自分のキッカーが何番目に強いかを、ボードの札と合わせて数えてから判断します。</li>
+<li>手札の強さは、役の種類だけでなく、同じ役のときの順位でも決まります。キッカーまで数えると、同じ「Aのペア」でも強さが変わります。</li>
+</ul>
+<p>これは勝ち負けの仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>のクイズと実戦で確かめられます。</p>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>近似やシミュレーションではなく、組み合わせを全部数えています。手札2組を固定し、残り48枚から選べるボードの5枚1,712,304通りを、C言語で作った判定プログラムでふたりぶん判定しました。7枚の中の最強の5枚を選び、役の種類、役を作る数字、キッカーの順に比べています。</p>
+<p>判定プログラムの確認として、52枚からランダムに7枚を400万回配り、役ごとの割合を出しました。<a href="/yaku/">役の強さ一覧</a>の全数え上げの表と、すべての役で0.05ポイント以内で一致しています（ワンペア43.78%と43.82%、ハイカード17.43%と17.41%）。</p>
+<p>「キッカーで決まる」は、ふたりの役が同じ種類で、役を作る数字が同じで、勝敗が分かれた場合と定義しました。対象はワンペア・ツーペア・スリーカード・フォーカードです。手札のマークは表の通りに固定しています。マークの組み合わせを変えると、フラッシュの出方が変わるので、割合は少し動きます。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>WSOP「Poker Hands」<a href="https://www.playwsop.com/poker-hands/">https://www.playwsop.com/poker-hands/</a> （キッカーの定義、同じ役の比べ方、引き分け。2026年11月4日に確認）</li>
+<li>Wikipedia「Texas hold 'em」<a href="https://en.wikipedia.org/wiki/Texas_hold_%27em">https://en.wikipedia.org/wiki/Texas_hold_%27em</a> （キッカーの定義。二次資料。2026年11月4日に確認）</li>
+</ul>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>キッカーは、役を作っていない残りの札。役が同じなら、役の数字を比べてから、キッカーを大きい順に比べます。</li>
+<li>キッカーがあるのはワンペア（3枚）、スリーカード（2枚）、ツーペア・フォーカード（1枚）です。ストレートとフルハウスにはありません。</li>
+<li>AKとAQのような勝負の約3割は、キッカーで決まります。引き分けは約5%です。</li>
+</ul>
+<p>次の1アクションは、手札とボードを見て、自分の最強の5枚を声に出して数えることです。ポーカー・トレーナーのクイズ（役あて）で、7枚から役を答える練習ができます。続きは次の2本です。</p>
+<ul>
+<li><a href="/outs/">アウツ計算（4と2の法則）</a></li>
+<li><a href="/potodds/">ポットオッズの計算</a></li>
+</ul>
+<p><a class="cta" href="/">クイズで役を判定してみる</a></p>
+
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>

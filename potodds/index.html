@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ポーカーのポットオッズの計算｜必要勝率の出し方と、ベット額別の早見表・計算機</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/potodds/">
+<meta name="description" content="ポーカーのポットオッズの式と、ベット額別の必要勝率・必要アウツの早見表、すぐ使える計算機。期待値が0になる勝率から式を導いて確かめた。数字は仮想チップを使った練習用の例。">
+<meta property="og:title" content="ポーカーのポットオッズの計算｜必要勝率の出し方と、ベット額別の早見表・計算機">
+<meta property="og:description" content="ポーカーのポットオッズの式と、ベット額別の必要勝率・必要アウツの早見表、すぐ使える計算機。期待値が0になる勝率から式を導いて確かめた。数字は仮想チップを使った練習用の例。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/potodds/">
+<link rel="stylesheet" href="/_legal.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2VF02QTTNV');
+</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+@media(min-width:640px){.tw::before{display:none}}
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 3.4em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px}
+.b5{background:var(--gold)}
+.b7{background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+.src li{overflow-wrap:anywhere}
+</style>
+<style>
+.calc{background:var(--panel);border-radius:16px;padding:16px;margin:8px 0 16px}
+.calc label{display:block;font-weight:700;margin:0 0 4px}
+.calc input{display:block;width:100%;min-height:48px;padding:8px 12px;font-size:16px;color:var(--txt);background:var(--panel2);border:1px solid var(--line2);border-radius:12px;margin:0 0 14px}
+.calc .res{background:var(--panel2);border-radius:12px;padding:12px 14px;margin:0}
+.calc .res p{margin:0 0 6px}
+.calc .res p:last-child{margin:0}
+.calc .big{font-size:1.5rem;font-weight:700;color:var(--gold)}
+.ex{margin:0 0 6px;font-weight:700}
+.lnk{display:block;margin:0 0 6px}
+.tw.nr th[scope=row]{white-space:nowrap}
+.tw.cmp table{min-width:0}
+.tw.cmp::before{display:none}
+.tw.cmp table{font-size:.875rem}
+.tw.cmp th,.tw.cmp td{padding:10px 5px;text-align:right;white-space:nowrap}
+.tw.cmp th:first-child,.tw.cmp td:first-child{text-align:left}
+.tw.cmp td.hd{white-space:normal}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月4日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ポーカーのポットオッズの計算｜必要勝率の出し方と早見表</h1>
+<div class="key"><p class="lead">必要勝率（%）は、コール額 ÷（今のポット ＋ 相手のベット ＋ 自分のコール額）で出ます。自分の勝率がこの値を上回れば、コールの期待値はプラスです。ポットの半分をベットされたら25%、ポットと同額なら33%です。</p></div>
+<p>この記事では、ポットオッズの式と意味を整理して、ベット額別の必要勝率とアウツの早見表を、僕が計算して作りました。すぐ使える計算機も置いています。数字はすべて、仮想チップを使った練習用の例です。</p>
+<p>自分の勝率の出し方は、<a href="/outs/">アウツ計算</a>の記事にまとめています。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-what">ポットオッズとは</a></li>
+<li><a href="#h-calc">必要勝率の計算機</a></li>
+<li><a href="#h-table">ベット額別の早見表</a></li>
+<li><a href="#h-ex">計算の例3つ</a></li>
+<li><a href="#h-why">なぜこの式で判断できるのか</a></li>
+<li><a href="#h-trap">ずれやすい3つの点</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+</ol></nav>
+<h2 id="h-what">ポットオッズとは</h2>
+<p>ポットオッズは、今のポットに対して、コールに必要な額がどれくらいかを示す比率です。コールした額に対して、ポットが何倍になって返ってくるかを見るもので、勝つ必要のある割合に直せます。</p>
+<p>表し方が2つあります。「3 : 1」のような倍率と、「25%」のような必要勝率です。3 : 1 は、払う額の3倍がポットにある、という意味で、必要勝率は 1 ÷（3＋1）＝ 25% です。n : 1 の必要勝率は、1 ÷（n＋1）で求まります。</p>
+<ul>
+<li><strong>必要勝率</strong> ＝ コール額 ÷（今のポット ＋ 相手のベット ＋ 自分のコール額）</li>
+<li><strong>自分の勝率</strong> ＞ 必要勝率 なら、数字の上ではコール、下回るならフォールドの目安です。</li>
+</ul>
+<p>ここでの「今のポット」は、相手がベットする前に、すでに真ん中にあるチップの合計です。式の分母は、相手のベットと自分のコールを足した、最終的なポットの大きさになります。</p>
+
+<h2 id="h-calc">必要勝率の計算機</h2>
+<p>ポットと相手のベット額を入れると、必要勝率と、必要なアウツの枚数が出ます（フロップはあと2枚、ターンはあと1枚を見られるとして計算）。初期値の例では、ポット1,000にベット500が来て、必要勝率は25%です。</p>
+<form class="calc" id="pcalc" onsubmit="return false" aria-label="必要勝率の計算機">
+<label for="c-pot">今のポット（相手がベットする前）</label>
+<input id="c-pot" type="number" inputmode="decimal" min="0" step="any" value="1000">
+<label for="c-bet">相手のベット額（自分のコール額と同じ）</label>
+<input id="c-bet" type="number" inputmode="decimal" min="0" step="any" value="500">
+<div class="res" id="c-out" aria-live="polite">
+<p class="big" id="c-req">必要勝率 25.0%</p>
+<p id="c-ratio">ポットオッズ 3 : 1</p>
+<p id="c-flop">必要アウツ（フロップ）：7枚以上</p>
+<p id="c-turn">必要アウツ（ターン）：12枚以上</p>
+</div>
+</form>
+<script>
+(function(){
+function C2(n){return n*(n-1)/2}
+function fl(o){return 100*(1-C2(47-o)/C2(47))}
+function tu(o){return 100*o/46}
+function need(eq,two){for(var o=0;o<=47;o++){if((two?fl(o):tu(o))>=eq*100)return o}return 47}
+function calc(){
+ var pot=parseFloat(document.getElementById('c-pot').value),bet=parseFloat(document.getElementById('c-bet').value);
+ var r=document.getElementById('c-req'),q=document.getElementById('c-ratio'),f=document.getElementById('c-flop'),t=document.getElementById('c-turn');
+ if(!(pot>=0)||!(bet>0)){r.textContent='数字を入れてください';q.textContent='';f.textContent='';t.textContent='';return}
+ var eq=bet/(pot+2*bet);
+ r.textContent='必要勝率 '+(eq*100).toFixed(1)+'%';
+ var ratio=(pot+bet)/bet;
+ q.textContent='ポットオッズ '+(Math.round(ratio*100)/100)+' : 1';
+ f.textContent='必要アウツ（フロップ）：'+need(eq,true)+'枚以上';
+ t.textContent='必要アウツ（ターン）：'+need(eq,false)+'枚以上';
+}
+document.getElementById('c-pot').addEventListener('input',calc);
+document.getElementById('c-bet').addEventListener('input',calc);
+})();
+</script>
+
+<h2 id="h-table">ベット額別の早見表</h2>
+<p>相手のベットがポットの何割かで、必要勝率が決まります。右の2列は、その勝率に届くために必要なアウツの最小枚数で、<a href="/outs/">アウツ計算</a>の厳密な確率で判定しています。</p>
+<div class="tw st"><table><caption>相手のベット額別の、必要勝率と必要なアウツ</caption><tr><th scope="col">相手のベット</th><th scope="col">必要勝率（%）</th><th scope="col">ポットオッズ</th><th scope="col">必要アウツ フロップ（枚・あと2枚）</th><th scope="col">必要アウツ ターン（枚・あと1枚）</th></tr><tr><th scope="row">ポットの1/4</th><td class="num">16.7</td><td class="num">5 : 1</td><td class="num">5</td><td class="num">8</td></tr><tr><th scope="row">ポットの1/3</th><td class="num">20.0</td><td class="num">4 : 1</td><td class="num">5</td><td class="num">10</td></tr><tr><th scope="row">ポットの1/2</th><td class="num">25.0</td><td class="num">3 : 1</td><td class="num">7</td><td class="num">12</td></tr><tr><th scope="row">ポットの2/3</th><td class="num">28.6</td><td class="num">2.5 : 1</td><td class="num">8</td><td class="num">14</td></tr><tr><th scope="row">ポットの3/4</th><td class="num">30.0</td><td class="num">2.33 : 1</td><td class="num">8</td><td class="num">14</td></tr><tr><th scope="row">ポットと同額</th><td class="num">33.3</td><td class="num">2 : 1</td><td class="num">9</td><td class="num">16</td></tr><tr><th scope="row">ポットの1.5倍</th><td class="num">37.5</td><td class="num">1.67 : 1</td><td class="num">10</td><td class="num">18</td></tr><tr><th scope="row">ポットの2倍</th><td class="num">40.0</td><td class="num">1.5 : 1</td><td class="num">11</td><td class="num">19</td></tr></table></div>
+<figure><div class="bg"><p class="bn">ポットの1/4</p><div class="br"><span class="bl" style="flex-basis:5.8em">必要勝率※</span><span class="bt"><i class="b7" style="width:33.40%"></i></span><span class="bv">16.7%</span></div></div><div class="bg"><p class="bn">ポットの1/3</p><div class="br"><span class="bl" style="flex-basis:5.8em">必要勝率※</span><span class="bt"><i class="b7" style="width:40.00%"></i></span><span class="bv">20.0%</span></div></div><div class="bg"><p class="bn">ポットの1/2</p><div class="br"><span class="bl" style="flex-basis:5.8em">必要勝率※</span><span class="bt"><i class="b7" style="width:50.00%"></i></span><span class="bv">25.0%</span></div></div><div class="bg"><p class="bn">ポットの2/3</p><div class="br"><span class="bl" style="flex-basis:5.8em">必要勝率※</span><span class="bt"><i class="b7" style="width:57.20%"></i></span><span class="bv">28.6%</span></div></div><div class="bg"><p class="bn">ポットの3/4</p><div class="br"><span class="bl" style="flex-basis:5.8em">必要勝率※</span><span class="bt"><i class="b7" style="width:60.00%"></i></span><span class="bv">30.0%</span></div></div><div class="bg"><p class="bn">ポットと同額</p><div class="br"><span class="bl" style="flex-basis:5.8em">必要勝率※</span><span class="bt"><i class="b7" style="width:66.60%"></i></span><span class="bv">33.3%</span></div></div><div class="bg"><p class="bn">ポットの1.5倍</p><div class="br"><span class="bl" style="flex-basis:5.8em">必要勝率※</span><span class="bt"><i class="b7" style="width:75.00%"></i></span><span class="bv">37.5%</span></div></div><div class="bg"><p class="bn">ポットの2倍</p><div class="br"><span class="bl" style="flex-basis:5.8em">必要勝率※</span><span class="bt"><i class="b7" style="width:80.00%"></i></span><span class="bv">40.0%</span></div></div><figcaption>※計算値。相手のベットがポットのどれだけかによる、必要勝率の違い。棒は50%を満幅としています。</figcaption></figure><figure><div class="bg"><p class="bn">ポットの1/4</p><div class="br"><span class="bl" style="flex-basis:5.2em">フロップ※</span><span class="bt"><i class="b5" style="width:25.00%"></i></span><span class="bv">5枚</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">ターン※</span><span class="bt"><i class="b7" style="width:40.00%"></i></span><span class="bv">8枚</span></div></div><div class="bg"><p class="bn">ポットの1/3</p><div class="br"><span class="bl" style="flex-basis:5.2em">フロップ※</span><span class="bt"><i class="b5" style="width:25.00%"></i></span><span class="bv">5枚</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">ターン※</span><span class="bt"><i class="b7" style="width:50.00%"></i></span><span class="bv">10枚</span></div></div><div class="bg"><p class="bn">ポットの1/2</p><div class="br"><span class="bl" style="flex-basis:5.2em">フロップ※</span><span class="bt"><i class="b5" style="width:35.00%"></i></span><span class="bv">7枚</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">ターン※</span><span class="bt"><i class="b7" style="width:60.00%"></i></span><span class="bv">12枚</span></div></div><div class="bg"><p class="bn">ポットの2/3</p><div class="br"><span class="bl" style="flex-basis:5.2em">フロップ※</span><span class="bt"><i class="b5" style="width:40.00%"></i></span><span class="bv">8枚</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">ターン※</span><span class="bt"><i class="b7" style="width:70.00%"></i></span><span class="bv">14枚</span></div></div><div class="bg"><p class="bn">ポットの3/4</p><div class="br"><span class="bl" style="flex-basis:5.2em">フロップ※</span><span class="bt"><i class="b5" style="width:40.00%"></i></span><span class="bv">8枚</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">ターン※</span><span class="bt"><i class="b7" style="width:70.00%"></i></span><span class="bv">14枚</span></div></div><div class="bg"><p class="bn">ポットと同額</p><div class="br"><span class="bl" style="flex-basis:5.2em">フロップ※</span><span class="bt"><i class="b5" style="width:45.00%"></i></span><span class="bv">9枚</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">ターン※</span><span class="bt"><i class="b7" style="width:80.00%"></i></span><span class="bv">16枚</span></div></div><div class="bg"><p class="bn">ポットの1.5倍</p><div class="br"><span class="bl" style="flex-basis:5.2em">フロップ※</span><span class="bt"><i class="b5" style="width:50.00%"></i></span><span class="bv">10枚</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">ターン※</span><span class="bt"><i class="b7" style="width:90.00%"></i></span><span class="bv">18枚</span></div></div><div class="bg"><p class="bn">ポットの2倍</p><div class="br"><span class="bl" style="flex-basis:5.2em">フロップ※</span><span class="bt"><i class="b5" style="width:55.00%"></i></span><span class="bv">11枚</span></div><div class="br"><span class="bl" style="flex-basis:5.2em">ターン※</span><span class="bt"><i class="b7" style="width:95.00%"></i></span><span class="bv">19枚</span></div></div><figcaption>※計算値（厳密な確率から判定した、必要なアウツの最小枚数）。棒は20枚を満幅としています。</figcaption></figure>
+<p>この表から読めることを3つ挙げます。</p>
+<ul>
+<li>ポットの半分（1/2）のベットなら必要勝率は25%で、ポットと同額なら33%です。ベットが大きいほど、必要勝率は上がりますが、上がり方は頭打ちで、ポットの2倍でも40%です。</li>
+<li>ターンでフラッシュドロー（9枚、約19.6%）は、ポットの1/2のベットに必要な25%に届きません。ターンの1枚だけで見ると、純粋な数字では足りません。</li>
+<li>フロップなら、同じ9枚で約35.0%あります。ただし、これは次のベットがなく、2枚とも見られるときの値です（落とし穴の章を参照）。</li>
+</ul>
+
+<h2 id="h-ex">計算の例3つ</h2>
+<p>数字はすべて仮想チップです。</p>
+<p class="ex">例1：ポット1,000にベット500。ターンでフラッシュドロー（9枚）</p>
+<p>必要勝率は、500 ÷（1,000 ＋ 500 ＋ 500）＝ 25%です。ターンで9枚のアウツは 9/46 ＝ 約19.6%で、25%に届きません。数字の上では降りる側です。</p>
+<p class="ex">例2：ポット1,000にベット1,000。ターンでオープンエンド（8枚）</p>
+<p>必要勝率は、1,000 ÷（1,000 ＋ 1,000 ＋ 1,000）＝ 約33.3%です。8枚は 8/46 ＝ 約17.4%で、大きく足りません。降りる側です。</p>
+<p class="ex">例3：ポット1,000にベット200。ターンでオープンエンド（8枚）</p>
+<p>必要勝率は、200 ÷（1,000 ＋ 200 ＋ 200）＝ 約14.3%です。8枚の約17.4%はこれを上回るので、数字の上ではコールの側です。</p>
+<p>同じ8枚のアウツでも、ベット額が変わると、判断が逆になります。</p>
+
+<h2 id="h-why">なぜこの式で判断できるのか</h2>
+<p>コールの期待値（仮想チップ）は、勝ったときに得る額と、負けたときに払う額の差です。勝率をpとすると、次のようになります。</p>
+<p>期待値 ＝ p ×（今のポット ＋ 相手のベット）－（1 － p）× コール額</p>
+<p>期待値がちょうど0になるpを解くと、p ＝ コール額 ÷（今のポット ＋ 相手のベット ＋ コール額）です。これが必要勝率の式です。例1で確かめると、p＝25%のとき、0.25 × 1,500 － 0.75 × 500 ＝ 375 － 375 ＝ 0 になります。</p>
+
+<h2 id="h-trap">ずれやすい3つの点</h2>
+<ul>
+<li><strong>ポットの数え方。</strong>「ポット」に、相手のベットを含めるかどうかで、答えが変わります。この記事の式は、ベットの前のポットを使い、分母で相手のベットと自分のコールを足しています。</li>
+<li><strong>フロップで、あと2枚を見られるとは限らない。</strong>ターンでまたベットされるなら、ターンで降りることがあります。そのときの勝率は、1枚ぶん（アウツ×2）で見るのが安全です。</li>
+<li><strong>インプライドオッズは別の話。</strong>ドローが完成したときに、相手からさらに取れるチップを見込む考え方です（Wikipediaの「Pot odds」も同じ扱いです）。見込む額は相手の動き次第なので、この記事の計算には入れていません。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>必要勝率は式 ベット ÷（ポット ＋ 2 × ベット）で、ポットの何割かをfとすると f ÷（1 ＋ 2f）です。早見表の必要アウツは、<a href="/outs/">アウツ計算</a>の厳密な確率（フロップは1 － C(47－o,2)/C(47,2)、ターンは o/46）が必要勝率以上になる、最小のアウツ枚数です。</p>
+<p>確認として、3つの例（1,000に500・1,000に1,000・1,000に200）で、期待値がちょうど0になる勝率が、式の値と一致することを計算しました。計算機は、同じ式をブラウザ上で動かしています。相手の手札や、これからのベットは考えていません。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Wikipedia「Pot odds」<a href="https://en.wikipedia.org/wiki/Pot_odds">https://en.wikipedia.org/wiki/Pot_odds</a> （ポットオッズの定義、完成する確率との比較、インプライドオッズ。二次資料。2026年11月4日に確認）</li>
+<li>Wikipedia「Texas hold 'em」<a href="https://en.wikipedia.org/wiki/Texas_hold_%27em">https://en.wikipedia.org/wiki/Texas_hold_%27em</a> （アウツの数え方、2倍・4倍の法則。二次資料。2026年11月4日に確認）</li>
+</ul>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>必要勝率は、コール額 ÷（今のポット ＋ 相手のベット ＋ 自分のコール額）です。</li>
+<li>ポットの半分のベットで25%、同額のベットで33%です。</li>
+<li>自分の勝率は、アウツ×4（フロップ）か×2（ターン）で見積もり、必要勝率と比べます。</li>
+</ul>
+<p>次の1アクションは、手持ちのドローのアウツを数えて、計算機に相手のベットを入れ、ターンとフロップのどちらの数字で比べるかを決めることです。ポーカー・トレーナーの実戦モードでは、ポストフロップのコーチ判定にこの必要勝率が出ます。</p>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>

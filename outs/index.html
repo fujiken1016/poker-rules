@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ポーカーのアウツ計算｜4と2の法則のやり方と、アウツ1〜20枚の誤差を実測した早見表</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/outs/">
+<meta name="description" content="ポーカーのアウツの数え方と、フロップはアウツ×4・ターンはアウツ×2の法則を、アウツ1〜20枚の厳密な確率と並べて確認した。9枚以上で4倍が高く出る誤差と補正、よくあるドローのアウツ早見表つき。">
+<meta property="og:title" content="ポーカーのアウツ計算｜4と2の法則のやり方と、アウツ1〜20枚の誤差を実測した早見表">
+<meta property="og:description" content="ポーカーのアウツの数え方と、フロップはアウツ×4・ターンはアウツ×2の法則を、アウツ1〜20枚の厳密な確率と並べて確認した。9枚以上で4倍が高く出る誤差と補正、よくあるドローのアウツ早見表つき。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/outs/">
+<link rel="stylesheet" href="/_legal.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2VF02QTTNV');
+</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+@media(min-width:640px){.tw::before{display:none}}
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 3.4em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px}
+.b5{background:var(--gold)}
+.b7{background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+.src li{overflow-wrap:anywhere}
+</style>
+<style>
+.calc{background:var(--panel);border-radius:16px;padding:16px;margin:8px 0 16px}
+.calc label{display:block;font-weight:700;margin:0 0 4px}
+.calc input{display:block;width:100%;min-height:48px;padding:8px 12px;font-size:16px;color:var(--txt);background:var(--panel2);border:1px solid var(--line2);border-radius:12px;margin:0 0 14px}
+.calc .res{background:var(--panel2);border-radius:12px;padding:12px 14px;margin:0}
+.calc .res p{margin:0 0 6px}
+.calc .res p:last-child{margin:0}
+.calc .big{font-size:1.5rem;font-weight:700;color:var(--gold)}
+.ex{margin:0 0 6px;font-weight:700}
+.lnk{display:block;margin:0 0 6px}
+.tw.nr th[scope=row]{white-space:nowrap}
+.tw.cmp table{min-width:0}
+.tw.cmp::before{display:none}
+.tw.cmp table{font-size:.875rem}
+.tw.cmp th,.tw.cmp td{padding:10px 5px;text-align:right;white-space:nowrap}
+.tw.cmp th:first-child,.tw.cmp td:first-child{text-align:left}
+.tw.cmp td.hd{white-space:normal}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月4日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ポーカーのアウツ計算｜4と2の法則のやり方と、誤差を実測した早見表</h1>
+<div class="key"><p class="lead">アウツは、あと何枚かで役が完成する、まだ見えていない札の枚数です。完成する確率は、フロップならアウツ×4、ターンならアウツ×2（どちらも%）で見積もれます。ただし、アウツが9枚以上のときは4倍が高く出すぎます。</p></div>
+<p>この記事では、アウツの数え方と計算の手順に加えて、アウツ1〜20枚の「厳密な確率」と「4倍・2倍で出した値」を並べた早見表を、僕が計算して作りました。誤差がどこから大きくなるかも数字で見せます。</p>
+<p>出した確率をどう使うかは、<a href="/potodds/">ポットオッズの計算</a>で続けます。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-what">アウツとは</a></li>
+<li><a href="#h-step">数え方と計算の3ステップ</a></li>
+<li><a href="#h-table">アウツ1〜20枚の早見表</a></li>
+<li><a href="#h-draw">よくあるドローのアウツ</a></li>
+<li><a href="#h-over">アウツが9枚以上だと4倍が高く出る</a></li>
+<li><a href="#h-trap">アウツを数えるときの3つの落とし穴</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+</ol></nav>
+<h2 id="h-what">アウツとは</h2>
+<p>アウツは、まだ見えていない札のうち、引けば自分の手が完成する札のことです。たとえば手札が A♠ Q♠、フロップが 7♠ 2♦ J♠ なら、スペードが4枚そろって、あと1枚でフラッシュです。スペードは13枚のうち4枚が見えているので、残りの9枚がアウツです。</p>
+<p>この時点で見えていない札は、52枚から自分の手札2枚とボード3枚を引いた47枚です。ターンになると、見えていない札は46枚になります。</p>
+
+<h2 id="h-step">数え方と計算の3ステップ</h2>
+<ol>
+<li><strong>アウツを数える。</strong>完成する札を、見えていない札の中から数えます。重複は1回だけ数えます。</li>
+<li><strong>確率にする。</strong>フロップ（あと2枚見られる）ならアウツ×4、ターン（あと1枚）ならアウツ×2を%として扱います。</li>
+<li><strong>相手のベットと比べる。</strong>コールに必要な勝率と比べます。ここは<a href="/potodds/">ポットオッズ</a>の話です。</li>
+</ol>
+<p>4倍・2倍はめやすで、厳密な値は次の式です。</p>
+<ul>
+<li>フロップからリバーまで：1 −（残り47枚からアウツ以外の2枚を引く組み合わせ ÷ 47枚から2枚を引く組み合わせ）</li>
+<li>ターンからリバーまで：アウツ ÷ 46</li>
+</ul>
+<p>アウツ9枚（フラッシュドロー）で確かめます。47枚から2枚を選ぶ組み合わせは1,081通り、アウツ以外の38枚から2枚を選ぶのは703通りです。1 − 703/1,081 = 約35.0%で、4倍の36%に近い値になります。ターンなら 9/46 = 約19.6%、2倍の18%です。</p>
+
+<h2 id="h-table">アウツ1〜20枚の早見表</h2>
+<p>厳密な確率を、4倍・2倍と並べました。「補正」は、9枚以上のときだけ使う方法で、次の章で説明します。</p>
+<div class="tw st cmp"><table><caption>アウツ別の完成確率（%）。フロップ・ターンの列が厳密値（フロップはあと2枚、ターンはあと1枚）。×4・×2は法則での見積もり、補正は9枚以上の補正後の値</caption><tr><th scope="col">アウツ</th><th scope="col">フロップ</th><th scope="col">×4</th><th scope="col">補正</th><th scope="col">ターン</th><th scope="col">×2</th></tr><tr><th scope="row">1</th><td class="num">4.3</td><td class="num">4</td><td class="num">4</td><td class="num">2.2</td><td class="num">2</td></tr><tr><th scope="row">2</th><td class="num">8.4</td><td class="num">8</td><td class="num">8</td><td class="num">4.3</td><td class="num">4</td></tr><tr><th scope="row">3</th><td class="num">12.5</td><td class="num">12</td><td class="num">12</td><td class="num">6.5</td><td class="num">6</td></tr><tr><th scope="row">4</th><td class="num">16.5</td><td class="num">16</td><td class="num">16</td><td class="num">8.7</td><td class="num">8</td></tr><tr><th scope="row">5</th><td class="num">20.4</td><td class="num">20</td><td class="num">20</td><td class="num">10.9</td><td class="num">10</td></tr><tr><th scope="row">6</th><td class="num">24.1</td><td class="num">24</td><td class="num">24</td><td class="num">13.0</td><td class="num">12</td></tr><tr><th scope="row">7</th><td class="num">27.8</td><td class="num">28</td><td class="num">28</td><td class="num">15.2</td><td class="num">14</td></tr><tr><th scope="row">8</th><td class="num">31.5</td><td class="num">32</td><td class="num">32</td><td class="num">17.4</td><td class="num">16</td></tr><tr><th scope="row">9</th><td class="num">35.0</td><td class="num">36</td><td class="num">35</td><td class="num">19.6</td><td class="num">18</td></tr><tr><th scope="row">10</th><td class="num">38.4</td><td class="num">40</td><td class="num">38</td><td class="num">21.7</td><td class="num">20</td></tr><tr><th scope="row">11</th><td class="num">41.7</td><td class="num">44</td><td class="num">41</td><td class="num">23.9</td><td class="num">22</td></tr><tr><th scope="row">12</th><td class="num">45.0</td><td class="num">48</td><td class="num">44</td><td class="num">26.1</td><td class="num">24</td></tr><tr><th scope="row">13</th><td class="num">48.1</td><td class="num">52</td><td class="num">47</td><td class="num">28.3</td><td class="num">26</td></tr><tr><th scope="row">14</th><td class="num">51.2</td><td class="num">56</td><td class="num">50</td><td class="num">30.4</td><td class="num">28</td></tr><tr><th scope="row">15</th><td class="num">54.1</td><td class="num">60</td><td class="num">53</td><td class="num">32.6</td><td class="num">30</td></tr><tr><th scope="row">16</th><td class="num">57.0</td><td class="num">64</td><td class="num">56</td><td class="num">34.8</td><td class="num">32</td></tr><tr><th scope="row">17</th><td class="num">59.8</td><td class="num">68</td><td class="num">59</td><td class="num">37.0</td><td class="num">34</td></tr><tr><th scope="row">18</th><td class="num">62.4</td><td class="num">72</td><td class="num">62</td><td class="num">39.1</td><td class="num">36</td></tr><tr><th scope="row">19</th><td class="num">65.0</td><td class="num">76</td><td class="num">65</td><td class="num">41.3</td><td class="num">38</td></tr><tr><th scope="row">20</th><td class="num">67.5</td><td class="num">80</td><td class="num">68</td><td class="num">43.5</td><td class="num">40</td></tr></table></div><figure><div class="bg"><p class="bn">アウツ4枚</p><div class="br"><span class="bl" style="flex-basis:5.2em">4倍の差※</span><span class="bt"><i class="b5" style="width:3.59%"></i></span><span class="bv">-0.5</span></div></div><div class="bg"><p class="bn">アウツ6枚</p><div class="br"><span class="bl" style="flex-basis:5.2em">4倍の差※</span><span class="bt"><i class="b5" style="width:3.08%"></i></span><span class="bv">-0.1</span></div></div><div class="bg"><p class="bn">アウツ8枚</p><div class="br"><span class="bl" style="flex-basis:5.2em">4倍の差※</span><span class="bt"><i class="b5" style="width:4.21%"></i></span><span class="bv">+0.5</span></div></div><div class="bg"><p class="bn">アウツ9枚</p><div class="br"><span class="bl" style="flex-basis:5.2em">4倍の差※</span><span class="bt"><i class="b5" style="width:7.94%"></i></span><span class="bv">+1.0</span></div></div><div class="bg"><p class="bn">アウツ10枚</p><div class="br"><span class="bl" style="flex-basis:5.2em">4倍の差※</span><span class="bt"><i class="b5" style="width:12.38%"></i></span><span class="bv">+1.6</span></div></div><div class="bg"><p class="bn">アウツ12枚</p><div class="br"><span class="bl" style="flex-basis:5.2em">4倍の差※</span><span class="bt"><i class="b5" style="width:23.40%"></i></span><span class="bv">+3.0</span></div></div><div class="bg"><p class="bn">アウツ15枚</p><div class="br"><span class="bl" style="flex-basis:5.2em">4倍の差※</span><span class="bt"><i class="b5" style="width:45.26%"></i></span><span class="bv">+5.9</span></div></div><div class="bg"><p class="bn">アウツ20枚</p><div class="br"><span class="bl" style="flex-basis:5.2em">4倍の差※</span><span class="bt"><i class="b5" style="width:95.92%"></i></span><span class="bv">+12.5</span></div></div><figcaption>※4倍で出した値から厳密な値を引いた差（ポイント）。棒は13ポイントを満幅としています。8枚までは±0.5ポイント程度ですが、アウツが増えるほど高く出すぎます。</figcaption></figure>
+<p>この表と図から読めることを3つ挙げます。</p>
+<ul>
+<li>アウツ8枚までは、4倍の誤差は±0.5ポイント以内です。8枚（オープンエンド）は厳密が31.5%、4倍が32%で、ほぼ一致します。</li>
+<li>アウツ15枚（フラッシュ＋オープンエンド）では、厳密が54.1%、4倍が60%で、5.9ポイント高く出ます。</li>
+<li>ターンの2倍は、どのアウツ数でも厳密な値より少し低く出ます。20枚でも3.5ポイントのずれで、フロップの4倍よりずれは小さくなります。</li>
+</ul>
+<figure><div class="bg"><p class="bn">アウツ4枚（フロップ）</p><div class="br"><span class="bl" style="flex-basis:3.4em">4倍</span><span class="bt"><i class="b5" style="width:26.67%"></i></span><span class="bv">16%</span></div><div class="br"><span class="bl" style="flex-basis:3.4em">厳密※</span><span class="bt"><i class="b7" style="width:27.44%"></i></span><span class="bv">16.5%</span></div></div><div class="bg"><p class="bn">アウツ8枚（フロップ）</p><div class="br"><span class="bl" style="flex-basis:3.4em">4倍</span><span class="bt"><i class="b5" style="width:53.33%"></i></span><span class="bv">32%</span></div><div class="br"><span class="bl" style="flex-basis:3.4em">厳密※</span><span class="bt"><i class="b7" style="width:52.42%"></i></span><span class="bv">31.5%</span></div></div><div class="bg"><p class="bn">アウツ9枚（フロップ）</p><div class="br"><span class="bl" style="flex-basis:3.4em">4倍</span><span class="bt"><i class="b5" style="width:60.00%"></i></span><span class="bv">36%</span></div><div class="br"><span class="bl" style="flex-basis:3.4em">厳密※</span><span class="bt"><i class="b7" style="width:58.28%"></i></span><span class="bv">35.0%</span></div></div><div class="bg"><p class="bn">アウツ12枚（フロップ）</p><div class="br"><span class="bl" style="flex-basis:3.4em">4倍</span><span class="bt"><i class="b5" style="width:80.00%"></i></span><span class="bv">48%</span></div><div class="br"><span class="bl" style="flex-basis:3.4em">厳密※</span><span class="bt"><i class="b7" style="width:74.93%"></i></span><span class="bv">45.0%</span></div></div><div class="bg"><p class="bn">アウツ15枚（フロップ）</p><div class="br"><span class="bl" style="flex-basis:3.4em">4倍</span><span class="bt"><i class="b5" style="width:100.00%"></i></span><span class="bv">60%</span></div><div class="br"><span class="bl" style="flex-basis:3.4em">厳密※</span><span class="bt"><i class="b7" style="width:90.19%"></i></span><span class="bv">54.1%</span></div></div><figcaption>※組み合わせの式で出した厳密な値（計算値）。棒は60%を満幅としています。</figcaption></figure>
+<h2 id="h-draw">よくあるドローのアウツ</h2>
+<p>実戦で出てくる形を、アウツの枚数と厳密な確率（フロップはあと2枚、ターンはあと1枚）にまとめました。</p>
+<div class="tw nr"><table><caption>よくあるドローのアウツと完成確率</caption><tr><th scope="col">ドロー</th><th scope="col">アウツ（枚）</th><th scope="col">フロップ（%）</th><th scope="col">ターン（%）</th></tr><tr><th scope="row">ガットショット（間が1つ抜けた連続）</th><td class="num">4</td><td class="num">16.5</td><td class="num">8.7</td></tr><tr><th scope="row">オーバーカード2枚</th><td class="num">6</td><td class="num">24.1</td><td class="num">13.0</td></tr><tr><th scope="row">オープンエンドのストレートドロー</th><td class="num">8</td><td class="num">31.5</td><td class="num">17.4</td></tr><tr><th scope="row">フラッシュドロー</th><td class="num">9</td><td class="num">35.0</td><td class="num">19.6</td></tr><tr><th scope="row">フラッシュ＋ガットショット</th><td class="num">12</td><td class="num">45.0</td><td class="num">26.1</td></tr><tr><th scope="row">フラッシュ＋オープンエンド</th><td class="num">15</td><td class="num">54.1</td><td class="num">32.6</td></tr></table></div><p>それぞれの形の例です。</p><ul><li><strong>ガットショット（間が1つ抜けた連続）</strong>：手札 9♣ 8<span class="r">♦</span>、ボード 6<span class="r">♥</span> 5♠ K<span class="r">♦</span>（7が出ればストレート）</li><li><strong>オーバーカード2枚</strong>：手札 A♣ K<span class="r">♦</span>、ボード 9<span class="r">♥</span> 6♠ 2<span class="r">♦</span>（AかKが出れば最上位のペア）</li><li><strong>オープンエンドのストレートドロー</strong>：手札 9<span class="r">♥</span> 8<span class="r">♥</span>、ボード 7♣ 6<span class="r">♦</span> 2♠（10か5が出れば完成）</li><li><strong>フラッシュドロー</strong>：手札 A♠ Q♠、ボード 7♠ 2<span class="r">♦</span> J♠（スペード9枚）</li><li><strong>フラッシュ＋ガットショット</strong>：手札 9<span class="r">♥</span> 8<span class="r">♥</span>、ボード 6<span class="r">♥</span> 5♣ K<span class="r">♥</span>（ハート9枚と7の4枚で、7<span class="r">♥</span>が重複）</li><li><strong>フラッシュ＋オープンエンド</strong>：手札 9<span class="r">♥</span> 8<span class="r">♥</span>、ボード 7<span class="r">♥</span> 6♣ K<span class="r">♥</span>（ハート9枚と10・5の8枚で、10<span class="r">♥</span>と5<span class="r">♥</span>が重複）</li></ul>
+<p>ガットショットは、完成する数字が1種類で、その数字の4枚（マーク違い）がアウツです。オープンエンドは、完成する数字が2種類あるので8枚です。複合ドローは、フラッシュとストレートの両方で完成する札が重複しているので、単純に足さず、重なりを引いて数えています。</p>
+
+<h2 id="h-over">アウツが9枚以上だと4倍が高く出る</h2>
+<p>4倍は、ターンで引ける確率とリバーで引ける確率を、それぞれ2倍して足したようなものです。ただし、ターンで引いたら、リバーでも引ける確率は意味を失います。その二重に数えた分が、アウツが増えるほど大きくなります。</p>
+<p>よく知られた補正は、9枚以上のときに「アウツ×4 −（アウツ−8）」とする方法です。表の「補正」の列がこれで、9枚で35%（厳密35.0%）、12枚で44%（45.0%）、15枚で53%（54.1%）と、誤差は約1.2ポイント以内におさまります。アウツ8枚までは、そのまま4倍で足ります。</p>
+
+<h2 id="h-trap">アウツを数えるときの3つの落とし穴</h2>
+<ul>
+<li><strong>重複して数える。</strong>フラッシュの9枚とストレートの8枚は、同じ札を含むことがあります。両方を単純に足すと数えすぎるので、1枚ずつ重なりを確認します。</li>
+<li><strong>完成しても負ける札を数える。</strong>自分がフラッシュになっても、同じ札で相手のフルハウスが完成するなど、勝てないことがあります。完成するだけでなく、勝てる札かどうかまで見て、怪しい札を減らして数えます。</li>
+<li><strong>フロップで4倍を使い続ける。</strong>4倍は、ターンとリバーの2枚を、追加のベットなしで見られるときの確率です。ターンでまたベットされるなら、1枚ずつの確率（2倍）で考えるほうが安全です。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>シミュレーションではなく、組み合わせの式で出した厳密な値です。フロップは、残り47枚から2枚を引く1,081通りのうち、アウツを1枚でも含む場合の数を数えています。ターンは、残り46枚のうち、アウツの枚数を数えています。</p>
+<p>式の確認として、アウツ4・8・9・15枚の4つについて、1,081通りの組み合わせを1つずつ数え上げ、式の値と完全に一致することを確かめました（9枚で378通り、34.97%）。表の「補正」と誤差の列は、表の値から計算しています。</p>
+<p>前提は、見えている札が自分の手札2枚とボードだけで、相手の手札は考えていないことです。相手の手札に自分のアウツがあれば、実際の確率は少し下がります。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Wikipedia「Texas hold 'em」<a href="https://en.wikipedia.org/wiki/Texas_hold_%27em">https://en.wikipedia.org/wiki/Texas_hold_%27em</a> （アウツの数え方、2倍・4倍の法則。二次資料。2026年11月4日に確認）</li>
+<li>Wikipedia「Pot odds」<a href="https://en.wikipedia.org/wiki/Pot_odds">https://en.wikipedia.org/wiki/Pot_odds</a> （ポットオッズと、完成する確率の比較。二次資料。2026年11月4日に確認）</li>
+</ul>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>フロップはアウツ×4、ターンはアウツ×2が、完成する確率（%）のめやすです。</li>
+<li>アウツ8枚までは4倍でそのまま使えます。9枚以上は「×4 −（アウツ−8）」で補正します。</li>
+<li>アウツは重複と、完成しても負ける札を除いて数えます。</li>
+</ul>
+<p>次の1アクションは、アウツの確率を、相手のベットから出る必要勝率と比べることです。<a href="/potodds/">ポットオッズの計算</a>に、ベット額別の早見表と計算機を用意しました。役の順番に不安があれば、先に次の2本を見てください。</p>
+<ul>
+<li><a href="/yaku/">ポーカーの役の強さ一覧</a></li>
+<li><a href="/kicker/">キッカー（同じ役の勝ち負け）</a></li>
+</ul>
+<p><a class="cta" href="/potodds/">ポットオッズの計算へ</a></p>
+
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
