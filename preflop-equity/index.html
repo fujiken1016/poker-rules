@@ -69,6 +69,9 @@ figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
 .tocT{font-weight:700;margin:0 0 4px}
 .toc ol{margin:0;padding-left:22px}
 .toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
 .src li{overflow-wrap:anywhere}
 .tw.nr th[scope=row]{white-space:nowrap}
 .ex{margin:0 0 6px;font-weight:700}
