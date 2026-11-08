@@ -766,11 +766,11 @@ function rankTableHTML(){
     ['スリーカード','同じ数字3枚','7s 7h 7d Kc 2s','約21回に1回'],
     ['ツーペア','ペアが2組','As Ah 9d 9c 5s','約4.3回に1回'],
     ['ワンペア','同じ数字2枚','Ks Kh Td 7c 3s','約2.3回に1回'],
-    ['ハイカード','役なし。一番大きい数字で勝負','Ad Qs 9h 6c 3d','—'],
+    ['ハイカード','役なし。一番大きい数字で勝負','Ad Qs 9h 6c 3d','約5.7回に1回'],
   ];
   return '<table class="ranktbl"><tr><th>役</th><th>例</th></tr>'+rows.map((r,i)=>
     '<tr><td><span class="nm">'+(10-i>1?'':'')+r[0]+'</span><br><span class="pr">'+r[1]+'・出る確率 '+r[3]+'</span></td><td class="cards">'+cardsHTML(pcs(r[2]))+'</td></tr>'
-  ).join('')+'</table><p style="margin:8px 0 0;font-size:14px;color:var(--sub)">※「出る確率」はテキサスホールデム（手札2枚＋ボード5枚＝7枚）で最終的にその役になる頻度です（全組み合わせの数え上げ）。カード5枚だけで配る場合の値は別で、ロイヤルフラッシュは約65万回に1回です。</p>';
+  ).join('')+'</table><p style="margin:8px 0 0;font-size:14px;color:var(--sub)">※「出る確率」はテキサスホールデム（手札2枚＋ボード5枚＝7枚）で、7枚の中の最強の5枚で最終的にその役になる頻度です（133,784,560通りの全数え上げ。<a href="yaku/" style="color:var(--cyan)">役の強さ一覧</a>と同じ値）。カード5枚だけで配る場合の値は別で、ロイヤルフラッシュは約65万回に1回です。</p>';
 }
 document.getElementById('sheetRanks').outerHTML=rankTableHTML();
 /* glossary */
