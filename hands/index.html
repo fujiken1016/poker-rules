@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ホールデムのスターティングハンド169通り｜組み合わせ数と勝率の一覧表</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/hands/">
+<meta name="description" content="ホールデムの配られる2枚1,326通りを169種類にまとめ、組み合わせ数と、ランダムな1人の相手に対する勝率を全ハンドの表で示す。AAは85.2%、最弱の32オフスートは32.3%。数字は仮想チップを使った練習用の例。">
+<meta property="og:title" content="ホールデムのスターティングハンド169通り｜組み合わせ数と勝率の一覧表">
+<meta property="og:description" content="ホールデムの配られる2枚1,326通りを169種類にまとめ、組み合わせ数と、ランダムな1人の相手に対する勝率を全ハンドの表で示す。AAは85.2%、最弱の32オフスートは32.3%。数字は仮想チップを使った練習用の例。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/hands/">
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+@media(min-width:640px){.tw::before{display:none}}
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+</style>
+<style>
+.gr table{min-width:700px;font-size:.875rem}
+.gr th,.gr td{padding:6px 4px;text-align:center;white-space:nowrap}
+.gr th[scope=row]{position:sticky;left:0;background:var(--panel2);z-index:1}
+.gr td.t1{background:#2a2a3c}
+.gr td.t2{background:#27403a}
+.gr td.t3{background:#2b5a49}
+.gr td.t4{background:#2f7358}
+.gr td.pp{font-weight:700;box-shadow:inset 0 0 0 1px var(--line2)}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月8日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ホールデムのスターティングハンド169通り｜組み合わせ数と勝率の一覧</h1>
+<div class="key"><p class="lead">配られる2枚は1,326通りで、数字とマークの違いでまとめると169種類です。組み合わせ数は、ペアが6通り、スーテッドが4通り、オフスートが12通りです。ランダムな1人の相手に対するエクイティは、最強のAAが85.2%、最弱の32オフスートが32.3%でした。</p></div>
+<p>この記事では、169種類のハンドの組み合わせ数と配られる確率を整理して、全ハンドの勝率を13×13の表にしました。数字は、僕が作った判定プログラムでランダムに配って数えた実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>役の強さそのものは<a href="/yaku/">ポーカーの役の強さ一覧</a>に、勝ち負けの決め方は<a href="/kicker/">キッカーの解説</a>にあります。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-kind">169種類の内訳と、配られる確率</a></li>
+<li><a href="#h-grid">169ハンドの勝率表</a></li>
+<li><a href="#h-rank">強いほうと弱いほうの12ハンド</a></li>
+<li><a href="#h-read">表から読める5つのこと</a></li>
+<li><a href="#h-limit">この表を使うときの注意</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+</ol></nav>
+
+<h2 id="h-kind">169種類の内訳と、配られる確率</h2>
+<p>最初に配られる2枚の組み合わせは、52枚から2枚を選ぶ C(52,2) ＝ 1,326通りです。ただし、マークに強弱はないので、「A♠K♠」と「A♥K♥」は強さが同じです。マークの違いを、同じマークかどうかだけに減らして数え直すと、169種類になります。</p>
+<div class="tw st nr"><table><caption>スターティングハンド169種類の内訳</caption><tr><th scope="col">種類</th><th scope="col">ハンドの数</th><th scope="col">1ハンドの組み合わせ</th><th scope="col">合計</th><th scope="col">配られる確率</th></tr>
+<tr><th scope="row">ペア（AA〜22）</th><td class="num">13</td><td class="num">6</td><td class="num">78</td><td class="num">5.88%</td></tr>
+<tr><th scope="row">スーテッド（AKsなど）</th><td class="num">78</td><td class="num">4</td><td class="num">312</td><td class="num">23.53%</td></tr>
+<tr><th scope="row">オフスート（AKoなど）</th><td class="num">78</td><td class="num">12</td><td class="num">936</td><td class="num">70.59%</td></tr>
+<tr><th scope="row">合計</th><td class="num">169</td><td class="num">―</td><td class="num">1,326</td><td class="num">100%</td></tr></table></div>
+<p>1つのハンドの組み合わせ数は、ペアが6通り（マーク4つから2つ選ぶので C(4,2)）、スーテッドが4通り（マークを1つ選ぶ）、オフスートが12通り（4×3）です。たとえばAAは6通りなので、配られる確率は 6 ÷ 1,326 ＝ 約0.45%（約221回に1回）です。AKのスーテッドは4通りで約0.30%、オフスートは12通りで約0.90%、合わせて約1.21%（約83回に1回）になります。（実測）</p>
+<p>「ポケットペアが配られるのは17回に1回」という言い方は、78 ÷ 1,326 ＝ 約5.88% から来ています。（実測）</p>
+
+<p>配られる確率を図にすると、次のとおりです。ペアは17回に1回、スーテッドは4回に1回弱、残りの約7割がオフスートです。</p>
+<figure><div class="bg"><p class="bn">ペア（AA〜22）</p><div class="br"><span class="bl">78通り</span><span class="bt"><i style="width:5.88%"></i></span><span class="bv">5.9%</span></div></div><div class="bg"><p class="bn">スーテッド</p><div class="br"><span class="bl">312通り</span><span class="bt"><i style="width:23.53%"></i></span><span class="bv">23.5%</span></div></div><div class="bg"><p class="bn">オフスート</p><div class="br"><span class="bl">936通り</span><span class="bt"><i style="width:70.59%"></i></span><span class="bv">70.6%</span></div></div><figcaption>※組み合わせの数え上げ（C(52,2)＝1,326通り）による割合。バーは0〜100%。</figcaption></figure>
+
+<h2 id="h-grid">169ハンドの勝率表</h2>
+<p>下の表は、169ハンドそれぞれが、ランダムな1人の相手（手札は何でもあり）と、最後まで勝負したときのエクイティです。エクイティは「勝つ割合 ＋ 引き分けの割合の半分」で、ポットを分け合う場合も数えた期待の取り分です。（実測）</p>
+<p>見方は、行と列の数字が手札の2枚です。左上から右下の斜めがペア、右上がスーテッド、左下がオフスートです。たとえば、行Aと列Kが交わる右上のマスがAKsで、列Aと行Kが交わる左下のマスがAKoです。背景が濃い緑ほどエクイティが高く、数字も必ず書いてあります。</p>
+<div class="tw st gr"><table><caption>13×13の勝率表（％・ランダムな1人の相手に対するエクイティ）</caption><tr><th scope="col"></th><th scope="col">A</th><th scope="col">K</th><th scope="col">Q</th><th scope="col">J</th><th scope="col">10</th><th scope="col">9</th><th scope="col">8</th><th scope="col">7</th><th scope="col">6</th><th scope="col">5</th><th scope="col">4</th><th scope="col">3</th><th scope="col">2</th></tr><tr><th scope="row">A</th><td class="num t4 pp">85.2</td><td class="num t3 ">67.0</td><td class="num t3 ">66.2</td><td class="num t3 ">65.4</td><td class="num t3 ">64.6</td><td class="num t3 ">62.8</td><td class="num t3 ">61.9</td><td class="num t3 ">61.0</td><td class="num t2 ">59.9</td><td class="num t2 ">59.9</td><td class="num t2 ">59.0</td><td class="num t2 ">58.2</td><td class="num t2 ">57.4</td></tr><tr><th scope="row">K</th><td class="num t3 ">65.3</td><td class="num t4 pp">82.4</td><td class="num t3 ">63.4</td><td class="num t3 ">62.6</td><td class="num t3 ">61.8</td><td class="num t2 ">60.0</td><td class="num t2 ">58.4</td><td class="num t2 ">57.5</td><td class="num t2 ">56.6</td><td class="num t2 ">55.7</td><td class="num t2 ">54.8</td><td class="num t2 ">54.0</td><td class="num t2 ">53.2</td></tr><tr><th scope="row">Q</th><td class="num t3 ">64.5</td><td class="num t3 ">61.5</td><td class="num t4 pp">79.9</td><td class="num t3 ">60.3</td><td class="num t2 ">59.4</td><td class="num t2 ">57.7</td><td class="num t2 ">56.0</td><td class="num t2 ">54.3</td><td class="num t2 ">53.6</td><td class="num t2 ">52.7</td><td class="num t2 ">51.9</td><td class="num t2 ">51.0</td><td class="num t2 ">50.1</td></tr><tr><th scope="row">J</th><td class="num t3 ">63.6</td><td class="num t3 ">60.6</td><td class="num t2 ">58.2</td><td class="num t4 pp">77.4</td><td class="num t2 ">57.6</td><td class="num t2 ">55.7</td><td class="num t2 ">54.0</td><td class="num t2 ">52.3</td><td class="num t2 ">50.6</td><td class="num t2 ">50.0</td><td class="num t1 ">49.1</td><td class="num t1 ">48.2</td><td class="num t1 ">47.4</td></tr><tr><th scope="row">10</th><td class="num t3 ">62.7</td><td class="num t2 ">59.8</td><td class="num t2 ">57.3</td><td class="num t2 ">55.3</td><td class="num t4 pp">75.0</td><td class="num t2 ">54.1</td><td class="num t2 ">52.3</td><td class="num t2 ">50.6</td><td class="num t1 ">48.9</td><td class="num t1 ">47.2</td><td class="num t1 ">46.5</td><td class="num t1 ">45.7</td><td class="num t1 ">44.8</td></tr><tr><th scope="row">9</th><td class="num t3 ">60.8</td><td class="num t2 ">57.8</td><td class="num t2 ">55.4</td><td class="num t2 ">53.3</td><td class="num t2 ">51.5</td><td class="num t4 pp">72.1</td><td class="num t2 ">50.8</td><td class="num t1 ">49.1</td><td class="num t1 ">47.4</td><td class="num t1 ">45.7</td><td class="num t1 ">43.9</td><td class="num t1 ">43.2</td><td class="num t1 ">42.4</td></tr><tr><th scope="row">8</th><td class="num t2 ">59.9</td><td class="num t2 ">56.0</td><td class="num t2 ">53.6</td><td class="num t2 ">51.5</td><td class="num t1 ">49.7</td><td class="num t1 ">48.1</td><td class="num t3 pp">69.2</td><td class="num t1 ">47.9</td><td class="num t1 ">46.2</td><td class="num t1 ">44.6</td><td class="num t1 ">42.7</td><td class="num t1 ">40.9</td><td class="num t1 ">40.3</td></tr><tr><th scope="row">7</th><td class="num t2 ">58.9</td><td class="num t2 ">55.2</td><td class="num t2 ">51.8</td><td class="num t1 ">49.7</td><td class="num t1 ">47.9</td><td class="num t1 ">46.3</td><td class="num t1 ">45.1</td><td class="num t3 pp">66.2</td><td class="num t1 ">45.4</td><td class="num t1 ">43.6</td><td class="num t1 ">41.8</td><td class="num t1 ">40.0</td><td class="num t1 ">38.1</td></tr><tr><th scope="row">6</th><td class="num t2 ">57.7</td><td class="num t2 ">54.2</td><td class="num t2 ">51.0</td><td class="num t1 ">47.8</td><td class="num t1 ">46.1</td><td class="num t1 ">44.5</td><td class="num t1 ">43.3</td><td class="num t1 ">42.3</td><td class="num t3 pp">63.2</td><td class="num t1 ">43.1</td><td class="num t1 ">41.3</td><td class="num t1 ">39.5</td><td class="num t1 ">37.7</td></tr><tr><th scope="row">5</th><td class="num t2 ">57.7</td><td class="num t2 ">53.3</td><td class="num t2 ">50.1</td><td class="num t1 ">47.2</td><td class="num t1 ">44.2</td><td class="num t1 ">42.7</td><td class="num t1 ">41.4</td><td class="num t1 ">40.6</td><td class="num t1 ">39.9</td><td class="num t3 pp">60.3</td><td class="num t1 ">41.5</td><td class="num t1 ">39.7</td><td class="num t1 ">37.8</td></tr><tr><th scope="row">4</th><td class="num t2 ">56.8</td><td class="num t2 ">52.3</td><td class="num t1 ">49.1</td><td class="num t1 ">46.2</td><td class="num t1 ">43.5</td><td class="num t1 ">40.6</td><td class="num t1 ">39.5</td><td class="num t1 ">38.5</td><td class="num t1 ">38.0</td><td class="num t1 ">38.1</td><td class="num t2 pp">57.0</td><td class="num t1 ">38.6</td><td class="num t1 ">36.8</td></tr><tr><th scope="row">3</th><td class="num t2 ">55.8</td><td class="num t2 ">51.4</td><td class="num t1 ">48.2</td><td class="num t1 ">45.3</td><td class="num t1 ">42.6</td><td class="num t1 ">40.0</td><td class="num t1 ">37.5</td><td class="num t1 ">36.6</td><td class="num t1 ">36.0</td><td class="num t1 ">36.2</td><td class="num t1 ">35.2</td><td class="num t2 pp">53.7</td><td class="num t1 ">36.0</td></tr><tr><th scope="row">2</th><td class="num t2 ">54.9</td><td class="num t2 ">50.5</td><td class="num t1 ">47.3</td><td class="num t1 ">44.4</td><td class="num t1 ">41.7</td><td class="num t1 ">39.1</td><td class="num t1 ">36.8</td><td class="num t1 ">34.6</td><td class="num t1 ">34.0</td><td class="num t1 ">34.3</td><td class="num t1 ">33.3</td><td class="num t1 ">32.3</td><td class="num t2 pp">50.3</td></tr></table></div>
+<figure><figcaption>※全数え上げで確かめた判定プログラムを使い、各ハンドをランダムに300万回配った実測値（標準誤差は約0.03ポイント）。背景は70％以上・60％以上・50％以上・50％未満の4段階。</figcaption></figure>
+
+<h2 id="h-rank">強いほうと弱いほうの12ハンド</h2>
+<figure><div class="bg"><p class="bn">AA（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:85.23%"></i></span><span class="bv">85.2%</span></div></div><div class="bg"><p class="bn">KK（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:82.41%"></i></span><span class="bv">82.4%</span></div></div><div class="bg"><p class="bn">QQ（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:79.91%"></i></span><span class="bv">79.9%</span></div></div><div class="bg"><p class="bn">JJ（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:77.44%"></i></span><span class="bv">77.4%</span></div></div><div class="bg"><p class="bn">1010（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:75.00%"></i></span><span class="bv">75.0%</span></div></div><div class="bg"><p class="bn">99（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:72.11%"></i></span><span class="bv">72.1%</span></div></div><div class="bg"><p class="bn">88（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:69.17%"></i></span><span class="bv">69.2%</span></div></div><div class="bg"><p class="bn">77（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:66.22%"></i></span><span class="bv">66.2%</span></div></div><div class="bg"><p class="bn">66（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:63.24%"></i></span><span class="bv">63.2%</span></div></div><div class="bg"><p class="bn">55（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:60.34%"></i></span><span class="bv">60.3%</span></div></div><div class="bg"><p class="bn">44（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:57.01%"></i></span><span class="bv">57.0%</span></div></div><div class="bg"><p class="bn">33（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:53.70%"></i></span><span class="bv">53.7%</span></div></div><div class="bg"><p class="bn">22（ペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:50.30%"></i></span><span class="bv">50.3%</span></div></div><figcaption>※ペア13種類のエクイティ（％）。各300万回の実測値。バーは0〜100%。</figcaption></figure>
+<p>エクイティの高い順に並べた、上位12と下位12です。「勝つ」は相手に勝つ割合、「引き分け」は同じ強さでポットを分ける割合です。</p>
+<div class="tw st"><table><caption>エクイティ上位12ハンド</caption><tr><th scope="col">順位</th><th scope="col">ハンド</th><th scope="col">エクイティ（％）</th><th scope="col">勝つ（％）</th><th scope="col">引き分け（％）</th><th scope="col">組み合わせ数</th></tr><tr><td class="num">1</td><th scope="row">AA（ペア）</th><td class="num">85.2</td><td class="num">85.0</td><td class="num">0.5</td><td class="num">6</td></tr><tr><td class="num">2</td><th scope="row">KK（ペア）</th><td class="num">82.4</td><td class="num">82.1</td><td class="num">0.6</td><td class="num">6</td></tr><tr><td class="num">3</td><th scope="row">QQ（ペア）</th><td class="num">79.9</td><td class="num">79.6</td><td class="num">0.6</td><td class="num">6</td></tr><tr><td class="num">4</td><th scope="row">JJ（ペア）</th><td class="num">77.4</td><td class="num">77.1</td><td class="num">0.6</td><td class="num">6</td></tr><tr><td class="num">5</td><th scope="row">1010（ペア）</th><td class="num">75.0</td><td class="num">74.6</td><td class="num">0.7</td><td class="num">6</td></tr><tr><td class="num">6</td><th scope="row">99（ペア）</th><td class="num">72.1</td><td class="num">71.7</td><td class="num">0.8</td><td class="num">6</td></tr><tr><td class="num">7</td><th scope="row">88（ペア）</th><td class="num">69.2</td><td class="num">68.7</td><td class="num">0.9</td><td class="num">6</td></tr><tr><td class="num">8</td><th scope="row">AK（スーテッド）</th><td class="num">67.0</td><td class="num">66.2</td><td class="num">1.6</td><td class="num">4</td></tr><tr><td class="num">9</td><th scope="row">AQ（スーテッド）</th><td class="num">66.2</td><td class="num">65.3</td><td class="num">1.8</td><td class="num">4</td></tr><tr><td class="num">10</td><th scope="row">77（ペア）</th><td class="num">66.2</td><td class="num">65.7</td><td class="num">1.0</td><td class="num">6</td></tr><tr><td class="num">11</td><th scope="row">AJ（スーテッド）</th><td class="num">65.4</td><td class="num">64.4</td><td class="num">2.0</td><td class="num">4</td></tr><tr><td class="num">12</td><th scope="row">AK（オフスート）</th><td class="num">65.3</td><td class="num">64.5</td><td class="num">1.7</td><td class="num">12</td></tr></table></div>
+<div class="tw st"><table><caption>エクイティ下位12ハンド</caption><tr><th scope="col">順位</th><th scope="col">ハンド</th><th scope="col">エクイティ（％）</th><th scope="col">勝つ（％）</th><th scope="col">引き分け（％）</th><th scope="col">組み合わせ数</th></tr><tr><td class="num">158</td><th scope="row">82（オフスート）</th><td class="num">36.8</td><td class="num">34.1</td><td class="num">5.5</td><td class="num">12</td></tr><tr><td class="num">159</td><th scope="row">42（スーテッド）</th><td class="num">36.8</td><td class="num">33.9</td><td class="num">5.8</td><td class="num">4</td></tr><tr><td class="num">160</td><th scope="row">73（オフスート）</th><td class="num">36.6</td><td class="num">33.7</td><td class="num">5.8</td><td class="num">12</td></tr><tr><td class="num">161</td><th scope="row">53（オフスート）</th><td class="num">36.2</td><td class="num">33.1</td><td class="num">6.2</td><td class="num">12</td></tr><tr><td class="num">162</td><th scope="row">63（オフスート）</th><td class="num">36.0</td><td class="num">33.0</td><td class="num">6.0</td><td class="num">12</td></tr><tr><td class="num">163</td><th scope="row">32（スーテッド）</th><td class="num">36.0</td><td class="num">33.1</td><td class="num">5.8</td><td class="num">4</td></tr><tr><td class="num">164</td><th scope="row">43（オフスート）</th><td class="num">35.2</td><td class="num">32.1</td><td class="num">6.2</td><td class="num">12</td></tr><tr><td class="num">165</td><th scope="row">72（オフスート）</th><td class="num">34.6</td><td class="num">31.7</td><td class="num">5.8</td><td class="num">12</td></tr><tr><td class="num">166</td><th scope="row">52（オフスート）</th><td class="num">34.3</td><td class="num">31.2</td><td class="num">6.2</td><td class="num">12</td></tr><tr><td class="num">167</td><th scope="row">62（オフスート）</th><td class="num">34.0</td><td class="num">31.1</td><td class="num">6.0</td><td class="num">12</td></tr><tr><td class="num">168</td><th scope="row">42（オフスート）</th><td class="num">33.3</td><td class="num">30.2</td><td class="num">6.2</td><td class="num">12</td></tr><tr><td class="num">169</td><th scope="row">32（オフスート）</th><td class="num">32.3</td><td class="num">29.3</td><td class="num">6.1</td><td class="num">12</td></tr></table></div>
+<p>※いずれもランダムな1人の相手に対する実測値です。</p>
+
+<h2 id="h-read">表から読める5つのこと</h2>
+<ul>
+<li><strong>半分弱のハンドが、ランダムな相手より有利。</strong>エクイティが50%を超えるのは169種類のうち90種類で、組み合わせ数では658通り（49.6%）です。最小のペア22でも50.3%あります。（実測）</li>
+<li><strong>最弱は72ではなく32オフスート。</strong>よく「最弱の手」と言われる72オフスートは165位で、34.6%です。最下位は32オフスートの32.3%でした。（実測）</li>
+<li><strong>スーテッドの価値は、平均2.7ポイント。</strong>同じ2つの数字で、スーテッドとオフスートを比べた差は、1.7〜3.7ポイントで、平均は2.7ポイントです。AKは1.7ポイントしか差がなく、数字の小さいハンドのほうが差は大きくなります（72は3.6ポイント）。（実測）</li>
+<li><strong>弱いハンドほど「引き分け」が多い。</strong>72オフスートは、勝つのが31.7%、引き分けが5.8%です。AAは勝つのが85.0%、引き分けは0.5%です。（実測）</li>
+<li><strong>小さいペアは、大きいオフスートに負けない。</strong>77の66.2%は、AKオフスートの65.3%より上です。ペアは、1枚も当たらなくても勝てる分だけ強くなります。（実測）</li>
+</ul>
+
+<p>スーテッドとオフスートの差を、よく出る4つの数字の組で図にします。</p>
+<figure><div class="bg"><p class="bn">AKスーテッド</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:67.04%"></i></span><span class="bv">67.0%</span></div></div><div class="bg"><p class="bn">AKオフスート</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:65.32%"></i></span><span class="bv">65.3%</span></div></div><div class="bg"><p class="bn">JTスーテッド</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:57.56%"></i></span><span class="bv">57.6%</span></div></div><div class="bg"><p class="bn">JTオフスート</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:55.27%"></i></span><span class="bv">55.3%</span></div></div><div class="bg"><p class="bn">76スーテッド</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:45.35%"></i></span><span class="bv">45.4%</span></div></div><div class="bg"><p class="bn">76オフスート</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:42.31%"></i></span><span class="bv">42.3%</span></div></div><div class="bg"><p class="bn">72スーテッド</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:38.15%"></i></span><span class="bv">38.1%</span></div></div><div class="bg"><p class="bn">72オフスート</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:34.58%"></i></span><span class="bv">34.6%</span></div></div><figcaption>※各300万回の実測値。バーは0〜100%。</figcaption></figure>
+
+<h2 id="h-limit">この表を使うときの注意</h2>
+<ul>
+<li><strong>相手がランダムでなければ、数字は変わります。</strong>実際の相手は、弱い手では降りてきます。強いハンドを持っている相手に対しては、ここに出た数字は使えません。相手の持ちそうな手を決めて比べる例は、<a href="/preflop-equity/">プリフロップの対決別の勝率</a>にまとめました。</li>
+<li><strong>人数が増えると、勝率は下がります。</strong>この表は1対1です。相手が複数いれば、全員に勝つ必要があるので、AAでも勝率は下がります。</li>
+<li><strong>ポジションや賭け金は入っていません。</strong>この表は、最後までカードを見切ったときの強さだけです。入るかどうかの判断は、ポジションとスタックと相手の動きで決まります。</li>
+<li>強さの順は、プレーするハンドの選び方そのものではありません。数字の根拠として使うための表です。</li>
+</ul>
+<p>これは強さの仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</p>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>各ハンドを手札に固定し、残りの50枚から、相手の手札2枚とボード5枚をランダムに引いて、勝ち・引き分け・負けを数えました。1ハンドあたり300万回で、乱数は固定してあるので、同じ手順で再現できます。標準誤差は √（0.25 ÷ 3,000,000） ＝ 約0.03ポイントです。（実測）</p>
+<p>判定プログラムは、7枚から最強の5枚の役を選ぶ形で、C言語で書きました。確認のため、52枚から7枚を選ぶ133,784,560通りを全部数え、役ごとの件数が、<a href="/yaku/">役の強さ一覧</a>の全数え上げの表と一致することを確かめています。</p>
+<p>表全体の検算として、169ハンドのエクイティを、組み合わせ数で重みづけして平均しました。結果は49.999%で、理論値の50%になります（ランダムな2人が戦えば、平均は必ず50%になるため）。（実測）</p>
+<p>他のサイトにも、ランダムな相手に対する勝率の表はあります。たとえばDeuces Crackedの表（出典は下の参考資料）は、AAが85.3%、AKsが67.2%、72オフスートが34.5%です（各ハンド18万回の試行と記載。2026年11月8日に確認）。この記事の数字（85.2%、67.0%、34.6%）とは、差が0.2ポイント以内で、近い値です。日本語で、169ハンド全部の表を載せたページは、僕が検索した範囲では見つかりませんでした（検索は網羅調査ではありません）。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Wikipedia「Texas hold 'em starting hands」<a href="https://en.wikipedia.org/wiki/Texas_hold_%27em_starting_hands">https://en.wikipedia.org/wiki/Texas_hold_%27em_starting_hands</a> （1,326通りと、169種類の内訳。二次資料。2026年11月8日に確認）</li>
+<li>Deuces Cracked「Texas Hold'em Equity vs Random Opponents」<a href="https://www.deucescracked.com/blog/texas-holdem-equity-vs-random-opponents-by-hand-data">https://www.deucescracked.com/blog/texas-holdem-equity-vs-random-opponents-by-hand-data</a> （対ランダムのエクイティの表。比較用。2026年11月8日に確認）</li>
+</ul>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>配られる2枚は1,326通りで、数字とマークの違いでまとめると169種類です。ペアは6通り、スーテッドは4通り、オフスートは12通りです。</li>
+<li>ランダムな1人の相手には、AAが85.2%、AKsが67.0%、最弱の32オフスートでも32.3%です。（実測）</li>
+<li>169種類のうち90種類は、ランダムな相手に対して50%を超えます。（実測）</li>
+</ul>
+<p>次の1アクションは、自分が配られたハンドを、表のマスで探してみることです。ポーカー・トレーナーの「虎の巻」には、同じ内容のスターティングハンドの簡易表があります。続きは次の2本です。</p>
+<ul>
+<li><a href="/preflop-equity/">プリフロップの勝率（AA対KK、AK対QQなど）</a></li>
+<li><a href="/flop-hit/">フロップでヒットする確率とセットマイニング</a></li>
+</ul>
+<p><a class="cta" href="/">クイズと実戦で試してみる</a></p>
+
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>

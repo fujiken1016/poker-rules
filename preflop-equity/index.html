@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ポーカーのプリフロップ勝率｜AA対KK・AK対QQなど34の対決を全部数えた一覧</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/preflop-equity/">
+<meta name="description" content="ポーカーのプリフロップ勝率を、AA対KK、AK対QQ、22対AKなど34の対決で一覧にした。ボード1,712,304通りを全部数えた実測値で、マークの重なりやスーテッドの差も出した。数字は仮想チップを使った練習用の例。">
+<meta property="og:title" content="ポーカーのプリフロップ勝率｜AA対KK・AK対QQなど34の対決を全部数えた一覧">
+<meta property="og:description" content="ポーカーのプリフロップ勝率を、AA対KK、AK対QQ、22対AKなど34の対決で一覧にした。ボード1,712,304通りを全部数えた実測値で、マークの重なりやスーテッドの差も出した。数字は仮想チップを使った練習用の例。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/preflop-equity/">
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+@media(min-width:640px){.tw::before{display:none}}
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月8日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ポーカーのプリフロップ勝率｜AA対KK・AK対QQなど34の対決一覧</h1>
+<div class="key"><p class="lead">AA対KKは約81〜82%、QQ対AKオフスートは約57%、22対AKスーテッドはほぼ五分です。ペア対AKは「コイントス」と呼ばれますが、実際はペア側が約50〜57%で、2倍の差はつきません。ボード1,712,304通りを全部数えた34の対決で、一覧にしました。</p></div>
+<p>この記事では、プリフロップでオールインしたときの勝率を、種類ごとの表に整理して、表から読めることを6つにまとめました。数字は、僕が作った判定プログラムで全部のボードを数えた実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>ランダムな相手に対する、169ハンド全部の勝率は<a href="/hands/">スターティングハンド169通りの勝率表</a>にあります。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-list">ペアが関わる勝負の勝率</a></li>
+<li><a href="#h-list2">ペア以外の勝負の勝率</a></li>
+<li><a href="#h-read">表から読める6つのこと</a></li>
+<li><a href="#h-limit">この表の使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+</ol></nav>
+
+<h2 id="h-list">ペアが関わる勝負の勝率（34の対決のうち前半）</h2>
+<p>下の表は、左のハンドから見た勝率です。「勝つ」「引き分け」「負ける」の3つを足すと100%になり、エクイティは「勝つ ＋ 引き分けの半分」です。マークは、結果が変わるので、実際に使った組み合わせを書いてあります。種類ごとに6つの表に分けました。（実測）</p>
+<h3>1. ペア対ペア</h3>
+<div class="tw st"><table><caption>ペア対ペアの勝率（左から見た割合）</caption><tr><th scope="col">左のハンド</th><th scope="col">右のハンド</th><th scope="col">左が勝つ（％）</th><th scope="col">引き分け（％）</th><th scope="col">右が勝つ（％）</th><th scope="col">左のエクイティ（％）</th></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">A♥</span></span></th><th scope="row"><span class="cd"><span class="r">K♦</span><span class="">K♣</span></span></th><td class="num">81.1</td><td class="num">0.4</td><td class="num">18.6</td><td class="num">81.3</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">A♥</span></span></th><th scope="row"><span class="cd"><span class="">K♠</span><span class="r">K♥</span></span></th><td class="num">82.4</td><td class="num">0.5</td><td class="num">17.1</td><td class="num">82.6</td></tr><tr><th scope="row"><span class="cd"><span class="">10♠</span><span class="r">10♥</span></span></th><th scope="row"><span class="cd"><span class="r">5♦</span><span class="">5♣</span></span></th><td class="num">80.1</td><td class="num">0.4</td><td class="num">19.5</td><td class="num">80.3</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">A♥</span></span></th><th scope="row"><span class="cd"><span class="r">2♦</span><span class="">2♣</span></span></th><td class="num">81.3</td><td class="num">0.5</td><td class="num">18.2</td><td class="num">81.5</td></tr></table></div>
+<h3>2. ペア対、それより大きい数字2枚（よく「コイントス」と呼ばれる勝負）</h3>
+<div class="tw st"><table><caption>ペア対オーバーカード2枚の勝率（左＝ペア）</caption><tr><th scope="col">左のハンド</th><th scope="col">右のハンド</th><th scope="col">左が勝つ（％）</th><th scope="col">引き分け（％）</th><th scope="col">右が勝つ（％）</th><th scope="col">左のエクイティ（％）</th></tr><tr><th scope="row"><span class="cd"><span class="">Q♠</span><span class="r">Q♥</span></span></th><th scope="row"><span class="cd"><span class="r">A♦</span><span class="">K♣</span></span></th><td class="num">57.0</td><td class="num">0.3</td><td class="num">42.7</td><td class="num">57.2</td></tr><tr><th scope="row"><span class="cd"><span class="">Q♠</span><span class="r">Q♥</span></span></th><th scope="row"><span class="cd"><span class="">A♣</span><span class="">K♣</span></span></th><td class="num">53.6</td><td class="num">0.4</td><td class="num">46.0</td><td class="num">53.8</td></tr><tr><th scope="row"><span class="cd"><span class="">J♠</span><span class="r">J♥</span></span></th><th scope="row"><span class="cd"><span class="r">A♦</span><span class="">K♣</span></span></th><td class="num">57.1</td><td class="num">0.3</td><td class="num">42.6</td><td class="num">57.3</td></tr><tr><th scope="row"><span class="cd"><span class="">7♠</span><span class="r">7♥</span></span></th><th scope="row"><span class="cd"><span class="r">A♦</span><span class="">K♣</span></span></th><td class="num">55.2</td><td class="num">0.3</td><td class="num">44.5</td><td class="num">55.4</td></tr><tr><th scope="row"><span class="cd"><span class="">7♠</span><span class="r">7♥</span></span></th><th scope="row"><span class="cd"><span class="">A♣</span><span class="">K♣</span></span></th><td class="num">52.0</td><td class="num">0.3</td><td class="num">47.7</td><td class="num">52.1</td></tr><tr><th scope="row"><span class="cd"><span class="">2♠</span><span class="r">2♥</span></span></th><th scope="row"><span class="cd"><span class="r">A♦</span><span class="">K♣</span></span></th><td class="num">52.8</td><td class="num">0.6</td><td class="num">46.7</td><td class="num">53.0</td></tr><tr><th scope="row"><span class="cd"><span class="">2♠</span><span class="r">2♥</span></span></th><th scope="row"><span class="cd"><span class="">A♣</span><span class="">K♣</span></span></th><td class="num">49.6</td><td class="num">0.6</td><td class="num">49.8</td><td class="num">49.9</td></tr><tr><th scope="row"><span class="cd"><span class="">7♠</span><span class="r">7♥</span></span></th><th scope="row"><span class="cd"><span class="r">J♦</span><span class="r">10♦</span></span></th><td class="num">48.9</td><td class="num">0.5</td><td class="num">50.6</td><td class="num">49.2</td></tr><tr><th scope="row"><span class="cd"><span class="">2♠</span><span class="r">2♥</span></span></th><th scope="row"><span class="cd"><span class="r">J♦</span><span class="r">10♦</span></span></th><td class="num">45.3</td><td class="num">1.4</td><td class="num">53.3</td><td class="num">46.0</td></tr></table></div>
+<figure><div class="bg"><p class="bn">QQ 対 AKオフスート</p><div class="br"><span class="bl">ペア側</span><span class="bt"><i style="width:57.16%"></i></span><span class="bv">57.2%</span></div></div><div class="bg"><p class="bn">QQ 対 AKスーテッド</p><div class="br"><span class="bl">ペア側</span><span class="bt"><i style="width:53.79%"></i></span><span class="bv">53.8%</span></div></div><div class="bg"><p class="bn">77 対 AKオフスート</p><div class="br"><span class="bl">ペア側</span><span class="bt"><i style="width:55.39%"></i></span><span class="bv">55.4%</span></div></div><div class="bg"><p class="bn">77 対 AKスーテッド</p><div class="br"><span class="bl">ペア側</span><span class="bt"><i style="width:52.12%"></i></span><span class="bv">52.1%</span></div></div><div class="bg"><p class="bn">22 対 AKオフスート</p><div class="br"><span class="bl">ペア側</span><span class="bt"><i style="width:53.04%"></i></span><span class="bv">53.0%</span></div></div><div class="bg"><p class="bn">22 対 AKスーテッド</p><div class="br"><span class="bl">ペア側</span><span class="bt"><i style="width:49.92%"></i></span><span class="bv">49.9%</span></div></div><figcaption>※全数え上げの実測値。ペア側のエクイティ（％）。バーは0〜100%。</figcaption></figure>
+<h3>3. ペア対、ペアの数字を1枚持つ手</h3>
+<div class="tw st"><table><caption>ペア対、同じ数字を1枚持つ手の勝率（左＝ペア）</caption><tr><th scope="col">左のハンド</th><th scope="col">右のハンド</th><th scope="col">左が勝つ（％）</th><th scope="col">引き分け（％）</th><th scope="col">右が勝つ（％）</th><th scope="col">左のエクイティ（％）</th></tr><tr><th scope="row"><span class="cd"><span class="">K♠</span><span class="r">K♥</span></span></th><th scope="row"><span class="cd"><span class="">A♣</span><span class="r">K♦</span></span></th><td class="num">69.6</td><td class="num">0.8</td><td class="num">29.6</td><td class="num">70.0</td></tr><tr><th scope="row"><span class="cd"><span class="">K♠</span><span class="r">K♥</span></span></th><th scope="row"><span class="cd"><span class="r">A♦</span><span class="">Q♣</span></span></th><td class="num">71.4</td><td class="num">0.3</td><td class="num">28.2</td><td class="num">71.6</td></tr><tr><th scope="row"><span class="cd"><span class="">Q♠</span><span class="r">Q♥</span></span></th><th scope="row"><span class="cd"><span class="">A♣</span><span class="r">Q♦</span></span></th><td class="num">69.2</td><td class="num">1.2</td><td class="num">29.6</td><td class="num">69.8</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">A♥</span></span></th><th scope="row"><span class="cd"><span class="r">A♦</span><span class="">K♣</span></span></th><td class="num">91.9</td><td class="num">1.3</td><td class="num">6.8</td><td class="num">92.6</td></tr></table></div>
+<h2 id="h-list2">ペア以外の勝負の勝率（34の対決のうち後半）</h2>
+<h3>4. AKとAQのように、数字を1つ共有する手同士</h3>
+<div class="tw st"><table><caption>数字を共有する手同士の勝率（左＝大きいほう）</caption><tr><th scope="col">左のハンド</th><th scope="col">右のハンド</th><th scope="col">左が勝つ（％）</th><th scope="col">引き分け（％）</th><th scope="col">右が勝つ（％）</th><th scope="col">左のエクイティ（％）</th></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">K♦</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="">Q♣</span></span></th><td class="num">71.7</td><td class="num">4.6</td><td class="num">23.7</td><td class="num">74.0</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="">K♠</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="r">Q♦</span></span></th><td class="num">73.4</td><td class="num">4.4</td><td class="num">22.2</td><td class="num">75.6</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="">K♠</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="r">Q♥</span></span></th><td class="num">69.2</td><td class="num">4.2</td><td class="num">26.6</td><td class="num">71.3</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">K♦</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="">10♣</span></span></th><td class="num">71.1</td><td class="num">4.6</td><td class="num">24.3</td><td class="num">73.4</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">K♦</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="">2♣</span></span></th><td class="num">71.3</td><td class="num">4.9</td><td class="num">23.8</td><td class="num">73.7</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">K♦</span></span></th><th scope="row"><span class="cd"><span class="r">K♥</span><span class="">Q♣</span></span></th><td class="num">73.6</td><td class="num">1.1</td><td class="num">25.3</td><td class="num">74.2</td></tr><tr><th scope="row"><span class="cd"><span class="">K♠</span><span class="r">Q♦</span></span></th><th scope="row"><span class="cd"><span class="r">Q♥</span><span class="">J♣</span></span></th><td class="num">72.3</td><td class="num">2.4</td><td class="num">25.3</td><td class="num">73.5</td></tr></table></div>
+<h3>5. 大きい手と小さい手</h3>
+<div class="tw st"><table><caption>強いハンド対弱いハンドの勝率</caption><tr><th scope="col">左のハンド</th><th scope="col">右のハンド</th><th scope="col">左が勝つ（％）</th><th scope="col">引き分け（％）</th><th scope="col">右が勝つ（％）</th><th scope="col">左のエクイティ（％）</th></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">A♥</span></span></th><th scope="row"><span class="cd"><span class="">7♣</span><span class="r">2♦</span></span></th><td class="num">87.2</td><td class="num">0.4</td><td class="num">12.4</td><td class="num">87.4</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">K♦</span></span></th><th scope="row"><span class="cd"><span class="r">7♥</span><span class="">2♣</span></span></th><td class="num">66.8</td><td class="num">0.4</td><td class="num">32.8</td><td class="num">67.0</td></tr><tr><th scope="row"><span class="cd"><span class="">A♠</span><span class="r">K♦</span></span></th><th scope="row"><span class="cd"><span class="">Q♣</span><span class="">J♣</span></span></th><td class="num">60.2</td><td class="num">0.4</td><td class="num">39.4</td><td class="num">60.4</td></tr></table></div>
+<h3>6. スーテッドコネクターが入る勝負</h3>
+<div class="tw st"><table><caption>スーテッドコネクターが関わる勝率</caption><tr><th scope="col">左のハンド</th><th scope="col">右のハンド</th><th scope="col">左が勝つ（％）</th><th scope="col">引き分け（％）</th><th scope="col">右が勝つ（％）</th><th scope="col">左のエクイティ（％）</th></tr><tr><th scope="row"><span class="cd"><span class="">J♠</span><span class="">10♠</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="r">K♦</span></span></th><td class="num">41.0</td><td class="num">0.4</td><td class="num">58.6</td><td class="num">41.2</td></tr><tr><th scope="row"><span class="cd"><span class="">J♠</span><span class="">10♠</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="r">A♦</span></span></th><td class="num">21.5</td><td class="num">0.3</td><td class="num">78.1</td><td class="num">21.7</td></tr><tr><th scope="row"><span class="cd"><span class="">J♠</span><span class="">10♠</span></span></th><th scope="row"><span class="cd"><span class="r">2♥</span><span class="r">2♦</span></span></th><td class="num">53.3</td><td class="num">1.4</td><td class="num">45.3</td><td class="num">54.0</td></tr><tr><th scope="row"><span class="cd"><span class="">8♠</span><span class="">7♠</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="r">K♦</span></span></th><td class="num">41.7</td><td class="num">0.4</td><td class="num">57.9</td><td class="num">41.9</td></tr><tr><th scope="row"><span class="cd"><span class="">7♠</span><span class="">6♠</span></span></th><th scope="row"><span class="cd"><span class="r">A♥</span><span class="r">K♦</span></span></th><td class="num">42.1</td><td class="num">0.4</td><td class="num">57.6</td><td class="num">42.3</td></tr><tr><th scope="row"><span class="cd"><span class="r">9♦</span><span class="r">9♥</span></span></th><th scope="row"><span class="cd"><span class="">8♠</span><span class="">7♠</span></span></th><td class="num">80.8</td><td class="num">0.6</td><td class="num">18.6</td><td class="num">81.1</td></tr><tr><th scope="row"><span class="cd"><span class="">8♠</span><span class="">7♠</span></span></th><th scope="row"><span class="cd"><span class="r">2♥</span><span class="r">2♦</span></span></th><td class="num">52.3</td><td class="num">2.4</td><td class="num">45.3</td><td class="num">53.5</td></tr></table></div>
+<figure><div class="bg"><p class="bn">JTスーテッド 対 AKオフスート</p><div class="br"><span class="bl">勝つ</span><span class="bt"><i style="width:40.97%"></i></span><span class="bv">41.0%</span></div></div><div class="bg"><p class="bn">JTスーテッド 対 AA</p><div class="br"><span class="bl">勝つ</span><span class="bt"><i style="width:21.55%"></i></span><span class="bv">21.5%</span></div></div><div class="bg"><p class="bn">JTスーテッド 対 22</p><div class="br"><span class="bl">勝つ</span><span class="bt"><i style="width:53.28%"></i></span><span class="bv">53.3%</span></div></div><div class="bg"><p class="bn">87スーテッド 対 AKオフスート</p><div class="br"><span class="bl">勝つ</span><span class="bt"><i style="width:41.71%"></i></span><span class="bv">41.7%</span></div></div><div class="bg"><p class="bn">99 対 87スーテッド</p><div class="br"><span class="bl">勝つ</span><span class="bt"><i style="width:80.77%"></i></span><span class="bv">80.8%</span></div></div><figcaption>※全数え上げの実測値。左のハンドが勝つ割合（％）。バーは0〜100%。</figcaption></figure>
+<p>※すべて、ボード5枚の全部の出方1,712,304通りを数えた、全数え上げの実測値です。</p>
+
+<h2 id="h-read">表から読める6つのこと</h2>
+<ul>
+<li><strong>「コイントス」は、実際にはペア側が50〜57%で、やや有利。</strong>QQ対AKオフスートでペア側が57.0%、77対AKオフスートで55.2%、22対AKオフスートで52.8%でした。ペア側が有利ですが、2倍の差ではありません。（実測）</li>
+<li><strong>AKがスーテッドだと、ペアの有利は約3ポイント縮む。</strong>ペア側のエクイティの差は、QQで3.4ポイント、77で3.3ポイント、22で3.1ポイントでした。22対AKスーテッドは49.9%で、ほぼ五分です。（実測）</li>
+<li><strong>マークが重なると、強いほうの勝率が上がる。</strong>AA対KKは、マークが重ならない場合のAAが81.1%なのに対し、KKがAAと同じ♠♥を持つ場合は82.4%です。KKがフラッシュになっても、同じマークのAAのフラッシュのほうが高く、KKの勝ち筋が減るので、1.3ポイント上がります。（実測）</li>
+<li><strong>数字を共有する手同士では、弱いほうの勝率は約22〜27%に落ちる。</strong>AKオフスート対AQオフスートで、AQが勝つのは23.7%です。引き分けが4.6%あります。キッカーの差は、AQでもA2でも、大きく変わりません（弱いほうが勝つ割合は、AQで23.7%、ATで24.3%、A2で23.8%）。（実測）</li>
+<li><strong>最強のAAでも、72には12.4%負ける。</strong>AA対72オフスートで、AAが負けるのは12.4%です。AKオフスートが72オフスートに勝つのは66.8%でした。（実測）</li>
+<li><strong>スーテッドコネクターは、AKに約41対59、AAに約22対78。</strong>JTスーテッド対AKオフスートで、JTが勝つのは41.0%、対AAでは21.5%です。一方、22に対しては、JTスーテッドが53.3%でペアを上回ります（引き分け1.4%）。（実測）</li>
+</ul>
+
+<h2 id="h-limit">この表の使いどころと限界</h2>
+<ul>
+<li><strong>オールインで全部のカードが出るときだけの数字です。</strong>実際はフロップやターンでベットが入り、降りる人が出ます。降りる判断が入ると、勝率だけでは決まりません。</li>
+<li><strong>相手の手がわかっているときの数字です。</strong>実戦では相手の手は見えないので、「だいたいこの範囲」を決めて、複数のハンドの平均で考えます。</li>
+<li><strong>ポットオッズと組み合わせて使います。</strong>勝率がわかったら、<a href="/potodds/">ポットオッズの計算</a>で、必要な勝率と比べます。</li>
+</ul>
+<p>これは勝ち負けの仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</p>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>2つのハンドを固定し、残りの48枚から選べるボード5枚 C(48,5) ＝ 1,712,304通りを、1通りずつ全部数えました。乱数は使っていないので、誤差はありません。判定は、7枚から最強の5枚を選び、役の種類、役を作る数字、キッカーの順に比べています。判定プログラムは、52枚から7枚を選ぶ133,784,560通りの役の件数が、<a href="/yaku/">役の強さ一覧</a>の全数え上げの表と一致することを確認ずみです。</p>
+<p>別の方法でも確かめました。判定プログラムを、C言語とは別に、Pythonで書き直し（コードは共有していません）、ボードを30万通りランダムに引いて、4つの対決のエクイティを推定しました。結果は、全数え上げの値と、標準誤差（約0.09ポイント）の2倍以内（最大の差0.12ポイント）で一致しました。（実測）</p>
+<p>他のサイトでも、全ボードを数えた表があります。Deuces Crackedの記事（2026年11月8日に確認。出典は下の参考資料）に載っている、AA対KK（マークが重ならない場合と重なる場合）、QQ対AKスーテッド・オフスート、22対AKスーテッド・オフスートの6つの勝率は、この記事の値と、小数第2位まで見ても差が0.01ポイント以内でした。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Deuces Cracked「Preflop Poker Equity Matchups — 25 Exact Calculations」<a href="https://www.deucescracked.com/blog/preflop-poker-equity-matchups-exact-data">https://www.deucescracked.com/blog/preflop-poker-equity-matchups-exact-data</a> （全1,712,304ボードを数えた対決表。値の照合に使用。2026年11月8日に確認）</li>
+<li>Wikipedia「Texas hold 'em starting hands」<a href="https://en.wikipedia.org/wiki/Texas_hold_%27em_starting_hands">https://en.wikipedia.org/wiki/Texas_hold_%27em_starting_hands</a> （スターティングハンドの数え方。二次資料。2026年11月8日に確認）</li>
+</ul>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>ペア対オーバーカード2枚は、QQで約54〜57%、22で約50〜53%で、「コイントス」に近いのは22対AKスーテッドだけです。（実測）</li>
+<li>AAでも、KKには約81〜82%、72には87%の勝率です。負ける確率は残ります。（実測）</li>
+<li>AKとAQのように数字を共有した手同士は、弱いほうが約22〜27%の勝率に落ちます。（実測）</li>
+</ul>
+<p>次の1アクションは、よく見る勝負を2つ選び、この表の値を<a href="/potodds/">ポットオッズ</a>の必要勝率と比べてみることです。続きは次の2本です。</p>
+<ul>
+<li><a href="/hands/">スターティングハンド169通りの勝率表</a></li>
+<li><a href="/flop-hit/">フロップでヒットする確率とセットマイニング</a></li>
+</ul>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>

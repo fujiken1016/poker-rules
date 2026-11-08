@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ポケットペアがフロップでセットになる確率は11.8%｜手札別ヒット確率の早見表</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/flop-hit/">
+<meta name="description" content="ポケットペアがフロップでセットになる確率は11.76%。セットマイニングに必要な額、AK・QJ・87などの手札別に、フロップのヒット確率とドロー確率を全19,600通りで数えた早見表。数字は仮想チップを使った練習用の例。">
+<meta property="og:title" content="ポケットペアがフロップでセットになる確率は11.8%｜手札別ヒット確率の早見表">
+<meta property="og:description" content="ポケットペアがフロップでセットになる確率は11.76%。セットマイニングに必要な額、AK・QJ・87などの手札別に、フロップのヒット確率とドロー確率を全19,600通りで数えた早見表。数字は仮想チップを使った練習用の例。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/flop-hit/">
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+@media(min-width:640px){.tw::before{display:none}}
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月8日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ポケットペアがフロップでセットになる確率｜手札別ヒット確率の早見表</h1>
+<div class="key"><p class="lead">ポケットペアがフロップでセットになる確率は11.76%（約8.5回に1回）です。リバーまで見ても19.2%で、セットマイニングは、完成したときにコール額の約7.5倍を勝ち取れないと、期待値がマイナスになります。AKやつながった手札のヒット確率も、全19,600通りで数えました。</p></div>
+<p>この記事では、ポケットペアがセットになる確率とセットマイニングの損益分岐を式で出して、ペア以外の手札がフロップで何になるかを手札別の表にしました。数字は、フロップ3枚の全部の出方を数えた実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>配られる2枚の勝率は<a href="/hands/">スターティングハンド169通りの勝率表</a>にあります。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-set">ポケットペアがフロップでセットになる確率</a></li>
+<li><a href="#h-mining">セットマイニングに必要な、勝ち取る額</a></li>
+<li><a href="#h-table">手札別のヒット確率の早見表</a></li>
+<li><a href="#h-read">表から読める5つのこと</a></li>
+<li><a href="#h-after">ドローになったあとの計算</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+</ol></nav>
+
+<h2 id="h-set">ポケットペアがフロップでセットになる確率</h2>
+<p>ポケットペアを持っているとき、残りの同じ数字は2枚です。フロップの3枚の中に、その2枚のうち1枚以上が入ればセット（スリーカード）になります。フロップの出方は C(50,3) ＝ 19,600通りで、そのうち2枚とも出ないのは C(48,3) ＝ 17,296通りです。セットになるのは、残りの2,304通りです。</p>
+<ul>
+<li><strong>フロップでセットになる確率</strong> ＝ 2,304 ÷ 19,600 ＝ <strong>11.76%</strong>（約8.5回に1回）（実測）</li>
+<li>ターンまで（4枚）見ると 15.5%、リバーまで（5枚）見ると <strong>19.2%</strong> です。（実測）</li>
+<li>セットにならない確率は 88.24% です。（実測）</li>
+</ul>
+<p>ペアの数字には関係なく、AAでも22でも同じ確率です。違うのは、セットになったときの強さと、セットにならなかったときのボードの怖さです。</p>
+<figure><div class="bg"><p class="bn">フロップでセット</p><div class="br"><span class="bl">フロップ3枚</span><span class="bt"><i style="width:11.76%"></i></span><span class="bv">11.8%</span></div></div><div class="bg"><p class="bn">ターンまでにセット</p><div class="br"><span class="bl">4枚</span><span class="bt"><i style="width:15.51%"></i></span><span class="bv">15.5%</span></div></div><div class="bg"><p class="bn">リバーまでにセット</p><div class="br"><span class="bl">5枚</span><span class="bt"><i style="width:19.18%"></i></span><span class="bv">19.2%</span></div></div><figcaption>※全数え上げと組み合わせの式で確かめた値。バーは0〜100%。</figcaption></figure>
+
+<h2 id="h-mining">セットマイニングに必要な、勝ち取る額</h2>
+<p>セットマイニングは、小さいペアでコールして、セットを狙う戦い方です。セットが完成する確率が11.8%なので、残りの88.2%は、コールした分のチップを失う前提で考えます（※全数え上げで確かめた確率）。期待値が0になる条件を式にすると、次のようになります。</p>
+<p>完成したとき勝ち取る額 × 11.76% ＝ コール額 × 88.24%、つまり <strong>勝ち取る額 ＝ コール額 × 7.51</strong>（17,296 ÷ 2,304）（実測）</p>
+<p class="ex">例：コール額が60のとき（仮想チップ）</p>
+<p>セットが完成したときに、60 × 7.51 ＝ 約450以上を勝ち取れないと、期待値はマイナスです。この額には、すでにポットにあるチップも含まれます。ポットが小さいと、相手のスタックから、さらに多く取る必要があります。</p>
+<p>実戦でよく言われる「コール額の10倍や20倍」のルールは、ここに「セットが負ける場合」や「セットが完成しても相手が払わない場合」の余裕を足した目安です（※PokerNewsの記事に出てくる目安。出典は下の参考資料）。この記事では、その余裕の大きさは測っていません。</p>
+<p>ポケットペアが配られるのは、1,326通りのうち78通り（約5.88%）です。ポケットペアを配られて、フロップでセットになるのは、全ハンドのうち 0.69%（約145回に1回）です。（実測）</p>
+
+<h2 id="h-table">手札別のヒット確率の早見表</h2>
+<p>ポケットペア以外の手札は、フロップでどうなるかを、全19,600通りで数えました。同じフロップが、複数の列に入ることがあるので、列を足しても100%にはなりません。（実測）</p>
+<div class="tw st"><table><caption>フロップ3枚で起こること（手札別・全19,600通りの割合）</caption><tr><th scope="col">手札</th><th scope="col">手札の数字が1つ以上出る（％）</th><th scope="col">手札の2つの数字が出る（％）</th><th scope="col">スリーカード（％）</th><th scope="col">ストレート完成（％）</th><th scope="col">ストレートドロー・8枚（％）</th><th scope="col">ガットショット・4枚（％）</th><th scope="col">フラッシュ完成（％）</th><th scope="col">フラッシュドロー（％）</th><th scope="col">何にもならない（％）</th></tr><tr><th scope="row">A♠K♦（オフスート）</th><td class="num">32.4</td><td class="num">2.1</td><td class="num">1.45</td><td class="num">0.33</td><td class="num">0.0</td><td class="num">11.3</td><td class="num">―</td><td class="num">―</td><td class="num">57.4</td></tr><tr><th scope="row">A♠K♠（スーテッド）</th><td class="num">32.4</td><td class="num">2.1</td><td class="num">1.45</td><td class="num">0.33</td><td class="num">0.0</td><td class="num">11.3</td><td class="num">0.84</td><td class="num">10.9</td><td class="num">48.8</td></tr><tr><th scope="row">Q♠J♦（オフスート）</th><td class="num">32.4</td><td class="num">2.1</td><td class="num">1.45</td><td class="num">0.98</td><td class="num">6.4</td><td class="num">14.8</td><td class="num">―</td><td class="num">―</td><td class="num">48.9</td></tr><tr><th scope="row">Q♠J♠（スーテッド）</th><td class="num">32.4</td><td class="num">2.1</td><td class="num">1.45</td><td class="num">0.98</td><td class="num">6.4</td><td class="num">14.8</td><td class="num">0.84</td><td class="num">10.9</td><td class="num">41.6</td></tr><tr><th scope="row">8♠7♦（オフスート）</th><td class="num">32.4</td><td class="num">2.1</td><td class="num">1.45</td><td class="num">1.31</td><td class="num">9.7</td><td class="num">16.8</td><td class="num">―</td><td class="num">―</td><td class="num">44.1</td></tr><tr><th scope="row">8♠7♠（スーテッド）</th><td class="num">32.4</td><td class="num">2.1</td><td class="num">1.45</td><td class="num">1.31</td><td class="num">9.7</td><td class="num">16.8</td><td class="num">0.84</td><td class="num">10.9</td><td class="num">37.6</td></tr></table></div>
+<p>ストレートドローは、あと1枚で完成するカードの数字が2種類あるもの（ふつう8枚）、ガットショットは1種類だけ（4枚）です。すでにストレートが完成しているフロップは、ドローに入れていません。「何にもならない」は、手札の数字が出ず、ストレートもフラッシュも、完成もドローもしないフロップの割合です。</p>
+<p>※すべて全数え上げの実測値です。</p>
+
+<figure><div class="bg"><p class="bn">AKオフスート</p><div class="br"><span class="bl">何もない</span><span class="bt"><i style="width:57.37%"></i></span><span class="bv">57.4%</span></div></div><div class="bg"><p class="bn">AKスーテッド</p><div class="br"><span class="bl">何もない</span><span class="bt"><i style="width:48.84%"></i></span><span class="bv">48.8%</span></div></div><div class="bg"><p class="bn">QJオフスート</p><div class="br"><span class="bl">何もない</span><span class="bt"><i style="width:48.88%"></i></span><span class="bv">48.9%</span></div></div><div class="bg"><p class="bn">QJスーテッド</p><div class="br"><span class="bl">何もない</span><span class="bt"><i style="width:41.64%"></i></span><span class="bv">41.6%</span></div></div><div class="bg"><p class="bn">87オフスート</p><div class="br"><span class="bl">何もない</span><span class="bt"><i style="width:44.14%"></i></span><span class="bv">44.1%</span></div></div><div class="bg"><p class="bn">87スーテッド</p><div class="br"><span class="bl">何もない</span><span class="bt"><i style="width:37.63%"></i></span><span class="bv">37.6%</span></div></div><figcaption>※全数え上げの実測値。フロップが「ペアにもドローにもならない」割合（％）。バーは0〜100%。</figcaption></figure>
+
+<h2 id="h-read">表から読める5つのこと</h2>
+<ul>
+<li><strong>ペア以上になるのは、3回に1回。</strong>手札の2つの数字のどちらかがフロップに出る確率は、どの手札でも32.4%です。逆に、約68%は、手札の数字が1つも出ません。（実測）</li>
+<li><strong>スーテッドの利点は、ドローが増えること。</strong>AKスーテッドは、フラッシュ完成が0.84%、フラッシュドローが10.9%です。合わせて約11.8%で、何にもならない割合は、オフスートの57.4%から48.8%に下がります。（実測）</li>
+<li><strong>つながった手札は、ストレートドローが多い。</strong>87のストレートドローは9.7%、AKは0%です（AKは、ストレートの完成にQJ10が必要で、完成するカードが1種類になります）。（実測）</li>
+<li><strong>ストレートの完成は、1%前後で、ドローよりずっと少ない。</strong>87は1.31%、QJは0.98%、AKは0.33%でした。（実測）</li>
+<li><strong>フラッシュの完成は、約0.84%（119回に1回）。</strong>スーテッドの手札で、フロップの3枚が全部同じマークになる確率は C(11,3) ÷ C(50,3) ＝ 165 ÷ 19,600 ＝ 0.84% です。（実測）</li>
+</ul>
+
+<h2 id="h-after">ドローになったあとの計算</h2>
+<p>フロップでドローになったら、次は完成する確率を知る番です。アウツの数えかたと、ターン・リバーで完成する確率は、<a href="/outs/">アウツ計算（4と2の法則）</a>の厳密値の表にあります。そのドローに、いくらまで払えるかは、<a href="/potodds/">ポットオッズの計算</a>で必要勝率と比べます。</p>
+<p>これは確率の仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</p>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>手札2枚を固定し、残りの50枚から選べるフロップ3枚 C(50,3) ＝ 19,600通りを、1通りずつ全部数えました。ストレートは、完成しているか、あと1枚で完成するカードの数字が何種類あるかで分けています。ストレートの組に、手札の数字が1枚も入らないものは数えていません。マークは、スーテッドとオフスートの違いだけなので、代表のマークで固定しています。</p>
+<p>式でも確かめました。セットは1 － C(48,3)/C(50,3) ＝ 11.76%、手札の数字が出る確率は1 － C(44,3)/C(50,3) ＝ 32.43%、フラッシュは C(11,3)/C(50,3) ＝ 0.84%、フラッシュドローは C(11,2)×39/C(50,3) ＝ 10.94% で、数え上げの結果とすべて一致しています。（実測）</p>
+<p>セットマイニングの確率について、PokerNewsの記事（2026年11月8日に確認。出典は下の参考資料）は、「7.5対1よりわずかに悪い」「約12%弱」「約8.5回に1回」と書いています。この記事の数字（7.51対1、11.76%、約8.5回に1回）と同じです。PokerNewsの記事は、7.5対1の導き方は示していないので、この記事で式から確かめました。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>PokerNews「Set Mining with Small-to-Medium Pocket Pairs」<a href="https://www.pokernews.com/strategy/set-mining-with-small-to-medium-pocket-pairs-19696.htm">https://www.pokernews.com/strategy/set-mining-with-small-to-medium-pocket-pairs-19696.htm</a> （セットを引く確率と、必要なインプライドオッズの考え方。2026年11月8日に確認）</li>
+<li>Wikipedia「Texas hold 'em starting hands」<a href="https://en.wikipedia.org/wiki/Texas_hold_%27em_starting_hands">https://en.wikipedia.org/wiki/Texas_hold_%27em_starting_hands</a> （ポケットペアの数え方。二次資料。2026年11月8日に確認）</li>
+</ul>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>ポケットペアがフロップでセットになる確率は11.76%（約8.5回に1回）で、リバーまで見ても19.2%です。（実測）</li>
+<li>セットマイニングは、完成したときに、コール額の約7.5倍を勝ち取れないと、期待値がマイナスです。（実測）</li>
+<li>手札の数字がフロップに出るのは約32%、スーテッドでフラッシュか、そのドローになるのは約12%です。（実測）</li>
+</ul>
+<p>次の1アクションは、自分がよく配られる手札の行を表で探して、フロップで何にもならない割合を確かめることです。続きは次の2本です。</p>
+<ul>
+<li><a href="/hands/">スターティングハンド169通りの勝率表</a></li>
+<li><a href="/preflop-equity/">プリフロップの勝率（AA対KK、AK対QQなど）</a></li>
+</ul>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
