@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ホールデムの人数別の勝率｜AAでも相手9人なら31%、1〜9人の一覧表</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/multiway/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="description" content="ホールデムで相手が増えると勝率はどう下がるか。AAは1人なら85%、5人で49%、9人で31%。全169ハンド×相手1〜9人をそれぞれ2,000,000回配って数えた一覧。数字は仮想チップを使った練習用の例。">
+<meta property="og:title" content="ホールデムの人数別の勝率｜AAでも相手9人なら31%、1〜9人の一覧表">
+<meta property="og:description" content="ホールデムで相手が増えると勝率はどう下がるか。AAは1人なら85%、5人で49%、9人で31%。全169ハンド×相手1〜9人をそれぞれ2,000,000回配って数えた一覧。数字は仮想チップを使った練習用の例。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/multiway/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ホールデムの人数別の勝率｜AAでも相手9人なら31%、1〜9人の一覧表","description":"ホールデムで相手が増えると勝率はどう下がるか。AAは1人なら85%、5人で49%、9人で31%。全169ハンド×相手1〜9人をそれぞれ2,000,000回配って数えた一覧。数字は仮想チップを使った練習用の例。","mainEntityOfPage":"https://rule.shoubu-lab.com/multiway/","inLanguage":"ja","datePublished":"2026-11-13T16:30:00+09:00","dateModified":"2026-11-13T16:30:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"AAの勝率は、相手が何人までなら50%を超えますか？","acceptedAnswer":{"@type":"Answer","text":"相手の手札がランダムで全員が最後まで残る場合、AAのエクイティは相手4人で55.8%、相手5人で49.1%です。つまり相手が4人までなら50%を超えます。KKは3人まで、QQは3人までです。"}},{"@type":"Question","name":"相手が増えると、全員の勝率はどう変わりますか？","acceptedAnswer":{"@type":"Answer","text":"全員のエクイティを足すと100%になるので、169ハンドの平均は1÷(相手の人数＋1)になります。相手1人なら50%、2人なら33.3%、5人なら16.7%、9人なら10%です。"}},{"@type":"Question","name":"相手が9人のとき、いちばん強いハンドの勝率は？","acceptedAnswer":{"@type":"Answer","text":"AAのエクイティが31.1%、KKが26.0%、AKスーテッドが20.7%です。基準の10%に対しては、AAが3.11倍です。"}},{"@type":"Question","name":"この表は実戦でそのまま使えますか？","acceptedAnswer":{"@type":"Answer","text":"使えません。相手の手札がランダムで、全員が最後まで降りない前提の数字です。実際は弱い手が途中で降りるので、最後まで残る相手の人数で読み替える必要があります。"}}]}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月13日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ホールデムの人数別の勝率｜相手が1〜9人のときのエクイティ一覧</h1>
+<div class="key"><p class="lead">AAのエクイティは、相手が1人なら85.2%、3人で63.8%、5人で49.1%、9人で31.1%です。相手の手札がランダムなとき、AAでも相手が5人になると、勝率は50%を割ります。全169ハンド×相手1〜9人を、それぞれ2,000,000回配って数えました。</p></div>
+<p>この記事では、プリフロップでオールインして最後までカードを開いたときの勝率（エクイティ）が、相手の人数でどう変わるかを、手札別の表にしました。数字は、僕が作った判定プログラムで配った実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>相手が1人のときの169ハンドの表は<a href="/hands/">スターティングハンド169通りの勝率表</a>にあります。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-table">手札別・人数別のエクイティ表</a></li>
+<li><a href="#h-fair">「公平ライン」と、AAが50%を割る人数</a></li>
+<li><a href="#h-ratio">倍率で見ると、強いハンドの価値は人数で上がる</a></li>
+<li><a href="#h-count">公平ラインを超えるハンドの数</a></li>
+<li><a href="#h-limit">この表の使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li>AAのエクイティは、相手1人で85.2%、2人で73.4%、3人で63.8%、5人で49.1%、9人で31.1%まで下がります。</li>
+<li>相手がランダムな手札のとき、50%を割るのはAAで相手5人から、KKで4人から、AKスーテッドで3人から、QQで4人からです。</li>
+<li>全169ハンドの平均は、相手がn人なら「1÷(n＋1)」です。相手1人なら50%、2人なら33.3%、9人なら10%が基準（公平ライン）になります。</li>
+<li>公平ラインとの倍率で見ると、AAは相手1人で1.70倍、9人で3.11倍。強いハンドの価値は、人数が増えるほど基準に対して大きくなります。</li>
+</ul>
+<p>※いずれも全169ハンド×相手1〜9人を、それぞれ2,000,000回配った実測値です。</p>
+
+<h2 id="h-table">手札別・人数別のエクイティ表</h2>
+<p>エクイティは「勝つ割合 ＋ 引き分けで分け合った分」で、最後までカードを開いたときの期待の取り分です。ポットを分け合う場合は、勝った人数で割って数えています。相手の手札はすべてランダムで、全員が最後まで降りません。</p>
+<div class="tw st"><table><caption>手札別のエクイティ（％）：相手が1〜9人のとき（相手の手札はランダム）</caption><tr><th scope="col">手札</th><th scope="col">1人</th><th scope="col">2人</th><th scope="col">3人</th><th scope="col">4人</th><th scope="col">5人</th><th scope="col">6人</th><th scope="col">7人</th><th scope="col">8人</th><th scope="col">9人</th></tr><tr><th scope="row">AA（ペア）</th><td class="num">85.2</td><td class="num">73.4</td><td class="num">63.8</td><td class="num">55.8</td><td class="num">49.1</td><td class="num">43.6</td><td class="num">38.8</td><td class="num">34.6</td><td class="num">31.1</td></tr><tr><th scope="row">KK（ペア）</th><td class="num">82.4</td><td class="num">68.9</td><td class="num">58.2</td><td class="num">49.8</td><td class="num">43.0</td><td class="num">37.4</td><td class="num">32.9</td><td class="num">29.2</td><td class="num">26.0</td></tr><tr><th scope="row">QQ（ペア）</th><td class="num">79.9</td><td class="num">64.9</td><td class="num">53.5</td><td class="num">44.7</td><td class="num">37.9</td><td class="num">32.5</td><td class="num">28.3</td><td class="num">24.9</td><td class="num">22.2</td></tr><tr><th scope="row">JJ（ペア）</th><td class="num">77.5</td><td class="num">61.2</td><td class="num">49.2</td><td class="num">40.2</td><td class="num">33.5</td><td class="num">28.5</td><td class="num">24.6</td><td class="num">21.7</td><td class="num">19.3</td></tr><tr><th scope="row">10のペア</th><td class="num">75.0</td><td class="num">57.6</td><td class="num">45.3</td><td class="num">36.3</td><td class="num">29.9</td><td class="num">25.2</td><td class="num">21.8</td><td class="num">19.2</td><td class="num">17.2</td></tr><tr><th scope="row">77（ペア）</th><td class="num">66.3</td><td class="num">46.4</td><td class="num">34.4</td><td class="num">26.8</td><td class="num">21.9</td><td class="num">18.6</td><td class="num">16.4</td><td class="num">14.8</td><td class="num">13.6</td></tr><tr><th scope="row">22（ペア）</th><td class="num">50.3</td><td class="num">30.7</td><td class="num">21.9</td><td class="num">17.7</td><td class="num">15.5</td><td class="num">14.1</td><td class="num">13.2</td><td class="num">12.5</td><td class="num">12.0</td></tr><tr><th scope="row">AK（スーテッド）</th><td class="num">67.0</td><td class="num">50.7</td><td class="num">41.4</td><td class="num">35.4</td><td class="num">31.1</td><td class="num">27.7</td><td class="num">25.0</td><td class="num">22.7</td><td class="num">20.7</td></tr><tr><th scope="row">AK（オフスート）</th><td class="num">65.3</td><td class="num">48.2</td><td class="num">38.5</td><td class="num">32.3</td><td class="num">27.8</td><td class="num">24.4</td><td class="num">21.6</td><td class="num">19.2</td><td class="num">17.2</td></tr><tr><th scope="row">AQ（オフスート）</th><td class="num">64.5</td><td class="num">46.8</td><td class="num">36.9</td><td class="num">30.5</td><td class="num">25.9</td><td class="num">22.5</td><td class="num">19.7</td><td class="num">17.4</td><td class="num">15.5</td></tr><tr><th scope="row">KQ（オフスート）</th><td class="num">61.5</td><td class="num">44.4</td><td class="num">35.2</td><td class="num">29.3</td><td class="num">25.1</td><td class="num">21.8</td><td class="num">19.1</td><td class="num">17.0</td><td class="num">15.1</td></tr><tr><th scope="row">J10（スーテッド）</th><td class="num">57.5</td><td class="num">42.0</td><td class="num">33.8</td><td class="num">28.6</td><td class="num">24.9</td><td class="num">22.0</td><td class="num">19.7</td><td class="num">18.0</td><td class="num">16.5</td></tr><tr><th scope="row">87（スーテッド）</th><td class="num">48.0</td><td class="num">33.8</td><td class="num">26.6</td><td class="num">22.1</td><td class="num">19.0</td><td class="num">16.7</td><td class="num">15.0</td><td class="num">13.8</td><td class="num">12.8</td></tr><tr><th scope="row">A2（スーテッド）</th><td class="num">57.5</td><td class="num">38.7</td><td class="num">29.5</td><td class="num">24.1</td><td class="num">20.6</td><td class="num">18.2</td><td class="num">16.3</td><td class="num">14.8</td><td class="num">13.6</td></tr><tr><th scope="row">72（オフスート）</th><td class="num">34.6</td><td class="num">20.5</td><td class="num">14.2</td><td class="num">10.8</td><td class="num">8.7</td><td class="num">7.2</td><td class="num">6.2</td><td class="num">5.4</td><td class="num">4.8</td></tr><tr><th scope="row">平均（公平ライン）</th><td class="num">50.0</td><td class="num">33.3</td><td class="num">25.0</td><td class="num">20.0</td><td class="num">16.7</td><td class="num">14.3</td><td class="num">12.5</td><td class="num">11.1</td><td class="num">10.0</td></tr></table></div>
+<p>※すべて2,000,000回ずつ配った実測値（標準誤差は0.04ポイント以下）。169ハンド全部の人数別の値は、同じ方法で数えてあります。</p>
+<p>見方は、行が自分の手札、列が相手の人数です。たとえばAKオフスートは、相手1人なら65.3%、3人なら38.5%、9人なら17.2%です。最後の行の「公平ライン」は、169ハンドの平均です。この行より大きければ、平均より有利なハンドです。</p>
+
+<h2 id="h-fair">「公平ライン」と、AAが50%を割る人数</h2>
+<p>相手が増えると、全員の勝率は下がります。全員のエクイティを足すと、ポット1つ分（100%）になるからです。169ハンドを配られる回数で重みづけして平均すると、相手がn人のとき 1÷(n＋1) になります。2,000,000回の実測で確かめた平均は、相手1人で50.00%、3人で25.00%、9人で10.00%でした（基準は50%・25%・10%）。</p>
+<figure><div class="bg"><p class="bn">相手1人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:85.16%"></i></span><span class="bv">85.2%</span></div></div><div class="bg"><p class="bn">相手2人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:73.44%"></i></span><span class="bv">73.4%</span></div></div><div class="bg"><p class="bn">相手3人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:63.82%"></i></span><span class="bv">63.8%</span></div></div><div class="bg"><p class="bn">相手4人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:55.85%"></i></span><span class="bv">55.8%</span></div></div><div class="bg"><p class="bn">相手5人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:49.14%"></i></span><span class="bv">49.1%</span></div></div><div class="bg"><p class="bn">相手6人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:43.61%"></i></span><span class="bv">43.6%</span></div></div><div class="bg"><p class="bn">相手7人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:38.79%"></i></span><span class="bv">38.8%</span></div></div><div class="bg"><p class="bn">相手8人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:34.63%"></i></span><span class="bv">34.6%</span></div></div><div class="bg"><p class="bn">相手9人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:31.05%"></i></span><span class="bv">31.1%</span></div></div><figcaption>※AAのエクイティ（勝率・％）。相手の手札はランダム。バーは0〜100%。</figcaption></figure>
+<p>AAのエクイティは、相手が1人のとき85.2%、2人のとき73.4%と下がり、5人で49.1%と50%を割ります（相手4人なら55.8%）。KKは相手4人で49.8%、QQは相手4人で44.7%です。「AAは最強のハンド」ですが、相手が9人いて全員が最後まで残る場面では、69%は取り分を失う（負けるか、分け合う）計算になります。</p>
+
+<h2 id="h-ratio">倍率で見ると、強いハンドの価値は人数で上がる</h2>
+<p>人数が増えるとどのハンドも勝率は下がるので、基準（公平ライン）との倍率で比べます。倍率が1より大きければ、平均より有利です。</p>
+<div class="tw st"><table><caption>公平ラインに対する倍率（エクイティ ÷ 公平ライン）</caption><tr><th scope="col">手札</th><th scope="col">1人</th><th scope="col">2人</th><th scope="col">3人</th><th scope="col">4人</th><th scope="col">5人</th><th scope="col">6人</th><th scope="col">7人</th><th scope="col">8人</th><th scope="col">9人</th></tr><tr><th scope="row">AA（ペア）</th><td class="num">1.70</td><td class="num">2.20</td><td class="num">2.55</td><td class="num">2.79</td><td class="num">2.95</td><td class="num">3.05</td><td class="num">3.10</td><td class="num">3.12</td><td class="num">3.11</td></tr><tr><th scope="row">KK（ペア）</th><td class="num">1.65</td><td class="num">2.07</td><td class="num">2.33</td><td class="num">2.49</td><td class="num">2.58</td><td class="num">2.62</td><td class="num">2.63</td><td class="num">2.63</td><td class="num">2.60</td></tr><tr><th scope="row">AK（オフスート）</th><td class="num">1.31</td><td class="num">1.44</td><td class="num">1.54</td><td class="num">1.62</td><td class="num">1.67</td><td class="num">1.71</td><td class="num">1.73</td><td class="num">1.73</td><td class="num">1.72</td></tr><tr><th scope="row">J10（スーテッド）</th><td class="num">1.15</td><td class="num">1.26</td><td class="num">1.35</td><td class="num">1.43</td><td class="num">1.49</td><td class="num">1.54</td><td class="num">1.58</td><td class="num">1.62</td><td class="num">1.65</td></tr><tr><th scope="row">87（スーテッド）</th><td class="num">0.96</td><td class="num">1.01</td><td class="num">1.06</td><td class="num">1.10</td><td class="num">1.14</td><td class="num">1.17</td><td class="num">1.20</td><td class="num">1.24</td><td class="num">1.27</td></tr><tr><th scope="row">22（ペア）</th><td class="num">1.01</td><td class="num">0.92</td><td class="num">0.88</td><td class="num">0.89</td><td class="num">0.93</td><td class="num">0.99</td><td class="num">1.06</td><td class="num">1.13</td><td class="num">1.20</td></tr><tr><th scope="row">72（オフスート）</th><td class="num">0.69</td><td class="num">0.62</td><td class="num">0.57</td><td class="num">0.54</td><td class="num">0.52</td><td class="num">0.50</td><td class="num">0.49</td><td class="num">0.49</td><td class="num">0.48</td></tr></table></div>
+<p>※倍率は、上の表のエクイティを公平ラインで割った値です。</p>
+<ul>
+<li><strong>AAは、相手1人で1.70倍、9人で3.11倍。</strong>勝率は下がっても、基準に対する優位は大きくなります。KKも1.65倍から2.60倍です。</li>
+<li><strong>22は、相手3人で0.88倍まで下がったあと、人数が増えるほど倍率が上がります。</strong>相手1人で1.01倍、3人で0.88倍、9人で1.20倍です。最弱のペアでも、多人数で最後まで勝負するなら、基準より有利になります。</li>
+<li><strong>87スーテッドは、相手1人で0.96倍と基準を下回り、相手2人で1.01倍と基準を超え、9人では1.27倍。</strong>つながったスーテッドは、人数が増えるほど倍率が上がります。</li>
+<li><strong>72オフスートは、倍率が0.69倍から0.48倍に下がります。</strong>弱いハンドは、人数が増えるほど、基準に対してさらに弱くなります。</li>
+</ul>
+<figure><div class="bg"><p class="bn">相手1人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:67.05%"></i></span><span class="bv">67.0%</span></div></div><div class="bg"><p class="bn">相手2人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:50.71%"></i></span><span class="bv">50.7%</span></div></div><div class="bg"><p class="bn">相手3人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:41.42%"></i></span><span class="bv">41.4%</span></div></div><div class="bg"><p class="bn">相手5人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:31.12%"></i></span><span class="bv">31.1%</span></div></div><div class="bg"><p class="bn">相手9人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:20.69%"></i></span><span class="bv">20.7%</span></div></div><figcaption>※AKスーテッドの勝率（％）。相手の手札はランダム。バーは0〜100%。</figcaption></figure>
+<figure><div class="bg"><p class="bn">相手1人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:34.58%"></i></span><span class="bv">34.6%</span></div></div><div class="bg"><p class="bn">相手2人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:20.52%"></i></span><span class="bv">20.5%</span></div></div><div class="bg"><p class="bn">相手3人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:14.24%"></i></span><span class="bv">14.2%</span></div></div><div class="bg"><p class="bn">相手5人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:8.66%"></i></span><span class="bv">8.7%</span></div></div><div class="bg"><p class="bn">相手9人</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:4.80%"></i></span><span class="bv">4.8%</span></div></div><figcaption>※72オフスートの勝率（％）。</figcaption></figure>
+<p>倍率の差（相手9人の倍率 － 相手1人の倍率）がいちばん大きく上がるハンドは、AA（ペア）で、相手1人の1.70倍から、9人の3.11倍です。いちばん大きく下がるのは、J4（オフスート）で、0.92倍から0.65倍です。</p>
+
+<h2 id="h-count">公平ラインを超えるハンドの数</h2>
+<p>公平ラインを超える（平均より有利な）ハンドが、169種類のうち何種類あるかを、人数別に数えました。</p>
+<div class="tw st"><table><caption>公平ラインを超えるハンドの数（169種類・1,326通りのうち）</caption><tr><th scope="col">相手の人数</th><th scope="col">公平ライン（％）</th><th scope="col">超えるハンドの種類</th><th scope="col">組み合わせ数</th><th scope="col">割合（％）</th></tr><tr><th scope="row">1人</th><td class="num">50.0</td><td class="num">89</td><td class="num">654</td><td class="num">49.3</td></tr><tr><th scope="row">2人</th><td class="num">33.3</td><td class="num">83</td><td class="num">588</td><td class="num">44.3</td></tr><tr><th scope="row">3人</th><td class="num">25.0</td><td class="num">83</td><td class="num">586</td><td class="num">44.2</td></tr><tr><th scope="row">4人</th><td class="num">20.0</td><td class="num">85</td><td class="num">578</td><td class="num">43.6</td></tr><tr><th scope="row">5人</th><td class="num">16.7</td><td class="num">87</td><td class="num">570</td><td class="num">43.0</td></tr><tr><th scope="row">6人</th><td class="num">14.3</td><td class="num">88</td><td class="num">560</td><td class="num">42.2</td></tr><tr><th scope="row">7人</th><td class="num">12.5</td><td class="num">90</td><td class="num">546</td><td class="num">41.2</td></tr><tr><th scope="row">8人</th><td class="num">11.1</td><td class="num">94</td><td class="num">554</td><td class="num">41.8</td></tr><tr><th scope="row">9人</th><td class="num">10.0</td><td class="num">94</td><td class="num">538</td><td class="num">40.6</td></tr></table></div>
+<p>※169ハンドそれぞれが公平ラインより大きいかを、2,000,000回の実測値で数えた結果です。</p>
+<p>相手1人のときは89種類（49.3%）、相手9人のときは94種類（40.6%）です。種類は増えますが、配られる回数で重みをつけた割合は下がります。同じ人数でも、基準を上回るのは強い手で、基準との差は人数が増えるほど開きます。</p>
+
+<h2 id="h-limit">この表の使いどころと限界</h2>
+<ul>
+<li><strong>相手の手札はランダムで、全員が最後まで残る前提です。</strong>実際の対戦では、弱い手は途中で降りるので、数字どおりにはなりません。「相手が9人いる」より、「最後まで残る相手が何人か」で読んでください。</li>
+<li><strong>ポジションや賭け金は入っていません。</strong>この表は、最後までカードを見切ったときの強さだけです。入るかどうかの判断は、位置・スタック・相手の動きで決まります。</li>
+<li><strong>ひとりひとりのエクイティは、勝つ確率とは違います。</strong>引き分けは分け合う前提で数えているので、「勝つ」だけを数えると、少し低くなります。</li>
+</ul>
+<p>相手の手札を決めた勝率（AA対KKなど）は<a href="/preflop-equity/">プリフロップの勝率の一覧</a>にあります。これは確率の仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</p>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>自分の手札の代表の2枚（マークはスーテッドかオフスートかだけで決めたもの）を固定し、残りの山から、相手n人の手札2枚ずつと、ボード5枚をランダムに配って、最後に7枚で強さを比べました。これを169ハンド×相手1〜9人の全部で2,000,000回ずつ（合計で約30億回の配り）行っています。乱数は固定シードです。引き分けは、勝った人数で割って数えました。</p>
+<p>確かめたこと。①169ハンドの組み合わせ数で重みづけした平均が、全部の人数で 1÷(n＋1) に0.01ポイント以内で一致（相手1人49.998、2人33.330、9人10.000）。②判定プログラムは、7枚の全13,378万通りで役の件数が既知の値と一致すると確認済みのもの（<a href="/yaku/">役の確率の記事</a>と同じ）。③相手1人のAAは85.2%で、<a href="/hands/">169ハンドの表</a>の全数え上げ・300万回実測と同じ値。④英語の人数別の表（Deuces Cracked、2026年11月13日に確認）と比べて、AAの相手2人・3人・9人は73.4%・63.8%・31.1%に対し、73.6%・63.9%・31.0%で、同じ水準です（向こうは18万回の試行）。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Deuces Cracked「Texas Hold'em Equity vs Random Opponents by Hand」<a href="https://www.deucescracked.com/blog/texas-holdem-equity-vs-random-opponents-by-hand-data">https://www.deucescracked.com/blog/texas-holdem-equity-vs-random-opponents-by-hand-data</a> （英語・169ハンドの人数別エクイティ・モンテカルロ法。2026年11月13日に確認。本記事は日本語で、2,000,000回の実測と公平ラインとの倍率を足したもの）</li>
+<li>ルフトツールズ「ポーカー無料｜テキサスホールデム」<a href="https://www.luft.co.jp/cgi/poker-texas.php">https://www.luft.co.jp/cgi/poker-texas.php</a> （主要ハンドの対ランダム勝率の目安。1対1のみで、人数別の表は無し。2026年11月13日に確認）</li>
+</ul>
+<p>取得できなかった資料：gameshub.com の日本語記事（HTTP 403）、Preflop Hand Equity By Number Of Players（PDF・本文を読み取れず）。競合の網羅性は未確認です。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>相手が増えるほど、全員の勝率は下がります。基準は 1÷(相手の人数＋1) です。</li>
+<li>AAは、相手が5人になると50%を割ります。9人では31.1%です。</li>
+<li>公平ラインとの倍率では、AAは相手が多いほど大きく有利になります。22やつながったスーテッドも、基準に近づきます。</li>
+</ul>
+<p>次の1アクションは、よく配られるハンドの行を表で探して、「何人まで残る相手を想定して入るか」を決めることです。続きは次の2本です。</p>
+<ul>
+<li><a href="/hands/">スターティングハンド169通りの勝率表</a></li>
+<li><a href="/flop-hit/">フロップのヒット確率とセットマイニング</a></li>
+</ul>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>AAの勝率は、相手が何人までなら50%を超えますか？</h3>
+<p>相手の手札がランダムで全員が最後まで残る場合、AAのエクイティは相手4人で55.8%、相手5人で49.1%です。つまり相手が4人までなら50%を超えます。KKは3人まで、QQは3人までです。</p>
+<h3>相手が増えると、全員の勝率はどう変わりますか？</h3>
+<p>全員のエクイティを足すと100%になるので、169ハンドの平均は1÷(相手の人数＋1)になります。相手1人なら50%、2人なら33.3%、5人なら16.7%、9人なら10%です。</p>
+<h3>相手が9人のとき、いちばん強いハンドの勝率は？</h3>
+<p>AAのエクイティが31.1%、KKが26.0%、AKスーテッドが20.7%です。基準の10%に対しては、AAが3.11倍です。</p>
+<h3>この表は実戦でそのまま使えますか？</h3>
+<p>使えません。相手の手札がランダムで、全員が最後まで降りない前提の数字です。実際は弱い手が途中で降りるので、最後まで残る相手の人数で読み替える必要があります。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>フロップがレインボーになる確率は39.8%｜ボードの出方をリバーまで全部数えた</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/board-texture/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="description" content="フロップがレインボーになる確率は39.8%、ツートーン55.1%、モノトーン5.2%、ペアボード17.2%。ターン・リバーでの出方も、全2,598,960通りを数えた表。数字は仮想チップを使った練習用の例。">
+<meta property="og:title" content="フロップがレインボーになる確率は39.8%｜ボードの出方をリバーまで全部数えた">
+<meta property="og:description" content="フロップがレインボーになる確率は39.8%、ツートーン55.1%、モノトーン5.2%、ペアボード17.2%。ターン・リバーでの出方も、全2,598,960通りを数えた表。数字は仮想チップを使った練習用の例。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/board-texture/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"フロップがレインボーになる確率は39.8%｜ボードの出方をリバーまで全部数えた","description":"フロップがレインボーになる確率は39.8%、ツートーン55.1%、モノトーン5.2%、ペアボード17.2%。ターン・リバーでの出方も、全2,598,960通りを数えた表。数字は仮想チップを使った練習用の例。","mainEntityOfPage":"https://rule.shoubu-lab.com/board-texture/","inLanguage":"ja","datePublished":"2026-11-13T16:30:00+09:00","dateModified":"2026-11-13T16:30:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"フロップがレインボーになる確率は？","acceptedAnswer":{"@type":"Answer","text":"39.76%です。全22,100通りのうち、3枚とも別のマークになるのは4×13³＝8,788通りで、約2.5回に1回です。ツートーンが55.06%、モノトーンが5.18%です。"}},{"@type":"Question","name":"ペアボードになる確率は？","acceptedAnswer":{"@type":"Answer","text":"フロップで17.18%、ターンまでで32.39%、リバーまでで49.29%です。リバーまで見ると、ほぼ2回に1回はボードにペアが出ます。"}},{"@type":"Question","name":"ボードにフラッシュが組める確率は？","acceptedAnswer":{"@type":"Answer","text":"同じマークが3枚以上になる割合は、フロップ5.18%、ターン17.54%、リバー37.11%です。ボードにフラッシュ（同じマーク5枚）が出るのは0.20%です。"}},{"@type":"Question","name":"ツートーンのフロップから、ターンでフラッシュが組める形になる確率は？","acceptedAnswer":{"@type":"Answer","text":"ターンで同じマークが3枚以上になるのは22.45%、リバーまでで45.83%です。レインボーのフロップからは、リバーまでで16.84%です。"}}]}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月13日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>フロップがレインボーになる確率は39.8%｜ペアボード・同じマークの出方をリバーまで全部数えた</h1>
+<div class="key"><p class="lead">フロップがレインボーになる確率は39.8%、ツートーンが55.1%、モノトーンが5.2%、ペアボードが17.2%です。リバーまで見ると、ボードにペアが出る確率は49.3%、同じマークが3枚以上になる確率は37.1%まで上がります。フロップ・ターン・リバーの全部の出方を数えました。</p></div>
+<p>この記事では、ボードの出方（テクスチャ）がどれくらいの割合で起こるかを、フロップ・ターン・リバーごとに表にしました。数字は、52枚から選べる全部の組み合わせを1通りずつ数えた実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>手札別のフロップのヒット確率は<a href="/flop-hit/">フロップのヒット確率とセットマイニング</a>にあります。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-def">言葉の意味</a></li>
+<li><a href="#h-flop">フロップの出方</a></li>
+<li><a href="#h-street">ターン・リバーでの出方</a></li>
+<li><a href="#h-cond">フロップの形ごとの、ターン・リバーでの変化</a></li>
+<li><a href="#h-dry">「ばらけたボード」は、リバーまでにほぼ消える</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li>フロップは、レインボーが39.76%、ツートーンが55.06%、モノトーンが5.18%です。ペアボードは17.18%（そのうちスリーカードが0.24%）です。</li>
+<li>ボードにペアが出る確率は、フロップ17.2%、ターン32.4%、リバー49.3%。リバーまでに、ほぼ2回に1回はペアになります。</li>
+<li>同じマーク3枚以上ボードは、フロップ5.2%、リバー37.1%です。</li>
+<li>ペア・同じマーク3枚・ストレートの3つがどれもない「ばらけたボード」は、フロップ60.3%、ターン21.3%、リバー1.8%。リバーまでには、ほとんどなくなります。</li>
+</ul>
+<p>※いずれもフロップ22,100通り・ターン270,725通り・リバー2,598,960通りの全数え上げです。</p>
+
+<h2 id="h-def">言葉の意味</h2>
+<p>この記事では、次の意味で使います。マークや数字の強弱は関係なく、「形」だけを数えています。</p>
+<ul>
+<li><strong>レインボー</strong>：3枚とも違うマーク。</li>
+<li><strong>ツートーン</strong>：2枚が同じマーク。</li>
+<li><strong>モノトーン</strong>：3枚とも同じマーク。</li>
+<li><strong>ペアボード</strong>：ボードの中に、同じ数字が2枚以上ある（スリーカードも含む）。</li>
+<li><strong>ストレートが組める</strong>：ボードの数字のうち3枚以上が、5つ並んだ数字（A-2-3-4-5も含む）の中に入っている。残りの手札2枚で、ストレートが完成する可能性がある形です。</li>
+<li><strong>ストレートまであと1枚</strong>：ボードの数字のうち4枚以上が、5連続の中に入っている。手札1枚で完成する形です。</li>
+<li><strong>同じマーク3枚以上</strong>：ボードのうち3枚以上が同じマーク。手札のマークしだいで、フラッシュが組める形です。</li>
+<li><strong>ばらけたボード</strong>：ペアがなく、同じマークが3枚以上なく、ストレートも組めない。この記事で決めた言い方です。</li>
+</ul>
+
+<h2 id="h-flop">フロップの出方</h2>
+<p>フロップの出方は、C(52,3) ＝ 22,100通りです。マークの形は、レインボーが4×13³ ＝ 8,788通りで、モノトーンが4×C(13,3) ＝ 1,144通りです。残りがツートーンで、12,168通りです。</p>
+<div class="tw st"><table><caption>フロップ3枚の出方（全22,100通り）</caption><tr><th scope="col">フロップの形</th><th scope="col">割合（％）</th><th scope="col">通り数</th><th scope="col">式</th></tr><tr><th scope="row">レインボー（3枚とも別）</th><td class="num">39.76</td><td class="num">8,788</td><td>4×13³</td></tr><tr><th scope="row">ツートーン（2枚が同じ）</th><td class="num">55.06</td><td class="num">12,168</td><td>残り</td></tr><tr><th scope="row">モノトーン（3枚とも同じ）</th><td class="num">5.18</td><td class="num">1,144</td><td>4×C(13,3)</td></tr><tr><th scope="row">ペアなし</th><td class="num">82.82</td><td class="num">18,304</td><td>C(13,3)×4³</td></tr><tr><th scope="row">ペアが1組</th><td class="num">16.94</td><td class="num">3,744</td><td>13×C(4,2)×48</td></tr><tr><th scope="row">スリーカード</th><td class="num">0.24</td><td class="num">52</td><td>13×4</td></tr><tr><th scope="row">ペアボード合計</th><td class="num">17.18</td><td class="num">3,796</td><td>3,744＋52</td></tr><tr><th scope="row">ストレートが組める</th><td class="num">18.53</td><td class="num">4,096</td><td>64×4³</td></tr></table></div>
+<p>※全数え上げの実測値です。レインボー・ツートーン・モノトーンの3つは、ペアボードも含めた割合で、足すと100%になります。</p>
+<ul>
+<li><strong>いちばん多いのはツートーン。</strong>半分以上（55.1%）です。レインボーは39.8%で、約2.5回に1回です。</li>
+<li><strong>モノトーンは5.2%、約19回に1回。</strong>めったに出ません。</li>
+<li><strong>ペアボードは、約5.9回に1回。</strong>スリーカードのフロップは、425回に1回もありません（52通り）。</li>
+<li><strong>ストレートが組めるフロップは、18.5%。</strong>5回に1回弱です。</li>
+</ul>
+
+<h2 id="h-street">ターン・リバーでの出方</h2>
+<p>ターンまで（4枚）は C(52,4) ＝ 270,725通り、リバーまで（5枚）は C(52,5) ＝ 2,598,960通りです。カードが増えるほど、形は出やすくなります。</p>
+<div class="tw st"><table><caption>ボードの形が出る確率（％）：フロップ・ターン・リバー</caption><tr><th scope="col">ボードの形</th><th scope="col">フロップ（3枚）</th><th scope="col">ターン（4枚）</th><th scope="col">リバー（5枚）</th></tr><tr><th scope="row">ペアが1つ以上ある</th><td class="num">17.18</td><td class="num">32.39</td><td class="num">49.29</td></tr><tr><th scope="row">同じマーク3枚以上</th><td class="num">5.18</td><td class="num">17.54</td><td class="num">37.11</td></tr><tr><th scope="row">同じマーク4枚以上</th><td class="num">―</td><td class="num">1.06</td><td class="num">4.49</td></tr><tr><th scope="row">同じマーク5枚</th><td class="num">―</td><td class="num">―</td><td class="num">0.20</td></tr><tr><th scope="row">ストレートが組める</th><td class="num">18.53</td><td class="num">47.66</td><td class="num">74.66</td></tr><tr><th scope="row">ストレートまであと1枚</th><td class="num">―</td><td class="num">3.88</td><td class="num">13.65</td></tr><tr><th scope="row">ボードにストレート</th><td class="num">―</td><td class="num">―</td><td class="num">0.39</td></tr><tr><th scope="row">ばらけたボード</th><td class="num">60.27</td><td class="num">21.32</td><td class="num">1.82</td></tr></table></div>
+<p>※全数え上げの実測値です。「ストレートが組める」は、ボードの3枚以上が5連続の中に入る形です。</p>
+<figure><div class="bg"><p class="bn">フロップ（3枚）</p><div class="br"><span class="bl">ペアあり</span><span class="bt"><i style="width:17.18%"></i></span><span class="bv">17.2%</span></div></div><div class="bg"><p class="bn">ターン（4枚）</p><div class="br"><span class="bl">ペアあり</span><span class="bt"><i style="width:32.39%"></i></span><span class="bv">32.4%</span></div></div><div class="bg"><p class="bn">リバー（5枚）</p><div class="br"><span class="bl">ペアあり</span><span class="bt"><i style="width:49.29%"></i></span><span class="bv">49.3%</span></div></div><figcaption>※ボードにペアが1つ以上ある割合。全数え上げ。バーは0〜100%。</figcaption></figure>
+<figure><div class="bg"><p class="bn">フロップ（3枚）</p><div class="br"><span class="bl">3枚以上</span><span class="bt"><i style="width:5.18%"></i></span><span class="bv">5.2%</span></div></div><div class="bg"><p class="bn">ターン（4枚）</p><div class="br"><span class="bl">3枚以上</span><span class="bt"><i style="width:17.54%"></i></span><span class="bv">17.5%</span></div></div><div class="bg"><p class="bn">リバー（5枚）</p><div class="br"><span class="bl">3枚以上</span><span class="bt"><i style="width:37.11%"></i></span><span class="bv">37.1%</span></div></div><figcaption>※ボードに同じマークが3枚以上ある割合（フラッシュが組める形）。全数え上げ。バーは0〜100%。</figcaption></figure>
+<ul>
+<li><strong>ペアは、リバーまでに約49%。</strong>ペアなしのリバーは、C(13,5)×4⁵ ＝ 1,317,888通りで、50.71%です。</li>
+<li><strong>同じマークが3枚以上のボードは、リバーで37.1%。</strong>約2.7回に1回です。</li>
+<li><strong>ボードにフラッシュ（同じマーク5枚）が出るのは、0.20%。</strong>505回に1回です。</li>
+<li><strong>ボードにストレート（5枚）が出るのは、0.39%。</strong>10通りの並び×4⁵通りのマークで、10,240通りです。</li>
+</ul>
+
+<h2 id="h-cond">フロップの形ごとの、ターン・リバーでの変化</h2>
+<p>フロップを見たあとの、残りのカード（ターンとリバー）の確率です。フロップの3枚を固定して、残り49枚から選べる2枚 C(49,2) ＝ 1,176通りを、全部数えました。同じマークが何枚そろうかは数字に関係せず、ペアになるかはマークに関係しません。そのため、代表の形で数えれば足ります（レインボーは7♠ 2♥ K♦、ツートーンは7♠ 2♠ K♦、モノトーンは7♠ 2♠ K♠）。</p>
+<div class="tw st"><table><caption>フロップの形ごとの、ターン・リバーでの変化（％）</caption><tr><th scope="col">フロップの形</th><th scope="col">ペアが出る<br>（ターン）</th><th scope="col">ペアが出る<br>（リバーまで）</th><th scope="col">同じマーク3枚以上<br>（ターン）</th><th scope="col">同じマーク3枚以上<br>（リバーまで）</th><th scope="col">同じマーク4枚以上<br>（リバーまで）</th></tr><tr><th scope="row">レインボー</th><td class="num">18.37</td><td class="num">38.78</td><td class="num">0.00</td><td class="num">16.84</td><td class="num">0.00</td></tr><tr><th scope="row">ツートーン</th><td class="num">18.37</td><td class="num">38.78</td><td class="num">22.45</td><td class="num">45.83</td><td class="num">4.68</td></tr><tr><th scope="row">モノトーン</th><td class="num">18.37</td><td class="num">38.78</td><td class="num">100</td><td class="num">100</td><td class="num">36.99</td></tr></table></div>
+<p>※全数え上げの実測値です。ペアボードのフロップは、すでにペアなので、ペアの欄は100%です。</p>
+<ul>
+<li><strong>レインボーのフロップが、リバーまでに同じマーク3枚以上になるのは16.8%。</strong>ツートーンなら45.8%で、約2.7倍です。</li>
+<li><strong>ペアのないフロップから、ターンでペアが出る確率は、マークの形によらず18.4%</strong>です（残り49枚のうち、フロップと同じ数字は9枚。9÷49）。リバーまで見ると38.8%です。</li>
+<li><strong>モノトーンのフロップは、リバーまでに同じマーク4枚以上が37.0%、5枚が3.8%。</strong></li>
+</ul>
+
+<h2 id="h-dry">「ばらけたボード」は、リバーまでにほぼ消える</h2>
+<p>ペアなし・同じマーク3枚なし・ストレートが組めない、の3つを全部満たすボードを、「ばらけたボード」と呼びました。フロップでは60.3%ありますが、ターンで21.3%、リバーでは1.8%まで減ります。</p>
+<figure><div class="bg"><p class="bn">フロップ（3枚）</p><div class="br"><span class="bl">ばらけ</span><span class="bt"><i style="width:60.27%"></i></span><span class="bv">60.3%</span></div></div><div class="bg"><p class="bn">ターン（4枚）</p><div class="br"><span class="bl">ばらけ</span><span class="bt"><i style="width:21.32%"></i></span><span class="bv">21.3%</span></div></div><div class="bg"><p class="bn">リバー（5枚）</p><div class="br"><span class="bl">ばらけ</span><span class="bt"><i style="width:1.82%"></i></span><span class="bv">1.8%</span></div></div><figcaption>※ペアなし・同じマーク3枚なし・ストレートが組めない、の全部を満たす割合。バーは0〜100%。</figcaption></figure>
+<p>カードが増えるほど、ペアか、同じマークか、並んだ数字のどれかが入るからです。フロップで「安全」に見えるボードも、リバーまで行けば、98%以上は、何かしらの形ができます。これは強さの話ではなく、形の出やすさの話です。</p>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>52枚から3枚・4枚・5枚を選ぶ全部の組み合わせ（22,100・270,725・2,598,960通り）を、1通りずつ数えました（乱数は使っていません）。数字は、ペアの有無・マークの枚数の最大・「5つ並んだ数字の中に入る枚数」の最大で分類しています。A-2-3-4-5のように、Aを小さい数字としてつなげる形も数えています。</p>
+<p>式でも確かめました。レインボー＝4×13³＝8,788、モノトーン＝4×C(13,3)＝1,144、ペアボード＝13×C(4,2)×48＝3,744、スリーカード＝13×4＝52は、数え上げの結果と全部一致しています。リバーのペアなしは C(13,5)×4⁵ ＝ 1,317,888、ストレートの5枚は10×4⁵ ＝ 10,240で、これも一致しました。</p>
+<p>英語の記事（Deuces Cracked、2026年11月13日に確認）は、フロップについて、レインボー39.76%・ツートーン55.06%・モノトーン5.18%・ペア17.18%と書いていて、この記事と同じ値です。ただし、その記事にはターンとリバーの数字がありません。この記事で足したのは、ターン・リバーの出方と、フロップの形ごとの変化です。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Deuces Cracked「Flop Texture Probabilities: Exact Hold'em Data」<a href="https://www.deucescracked.com/blog/flop-texture-probabilities-exact-holdem-data">https://www.deucescracked.com/blog/flop-texture-probabilities-exact-holdem-data</a> （英語・フロップ22,100通りの全数え上げ。ターン・リバーは無し。2026年11月13日に確認）</li>
+<li>ルフトツールズ「ポーカー無料｜テキサスホールデム」<a href="https://www.luft.co.jp/cgi/poker-texas.php">https://www.luft.co.jp/cgi/poker-texas.php</a> （ボードの危険度を分析する機能の案内。フロップの形の出現率の表は無し。2026年11月13日に確認）</li>
+</ul>
+<p>日本語で、レインボー・ツートーンの出現率を表にした記事は、検索した範囲では見つかりませんでした（網羅的な調査ではありません）。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>フロップは、レインボー39.8%・ツートーン55.1%・モノトーン5.2%、ペアボード17.2%です。</li>
+<li>ボードのペアは、リバーまでに49.3%。同じマーク3枚以上は37.1%です。</li>
+<li>「ばらけたボード」は、フロップの60%から、リバーの2%に減ります。</li>
+</ul>
+<p>次の1アクションは、プレイした直近のボードを思い出して、どの形に当てはまっていたかを、この表で確かめることです。続きは次の2本です。</p>
+<ul>
+<li><a href="/flop-hit/">フロップのヒット確率とセットマイニング</a></li>
+<li><a href="/outs/">アウツ計算（4と2の法則）</a></li>
+</ul>
+<p>これは確率の仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</p>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>フロップがレインボーになる確率は？</h3>
+<p>39.76%です。全22,100通りのうち、3枚とも別のマークになるのは4×13³＝8,788通りで、約2.5回に1回です。ツートーンが55.06%、モノトーンが5.18%です。</p>
+<h3>ペアボードになる確率は？</h3>
+<p>フロップで17.18%、ターンまでで32.39%、リバーまでで49.29%です。リバーまで見ると、ほぼ2回に1回はボードにペアが出ます。</p>
+<h3>ボードにフラッシュが組める確率は？</h3>
+<p>同じマークが3枚以上になる割合は、フロップ5.18%、ターン17.54%、リバー37.11%です。ボードにフラッシュ（同じマーク5枚）が出るのは0.20%です。</p>
+<h3>ツートーンのフロップから、ターンでフラッシュが組める形になる確率は？</h3>
+<p>ターンで同じマークが3枚以上になるのは22.45%、リバーまでで45.83%です。レインボーのフロップからは、リバーまでで16.84%です。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
