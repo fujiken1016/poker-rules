@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ポーカーの引き分け（チョップ）の確率｜ヘッズアップで4.1%、9人で9.7%</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/chop/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="description" content="ホールデムで最強の手を分け合う（チョップ）確率を、プレーヤー2〜9人で5,000万回ずつ配って数えた。ヘッズアップで約25回に1回、9人だと約10回に1回。同点になる役の内訳と手札別の引き分け率も。">
+<meta property="og:title" content="ポーカーの引き分け（チョップ）の確率｜ヘッズアップで4.1%、9人で9.7%">
+<meta property="og:description" content="ホールデムで最強の手を分け合う（チョップ）確率を、プレーヤー2〜9人で5,000万回ずつ配って数えた。ヘッズアップで約25回に1回、9人だと約10回に1回。同点になる役の内訳と手札別の引き分け率も。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/chop/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ポーカーの引き分け（チョップ）の確率｜ヘッズアップで4.1%、9人で9.7%","description":"ホールデムで最強の手を分け合う（チョップ）確率を、プレーヤー2〜9人で5,000万回ずつ配って数えた。ヘッズアップで約25回に1回、9人だと約10回に1回。同点になる役の内訳と手札別の引き分け率も。","mainEntityOfPage":"https://rule.shoubu-lab.com/chop/","inLanguage":"ja","datePublished":"2026-11-14T16:00:00+09:00","dateModified":"2026-11-14T16:00:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ホールデムで引き分け（チョップ）になる確率は？","acceptedAnswer":{"@type":"Answer","text":"ランダムな手札の2人が最後まで残る場合、最強の手を分け合うのは4.07%（約25回に1回）です。プレーヤーが5人なら6.32%、9人なら9.75%です。"}},{"@type":"Question","name":"AAを持っているとき、引き分けになる確率は？","acceptedAnswer":{"@type":"Answer","text":"ランダムな1人の相手に対して、AAの引き分けは0.54%です（勝つのは85.0%）。弱いハンドほど引き分けが多く、32オフスートは6.14%です。"}},{"@type":"Question","name":"ボードだけで引き分けになるのは、どのくらいの割合ですか？","acceptedAnswer":{"@type":"Answer","text":"ヘッズアップの分け合いのうち37%は、ボードの5枚が最強の5枚で、どちらの手札も勝敗に関係しませんでした。9人では1.4%に下がります。"}},{"@type":"Question","name":"人数が増えると引き分けは増えますか？","acceptedAnswer":{"@type":"Answer","text":"増えます。4.07%（2人）から9.75%（9人）まで、人数に応じて上がります。ただし、全員がランダムな手札で、最後まで残る場合の数字です。"}}]}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月14日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ホールデムの引き分け（チョップ）はどれくらい起きる？人数別の確率と、同点になる役</h1>
+<div class="key"><p class="lead">全員がランダムな手札でボード5枚まで見ると、ヘッズアップ（2人）では4.07%（約25回に1回）、9人では9.75%（約10回に1回）で、最強の手を2人以上が分け合います。ヘッズアップの分け合いの37%は、ボードの5枚だけで勝負が決まる（どちらの手札も関係ない）場面でした。</p></div>
+<p>この記事では、ホールデムで「引き分け（チョップ）」がどのくらいの頻度で起きるかを、プレーヤーの人数別に数えました。数字は、僕が作った判定プログラムでランダムに配った実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>同じ役のときの勝敗の決め方は<a href="/kicker/">キッカーの解説</a>に、手札どうしの対決別の引き分け率は<a href="/preflop-equity/">プリフロップの勝率の一覧</a>にあります。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-n">人数別のチョップ確率</a></li>
+<li><a href="#h-what">どんな役で同点になるのか</a></li>
+<li><a href="#h-hand">手札別の引き分け率</a></li>
+<li><a href="#h-limit">この数字の使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li>ヘッズアップ（2人）で、最強の手が同点になる確率は4.07%、約25回に1回です。</li>
+<li>人数が増えるほど増えて、5人で6.32%、9人で9.75%（約10回に1回）になります。</li>
+<li>ヘッズアップの分け合いのうち、37%は「ボードの5枚が最強の5枚」でした。このとき、手札は勝敗に関係しません。</li>
+<li>同点の役は、2人ならワンペア（34%）とツーペア（30%）が中心です。9人になるとストレートが50%を占めます。</li>
+<li>手札別では、AAがランダムな相手と引き分ける確率は0.54%、32オフスートは6.14%です。弱いハンドほど、引き分けが多くなります。</li>
+</ul>
+<p>※全員の手札がランダム・全員が最後まで残る前提の実測値です。人数は、自分を含むプレーヤーの数です。</p>
+
+<h2 id="h-n">人数別のチョップ確率</h2>
+<p>ここでいう分け合い（チョップ）は、ボード5枚まで開いたとき、最も強い役が2人以上で完全に同じになり、ポットを分けることです。最強でない2人が同じ役になっても、数えていません。</p>
+<div class="tw st"><table><caption>テーブルの人数別：最強の手が分け合いになる確率（全員がランダムな手札で、最後まで残る場合）</caption><tr><th scope="col">プレーヤー数</th><th scope="col">分け合いの確率（％）</th><th scope="col">何回に1回</th><th scope="col">うち3人以上で分ける割合（％）</th><th scope="col">うちボードだけで分ける割合（％）</th></tr><tr><th scope="row">2人（相手1人）</th><td class="num">4.07</td><td class="num">24.6</td><td class="num">0.0</td><td class="num">36.8</td></tr><tr><th scope="row">3人（相手2人）</th><td class="num">4.61</td><td class="num">21.7</td><td class="num">18.8</td><td class="num">16.8</td></tr><tr><th scope="row">4人（相手3人）</th><td class="num">5.43</td><td class="num">18.4</td><td class="num">13.0</td><td class="num">9.2</td></tr><tr><th scope="row">5人（相手4人）</th><td class="num">6.32</td><td class="num">15.8</td><td class="num">11.3</td><td class="num">5.6</td></tr><tr><th scope="row">6人（相手5人）</th><td class="num">7.21</td><td class="num">13.9</td><td class="num">11.4</td><td class="num">3.7</td></tr><tr><th scope="row">7人（相手6人）</th><td class="num">8.09</td><td class="num">12.4</td><td class="num">12.4</td><td class="num">2.6</td></tr><tr><th scope="row">8人（相手7人）</th><td class="num">8.94</td><td class="num">11.2</td><td class="num">13.9</td><td class="num">1.9</td></tr><tr><th scope="row">9人（相手8人）</th><td class="num">9.75</td><td class="num">10.3</td><td class="num">15.8</td><td class="num">1.4</td></tr></table></div>
+<p>※各プレーヤー数について50,000,000回ずつ配った実測値（標準誤差は0.01ポイント以下）。</p>
+<figure><div class="bg"><p class="bn">プレーヤー2人</p><div class="br"><span class="bl">分け合い</span><span class="bt"><i style="width:4.07%"></i></span><span class="bv">4.07%</span></div></div><div class="bg"><p class="bn">プレーヤー3人</p><div class="br"><span class="bl">分け合い</span><span class="bt"><i style="width:4.61%"></i></span><span class="bv">4.61%</span></div></div><div class="bg"><p class="bn">プレーヤー4人</p><div class="br"><span class="bl">分け合い</span><span class="bt"><i style="width:5.43%"></i></span><span class="bv">5.43%</span></div></div><div class="bg"><p class="bn">プレーヤー5人</p><div class="br"><span class="bl">分け合い</span><span class="bt"><i style="width:6.32%"></i></span><span class="bv">6.32%</span></div></div><div class="bg"><p class="bn">プレーヤー6人</p><div class="br"><span class="bl">分け合い</span><span class="bt"><i style="width:7.21%"></i></span><span class="bv">7.21%</span></div></div><div class="bg"><p class="bn">プレーヤー7人</p><div class="br"><span class="bl">分け合い</span><span class="bt"><i style="width:8.09%"></i></span><span class="bv">8.09%</span></div></div><div class="bg"><p class="bn">プレーヤー8人</p><div class="br"><span class="bl">分け合い</span><span class="bt"><i style="width:8.94%"></i></span><span class="bv">8.94%</span></div></div><div class="bg"><p class="bn">プレーヤー9人</p><div class="br"><span class="bl">分け合い</span><span class="bt"><i style="width:9.75%"></i></span><span class="bv">9.75%</span></div></div><figcaption>※ボード5枚まで見て、最強の手を2人以上で分け合う確率（％）。バーは0〜100%。</figcaption></figure>
+<p>2人のときは4.07%、3人で4.61%、5人で6.32%、9人で9.75%です。人数が1人増えるごとに、おおよそ0.5〜0.9ポイントずつ増えます。9人では、分け合いの16%が3人以上で分ける形でした。</p>
+<p>もうひとつの見方です。ボードだけで勝負が決まる割合は、2人で37%ですが、9人では1.4%まで減ります。人数が多いと、ボードより強い手がだれかに入りやすくなるからです。</p>
+
+<h2 id="h-what">どんな役で同点になるのか</h2>
+<p>分け合いになった回だけを取り出して、同点だった役（最強の手の種類）を数えました。</p>
+<div class="tw st"><table><caption>分け合いになったとき、同点だった役の内訳（％）</caption><tr><th scope="col">同点だった役</th><th scope="col">2人</th><th scope="col">3人</th><th scope="col">5人</th><th scope="col">9人</th></tr><tr><th scope="row">ハイカード</th><td class="num">10.3</td><td class="num">4.0</td><td class="num">0.4</td><td class="num">0.0</td></tr><tr><th scope="row">ワンペア</th><td class="num">34.3</td><td class="num">26.2</td><td class="num">14.6</td><td class="num">6.5</td></tr><tr><th scope="row">ツーペア</th><td class="num">30.1</td><td class="num">35.4</td><td class="num">34.1</td><td class="num">20.1</td></tr><tr><th scope="row">スリーカード</th><td class="num">4.1</td><td class="num">4.3</td><td class="num">5.6</td><td class="num">9.4</td></tr><tr><th scope="row">ストレート</th><td class="num">13.8</td><td class="num">21.8</td><td class="num">35.1</td><td class="num">50.2</td></tr><tr><th scope="row">フラッシュ</th><td class="num">2.6</td><td class="num">1.6</td><td class="num">0.6</td><td class="num">0.1</td></tr><tr><th scope="row">フルハウス</th><td class="num">4.6</td><td class="num">6.4</td><td class="num">9.5</td><td class="num">13.7</td></tr><tr><th scope="row">フォーカード</th><td class="num">0.2</td><td class="num">0.2</td><td class="num">0.1</td><td class="num">0.1</td></tr><tr><th scope="row">ストレートフラッシュ</th><td class="num">0.0</td><td class="num">0.0</td><td class="num">0.0</td><td class="num">0.0</td></tr></table></div>
+<p>※同点になった回のうち、その役だった割合（％）。列ごとに足すと100%です。</p>
+<figure><div class="bg"><p class="bn">ワンペア</p><div class="br"><span class="bl">同点</span><span class="bt"><i style="width:34.27%"></i></span><span class="bv">34.3%</span></div></div><div class="bg"><p class="bn">ツーペア</p><div class="br"><span class="bl">同点</span><span class="bt"><i style="width:30.09%"></i></span><span class="bv">30.1%</span></div></div><div class="bg"><p class="bn">ストレート</p><div class="br"><span class="bl">同点</span><span class="bt"><i style="width:13.84%"></i></span><span class="bv">13.8%</span></div></div><div class="bg"><p class="bn">ハイカード</p><div class="br"><span class="bl">同点</span><span class="bt"><i style="width:10.34%"></i></span><span class="bv">10.3%</span></div></div><div class="bg"><p class="bn">フルハウス</p><div class="br"><span class="bl">同点</span><span class="bt"><i style="width:4.59%"></i></span><span class="bv">4.6%</span></div></div><figcaption>※相手1人のとき、分け合いになった回の内訳（％）。上位5つ。</figcaption></figure>
+<ul>
+<li><strong>2人のときは、ワンペアとツーペアの同点が64%を占めます。</strong>ボードにペアなどが出て、手札が役に絡まず、残りの札（キッカー）まで同じになる形です。</li>
+<li><strong>人数が増えると、ストレートの同点が主役になります。</strong>2人で13.8%、5人で35.1%、9人で50.2%です。ボードに5枚並ぶストレートが出ると、全員が同じ役になるためです。</li>
+<li><strong>ハイカードの同点は、人数が増えると消えていきます。</strong>2人で10.3%、9人では0.00%です。人数が多いと、だれかがペア以上の役を作りやすくなるからです。</li>
+<li>フォーカード・ストレートフラッシュの同点は、2人でもそれぞれ0.18%・0.03%で、まれです。</li>
+</ul>
+
+<h2 id="h-hand">手札別の引き分け率</h2>
+<p>自分の手札を固定して、ランダムな1人の相手と最後まで勝負したときの、勝つ・引き分け・負けの割合です。</p>
+<div class="tw st"><table><caption>手札別の「勝つ・引き分け・負ける」：ランダムな1人の相手に対して（％）</caption><tr><th scope="col">手札</th><th scope="col">勝つ</th><th scope="col">引き分け</th><th scope="col">負ける</th></tr><tr><th scope="row">AA</th><td class="num">85.0</td><td class="num">0.54</td><td class="num">14.5</td></tr><tr><th scope="row">KK</th><td class="num">82.1</td><td class="num">0.56</td><td class="num">17.3</td></tr><tr><th scope="row">QQ</th><td class="num">79.6</td><td class="num">0.59</td><td class="num">19.8</td></tr><tr><th scope="row">77</th><td class="num">65.7</td><td class="num">1.02</td><td class="num">33.3</td></tr><tr><th scope="row">22</th><td class="num">49.4</td><td class="num">1.90</td><td class="num">48.8</td></tr><tr><th scope="row">AKs</th><td class="num">66.2</td><td class="num">1.65</td><td class="num">32.1</td></tr><tr><th scope="row">AKo</th><td class="num">64.5</td><td class="num">1.70</td><td class="num">33.8</td></tr><tr><th scope="row">JTs</th><td class="num">56.2</td><td class="num">2.74</td><td class="num">41.1</td></tr><tr><th scope="row">87s</th><td class="num">45.7</td><td class="num">4.52</td><td class="num">49.8</td></tr><tr><th scope="row">A2s</th><td class="num">55.5</td><td class="num">3.74</td><td class="num">40.7</td></tr><tr><th scope="row">72o</th><td class="num">31.7</td><td class="num">5.75</td><td class="num">62.5</td></tr><tr><th scope="row">32o</th><td class="num">29.3</td><td class="num">6.14</td><td class="num">64.6</td></tr></table></div>
+<figure><div class="bg"><p class="bn">AA</p><div class="br"><span class="bl">引き分け</span><span class="bt"><i style="width:0.54%"></i></span><span class="bv">0.54%</span></div></div><div class="bg"><p class="bn">KK</p><div class="br"><span class="bl">引き分け</span><span class="bt"><i style="width:0.56%"></i></span><span class="bv">0.56%</span></div></div><div class="bg"><p class="bn">77</p><div class="br"><span class="bl">引き分け</span><span class="bt"><i style="width:1.02%"></i></span><span class="bv">1.02%</span></div></div><div class="bg"><p class="bn">AKs</p><div class="br"><span class="bl">引き分け</span><span class="bt"><i style="width:1.65%"></i></span><span class="bv">1.65%</span></div></div><div class="bg"><p class="bn">JTs</p><div class="br"><span class="bl">引き分け</span><span class="bt"><i style="width:2.74%"></i></span><span class="bv">2.74%</span></div></div><div class="bg"><p class="bn">87s</p><div class="br"><span class="bl">引き分け</span><span class="bt"><i style="width:4.52%"></i></span><span class="bv">4.52%</span></div></div><div class="bg"><p class="bn">72o</p><div class="br"><span class="bl">引き分け</span><span class="bt"><i style="width:5.75%"></i></span><span class="bv">5.75%</span></div></div><div class="bg"><p class="bn">32o</p><div class="br"><span class="bl">引き分け</span><span class="bt"><i style="width:6.14%"></i></span><span class="bv">6.14%</span></div></div><figcaption>※ランダムな1人の相手に対する引き分けの割合（％）。バーは0〜100%。</figcaption></figure>
+<p>※169ハンドそれぞれを300万回ずつ配った実測値（<a="/hands/">スターティングハンド169通りの勝率表</a>と同じデータ）。</p>
+<ul>
+<li><strong>配られる確率で重みづけした169ハンドの平均は4.07%です。</strong>先ほどの「ヘッズアップの分け合い 4.07%」と、別々の方法で数えた値が一致しています。</li>
+<li><strong>引き分け率は、ペアの平均が1.03%、スーテッドが4.10%、オフスートが4.31%です。</strong>ペアは引き分けが少なく、スーテッドとオフスートはほぼ同じ水準です。</li>
+<li><strong>引き分けが少ない5ハンドは、AA・KK・QQ・JJ・TT。</strong>いずれも、0.54〜0.71%です。</li>
+<li><strong>引き分けが多い5ハンドは、53o・52o・54o・42o・43o。</strong>6.17〜6.20%で、AAの0.54%の約11倍です。</li>
+</ul>
+
+<h2 id="h-limit">この数字の使いどころと限界</h2>
+<ul>
+<li><strong>相手の手札はランダムで、全員が最後まで残る前提です。</strong>実戦では途中で降りる人がいるので、分け合いの頻度は変わります。</li>
+<li><strong>ボードに5枚目が出るまで見た場合の数字です。</strong>途中で全員が降りたときや、オールインの前に決着したときは含まれません。</li>
+<li><strong>端数のチップの分け方などは、場のルールで違います。</strong>この記事では扱っていません。</li>
+<li><strong>これは強さの仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</strong>実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>人数ごとに、全員にランダムな2枚ずつとボード5枚を配り、7枚から最強の5枚を選ぶ判定プログラム（C言語）で、全員の役を比べました。最強の役が2人以上で完全に同じ（同じ種類で、数字の順も全部同じ）なら、分け合いと数えます。これを2〜9人の各人数で50,000,000回ずつ行いました（乱数は固定シード）。「ボードだけで決まる」は、同点の役が、ボード5枚だけで作った役と同じだった回です。</p>
+<p>確かめたこと。①手札別の表（別のプログラムで169ハンドを300万回ずつ数えたもの）を、配られる確率で重みづけして平均すると4.066%で、ヘッズアップの4.068%と0.01ポイント以内で一致。②2人の分け合いで、同点の役の合計が分け合いの回数と一致（2,034,245回）。③判定プログラムは、7枚の全13,378万通りで役の件数が既知の値と一致すると確認済みのもの（<a href="/yaku/">役の確率の記事</a>と同じ）。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>PokerNews「Tied Poker Hands」<a href="https://www.pokernews.com/poker-hands/tied-poker-hands.htm">https://www.pokernews.com/poker-hands/tied-poker-hands.htm</a> （英語・同点になる条件の説明。頻度の数字は無し。2026年11月14日に確認）</li>
+<li>ルフトツールズ「ポーカー無料｜テキサスホールデム」<a href="https://www.luft.co.jp/cgi/poker-texas.php">https://www.luft.co.jp/cgi/poker-texas.php</a> （勝率計算で引き分け率が出ることの案内。確率の数値は無し。2026年11月14日に確認）</li>
+<li>Omni Calculator「Poker Odds Calculator」<a href="https://www.omnicalculator.com/all/poker-odds">https://www.omnicalculator.com/all/poker-odds</a> （同じ役の比べ方のみ。頻度の数字は無し。2026年11月14日に確認）</li>
+</ul>
+<p>取得できなかった資料：gameshub.com の日本語記事（HTTP 403）。検索した範囲では、ランダムな手札どうしの分け合いの平均や人数別の頻度を日本語・英語とも数字で示したページは見つかりませんでした（網羅的な調査ではありません）。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>ヘッズアップのチョップは4.07%、約25回に1回。9人では9.75%です。</li>
+<li>2人の分け合いの約37%は、ボードだけで決まります。人数が増えるとストレートの同点が主役になります。</li>
+<li>弱いハンドほど引き分けが多く、AAは0.54%、32オフスートは6.14%です。</li>
+</ul>
+<p>次の1アクションは、ボード5枚が並んだとき、まず「ボードだけで作れる役」を見て、自分の手札がそれを上回るかを確かめることです。続きは次の2本です。</p>
+<ul>
+<li><a href="/kicker/">キッカーの解説と、AK対AQの全数え</a></li>
+<li><a href="/board-texture/">ボードの出方（レインボー・ペア・フラッシュ可能）</a></li>
+</ul>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>ホールデムで引き分け（チョップ）になる確率は？</h3>
+<p>ランダムな手札の2人が最後まで残る場合、最強の手を分け合うのは4.07%（約25回に1回）です。プレーヤーが5人なら6.32%、9人なら9.75%です。</p>
+<h3>AAを持っているとき、引き分けになる確率は？</h3>
+<p>ランダムな1人の相手に対して、AAの引き分けは0.54%です（勝つのは85.0%）。弱いハンドほど引き分けが多く、32オフスートは6.14%です。</p>
+<h3>ボードだけで引き分けになるのは、どのくらいの割合ですか？</h3>
+<p>ヘッズアップの分け合いのうち37%は、ボードの5枚が最強の5枚で、どちらの手札も勝敗に関係しませんでした。9人では1.4%に下がります。</p>
+<h3>人数が増えると引き分けは増えますか？</h3>
+<p>増えます。4.07%（2人）から9.75%（9人）まで、人数に応じて上がります。ただし、全員がランダムな手札で、最後まで残る場合の数字です。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>

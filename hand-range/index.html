@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ホールデムのスターティングハンド上位10%・20%・30%はどれ？1,326通りの累積表</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/hand-range/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="description" content="ホールデムの「上位10%のハンド」は20種類・130通り（AA〜66、AKs〜KJs、AKo〜AToなど）。169種類を強さ順に並べて、上位5%から50%までの区切りと組み合わせ数を一覧にした。">
+<meta property="og:title" content="ホールデムのスターティングハンド上位10%・20%・30%はどれ？1,326通りの累積表">
+<meta property="og:description" content="ホールデムの「上位10%のハンド」は20種類・130通り（AA〜66、AKs〜KJs、AKo〜AToなど）。169種類を強さ順に並べて、上位5%から50%までの区切りと組み合わせ数を一覧にした。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/hand-range/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ホールデムのスターティングハンド上位10%・20%・30%はどれ？1,326通りの累積表","description":"ホールデムの「上位10%のハンド」は20種類・130通り（AA〜66、AKs〜KJs、AKo〜AToなど）。169種類を強さ順に並べて、上位5%から50%までの区切りと組み合わせ数を一覧にした。","mainEntityOfPage":"https://rule.shoubu-lab.com/hand-range/","inLanguage":"ja","datePublished":"2026-11-14T16:00:00+09:00","dateModified":"2026-11-14T16:00:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"スターティングハンドの上位10%は、どのハンドですか？","acceptedAnswer":{"@type":"Answer","text":"ランダムな1人の相手へのエクイティ順で、20種類です。AA、KK、QQ、JJ、TT、99、88、AKs、AQs、77、AJs、AKo、ATs、AQo、AJo、KQs、66、A9s、ATo、KJs。組み合わせの数では、130通り（9.8%）です。区切りの途中で割れるハンドは入れていません。"}},{"@type":"Question","name":"上位20%は何通り、何種類ですか？","acceptedAnswer":{"@type":"Answer","text":"39種類・264通り（19.9%）です。配られる2枚は全部で1,326通りで、上位20%は約265通りに当たります。"}},{"@type":"Question","name":"ランダムな相手より有利なハンドは、いくつありますか？","acceptedAnswer":{"@type":"Answer","text":"エクイティが50%を超えるのは169種類のうち90種類、組み合わせでは658通り（49.6%）です。最小はJ5s（50.0%）です。"}},{"@type":"Question","name":"この順位は、実戦で入るハンドの目安になりますか？","acceptedAnswer":{"@type":"Answer","text":"そのままは使えません。ランダムな1人の相手に最後まで残ったときの強さだけで決めた順位で、ポジション・人数・スタック・相手の動きは入っていません。"}}]}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月14日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ホールデムのスターティングハンド「上位◯%」はどのハンド？全1,326通りの累積表</h1>
+<div class="key"><p class="lead">エクイティ（ランダムな1人の相手への取り分）が高い順に並べると、上位5%は11種類・60通り（AA〜77とAKs・AQs・AJs）です。上位10%は20種類・130通り、上位20%は39種類・264通りです。配られる2枚の組み合わせは全部で1,326通りなので、「上位10%」はおよそ133通りに当たります。</p></div>
+<p>レンジ表の説明で出てくる「上位10%のハンド」「上位20%のレンジ」は、どのハンドのことなのかを、169種類の勝率の表から数えて表にしました。数字は、僕が作った判定プログラムでランダムに配った実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>表記は、AKs＝エースとキングのスーテッド（同じマーク）、AKo＝オフスート（違うマーク）、77＝ペアです。T＝10です。169ハンドそれぞれの勝率は<a href="/hands/">スターティングハンド169通りの勝率表</a>にあります。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-table">上位◯%に入るハンドの一覧</a></li>
+<li><a href="#h-comp">区切りの中身：ペアとスーテッドの割合</a></li>
+<li><a href="#h-find">順位表から読める4つのこと</a></li>
+<li><a href="#h-limit">この表の使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li>上位5%は11種類（60通り）：AA、KK、QQ、JJ、TT、99、88、AKs、AQs、77、AJs。</li>
+<li>上位10%は20種類（130通り）、上位20%は39種類（264通り）、上位30%は55種類（386通り）です。</li>
+<li>ランダムな相手より有利（エクイティが50%超）なのは169種類のうち90種類で、組み合わせでは658通り（49.6%）です。</li>
+<li>上位10%の平均エクイティは68.5%、上位30%でも61.9%。下に行くほど、強さの差は小さくなります。</li>
+</ul>
+<p>※「上位◯%」は、配られる2枚の組み合わせ（1,326通り）の何%に当たるかで数えています。ハンドの種類の数（169種類）の何%ではありません。</p>
+
+<h2 id="h-table">上位◯%に入るハンドの一覧</h2>
+<p>ランダムな1人の相手と最後まで勝負したときのエクイティが高い順に並べました。組み合わせ数（ペア6通り・スーテッド4通り・オフスート12通り）を、上から足していきます。各区切りは、「その割合を超えない範囲で、上から入れられるだけ入れた」ものです。区切りの途中で割れるハンドは入れていません。</p>
+<div class="tw rw"><table><caption>上位◯%に入るスターティングハンド（種類・通り・割合・平均エクイティは、その区切りまでの累計）</caption><tr><th scope="col">区切り</th><th scope="col">加わるハンド（強い順）</th><th scope="col">種類</th><th scope="col">通り</th><th scope="col">割合（％）</th><th scope="col">平均（％）</th></tr><tr><th scope="row">上位5%</th><td>AA、KK、QQ、JJ、TT、99、88、AKs、AQs、77、AJs</td><td class="num">11</td><td class="num">60</td><td class="num">4.5</td><td class="num">74.0</td></tr><tr><th scope="row">上位10%</th><td>AKo、ATs、AQo、AJo、KQs、66、A9s、ATo、KJs</td><td class="num">20</td><td class="num">130</td><td class="num">9.8</td><td class="num">68.5</td></tr><tr><th scope="row">上位15%</th><td>A8s、KTs、KQo、A7s、A9o、KJo、55、QJs、K9s、A5s</td><td class="num">30</td><td class="num">196</td><td class="num">14.8</td><td class="num">65.9</td></tr><tr><th scope="row">上位20%</th><td>A6s、A8o、KTo、QTs、A4s、A7o、K8s、QJo、A3s</td><td class="num">39</td><td class="num">264</td><td class="num">19.9</td><td class="num">64.2</td></tr><tr><th scope="row">上位25%</th><td>K9o、A6o、Q9s、A5o、JTs、K7s、A2s、QTo</td><td class="num">47</td><td class="num">328</td><td class="num">24.7</td><td class="num">62.9</td></tr><tr><th scope="row">上位30%</th><td>44、A4o、K6s、Q8s、K8o、A3o、K5s、J9s</td><td class="num">55</td><td class="num">386</td><td class="num">29.1</td><td class="num">61.9</td></tr><tr><th scope="row">上位40%</th><td>Q9o、JTo、K7o、A2o、K4s、Q7s、K6o、T9s、K3s、J8s、33、Q6s、Q8o、K5o、J9o、K2s、Q5s、T8s、J7s</td><td class="num">74</td><td class="num">528</td><td class="num">39.8</td><td class="num">59.8</td></tr><tr><th scope="row">上位50%</th><td>K4o、Q4s、Q7o、T9o、J8o、K3o、Q6o、Q3s、98s、T7s、J6s、K2o、22、Q2s、Q5o、J5s</td><td class="num">90</td><td class="num">658</td><td class="num">49.6</td><td class="num">58.1</td></tr></table></div>
+<p>※169ハンドそれぞれ300万回ずつ配った実測値の順位。「実際の割合」は組み合わせ数÷1,326。「平均エクイティ」は組み合わせ数で重みづけした値。</p>
+<figure><div class="bg"><p class="bn">上位5%</p><div class="br"><span class="bl">平均</span><span class="bt"><i style="width:73.99%"></i></span><span class="bv">74.0%</span></div></div><div class="bg"><p class="bn">上位10%</p><div class="br"><span class="bl">平均</span><span class="bt"><i style="width:68.50%"></i></span><span class="bv">68.5%</span></div></div><div class="bg"><p class="bn">上位15%</p><div class="br"><span class="bl">平均</span><span class="bt"><i style="width:65.93%"></i></span><span class="bv">65.9%</span></div></div><div class="bg"><p class="bn">上位20%</p><div class="br"><span class="bl">平均</span><span class="bt"><i style="width:64.17%"></i></span><span class="bv">64.2%</span></div></div><div class="bg"><p class="bn">上位25%</p><div class="br"><span class="bl">平均</span><span class="bt"><i style="width:62.89%"></i></span><span class="bv">62.9%</span></div></div><div class="bg"><p class="bn">上位30%</p><div class="br"><span class="bl">平均</span><span class="bt"><i style="width:61.89%"></i></span><span class="bv">61.9%</span></div></div><div class="bg"><p class="bn">上位40%</p><div class="br"><span class="bl">平均</span><span class="bt"><i style="width:59.80%"></i></span><span class="bv">59.8%</span></div></div><div class="bg"><p class="bn">上位50%</p><div class="br"><span class="bl">平均</span><span class="bt"><i style="width:58.08%"></i></span><span class="bv">58.1%</span></div></div><figcaption>※各区切りに入るハンドの平均エクイティ（ランダムな1人の相手に対して・％。配られる確率で重みづけ）。バーは0〜100%。</figcaption></figure>
+<p>たとえば上位10%は、次の20種類です。AA、KK、QQ、JJ、TT、99、88、AKs、AQs、77、AJs、AKo、ATs、AQo、AJo、KQs、66、A9s、ATo、KJs。種類で数えると20÷169＝12%、組み合わせで数えると130÷1,326＝9.8%です。ペアは1種類で6通り、スーテッドは4通りと、種類あたりの通り数が違うため、2つの割合は一致しません。</p>
+
+<h2 id="h-comp">区切りの中身：ペアとスーテッドの割合</h2>
+<div class="tw st"><table><caption>各区切りの中身：ペア・スーテッド・オフスートの種類数と、組み合わせ数での割合</caption><tr><th scope="col">区切り</th><th scope="col">ペア（種類）</th><th scope="col">スーテッド（種類）</th><th scope="col">オフスート（種類）</th><th scope="col">ペアの割合（％）</th><th scope="col">スーテッドの割合（％）</th></tr><tr><th scope="row">上位5%</th><td class="num">8</td><td class="num">3</td><td class="num">0</td><td class="num">80</td><td class="num">20</td></tr><tr><th scope="row">上位10%</th><td class="num">9</td><td class="num">7</td><td class="num">4</td><td class="num">42</td><td class="num">22</td></tr><tr><th scope="row">上位15%</th><td class="num">10</td><td class="num">13</td><td class="num">7</td><td class="num">31</td><td class="num">27</td></tr><tr><th scope="row">上位20%</th><td class="num">10</td><td class="num">18</td><td class="num">11</td><td class="num">23</td><td class="num">27</td></tr><tr><th scope="row">上位25%</th><td class="num">10</td><td class="num">22</td><td class="num">15</td><td class="num">18</td><td class="num">27</td></tr><tr><th scope="row">上位30%</th><td class="num">11</td><td class="num">26</td><td class="num">18</td><td class="num">17</td><td class="num">27</td></tr><tr><th scope="row">上位40%</th><td class="num">12</td><td class="num">36</td><td class="num">26</td><td class="num">14</td><td class="num">27</td></tr><tr><th scope="row">上位50%</th><td class="num">13</td><td class="num">43</td><td class="num">34</td><td class="num">12</td><td class="num">26</td></tr></table></div>
+<p>※種類は区切りに入るハンドの数、割合は組み合わせ数で見た構成比。</p>
+<p>上位5%では、組み合わせの80%がペアです。区切りが広がるほど、ペアの割合は下がり、オフスートが増えます。全体では、ペアは5.9%、スーテッドは23.5%、オフスートは70.6%です。</p>
+
+<h2 id="h-find">順位表から読める4つのこと</h2>
+<figure><div class="bg"><p class="bn">AA</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:0.45%"></i></span><span class="bv">0.5%</span></div></div><div class="bg"><p class="bn">JJ</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:1.81%"></i></span><span class="bv">1.8%</span></div></div><div class="bg"><p class="bn">99</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:2.71%"></i></span><span class="bv">2.7%</span></div></div><div class="bg"><p class="bn">77</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:4.22%"></i></span><span class="bv">4.2%</span></div></div><div class="bg"><p class="bn">55</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:13.88%"></i></span><span class="bv">13.9%</span></div></div><div class="bg"><p class="bn">33</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:35.60%"></i></span><span class="bv">35.6%</span></div></div><div class="bg"><p class="bn">22</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:48.11%"></i></span><span class="bv">48.1%</span></div></div><figcaption>※ペアが何%の位置までに入るか（上位◯%の◯・組み合わせ数で数えた累積％）。バーは0〜100%。</figcaption></figure>
+<ul>
+<li><strong>小さいペアは、思ったより下です。</strong>55は27位（上位13.9%）、22は87位（上位48.1%）。エースのオフスートで、A9oが25位、A8oが32位で、55と近い位置にいます。</li>
+<li><strong>スーテッドのエースは、オフスートの強いハンドと並びます。</strong>A5sは30位（エクイティ59.9%）で、KTo（33位・59.8%）より上です。</li>
+<li><strong>つながったスーテッドは、ランダムな相手への強さでは中位以下です。</strong>JTsは44位（上位23.2%）、87sは100位（上位55.7%）です。この表は「ランダムな相手に最後まで残ったときの強さ」だけで、実戦で使われるかどうかとは別です。</li>
+<li><strong>50%超のハンドは90種類で、最後はJ5s（90位）。</strong>これより下の79種類は、エクイティが50%に届きません。なお、J5sは50.01%で、実測の誤差（約0.03ポイント）を考えると50%ちょうどに近い値です。</li>
+</ul>
+<figure><div class="bg"><p class="bn">AKo</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:5.43%"></i></span><span class="bv">5.4%</span></div></div><div class="bg"><p class="bn">KQs</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:7.84%"></i></span><span class="bv">7.8%</span></div></div><div class="bg"><p class="bn">A9o</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:12.52%"></i></span><span class="bv">12.5%</span></div></div><div class="bg"><p class="bn">A5s</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:14.78%"></i></span><span class="bv">14.8%</span></div></div><div class="bg"><p class="bn">JTs</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:23.23%"></i></span><span class="bv">23.2%</span></div></div><div class="bg"><p class="bn">87s</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:55.66%"></i></span><span class="bv">55.7%</span></div></div><div class="bg"><p class="bn">72o</p><div class="br"><span class="bl">累積</span><span class="bt"><i style="width:96.38%"></i></span><span class="bv">96.4%</span></div></div><figcaption>※ペア以外の例が何%の位置までに入るか（上位◯%の◯・累積％）。バーは0〜100%。</figcaption></figure>
+
+<h2 id="h-limit">この表の使いどころと限界</h2>
+<ul>
+<li><strong>これは、プレーするハンドの選び方そのものではありません。</strong>順位は「ランダムな1人の相手に対するエクイティ」だけで決めました。ポジション・人数・スタック・相手の動きは入っていません。</li>
+<li><strong>隣どうしの順位は、入れ替わることがあります。</strong>実測の誤差は約0.03ポイントなので、エクイティの差が0.06ポイント未満の隣り合うハンドは、順位が逆になる可能性があります（該当は37組）。区切りの境目に近いハンドは、数字を確認してください。</li>
+<li><strong>相手の人数が増えると、順位は変わります。</strong>この表は1対1です。人数別の値は<a href="/multiway/">人数別の勝率の一覧</a>にあります。</li>
+<li><strong>これは強さの仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</strong>実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>169ハンドそれぞれを手札に固定し、残りの山から、相手の手札2枚とボード5枚をランダムに配って、勝ち・引き分け・負けを数えました。1ハンドあたり300万回で、乱数は固定してあります。エクイティは「勝つ割合＋引き分けの割合の半分」です。このエクイティの高い順に並べ、組み合わせ数（ペア6・スーテッド4・オフスート12）を累積して、全部で1,326通りになることを確かめました。</p>
+<p>確かめたこと。①累積が最後に1,326通りちょうどになる。②エクイティ50%超が90種類・658通り（49.6%）で、<a href="/hands/">169ハンドの表</a>の記述と一致。③上位12位までの並びが、169ハンドの表の上位12ハンドと同じ（AA、KK、QQ、JJ、TT、99、88、AKs、AQs、77、AJs、AKo）。AQsと77は小数第2位まで同じ66.22%で、順位は表の並びに合わせました。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>ルフトツールズ「ポーカー無料｜テキサスホールデム」<a href="https://www.luft.co.jp/cgi/poker-texas.php">https://www.luft.co.jp/cgi/poker-texas.php</a> （レンジのプリセット名と対ランダム勝率の表示。各プリセットが上位何%かの数値は無し。2026年11月14日に確認）</li>
+<li>gaming.net「ポーカーのハンド戦略」<a href="https://www.gaming.net/ja/poker-hands-strategy/">https://www.gaming.net/ja/poker-hands-strategy/</a> （169種類の総数のみ。上位◯%の表は無し。2026年11月14日に確認）</li>
+<li>Gamerch「エッジポーカー」<a href="https://gamerch.com/edge-poker/960374">https://gamerch.com/edge-poker/960374</a> （強いハンドの例示のみ。順位表・割合は無し。2026年11月14日に確認）</li>
+</ul>
+<p>取得できなかった資料：gameshub.com の日本語記事（HTTP 403）。検索した範囲では、スターティングハンドを「上位◯%」の区切りで一覧にしたページは見つかりませんでした（網羅的な調査ではありません）。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>上位5%は11種類、上位10%は20種類、上位20%は39種類です（組み合わせ数で60・130・264通り）。</li>
+<li>ランダムな相手より有利なのは90種類（658通り・49.6%）です。</li>
+<li>この順位は、ランダムな相手に最後まで残ったときの強さの順で、実戦のレンジとは別物です。</li>
+</ul>
+<p>次の1アクションは、レンジ表で「上位◯%」と書いてあるとき、この表の区切りと照らして、そこに入るハンドの数をつかむことです。続きは次の2本です。</p>
+<ul>
+<li><a href="/hands/">スターティングハンド169通りの勝率表</a></li>
+<li><a href="/multiway/">人数別の勝率の一覧</a></li>
+</ul>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>スターティングハンドの上位10%は、どのハンドですか？</h3>
+<p>ランダムな1人の相手へのエクイティ順で、20種類です。AA、KK、QQ、JJ、TT、99、88、AKs、AQs、77、AJs、AKo、ATs、AQo、AJo、KQs、66、A9s、ATo、KJs。組み合わせの数では、130通り（9.8%）です。区切りの途中で割れるハンドは入れていません。</p>
+<h3>上位20%は何通り、何種類ですか？</h3>
+<p>39種類・264通り（19.9%）です。配られる2枚は全部で1,326通りで、上位20%は約265通りに当たります。</p>
+<h3>ランダムな相手より有利なハンドは、いくつありますか？</h3>
+<p>エクイティが50%を超えるのは169種類のうち90種類、組み合わせでは658通り（49.6%）です。最小はJ5s（50.0%）です。</p>
+<h3>この順位は、実戦で入るハンドの目安になりますか？</h3>
+<p>そのままは使えません。ランダムな1人の相手に最後まで残ったときの強さだけで決めた順位で、ポジション・人数・スタック・相手の動きは入っていません。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
