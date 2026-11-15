@@ -1103,7 +1103,7 @@ function initPlay(reset){
   P.btn=Math.floor(Math.random()*P.seats.length);
   elPL.innerHTML='';
   plog(reset?'チップをリセットしました（全員1000点）。':'ようこそ！ ブラインドは10/20、持ち点1000でスタート。');
-  elPM.textContent='「次のハンド」を押して開始！';
+  elPM.textContent='「ハンド開始！」を押してスタート';
   elCB.style.display='none';
   P.phase='idle';
   playRender();renderIdleActions();
@@ -1329,6 +1329,11 @@ function showCoach(){
     if(eq*100>need+20&&eq>0.5)adv='レイズ推奨 — 十分有利。強い手は強く打とう';
     else if(eq*100>=need)adv='コールOK — 割に合う勝負';
     else adv='フォールド推奨 — 割に合わない。降りて次のハンドへ';
+    /* J517: まだ誰もレイズしていないプリフロップで「コールだけ（リンプ）」を勧めない。Upswing・PokerCoaching の初心者向け基本＝最初に入るならレイズか降りる */
+    if(P.board.length===0&&P.currentBet<=BB&&adv.indexOf('コールOK')===0){
+      if(eq>1/(opps+1))adv='レイズ推奨 — 最初に参加するなら、コールだけ（リンプ）より3倍前後のレイズが基本';
+      else adv='フォールド推奨 — レイズして入るほどの手ではない。コールだけで入るのは避けよう';
+    }
   }else{
     const base=1/(opps+1);
     why='勝率およそ'+eqPct+'%（'+(opps+1)+'人勝負の平均は'+Math.round(base*100)+'%）。';
