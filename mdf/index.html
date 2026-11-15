@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MDF（最低防衛頻度）とは？ベット額別の早見表と、ソルバーの降りがずれる板</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/mdf/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="description" content="MDFの式（ポット÷（ポット＋ベット））とベット額別の早見表。通常のポットのBBは、BTNの33%のベットに30.5〜40.9%降り、MDFから出る基準（24.8%）をどの板でも上回った。3ベットポットでは下回る板も。">
+<meta property="og:title" content="MDF（最低防衛頻度）とは？ベット額別の早見表と、ソルバーの降りがずれる板">
+<meta property="og:description" content="MDFの式（ポット÷（ポット＋ベット））とベット額別の早見表。通常のポットのBBは、BTNの33%のベットに30.5〜40.9%降り、MDFから出る基準（24.8%）をどの板でも上回った。3ベットポットでは下回る板も。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/mdf/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"MDF（最低防衛頻度）とは？ベット額別の早見表と、ソルバーの降りがずれる板","description":"MDFの式（ポット÷（ポット＋ベット））とベット額別の早見表。通常のポットのBBは、BTNの33%のベットに30.5〜40.9%降り、MDFから出る基準（24.8%）をどの板でも上回った。3ベットポットでは下回る板も。","mainEntityOfPage":"https://rule.shoubu-lab.com/mdf/","inLanguage":"ja","datePublished":"2026-11-16T15:00:00+09:00","dateModified":"2026-11-16T15:00:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"MDF（最低防衛頻度）の計算式は？","acceptedAnswer":{"@type":"Answer","text":"ポット÷（ポット＋ベット）です。ポットの33%のベットなら75.2%、50%なら66.7%、75%なら57.1%、100%なら50%を守る計算です。降りてよい割合は、その残りです。"}},{"@type":"Question","name":"ハーフポットのベットに対するMDFは？","acceptedAnswer":{"@type":"Answer","text":"ポットの50%のベットなら、MDFは66.7%です（降りてよいのは33.3%）。コールに必要な勝率は25%です。"}},{"@type":"Question","name":"ソルバーは、MDFどおりに守りますか？","acceptedAnswer":{"@type":"Answer","text":"通常のポットのBBは、BTNの33%のベットに30.5〜40.9%降り、7枚全部でMDFの基準（24.8%）を上回りました。3ベットポットのBTNは、33%のベットに基準より少ない降りの板が4枚ありました。"}},{"@type":"Question","name":"チェックレイズは、どれくらいの頻度ですか？","acceptedAnswer":{"@type":"Answer","text":"通常のポットのBBは、33%のベットに10.2〜21.5%（中央値14.3%）、75%のベットに2.6〜15.4%（中央値6.0%）でした。"}},{"@type":"Question","name":"MDFは手札ごとの判断にも使えますか？","acceptedAnswer":{"@type":"Answer","text":"そのままは使えません。MDFはレンジ全体で守る割合の下限で、どの手札で守るかは決めません。また、ブラフが正しい割合で入っているという前提の値です。"}}]}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+article li>a:first-child:last-child{display:inline-block;padding:11px 0}
+.tw.rw th,.tw.rw td{padding-left:8px;padding-right:8px}
+.sub{font-size:14px;font-weight:400;color:var(--sub);white-space:nowrap}
+.tw.rw th[scope=row]{min-width:9em;max-width:14em;white-space:nowrap}
+.tw.rw th[scope=col]{white-space:nowrap}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月16日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>MDF（最低防衛頻度）とは？ベット額別の早見表と、ソルバーが実際に降る量</h1>
+<div class="key"><p class="lead">MDFは「ベットに対して、レンジの何%を守れば相手のブラフが自動的に得をしないか」の下限で、ポット÷（ポット＋ベット）で出ます。33%のベットなら75.2%を守る（降りるのは24.8%まで）計算です。ところが、ソルバーで解いた通常のポットのBBは、BTNの33%のベットに30.5〜40.9%降りていて、7枚のどれでも基準を上回りました。</p></div>
+<p>この記事は、MDFの式と早見表を最初に出し、そのあとソルバーで解いた実際の降りる量を、基準と並べたものです。すべて仮想チップを使った練習用の例で、お金を賭けて勝つための方法ではありません。</p>
+<p>関連する解説は、次の2本です。</p>
+<ul>
+<li><a href="/cbet/">Cベット（ベットする側の頻度）</a></li>
+<li><a href="/3bet-pot-cbet/">3ベットポットのCベット</a></li>
+</ul>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-what">MDFの式と早見表</a></li>
+<li><a href="#h-srp">通常ポットのBBの降り</a></li>
+<li><a href="#h-s75">75%のベットへの降り</a></li>
+<li><a href="#h-cr">チェックレイズの頻度</a></li>
+<li><a href="#h-3bp">3ベットポットのBTN</a></li>
+<li><a href="#h-limit">使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li><b>MDF＝ポット÷（ポット＋ベット）。</b>ポットの33%のベットなら75.2%、75%なら57.1%、ポットと同じ額（100%）なら50%を守ります。降りてよい割合は、その残りです（24.8%・42.9%・50.0%）。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li>通常のポットで、BBがBTNの<b>33%のベットに降る量は、7枚で30.5〜40.9%</b>。MDFの基準（24.8%）を、7枚全部で5.7〜16.1ポイント上回りました。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li><b>75%のベットへの降りは、6枚で48.6〜57.0%</b>。基準（42.9%）を、6枚全部で5.7〜14.1ポイント上回りました（K72は75%のベットがほぼ無いので除きます）。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li>3ベットポットで受けるBTNは、基準を<b>下回る板があります</b>。33%のベットに対し、A83・T97・862・553の4枚で基準より少ない降りでした。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li>チェックレイズは、33%のベットに10.2〜21.5%（中央値14.3%）、75%のベットに2.6〜15.4%（中央値6.0%）でした。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+</ul>
+<p>※通常のポットは、BTN 2.5bbオープン→BBコール（100bb・レーキなし）、3ベットポットは、BBが11bbに3ベットしてBTNがコールした形です。どちらも2人のポットで、フロップの数字です。</p>
+
+<h2 id="h-what">MDFとは：式と早見表</h2>
+<p>MDF（Minimum Defense Frequency、最低防衛頻度）は、ベットされたとき、自分のレンジのうち最低限「降りずに続ける」割合です。続けるのは、コールでもレイズでも構いません。ポットを P、ベット額を B とすると、</p>
+<div class="eq">MDF ＝ P ÷（P＋B）　／　降りてよい割合 ＝ B ÷（P＋B）</div>
+<p>ベットする側から見ると、降りてよい割合を超えて相手が降りるなら、手札に関係なくブラフが得をします。守る側は、それを許さない下限として使います。</p>
+<div class="tw st rw"><table><caption>ベットの大きさ別：降りてよい割合・MDF・コールに必要な勝率（％）</caption><tr><th scope="col">ベット額</th><th scope="col">降りてよい</th><th scope="col">MDF</th><th scope="col">必要勝率</th></tr><tr><th scope="row">25%</th><td class="num">20.0</td><td class="num"><b>80.0</b></td><td class="num">16.7</td></tr><tr><th scope="row">33%</th><td class="num">24.8</td><td class="num"><b>75.2</b></td><td class="num">19.9</td></tr><tr><th scope="row">50%</th><td class="num">33.3</td><td class="num"><b>66.7</b></td><td class="num">25.0</td></tr><tr><th scope="row">75%</th><td class="num">42.9</td><td class="num"><b>57.1</b></td><td class="num">30.0</td></tr><tr><th scope="row">100%</th><td class="num">50.0</td><td class="num"><b>50.0</b></td><td class="num">33.3</td></tr><tr><th scope="row">150%</th><td class="num">60.0</td><td class="num"><b>40.0</b></td><td class="num">37.5</td></tr></table></div>
+<p>※計算値（式から出した数字）。「コールに必要な勝率」＝ B÷（P＋2B）で、コールが損にならないエクイティの下限です。</p>
+<figure><div class="bg"><p class="bn">ポットの25%のベット</p><div class="br"><span class="bl">MDF</span><span class="bt"><i style="width:80.00%"></i></span><span class="bv">80.0%</span></div></div><div class="bg"><p class="bn">ポットの33%のベット</p><div class="br"><span class="bl">MDF</span><span class="bt"><i style="width:75.19%"></i></span><span class="bv">75.2%</span></div></div><div class="bg"><p class="bn">ポットの50%のベット</p><div class="br"><span class="bl">MDF</span><span class="bt"><i style="width:66.67%"></i></span><span class="bv">66.7%</span></div></div><div class="bg"><p class="bn">ポットの75%のベット</p><div class="br"><span class="bl">MDF</span><span class="bt"><i style="width:57.14%"></i></span><span class="bv">57.1%</span></div></div><div class="bg"><p class="bn">ポットの100%のベット</p><div class="br"><span class="bl">MDF</span><span class="bt"><i style="width:50.00%"></i></span><span class="bv">50.0%</span></div></div><div class="bg"><p class="bn">ポットの150%のベット</p><div class="br"><span class="bl">MDF</span><span class="bt"><i style="width:40.00%"></i></span><span class="bv">40.0%</span></div></div><figcaption>※式から計算した、ベット額別のMDF（守る割合・％）。バーは0〜100%。</figcaption></figure>
+<p>この表は、英語の解説（Poker Trainer）にある表と同じ値です。ベットが大きいほどMDFは下がり、降りてよい割合は増えます。</p>
+
+<h2 id="h-srp">通常のポットのBBは、MDFどおりに降りているか</h2>
+<p>BTNが2.5bbでオープンし、BBがコールしたポットで、代表7枚をソルバーで解きました。BTNのベットに対する、BBの降り・コール・チェックレイズです。</p>
+<p>板の下の小さい字は特徴です。「同スート2」は同じマークが2枚、「同スート3」は3枚そろった板で、書いていない板はマークがバラバラです。「高い板」「低い板」は札の大きさ、「ペア板」は同じ数字が2枚並んだ板です。</p>
+<div class="tw st rw"><table><caption>通常のポットのBB：33%のベットへの応手（％）。基準＝MDFから出る降り24.8%</caption><tr><th scope="col">板</th><th scope="col">降り</th><th scope="col">基準との差</th><th scope="col">コール</th><th scope="col">チェックレイズ</th></tr><tr><th scope="row">Q♠J♥4♠<br><span class="sub">同スート2</span></th><td class="num"><b>40.9</b></td><td class="num">+16.1</td><td class="num">46.3</td><td class="num">12.8</td></tr><tr><th scope="row">A♠8♦3♣<br><span class="sub">Aハイ</span></th><td class="num"><b>39.0</b></td><td class="num">+14.2</td><td class="num">48.1</td><td class="num">12.9</td></tr><tr><th scope="row">5♠5♥3♦<br><span class="sub">ペア板</span></th><td class="num"><b>36.6</b></td><td class="num">+11.8</td><td class="num">41.9</td><td class="num">21.5</td></tr><tr><th scope="row">T♠9♥7♠<br><span class="sub">つながり</span></th><td class="num"><b>35.0</b></td><td class="num">+10.2</td><td class="num">50.7</td><td class="num">14.3</td></tr><tr><th scope="row">J♠7♠3♠<br><span class="sub">同スート3</span></th><td class="num"><b>34.5</b></td><td class="num">+9.7</td><td class="num">55.3</td><td class="num">10.2</td></tr><tr><th scope="row">K♠7♦2♣<br><span class="sub">高い板</span></th><td class="num"><b>34.1</b></td><td class="num">+9.3</td><td class="num">46.5</td><td class="num">19.4</td></tr><tr><th scope="row">8♥6♦2♣<br><span class="sub">低い板</span></th><td class="num"><b>30.5</b></td><td class="num">+5.7</td><td class="num">54.8</td><td class="num">14.7</td></tr></table></div>
+<p>※ソルバーの実測値（BTN対BB・100bb・レーキなし）。降り＋コール＋チェックレイズ＝100%。</p>
+<figure><div class="bg"><p class="bn">QJ4（Q♠J♥4♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:40.90%"></i></span><span class="bv">40.9%</span></div></div><div class="bg"><p class="bn">A83（A♠8♦3♣）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:39.00%"></i></span><span class="bv">39.0%</span></div></div><div class="bg"><p class="bn">553（5♠5♥3♦）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:36.60%"></i></span><span class="bv">36.6%</span></div></div><div class="bg"><p class="bn">T97（T♠9♥7♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:35.00%"></i></span><span class="bv">35.0%</span></div></div><div class="bg"><p class="bn">J73（J♠7♠3♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:34.50%"></i></span><span class="bv">34.5%</span></div></div><div class="bg"><p class="bn">K72（K♠7♦2♣）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:34.10%"></i></span><span class="bv">34.1%</span></div></div><div class="bg"><p class="bn">862（8♥6♦2♣）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:30.50%"></i></span><span class="bv">30.5%</span></div></div><div class="bg"><p class="bn">MDFの基準（33%のベット）</p><div class="br"><span class="bl">基準</span><span class="bt"><i style="width:24.81%"></i></span><span class="bv">24.8%</span></div></div><figcaption>※通常のポットのBBが、BTNの33%のベットに降りる割合（％）。最下行はMDFから出る降りの基準。バーは0〜100%。</figcaption></figure>
+<ul>
+<li><b>7枚全部で、MDFの基準より多く降りています。</b>差は+5.7〜+16.1ポイントです。最も降りるのはQJ4（40.9%）、最も降りないのは862（30.5%）。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+</ul>
+
+<h2 id="h-s75">75%のベットでは、降りる量はさらに増える</h2>
+<p>同じ表から、BTNが75%でベットしたときのBBの応手です。</p>
+<div class="tw st rw"><table><caption>通常のポットのBB：75%のベットへの応手（％）。基準＝MDFから出る降り42.9%</caption><tr><th scope="col">板</th><th scope="col">降り</th><th scope="col">基準との差</th><th scope="col">コール</th><th scope="col">チェックレイズ</th></tr><tr><th scope="row">Q♠J♥4♠<br><span class="sub">同スート2</span></th><td class="num"><b>57.0</b></td><td class="num">+14.1</td><td class="num">37.5</td><td class="num">5.5</td></tr><tr><th scope="row">A♠8♦3♣<br><span class="sub">Aハイ</span></th><td class="num"><b>54.4</b></td><td class="num">+11.5</td><td class="num">43.0</td><td class="num">2.6</td></tr><tr><th scope="row">5♠5♥3♦<br><span class="sub">ペア板</span></th><td class="num"><b>53.2</b></td><td class="num">+10.3</td><td class="num">31.4</td><td class="num">15.4</td></tr><tr><th scope="row">T♠9♥7♠<br><span class="sub">つながり</span></th><td class="num"><b>52.5</b></td><td class="num">+9.6</td><td class="num">37.9</td><td class="num">9.6</td></tr><tr><th scope="row">J♠7♠3♠<br><span class="sub">同スート3</span></th><td class="num"><b>51.7</b></td><td class="num">+8.8</td><td class="num">44.6</td><td class="num">3.7</td></tr><tr><th scope="row">8♥6♦2♣<br><span class="sub">低い板</span></th><td class="num"><b>48.6</b></td><td class="num">+5.7</td><td class="num">45.0</td><td class="num">6.4</td></tr></table></div>
+<figure><div class="bg"><p class="bn">QJ4（Q♠J♥4♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:57.00%"></i></span><span class="bv">57.0%</span></div></div><div class="bg"><p class="bn">A83（A♠8♦3♣）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:54.40%"></i></span><span class="bv">54.4%</span></div></div><div class="bg"><p class="bn">553（5♠5♥3♦）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:53.20%"></i></span><span class="bv">53.2%</span></div></div><div class="bg"><p class="bn">T97（T♠9♥7♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:52.50%"></i></span><span class="bv">52.5%</span></div></div><div class="bg"><p class="bn">J73（J♠7♠3♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:51.70%"></i></span><span class="bv">51.7%</span></div></div><div class="bg"><p class="bn">862（8♥6♦2♣）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:48.60%"></i></span><span class="bv">48.6%</span></div></div><div class="bg"><p class="bn">MDFの基準（75%のベット）</p><div class="br"><span class="bl">基準</span><span class="bt"><i style="width:42.86%"></i></span><span class="bv">42.9%</span></div></div><figcaption>※通常のポットのBBが、BTNの75%のベットに降りる割合（％）。K72は75%のベットがほぼ無いので除く。最下行はMDFから出る基準。バーは0〜100%。</figcaption></figure>
+<ul>
+<li><b>6枚全部で、基準より多く降ります。</b>QJ4で57.0%（+14.1）、862で48.6%（+5.7）です。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li>「MDFの分は守らないと、ブラフが得をする」という理屈と、この結果は食い違います。BTNのベットする手にもエクイティがあり、ブラフだけで構成されていないためです。BBが基準より多く降りても、BTNのブラフが一方的に得をするとは限りません。ここは数字からの読みで、ソルバーが理由を示したわけではありません。</li>
+</ul>
+
+<h2 id="h-cr">チェックレイズの頻度</h2>
+<ul>
+<li><b>33%のベットには、10.2〜21.5%（中央値14.3%）。</b>多いのは553（21.5%）とK72（19.4%）、少ないのはJ73（10.2%）です。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li><b>75%のベットには、2.6〜15.4%（中央値6.0%）。</b>553で15.4%、A83で2.6%。ベットが大きいほど、チェックレイズは減ります。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li>ターン以降にレイズを入れた木でK72を測り直すと、33%のベットへのチェックレイズは19.4%から19.6%でした。簡略な木のせいで多めに出ている、という形にはなりませんでした（1枚だけの結果です）。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+</ul>
+
+<h2 id="h-3bp">3ベットポットのBTNは、基準を下回る板がある</h2>
+<p>BBが3ベットし、BTNがコールしたポットで、3ベットしたBBのベットを受けるBTNの降りです。</p>
+<div class="tw st rw"><table><caption>3ベットポットのBTN（受ける側）：降りる割合と基準との差（％）。基準＝33%で24.8%・75%で42.9%</caption><tr><th scope="col">板</th><th scope="col">33%に降り</th><th scope="col">差</th><th scope="col">75%に降り</th><th scope="col">差</th></tr><tr><th scope="row">K♠7♦2♣<br><span class="sub">高い板</span></th><td class="num">34.0</td><td class="num">+9.2</td><td class="num">52.2</td><td class="num">+9.3</td></tr><tr><th scope="row">Q♠J♥4♠<br><span class="sub">同スート2</span></th><td class="num">29.6</td><td class="num">+4.8</td><td class="num">48.5</td><td class="num">+5.6</td></tr><tr><th scope="row">J♠7♠3♠<br><span class="sub">同スート3</span></th><td class="num">25.5</td><td class="num">+0.7</td><td class="num">46.2</td><td class="num">+3.3</td></tr><tr><th scope="row">A♠8♦3♣<br><span class="sub">Aハイ</span></th><td class="num">22.9</td><td class="num">-1.9</td><td class="num">44.3</td><td class="num">+1.4</td></tr><tr><th scope="row">T♠9♥7♠<br><span class="sub">つながり</span></th><td class="num">20.2</td><td class="num">-4.6</td><td class="num">43.2</td><td class="num">+0.3</td></tr><tr><th scope="row">5♠5♥3♦<br><span class="sub">ペア板</span></th><td class="num">14.3</td><td class="num">-10.5</td><td class="num">34.5</td><td class="num">-8.4</td></tr><tr><th scope="row">8♥6♦2♣<br><span class="sub">低い板</span></th><td class="num">13.1</td><td class="num">-11.7</td><td class="num">35.2</td><td class="num">-7.7</td></tr></table></div>
+<p>※ソルバーの実測値（BTN対BB・100bb・レーキなし）。差＝降りる割合−MDFから出る基準。</p>
+<figure><div class="bg"><p class="bn">K72（K♠7♦2♣）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:34.00%"></i></span><span class="bv">34.0%</span></div></div><div class="bg"><p class="bn">QJ4（Q♠J♥4♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:29.60%"></i></span><span class="bv">29.6%</span></div></div><div class="bg"><p class="bn">J73（J♠7♠3♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:25.50%"></i></span><span class="bv">25.5%</span></div></div><div class="bg"><p class="bn">A83（A♠8♦3♣）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:22.90%"></i></span><span class="bv">22.9%</span></div></div><div class="bg"><p class="bn">T97（T♠9♥7♠）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:20.20%"></i></span><span class="bv">20.2%</span></div></div><div class="bg"><p class="bn">553（5♠5♥3♦）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:14.30%"></i></span><span class="bv">14.3%</span></div></div><div class="bg"><p class="bn">862（8♥6♦2♣）</p><div class="br"><span class="bl">降り</span><span class="bt"><i style="width:13.10%"></i></span><span class="bv">13.1%</span></div></div><div class="bg"><p class="bn">MDFの基準（33%のベット）</p><div class="br"><span class="bl">基準</span><span class="bt"><i style="width:24.81%"></i></span><span class="bv">24.8%</span></div></div><figcaption>※3ベットポットで、BTNが3ベットしたBBの33%のベットに降りる割合（％）。最下行はMDFから出る基準。バーは0〜100%。</figcaption></figure>
+<ul>
+<li><b>33%のベットに、基準より少ない降りが4枚、多いのが3枚。</b>少ない板はA83・T97・862・553で、最も少ない862は13.1%（-11.7）です。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li><b>75%のベットには、基準より少ない降りが2枚（862・553）、多いのが5枚。</b><span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li>通常のポットのBBとは逆に、「基準より多く降りる」とは限りません。3ベットしたBBに対して、BTNのコールのレンジが強く、守る手が多く残る形だと読めます（読みです）。</li>
+</ul>
+
+<h2 id="h-limit">この数字の使いどころと限界</h2>
+<ul>
+<li><b>MDFは、ベットする側が正しい割合でブラフするという前提の下限です。</b>Poker Trainerの解説は、MDFを「そのまま守る規則」ではなく学習の道具とし、次のカードや次のベットが関係しない、リバーで最も使いやすいとしています。この記事の数字はフロップで、その前提から外れます。</li>
+<li><b>7枚・1組のレンジ・1つの木だけの結果です。</b>他の板、他のポジション、3人以上のポットは分かりません。</li>
+<li><b>MDFの基準は、ベット額をポットの33%・75%としたときの値です。</b>実戦のベット額は、ポットのきっかり33%や75%とは限りません。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li><b>これは、仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</b>判断の練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>数字は、僕がオープンソースのGTOソルバー（ブラウザ版 postflop-solver／WASM）で解いた結果です。計算したのは2026年10月18日。レンジは当サイトのプリフロップ表で、誤差は0.3%ポット以下まで解きました。解いた結果の表から、フロップの最初の分岐を読んでいます。</p>
+<p>MDFの基準は式から計算しました（33%：0.33÷1.33＝24.81%、75%：0.75÷1.75＝42.86%）。早見表は、同じ式で6つのベット額を計算し、英語の解説（Poker Trainer）の表の値と一致することを確かめました。ソルバーの条件は、<a href="/cbet/">Cベットの解説</a>と同じ表です（3ベットポットも同じ道具・同じ日に解きました）。確かめたこと。①降り＋コール＋チェックレイズが、全ての板で100%（丸めの範囲）。②「MDFとの差」は、表の降りの値から基準を引いただけで、全て手計算と一致。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Poker Trainer「Introduction to minimum defense frequency」<a href="https://pokertrainer.se/introduction-to-minimum-defense-frequency/">https://pokertrainer.se/introduction-to-minimum-defense-frequency/</a> （英語・MDFの式とベット額別の表（25〜150%）。ソルバーとの比較は無し。リバーで使いやすい、そのまま使わないよう注意、という説明。2026年11月16日に確認）</li>
+</ul>
+<p>検索した範囲では、MDFの式の解説は多数ありましたが、ソルバーで解いた実際の降りる量をMDFの基準と板ごとに並べた日本語のページは見つかりませんでした（網羅的な調査ではありません）。検索結果の抜粋には、ハーフポットのMDFを33%と書いたページ（本体は開いていません）もありました。式から計算すると、ハーフポット（50%）のMDFは66.7%です。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>MDF＝ポット÷（ポット＋ベット）。33%のベットなら75.2%、75%なら57.1%を守ります。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li>通常のポットのBBは、7枚全部で、MDFの基準より多く降りました（33%のベットで30.5〜40.9%）。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+<li>3ベットポットのBTNは、基準より少ない降りの板もありました（33%のベットで4枚）。<span style="white-space:nowrap">（式の計算・ソルバー実測）</span></li>
+</ul>
+<p>次の1アクションは、<a href="https://shoubu-lab.com/flop/">フロップのCベット頻度早見表</a>で、33%のベットに対する降り・コール・チェックレイズの表を見て、MDFの基準との差を自分で引いてみることです。続きは次の2本です。</p>
+<ul>
+<li><a href="/cbet/">Cベットとは？フロップでどれくらい打つのか</a></li>
+<li><a href="/3bet-pot-cbet/">3ベットポットのCベット頻度</a></li>
+</ul>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>MDF（最低防衛頻度）の計算式は？</h3>
+<p>ポット÷（ポット＋ベット）です。ポットの33%のベットなら75.2%、50%なら66.7%、75%なら57.1%、100%なら50%を守る計算です。降りてよい割合は、その残りです。</p>
+<h3>ハーフポットのベットに対するMDFは？</h3>
+<p>ポットの50%のベットなら、MDFは66.7%です（降りてよいのは33.3%）。コールに必要な勝率は25%です。</p>
+<h3>ソルバーは、MDFどおりに守りますか？</h3>
+<p>通常のポットのBBは、BTNの33%のベットに30.5〜40.9%降り、7枚全部でMDFの基準（24.8%）を上回りました。3ベットポットのBTNは、33%のベットに基準より少ない降りの板が4枚ありました。</p>
+<h3>チェックレイズは、どれくらいの頻度ですか？</h3>
+<p>通常のポットのBBは、33%のベットに10.2〜21.5%（中央値14.3%）、75%のベットに2.6〜15.4%（中央値6.0%）でした。</p>
+<h3>MDFは手札ごとの判断にも使えますか？</h3>
+<p>そのままは使えません。MDFはレンジ全体で守る割合の下限で、どの手札で守るかは決めません。また、ブラフが正しい割合で入っているという前提の値です。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>

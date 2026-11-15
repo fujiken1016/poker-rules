@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cベットとは？フロップで打つ頻度は板で変わる｜BTN対BBの7枚で51〜80%</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/cbet/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary">
+<meta name="description" content="Cベット（コンティニュエーションベット）の意味と、BTN対BB・100bbの代表的なフロップ7枚をソルバーで解いた頻度。打つ割合は51.1〜79.5%、サイズは33%と75%の2つ。板ごとの表と、前提条件つき。">
+<meta property="og:title" content="Cベットとは？フロップで打つ頻度は板で変わる｜BTN対BBの7枚で51〜80%">
+<meta property="og:description" content="Cベット（コンティニュエーションベット）の意味と、BTN対BB・100bbの代表的なフロップ7枚をソルバーで解いた頻度。打つ割合は51.1〜79.5%、サイズは33%と75%の2つ。板ごとの表と、前提条件つき。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/cbet/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Cベットとは？フロップで打つ頻度は板で変わる｜BTN対BBの7枚で51〜80%","description":"Cベット（コンティニュエーションベット）の意味と、BTN対BB・100bbの代表的なフロップ7枚をソルバーで解いた頻度。打つ割合は51.1〜79.5%、サイズは33%と75%の2つ。板ごとの表と、前提条件つき。","mainEntityOfPage":"https://rule.shoubu-lab.com/cbet/","inLanguage":"ja","datePublished":"2026-11-16T15:00:00+09:00","dateModified":"2026-11-16T15:00:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Cベット（コンティニュエーションベット）とは何ですか？","acceptedAnswer":{"@type":"Answer","text":"プリフロップでレイズして主導権を持った側が、フロップでもベットすることです。手札がボードに当たったかどうかは問いません。"}},{"@type":"Question","name":"Cベットはフロップで何%くらい打ちますか？","acceptedAnswer":{"@type":"Answer","text":"BTN対BB・100bb・2人のポットで、代表7枚をソルバーで解いたところ、51.1〜79.5%でした（最多はK72の79.5%、最少はJ73の51.1%）。板によって大きく変わります。"}},{"@type":"Question","name":"Cベットは毎回打つものですか？","acceptedAnswer":{"@type":"Answer","text":"この7枚では、毎回は打ちませんでした。最も多い板でも79.5%で、少なくとも20.5%はチェックです。"}},{"@type":"Question","name":"Cベットのサイズは、ポットの何%がよいですか？","acceptedAnswer":{"@type":"Answer","text":"33%と75%の2つから選ばせた結果、33%が多い板がK72・A83・QJ4・553、75%が多い板がT97・862・J73でした。板によって変わります。"}},{"@type":"Question","name":"この数字は、3人以上のポットでも使えますか？","acceptedAnswer":{"@type":"Answer","text":"使えません。2人のポット（BTNとBB）の数字です。3人以上の局面や、3ベットしたポットは含んでいません。"}}]}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+article li>a:first-child:last-child{display:inline-block;padding:11px 0}
+.tw.rw th,.tw.rw td{padding-left:8px;padding-right:8px}
+.sub{font-size:14px;font-weight:400;color:var(--sub);white-space:nowrap}
+.tw.rw th[scope=row]{min-width:9em;max-width:14em;white-space:nowrap}
+.tw.rw th[scope=col]{white-space:nowrap}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月16日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>Cベットとは？フロップでどれくらい打つのか、ソルバーで解いた7枚の頻度</h1>
+<div class="key"><p class="lead">Cベットは、プリフロップでレイズした側がフロップでもベットすることです。BTNがオープンしてBBがコールしたポット（100bb）の代表7枚をソルバーで解くと、BTNがフロップで打つ割合は51.1%（J73）から79.5%（K72）まで、板によって28.4ポイント開きました。7枚のどれでも「毎回打つ」にはなりません。</p></div>
+<p>この記事は、Cベットを「どれくらいの頻度で、どのサイズで打つのか」を、自分でソルバーを回した数字で整理したものです。すべて仮想チップを使った練習用の例で、お金を賭けて勝つための方法ではありません。</p>
+<p>関連する解説は、次の2本です。</p>
+<ul>
+<li><a href="/mdf/">MDF（受ける側の守り方）</a></li>
+<li><a href="/3bet-pot-cbet/">3ベットポットのCベット</a></li>
+</ul>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-what">Cベットとは</a></li>
+<li><a href="#h-tbl">7枚の板ごとの頻度</a></li>
+<li><a href="#h-read">表から読めること</a></li>
+<li><a href="#h-cond">前提が変わると</a></li>
+<li><a href="#h-limit">使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li>BTNがフロップでベットする割合（Cベット頻度）は、7枚の板で<b>51.1〜79.5%</b>。最多はK72（K♠7♦2♣）の79.5%、最少はJ73（J♠7♠3♠）の51.1%です。7枚の単純平均は64.2%、中央値は60.9%でした。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li>どの板でも、少なくとも20.5%はチェックします。「プリフロップでレイズしたら毎回打つ」という結果にはなりませんでした。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li>サイズは33%と75%の2つから選ばせました。33%が多い板はK72・A83・QJ4・553、75%が多い板はT97・862・J73です（862は36.1%と38.2%でほぼ半々）。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li>BBが先にベットする（ドンク）のは、553の4.7%を除くと0〜0.3%でした。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+</ul>
+<p>※BTNが2.5bbでオープンし、BBがコールした2人のポット（100bb・レーキなし）の数字です。3人以上のポットや、3ベットしたポットは含みません。</p>
+
+<h2 id="h-what">Cベットとは</h2>
+<p>Cベット（コンティニュエーションベット）は、プリフロップでレイズして主導権を持った側が、フロップでもベットすることです。手札がボードに当たったかどうかは問いません。この記事の「Cベット頻度」は、<b>BTNのレンジ全体の何%が、フロップでベットになるか</b>で数えています（594通りのうち、ベットにまわる手の割合）。</p>
+<p>よく見る説明は、「ドライな板では小さく、ウェットな板では大きく打つ」というものです。たとえばDeuces Crackedの解説は、乾いた板で25〜40%、ドローの多い板で66〜100%のポットを目安に挙げています（数字の出どころや前提の記載は無し）。ここからは、実際にソルバーで解いた頻度でそれを確かめます。</p>
+
+<h2 id="h-tbl">7枚の板ごとの頻度</h2>
+<p>BTNが2.5bbでオープンし、BBがコールしたポット（5.5bb）です。フロップでのBTNのベットは、ポットの33%と75%の2種類から選べる設定にしました。</p>
+<p>板の下の小さい字は特徴です。「同スート2」は同じマークが2枚、「同スート3」は3枚そろった板で、書いていない板はマークがバラバラです。「高い板」「低い板」は札の大きさ、「ペア板」は同じ数字が2枚並んだ板です。</p>
+<div class="tw st rw"><table><caption>BTNのフロップでの動き：7枚の板ごとの頻度（％）</caption><tr><th scope="col">板</th><th scope="col">ベット合計</th><th scope="col">うち33%</th><th scope="col">うち75%</th><th scope="col">多いサイズ</th><th scope="col">BBドンク</th></tr><tr><th scope="row">K♠7♦2♣<br><span class="sub">高い板</span></th><td class="num"><b>79.5</b></td><td class="num">79.2</td><td class="num">0.3</td><td>33%</td><td class="num">0.0</td></tr><tr><th scope="row">8♥6♦2♣<br><span class="sub">低い板</span></th><td class="num"><b>74.3</b></td><td class="num">36.1</td><td class="num">38.2</td><td>75%</td><td class="num">0.0</td></tr><tr><th scope="row">Q♠J♥4♠<br><span class="sub">同スート2</span></th><td class="num"><b>70.9</b></td><td class="num">53.0</td><td class="num">17.9</td><td>33%</td><td class="num">0.0</td></tr><tr><th scope="row">5♠5♥3♦<br><span class="sub">ペア板</span></th><td class="num"><b>60.9</b></td><td class="num">34.2</td><td class="num">26.7</td><td>33%</td><td class="num">4.7</td></tr><tr><th scope="row">A♠8♦3♣<br><span class="sub">Aハイ</span></th><td class="num"><b>60.5</b></td><td class="num">57.5</td><td class="num">3.0</td><td>33%</td><td class="num">0.0</td></tr><tr><th scope="row">T♠9♥7♠<br><span class="sub">つながり</span></th><td class="num"><b>52.5</b></td><td class="num">9.7</td><td class="num">42.8</td><td>75%</td><td class="num">0.0</td></tr><tr><th scope="row">J♠7♠3♠<br><span class="sub">同スート3</span></th><td class="num"><b>51.1</b></td><td class="num">17.7</td><td class="num">33.4</td><td>75%</td><td class="num">0.3</td></tr></table></div>
+<p>※ソルバーの実測値（BTN対BB・100bb・レーキなし）。「Cベット合計」＝33%＋75%（小数第1位の丸めで0.1ずれることがあります）。「BBが先にベット」はドンクの頻度。</p>
+<figure><div class="bg"><p class="bn">K72（K♠7♦2♣）</p><div class="br"><span class="bl">Cベット</span><span class="bt"><i style="width:79.50%"></i></span><span class="bv">79.5%</span></div></div><div class="bg"><p class="bn">862（8♥6♦2♣）</p><div class="br"><span class="bl">Cベット</span><span class="bt"><i style="width:74.30%"></i></span><span class="bv">74.3%</span></div></div><div class="bg"><p class="bn">QJ4（Q♠J♥4♠）</p><div class="br"><span class="bl">Cベット</span><span class="bt"><i style="width:70.90%"></i></span><span class="bv">70.9%</span></div></div><div class="bg"><p class="bn">553（5♠5♥3♦）</p><div class="br"><span class="bl">Cベット</span><span class="bt"><i style="width:60.90%"></i></span><span class="bv">60.9%</span></div></div><div class="bg"><p class="bn">A83（A♠8♦3♣）</p><div class="br"><span class="bl">Cベット</span><span class="bt"><i style="width:60.50%"></i></span><span class="bv">60.5%</span></div></div><div class="bg"><p class="bn">T97（T♠9♥7♠）</p><div class="br"><span class="bl">Cベット</span><span class="bt"><i style="width:52.50%"></i></span><span class="bv">52.5%</span></div></div><div class="bg"><p class="bn">J73（J♠7♠3♠）</p><div class="br"><span class="bl">Cベット</span><span class="bt"><i style="width:51.10%"></i></span><span class="bv">51.1%</span></div></div><figcaption>※BTNの頻度（％）。バー0〜100%。</figcaption></figure>
+<p>サイズ別の頻度です（実測値）。</p>
+<figure><div class="bg"><p class="bn">K72（K♠7♦2♣）</p><div class="br"><span class="bl">33%</span><span class="bt"><i style="width:79.20%"></i></span><span class="bv">79.2%</span></div></div><div class="bg"><p class="bn">A83（A♠8♦3♣）</p><div class="br"><span class="bl">33%</span><span class="bt"><i style="width:57.50%"></i></span><span class="bv">57.5%</span></div></div><div class="bg"><p class="bn">QJ4（Q♠J♥4♠）</p><div class="br"><span class="bl">33%</span><span class="bt"><i style="width:53.00%"></i></span><span class="bv">53.0%</span></div></div><div class="bg"><p class="bn">862（8♥6♦2♣）</p><div class="br"><span class="bl">33%</span><span class="bt"><i style="width:36.10%"></i></span><span class="bv">36.1%</span></div></div><div class="bg"><p class="bn">553（5♠5♥3♦）</p><div class="br"><span class="bl">33%</span><span class="bt"><i style="width:34.20%"></i></span><span class="bv">34.2%</span></div></div><div class="bg"><p class="bn">J73（J♠7♠3♠）</p><div class="br"><span class="bl">33%</span><span class="bt"><i style="width:17.70%"></i></span><span class="bv">17.7%</span></div></div><div class="bg"><p class="bn">T97（T♠9♥7♠）</p><div class="br"><span class="bl">33%</span><span class="bt"><i style="width:9.70%"></i></span><span class="bv">9.7%</span></div></div><figcaption>※BTNが33%のサイズでベットする割合（％）。バーは0〜100%。</figcaption></figure>
+<figure><div class="bg"><p class="bn">T97（T♠9♥7♠）</p><div class="br"><span class="bl">75%</span><span class="bt"><i style="width:42.80%"></i></span><span class="bv">42.8%</span></div></div><div class="bg"><p class="bn">862（8♥6♦2♣）</p><div class="br"><span class="bl">75%</span><span class="bt"><i style="width:38.20%"></i></span><span class="bv">38.2%</span></div></div><div class="bg"><p class="bn">J73（J♠7♠3♠）</p><div class="br"><span class="bl">75%</span><span class="bt"><i style="width:33.40%"></i></span><span class="bv">33.4%</span></div></div><div class="bg"><p class="bn">553（5♠5♥3♦）</p><div class="br"><span class="bl">75%</span><span class="bt"><i style="width:26.70%"></i></span><span class="bv">26.7%</span></div></div><div class="bg"><p class="bn">QJ4（Q♠J♥4♠）</p><div class="br"><span class="bl">75%</span><span class="bt"><i style="width:17.90%"></i></span><span class="bv">17.9%</span></div></div><div class="bg"><p class="bn">A83（A♠8♦3♣）</p><div class="br"><span class="bl">75%</span><span class="bt"><i style="width:3.00%"></i></span><span class="bv">3.0%</span></div></div><div class="bg"><p class="bn">K72（K♠7♦2♣）</p><div class="br"><span class="bl">75%</span><span class="bt"><i style="width:0.30%"></i></span><span class="bv">0.3%</span></div></div><figcaption>※BTNが75%のサイズでベットする割合（％）。バーは0〜100%。</figcaption></figure>
+
+<h2 id="h-read">表から読める4つのこと</h2>
+<ul>
+<li><b>板によって、打つ割合が28ポイント近く動きます。</b>K72の79.5%に対して、同じようにバラバラの板でもA83は60.5%、862は74.3%です。「ドライな板ほど打つ」と一言では言えません。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li><b>同スートが2〜3枚ある板や、つながった板では、打つ割合が低めでした。</b>T97は52.5%、J73は51.1%で、7枚の中の下位2枚です。ただし7枚だけの結果なので、一般則にはしません。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li><b>サイズは、その板で1つに寄ります。</b>K72は、ベットの99.6%が33%でした（75%は0.3%）。T97は逆に、ベットの82%が75%です。2つのサイズを同じ割合で使う板は、862くらいでした。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li><b>33%が多い板のほうが、打つ割合は高めでした。</b>33%が多い4枚（K72・A83・QJ4・553）の単純平均は68.0%、75%が多い3枚（T97・862・J73）は59.3%です。ただし862（74.3%）のような例外もあり、7枚だけの傾向です。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+</ul>
+
+<h2 id="h-cond">前提が変わると、数字はどれだけ動くか</h2>
+<ul>
+<li><b>レーキがあると、少し減ります。</b>K72でレーキ5%（上限3bb）を入れると、BTNのCベットは79.5%から76.0%に下がりました（−3.5ポイント）。ただし、レーキありの計算は収束が遅く、誤差が0.59%ポットまでしか詰められていません。差の一部は、計算の残りかもしれません。</li>
+<li><b>ターン以降にレイズを入れても、フロップはほぼ同じでした。</b>この記事の木はターン・リバーのレイズ無しの簡略版です。K72の1枚だけ、レイズ入りで測り直すと、BBのチェックレイズは19.4%から19.6%に動いただけでした（Cベットの合計は79.5%→76.5%）。他の板は測っていません。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li><b>3ベットしたポットでは、別の数字になります。</b>同じK72で、3ベットした側のCベットは100%でした。くわしくは<a href="/3bet-pot-cbet/">3ベットポットのCベット</a>です。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+</ul>
+
+<h2 id="h-limit">この数字の使いどころと限界</h2>
+<ul>
+<li><b>7枚・1組のレンジ・1つの木だけの結果です。</b>板の種類は無数にあり、ここにない板の頻度は分かりません。全部のフロップを引ける表は準備中です。</li>
+<li><b>ヘッズアップ（2人）のポットの数字です。</b>3人以上になると、打つ割合は大きく変わると言われますが、ここでは測っていません。</li>
+<li><b>相手の癖は入っていません。</b>ソルバーは、お互いに最善を尽くす想定で解いた値です。現実の相手がコールしすぎるのか降りすぎるのかで、よい打ち方は変わります。</li>
+<li><b>これは、仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</b>判断の練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方</h2>
+<p>数字は、僕がオープンソースのGTOソルバー（ブラウザ版 postflop-solver／WASM）で解いた結果です。計算したのは2026年10月18日。レンジは当サイトのプリフロップ表で、誤差は0.3%ポット以下まで解きました。解いた結果の表から、フロップの最初の分岐を読んでいます。</p>
+<p>条件は、6人卓キャッシュ・100bb・BTNが2.5bbでオープンしBBがコール（ポット5.5bb・残り97.5bb）。BTNのオープンは594通り（44.8%）、BBのコールは528通り（39.8%）で、混合戦略の手は重みづけして数えています。ベットの木は、フロップがBTN 33%・75%（BBのドンクは33%、レイズは3倍）、ターンが66%、リバーが75%で、ターン・リバーのレイズは無しです。</p>
+<p>確かめたこと。①BBの応手の降り・コール・チェックレイズは、全ての板で合計が100%（丸めの範囲）。②BTNの33%と75%の頻度を足すと、Cベット合計と一致（小数第1位の丸めの範囲）。③この道具は、ターン・リバーの局面で、別に作った自前のソルバーと結果が一致することを確かめてあります。フロップの数字そのものは、別のソルバーとは照らし合わせていません。</p>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Deuces Cracked「Continuation Bet Strategy: Master the C-Bet in Poker」<a href="https://www.deucescracked.com/blog/poker-continuation-bet-cbet-strategy-guide">https://www.deucescracked.com/blog/poker-continuation-bet-cbet-strategy-guide</a> （英語・乾いた板25〜40%、ドローの多い板66〜100%の目安。表・ソルバーの頻度・前提の記載は無し。2026年11月16日に確認）</li>
+</ul>
+<p>検索した範囲では、板ごとのCベット頻度を、ソルバーの前提（人数・スタック・レーキ）つきの数字で示した日本語のページは見つかりませんでした（網羅的な調査ではありません）。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>BTNのCベット頻度は、7枚の板で51.1〜79.5%。毎回打つことにはなりませんでした。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li>サイズは板で寄ります。33%が多いのはK72・A83・QJ4・553、75%が多いのはT97・862・J73です。<span style="white-space:nowrap">（ソルバー実測）</span></li>
+<li>覚えるなら小数点ではなく、「板によって頻度もサイズも変わる」という向きです。</li>
+</ul>
+<p>次の1アクションは、<a href="https://shoubu-lab.com/flop/">フロップのCベット頻度早見表</a>で7枚を見比べて、サイズが33%から75%に変わる境目を自分の目で確かめることです。続きは次の2本です。</p>
+<ul>
+<li><a href="/mdf/">MDF（最低防衛頻度）とは？ソルバーの降りがずれる板</a></li>
+<li><a href="/3bet-pot-cbet/">3ベットポットのCベット頻度</a></li>
+</ul>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>Cベット（コンティニュエーションベット）とは何ですか？</h3>
+<p>プリフロップでレイズして主導権を持った側が、フロップでもベットすることです。手札がボードに当たったかどうかは問いません。</p>
+<h3>Cベットはフロップで何%くらい打ちますか？</h3>
+<p>BTN対BB・100bb・2人のポットで、代表7枚をソルバーで解いたところ、51.1〜79.5%でした（最多はK72の79.5%、最少はJ73の51.1%）。板によって大きく変わります。</p>
+<h3>Cベットは毎回打つものですか？</h3>
+<p>この7枚では、毎回は打ちませんでした。最も多い板でも79.5%で、少なくとも20.5%はチェックです。</p>
+<h3>Cベットのサイズは、ポットの何%がよいですか？</h3>
+<p>33%と75%の2つから選ばせた結果、33%が多い板がK72・A83・QJ4・553、75%が多い板がT97・862・J73でした。板によって変わります。</p>
+<h3>この数字は、3人以上のポットでも使えますか？</h3>
+<p>使えません。2人のポット（BTNとBB）の数字です。3人以上の局面や、3ベットしたポットは含んでいません。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
