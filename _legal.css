@@ -30,3 +30,7 @@ nav.sl-tools .sl-tools__d{font-size:.875rem;word-break:auto-phrase;line-break:st
 nav.sl-tools .sl-tools__t{word-break:auto-phrase;line-break:strict;text-wrap:balance}
 footer a{display:inline-block;white-space:nowrap;padding:13px 8px}
 td{text-wrap:balance}
+/* 記事の冒頭画像（2026-11-19 週次デザイン） */
+.eye{margin:0 0 20px}
+.eye img{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:16px;background:var(--panel)}
+.eye figcaption{font-size:.875rem;color:var(--sub);margin-top:8px}
