@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ホールデムで勝つ役は何？人数別の勝者の役の分布｜2人はワンペアが37%、9人はツーペアが25%</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/winning-hand/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="ホールデムで全員が最後まで残ったとき、勝つ役を2〜9人で1億回ずつ数えた。ワンペア以下で勝つのは2人で43%、5人で20%、9人で9%。ツーペア以上が過半数になる人数、スリーカード以上が過半数になる人数も。">
+<meta property="og:title" content="ホールデムで勝つ役は何？人数別の勝者の役の分布｜2人はワンペアが37%、9人はツーペアが25%">
+<meta property="og:image" content="https://rule.shoubu-lab.com/og_rule.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://rule.shoubu-lab.com/og_rule.jpg">
+<meta property="og:description" content="ホールデムで全員が最後まで残ったとき、勝つ役を2〜9人で1億回ずつ数えた。ワンペア以下で勝つのは2人で43%、5人で20%、9人で9%。ツーペア以上が過半数になる人数、スリーカード以上が過半数になる人数も。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/winning-hand/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ホールデムで勝つ役は何？人数別の勝者の役の分布｜2人はワンペアが37%、9人はツーペアが25%","description":"ホールデムで全員が最後まで残ったとき、勝つ役を2〜9人で1億回ずつ数えた。ワンペア以下で勝つのは2人で43%、5人で20%、9人で9%。ツーペア以上が過半数になる人数、スリーカード以上が過半数になる人数も。","mainEntityOfPage":"https://rule.shoubu-lab.com/winning-hand/","inLanguage":"ja","datePublished":"2026-11-23T16:00:00+09:00","dateModified":"2026-11-23T16:00:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"勝つ役は何が多いですか？","acceptedAnswer":{"@type":"Answer","text":"全員がランダムな手札で最後まで残る場合、2人のときはワンペア（37.1%）、3人以上のときはツーペアが最も多い勝ち役です。9人ではツーペアが24.6%、ストレートが20.1%です。"}},{"@type":"Question","name":"ワンペアで勝てる割合は、人数が増えるとどうなりますか？","acceptedAnswer":{"@type":"Answer","text":"勝者の役がワンペアだった割合は、2人で37.1%、3人で30.0%、5人で19.6%、9人で9.4%と減っていきます。ワンペアかハイカードで勝つ割合の合計は、9人で9.4%です。"}},{"@type":"Question","name":"ツーペア以上が必要になるのは、何人からですか？","acceptedAnswer":{"@type":"Answer","text":"勝者の役がツーペア以上だった割合は、2人の時点で57.0%と過半数です。スリーカード以上が過半数になるのは6人から（53.3%）で、ストレート以上は9人でも49.3%にとどまります。"}},{"@type":"Question","name":"実戦でそのまま使えますか？","acceptedAnswer":{"@type":"Answer","text":"使えません。全員がランダムな手札で、最後まで残るという前提の実測値です。実戦では降りる人がいるので、勝者の役の分布は変わります。この表は、何も選ばずに全員が残った場合の基準線として読んでください。"}}]}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月23日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ホールデムで勝つ役は何？2〜9人で、勝者の最終の役がどう変わるか</h1>
+<figure class="eye"><img src="/img/eye_table.webp" srcset="/img/eye_table-640.webp 640w, /img/eye_table.webp 1024w" sizes="(max-width:760px) 100vw, 728px" width="1024" height="576" fetchpriority="high" alt="緑のフェルトのポーカーテーブルを真上から見た図"><figcaption>画像はイメージ（AI生成のイラスト）</figcaption></figure>
+<div class="key"><p class="lead">全員がランダムな手札でボード5枚まで見ると、勝者の役がワンペア以下なのは、2人で43.0%、5人で19.8%、9人で9.4%です。最も多い勝ち役は、2人ならワンペア（37.1%）、3人以上ならツーペア（9人で24.6%）でした。</p></div>
+<p>この記事では、ホールデムで「どの役で勝つことが多いのか」を、プレーヤーの人数別に数えました。「ワンペアで勝てるのか」「ツーペアがないと厳しいのか」に、数字で答える記事です。数字は、僕が作った判定プログラムでランダムに配った実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>この記事は、ほかの記事とは別の問い「勝った人の役は何か」を扱います。関連する記事は次のとおりです。</p>
+<ul>
+<li><a href="/yaku/">役の強さ一覧</a>：1人の7枚の役の出方</li>
+<li><a href="/chop/">引き分けの確率</a>：同点の分け合い</li>
+<li><a href="/multiway/">人数別の勝率</a>：自分の手札の勝率</li>
+</ul>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-main">人数別の勝者の役</a></li>
+<li><a href="#h-cum">勝つのに必要な役の目安</a></li>
+<li><a href="#h-why">1人の役の出方との違い</a></li>
+<li><a href="#h-limit">この数字の使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方と、確かめたこと</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li>ワンペア以下で勝つ割合は、2人で43.0%、3人で31.9%、5人で19.8%、9人で9.4%です。人数が増えるほど、ワンペアでは勝ちにくくなります。</li>
+<li>最も多い勝ち役は、2人のときだけワンペア（37.1%）です。3人以上ではツーペアが最多で、2人で31.4%、9人で24.6%です。</li>
+<li>ツーペア以上が勝者の過半数になるのは、2人から（57.0%）です。スリーカード以上が過半数になるのは6人から（53.3%。5人は47.8%）です。</li>
+<li>ストレート以上は、9人でも49.3%で、過半数には届きません。</li>
+<li>ハイカードで勝つのは、2人で5.93%、4人で0.62%、9人では0.0007%（1億回のうち717回）です。</li>
+</ul>
+<p>※全員の手札がランダム・全員が最後まで残る前提の実測値です。人数は、自分を含むプレーヤーの数です。同点で分け合いになった回も、勝った役を1回と数えています。</p>
+
+<h2 id="h-main">人数別の勝者の役</h2>
+<p>全員にランダムな2枚ずつとボード5枚を配り、全員の7枚から最強の5枚を選んで、いちばん強い人（同点なら分け合う人たち）の役を数えました。</p>
+<div class="tw rw"><table><caption>勝者の最終の役の分布（％）：プレーヤー数別・全員がランダムな手札で最後まで残る場合</caption><tr><th scope="col">勝った役</th><th scope="col">2人</th><th scope="col">3人</th><th scope="col">4人</th><th scope="col">5人</th><th scope="col">6人</th><th scope="col">7人</th><th scope="col">8人</th><th scope="col">9人</th></tr><tr><th scope="row">ストレート<br>フラッシュ</th><td class="num">0.061</td><td class="num">0.089</td><td class="num">0.12</td><td class="num">0.15</td><td class="num">0.18</td><td class="num">0.20</td><td class="num">0.23</td><td class="num">0.26</td></tr><tr><th scope="row">フォーカード</th><td class="num">0.31</td><td class="num">0.46</td><td class="num">0.60</td><td class="num">0.74</td><td class="num">0.89</td><td class="num">1.03</td><td class="num">1.18</td><td class="num">1.32</td></tr><tr><th scope="row">フルハウス</th><td class="num">4.70</td><td class="num">6.54</td><td class="num">8.16</td><td class="num">9.61</td><td class="num">10.92</td><td class="num">12.13</td><td class="num">13.23</td><td class="num">14.26</td></tr><tr><th scope="row">フラッシュ</th><td class="num">5.25</td><td class="num">7.04</td><td class="num">8.50</td><td class="num">9.74</td><td class="num">10.83</td><td class="num">11.79</td><td class="num">12.65</td><td class="num">13.44</td></tr><tr><th scope="row">ストレート</th><td class="num">8.02</td><td class="num">10.79</td><td class="num">13.08</td><td class="num">14.99</td><td class="num">16.59</td><td class="num">17.94</td><td class="num">19.08</td><td class="num">20.06</td></tr><tr><th scope="row">スリーカード</th><td class="num">7.19</td><td class="num">9.24</td><td class="num">11.04</td><td class="num">12.59</td><td class="num">13.91</td><td class="num">15.02</td><td class="num">15.96</td><td class="num">16.72</td></tr><tr><th scope="row">ツーペア</th><td class="num">31.42</td><td class="num">33.92</td><td class="num">33.77</td><td class="num">32.40</td><td class="num">30.52</td><td class="num">28.48</td><td class="num">26.47</td><td class="num">24.56</td></tr><tr><th scope="row">ワンペア</th><td class="num">37.12</td><td class="num">29.97</td><td class="num">24.11</td><td class="num">19.59</td><td class="num">16.12</td><td class="num">13.39</td><td class="num">11.19</td><td class="num">9.39</td></tr><tr><th scope="row">ハイカード</th><td class="num">5.93</td><td class="num">1.96</td><td class="num">0.62</td><td class="num">0.19</td><td class="num">0.053</td><td class="num">0.014</td><td class="num">0.0033</td><td class="num">0.0007</td></tr><tr><th scope="row">合計</th><td class="num">100.00</td><td class="num">100.00</td><td class="num">100.00</td><td class="num">100.00</td><td class="num">100.00</td><td class="num">100.00</td><td class="num">100.00</td><td class="num">100.00</td></tr></table></div>
+<p>※各プレーヤー数について100,000,000回ずつ配った実測値（標準誤差は0.005ポイント以下）。値が小さい行は、桁を増やして表示しています。ストレートフラッシュの行は、ロイヤルフラッシュ（例：2人で6,268回）を含みます。</p>
+<figure><div class="bg"><p class="bn">2人（ワンペア以下で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:43.05%"></i></span><span class="bv">43.0%</span></div></div><div class="bg"><p class="bn">3人（ワンペア以下で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:31.93%"></i></span><span class="bv">31.9%</span></div></div><div class="bg"><p class="bn">4人（ワンペア以下で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:24.73%"></i></span><span class="bv">24.7%</span></div></div><div class="bg"><p class="bn">5人（ワンペア以下で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:19.78%"></i></span><span class="bv">19.8%</span></div></div><div class="bg"><p class="bn">6人（ワンペア以下で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:16.18%"></i></span><span class="bv">16.2%</span></div></div><div class="bg"><p class="bn">7人（ワンペア以下で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:13.41%"></i></span><span class="bv">13.4%</span></div></div><div class="bg"><p class="bn">8人（ワンペア以下で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:11.20%"></i></span><span class="bv">11.2%</span></div></div><div class="bg"><p class="bn">9人（ワンペア以下で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:9.39%"></i></span><span class="bv">9.4%</span></div></div><figcaption>※勝者の役がワンペアかハイカードだった割合（％）。バーは0〜100%。</figcaption></figure>
+<ul>
+<li><strong>ワンペアの勝ち役は、人数が増えると減っていきます。</strong>2人で37.1%、3人で30.0%、5人で19.6%、9人で9.4%です。</li>
+<li><strong>ツーペアは、3人から9人まで最も多い勝ち役です。</strong>ただし、割合は33.9%（3人）から24.6%（9人）へ、ゆっくり下がります。</li>
+<li><strong>ストレートの勝ちが増えます。</strong>2人で8.0%、5人で15.0%、9人で20.1%です。9人では、ツーペアに次ぐ2番目に多い勝ち役です。</li>
+<li><strong>フルハウス以上で勝つ割合は、2人で5.1%、9人で15.8%</strong>です。9人でも、約6人に1人です。</li>
+</ul>
+<figure><div class="bg"><p class="bn">ツーペアで勝つ（9人）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:24.56%"></i></span><span class="bv">24.6%</span></div></div><div class="bg"><p class="bn">ストレートで勝つ（9人）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:20.06%"></i></span><span class="bv">20.1%</span></div></div><div class="bg"><p class="bn">スリーカードで勝つ（9人）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:16.72%"></i></span><span class="bv">16.7%</span></div></div><div class="bg"><p class="bn">フルハウスで勝つ（9人）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:14.26%"></i></span><span class="bv">14.3%</span></div></div><div class="bg"><p class="bn">フラッシュで勝つ（9人）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:13.44%"></i></span><span class="bv">13.4%</span></div></div><div class="bg"><p class="bn">ワンペアで勝つ（9人）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:9.39%"></i></span><span class="bv">9.4%</span></div></div><figcaption>※9人のときに勝つ役の上位6つ（％）</figcaption></figure>
+
+<h2 id="h-cum">勝つのに必要な役の目安</h2>
+<p>「その役以上で勝った割合」に直すと、勝つために何が要るかが読みやすくなります。</p>
+<div class="tw st"><table><caption>「その役以上」で勝つ割合（％）：勝つのに必要な役の目安</caption><tr><th scope="col">勝った役</th><th scope="col">2人</th><th scope="col">3人</th><th scope="col">4人</th><th scope="col">5人</th><th scope="col">6人</th><th scope="col">7人</th><th scope="col">8人</th><th scope="col">9人</th></tr><tr><th scope="row">ツーペア以上</th><td class="num">56.95</td><td class="num">68.07</td><td class="num">75.27</td><td class="num">80.22</td><td class="num">83.82</td><td class="num">86.59</td><td class="num">88.80</td><td class="num">90.61</td></tr><tr><th scope="row">スリーカード以上</th><td class="num">25.53</td><td class="num">34.15</td><td class="num">41.50</td><td class="num">47.82</td><td class="num">53.31</td><td class="num">58.11</td><td class="num">62.34</td><td class="num">66.05</td></tr><tr><th scope="row">ストレート以上</th><td class="num">18.34</td><td class="num">24.91</td><td class="num">30.46</td><td class="num">35.23</td><td class="num">39.40</td><td class="num">43.09</td><td class="num">46.37</td><td class="num">49.34</td></tr><tr><th scope="row">フラッシュ以上</th><td class="num">10.32</td><td class="num">14.12</td><td class="num">17.38</td><td class="num">20.24</td><td class="num">22.81</td><td class="num">25.15</td><td class="num">27.29</td><td class="num">29.27</td></tr><tr><th scope="row">フルハウス以上</th><td class="num">5.08</td><td class="num">7.08</td><td class="num">8.88</td><td class="num">10.50</td><td class="num">11.98</td><td class="num">13.36</td><td class="num">14.64</td><td class="num">15.83</td></tr><tr><th scope="row">ワンペア以下</th><td class="num">43.05</td><td class="num">31.93</td><td class="num">24.73</td><td class="num">19.78</td><td class="num">16.18</td><td class="num">13.41</td><td class="num">11.20</td><td class="num">9.39</td></tr></table></div>
+<p>※勝者の役がその役以上だった割合（％）。たとえば「ツーペア以上」の2人の列は、勝者がツーペア・スリーカード…のどれかだった割合です。</p>
+<figure><div class="bg"><p class="bn">2人（スリーカード以上で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:25.53%"></i></span><span class="bv">25.5%</span></div></div><div class="bg"><p class="bn">3人（スリーカード以上で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:34.15%"></i></span><span class="bv">34.2%</span></div></div><div class="bg"><p class="bn">4人（スリーカード以上で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:41.50%"></i></span><span class="bv">41.5%</span></div></div><div class="bg"><p class="bn">5人（スリーカード以上で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:47.82%"></i></span><span class="bv">47.8%</span></div></div><div class="bg"><p class="bn">6人（スリーカード以上で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:53.31%"></i></span><span class="bv">53.3%</span></div></div><div class="bg"><p class="bn">7人（スリーカード以上で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:58.11%"></i></span><span class="bv">58.1%</span></div></div><div class="bg"><p class="bn">8人（スリーカード以上で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:62.34%"></i></span><span class="bv">62.3%</span></div></div><div class="bg"><p class="bn">9人（スリーカード以上で勝つ）</p><div class="br"><span class="bl">割合</span><span class="bt"><i style="width:66.05%"></i></span><span class="bv">66.1%</span></div></div><figcaption>※勝者の役がスリーカード以上だった割合（％）。バーは0〜100%。</figcaption></figure>
+<ul>
+<li><strong>ツーペア以上は、2人の時点で勝者の過半数です（57.0%）。</strong>3人で68.1%、5人で80.2%、9人で90.6%です。</li>
+<li><strong>スリーカード以上が過半数になるのは、6人からです。</strong>5人は47.8%、6人は53.3%、9人は66.1%です。</li>
+<li><strong>ストレート以上は、9人でも49.3%</strong>で、過半数には届きません。フラッシュ以上は9人で29.3%です。</li>
+</ul>
+<p>注意：「勝つ役の分布」は、「その役を持っていれば勝てる確率」ではありません。たとえば、2人でワンペアが勝つのは37.1%ですが、ワンペアを持っている人が勝つ確率とは別の数字です。自分の手札別の勝率は、次の2本で見られます。</p>
+<ul>
+<li><a href="/hands/">スターティングハンド169通りの勝率表</a></li>
+<li><a href="/multiway/">人数別の勝率の一覧</a></li>
+</ul>
+
+<h2 id="h-why">1人の役の出方との違い</h2>
+<p>1人が7枚で作る役の出方（<a href="/yaku/">役の強さ一覧</a>の全数え上げ）と、勝者の役を並べました。</p>
+<div class="tw rw"><table><caption>1人の7枚の役の出方（全数え上げ）と、勝者の役の比較（％）</caption><tr><th scope="col">役</th><th scope="col">1人の7枚</th><th scope="col">勝者2人</th><th scope="col">勝者5人</th><th scope="col">勝者9人</th></tr><tr><th scope="row">ストレート<br>フラッシュ</th><td class="num">0.031</td><td class="num">0.061</td><td class="num">0.15</td><td class="num">0.26</td></tr><tr><th scope="row">フォーカード</th><td class="num">0.17</td><td class="num">0.31</td><td class="num">0.74</td><td class="num">1.32</td></tr><tr><th scope="row">フルハウス</th><td class="num">2.60</td><td class="num">4.70</td><td class="num">9.61</td><td class="num">14.26</td></tr><tr><th scope="row">フラッシュ</th><td class="num">3.03</td><td class="num">5.25</td><td class="num">9.74</td><td class="num">13.44</td></tr><tr><th scope="row">ストレート</th><td class="num">4.62</td><td class="num">8.02</td><td class="num">14.99</td><td class="num">20.06</td></tr><tr><th scope="row">スリーカード</th><td class="num">4.83</td><td class="num">7.19</td><td class="num">12.59</td><td class="num">16.72</td></tr><tr><th scope="row">ツーペア</th><td class="num">23.50</td><td class="num">31.42</td><td class="num">32.40</td><td class="num">24.56</td></tr><tr><th scope="row">ワンペア</th><td class="num">43.82</td><td class="num">37.12</td><td class="num">19.59</td><td class="num">9.39</td></tr><tr><th scope="row">ハイカード</th><td class="num">17.41</td><td class="num">5.93</td><td class="num">0.19</td><td class="num">0.0007</td></tr></table></div>
+<p>※勝者の列は100,000,000回ずつの実測値。ストレートフラッシュは、どの列もロイヤルフラッシュを含みます。</p>
+<ul>
+<li><strong>1人の7枚では、ワンペアが43.8%、ハイカードが17.4%、ツーペアが23.5%です。</strong>ストレートは4.6%、フラッシュは3.0%、フルハウスは2.6%にすぎません。</li>
+<li><strong>勝者は、全員の中の最強です。</strong>人数が増えるほど、「だれかがストレートやフラッシュを作っている」確率が上がるので、勝者の役が強いほうへ動きます。</li>
+<li>2人でも、ハイカード（1人の7枚では17.4%）で勝つのは5.9%に減ります。相手がペア以上を作ると、ハイカードでは負けるためです。</li>
+</ul>
+
+<h2 id="h-limit">この数字の使いどころと限界</h2>
+<ul>
+<li><strong>全員がランダムな手札で、最後まで残る前提です。</strong>実戦では、降りる人がいます。降りる人の手札は弱いことが多いと考えられるので、実戦の勝者の役の分布は、この表そのものにはなりません。この表は、何も選ばずに全員が残った場合の基準線です。</li>
+<li><strong>ボードに5枚目が出るまで見た場合の数字です。</strong>途中で全員が降りた回や、5枚目より前に決着した回は含まれません。</li>
+<li><strong>勝った役の分布で、役ごとの勝率ではありません。</strong>「ワンペアで勝てる割合」は、勝者の役がワンペアだった割合のことです。</li>
+<li><strong>ストレートフラッシュ・フォーカードなどまれな役は、回数が少なく、割合の誤差が相対的に大きくなります。</strong>表の小さい値は、1億回の中の回数が少ないものです（9人のハイカードは717回）。</li>
+<li><strong>これは強さの仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</strong>実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方と、確かめたこと</h2>
+<p>人数ごとに、全員にランダムな2枚ずつとボード5枚を配り、7枚から最強の5枚を選ぶ判定プログラム（C言語）で全員の役を比べ、いちばん強い役のカテゴリ（ハイカード〜ストレートフラッシュ）を数えました。2〜9人の各人数で100,000,000回ずつ行いています（乱数は固定シード）。判定プログラムは、<a href="/chop/">引き分けの確率</a>の記事と同じものです。</p>
+<p>確かめたこと。</p>
+<ol>
+<li><strong>役の出方が、全数え上げと合う。</strong>各回の1人目の7枚の役を数え、<a href="/yaku/">役の強さ一覧</a>の全数え上げ（7枚の全133,784,560通り）と比べました。2〜9人の9役×8人数＝72項目のうち、71項目は標準誤差の2.3倍以内に収まりました。唯一はずれたのは7人のスリーカード（標準誤差の3.7倍）で、シードを変えて3回やり直すと、すべて標準誤差の1.8倍以内でした。偶然のずれと判断しています。</li>
+<li><strong>別の方式のプログラムと合う。</strong>判定を「7枚から5枚を選ぶ全21通りの総当たり」、乱数を別の方式（splitmix64）、配り方を部分シャッフルに変えた別実装で、各人数を20,000,000回ずつ数えました。勝者の役の割合は、72項目すべてで差が標準誤差の2.1倍以内（最大の差は0.021ポイント）でした。</li>
+<li><strong>合計が100%。</strong>各人数で、9つの役の件数の合計が100,000,000回ちょうどになります。</li>
+<li><strong>引き分けの確率と合う。</strong>各回の最強の手を分け合った割合は、2人で4.068%、9人で9.752%で、<a href="/chop/">引き分けの確率</a>の記事の実測（別の乱数列）と、全人数で0.003ポイント以内で一致しました。</li>
+</ol>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>rahosbach「Texas Hold'em Simulation」<a href="https://rahosbach.github.io/2019-09-20-TexasHoldem">https://rahosbach.github.io/2019-09-20-TexasHoldem</a> （英語・最終の役ごとの勝ち＋引き分けの割合を、2〜10人で10万回ずつ。手札ではなく役を条件にした勝率の表で、勝者の役の分布は示していない。2026年11月23日に確認）</li>
+<li>PokerNews「Poker Hand Probabilities」<a href="https://www.pokernews.com/poker-hands/probabilities.htm">https://www.pokernews.com/poker-hands/probabilities.htm</a> （英語・7枚で各役が出る確率のみ。勝者の役の分布は無し。2026年11月23日に確認）</li>
+<li>gaming.net「ポーカーの役」<a href="https://www.gaming.net/ja/poker-hands/">https://www.gaming.net/ja/poker-hands/</a> （日本語・5枚の役の件数と確率のみ。人数別の勝者の分布は無し。2026年11月23日に確認）</li>
+<li>楽天ブログ「ポーカー プリフロップ勝率」<a href="https://plaza.rakuten.co.jp/theplayer/7000/">https://plaza.rakuten.co.jp/theplayer/7000/</a> （日本語・1対1のプリフロップ勝率。勝者の役の分布は無し。2026年11月23日に確認）</li>
+</ul>
+<p>取得できなかった資料：gameshub.com の日本語記事（HTTP 403）、Tang「Poker research paper」の付録（srs.amsi.org.au・PDFの本文を読み取れず）、Williamson の arXiv 論文2511.06145（同・読み取れず）。検索した範囲では、人数別に勝者の最終の役の割合を数字で示した日本語のページは見つかりませんでした（網羅的な調査ではありません）。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>ワンペア以下で勝つのは、2人で43.0%、9人で9.4%です。</li>
+<li>最多の勝ち役は、2人ならワンペア、3人以上ならツーペアです。ツーペア以上は2人から、スリーカード以上は6人から過半数になります。</li>
+<li>これは「全員が最後まで残る」基準線で、実戦の分布とは別です。</li>
+</ul>
+<p>次の1アクションは、自分の席の人数に合わせて<a href="/multiway/">人数別の勝率の一覧</a>で、よく配られるハンドの勝率を確かめることです。続きは次の2本です。</p>
+<ul>
+<li><a href="/hands/">スターティングハンド169通りの勝率表</a></li>
+<li><a href="/outs/">アウツの数え方と4-2の法則</a></li>
+</ul>
+<p><a class="cta" href="/">実戦モードで試してみる</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>勝つ役は何が多いですか？</h3>
+<p>全員がランダムな手札で最後まで残る場合、2人のときはワンペア（37.1%）、3人以上のときはツーペアが最も多い勝ち役です。9人ではツーペアが24.6%、ストレートが20.1%です。</p>
+<h3>ワンペアで勝てる割合は、人数が増えるとどうなりますか？</h3>
+<p>勝者の役がワンペアだった割合は、2人で37.1%、3人で30.0%、5人で19.6%、9人で9.4%と減っていきます。ワンペアかハイカードで勝つ割合の合計は、9人で9.4%です。</p>
+<h3>ツーペア以上が必要になるのは、何人からですか？</h3>
+<p>勝者の役がツーペア以上だった割合は、2人の時点で57.0%と過半数です。スリーカード以上が過半数になるのは6人から（53.3%）で、ストレート以上は9人でも49.3%にとどまります。</p>
+<h3>実戦でそのまま使えますか？</h3>
+<p>使えません。全員がランダムな手札で、最後まで残るという前提の実測値です。実戦では降りる人がいるので、勝者の役の分布は変わります。この表は、何も選ばずに全員が残った場合の基準線として読んでください。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
