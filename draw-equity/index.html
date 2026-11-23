@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>フラッシュドローの本当の勝率は？相手の手別に全990通りで数えた表｜対セットは27%、対トップペアは39%</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/draw-equity/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="フロップのドローが最後に勝つ確率を、相手の手別に残り2枚の全990通りで数えた。フラッシュドロー（アウツ9枚）はトップペアに38.9%、セットには27.4%。アウツ表の35%との差と、アウツを引いても負ける割合も。">
+<meta property="og:title" content="フラッシュドローの本当の勝率は？相手の手別に全990通りで数えた表｜対セットは27%、対トップペアは39%">
+<meta property="og:image" content="https://rule.shoubu-lab.com/og_draw_equity.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://rule.shoubu-lab.com/og_draw_equity.jpg">
+<meta property="og:description" content="フロップのドローが最後に勝つ確率を、相手の手別に残り2枚の全990通りで数えた。フラッシュドロー（アウツ9枚）はトップペアに38.9%、セットには27.4%。アウツ表の35%との差と、アウツを引いても負ける割合も。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/draw-equity/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"フラッシュドローの本当の勝率は？相手の手別に全990通りで数えた表｜対セットは27%、対トップペアは39%","description":"フロップのドローが最後に勝つ確率を、相手の手別に残り2枚の全990通りで数えた。フラッシュドロー（アウツ9枚）はトップペアに38.9%、セットには27.4%。アウツ表の35%との差と、アウツを引いても負ける割合も。","mainEntityOfPage":"https://rule.shoubu-lab.com/draw-equity/","inLanguage":"ja","datePublished":"2026-11-23T17:50:00+09:00","dateModified":"2026-11-23T17:50:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"フラッシュドローが最後に勝つ確率は、本当は何%ですか？","acceptedAnswer":{"@type":"Answer","text":"相手の手で変わります（実測）。この記事の1組では、相手がトップペアなら38.9%、ツーペアなら32.8%、セットなら27.4%でした。アウツ表の35.0%は、アウツ9枚のどれかを引く確率で、相手の手は考えていません。"}},{"@type":"Question","name":"アウツを引いたのに負けることはありますか？","acceptedAnswer":{"@type":"Answer","text":"あります（実測）。相手がセットのとき、フラッシュドローは完成した回の32.2%で負けました。ボードがペアになって、相手のフルハウスやフォーカードになるためです。相手がトップペアなら、2.2%です。"}},{"@type":"Question","name":"フラッシュ＋両面のコンボドローは、どのくらい強いですか？","acceptedAnswer":{"@type":"Answer","text":"実測では、アウツ15枚のコンボドローは、トップペアに56.8%、セットに40.3%でした。アウツ表の54.1%は、相手がペア1つのときだけ上回ります。"}},{"@type":"Question","name":"オーバーカード2枚は、ペアにどのくらい勝てますか？","acceptedAnswer":{"@type":"Answer","text":"この記事の1組の実測では、相手のトップペアに23.3%、オーバーペアに24.7%でした。ツーペアには4.9%、セットには1.6%しかありません。"}},{"@type":"Question","name":"この数字は実戦でそのまま使えますか？","acceptedAnswer":{"@type":"Answer","text":"使えません。相手の手札が分かっている前提の、フロップからリバーまでの勝率です。実戦では相手の手札が分からないので、持ちうる手の範囲で考える必要があります。この表は、アウツ表のずれの大きさを知るための目安として読んでください。"}}]}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月23日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ドローの本当の勝率は？フラッシュドロー・両面・ガットショットを、相手の手別に全部数えた</h1>
+<figure class="eye"><img src="/img/eye_table.webp" srcset="/img/eye_table-640.webp 640w, /img/eye_table.webp 1024w" sizes="(max-width:760px) 100vw, 728px" width="1024" height="576" fetchpriority="high" alt="緑のフェルトのポーカーテーブルを真上から見た図"><figcaption>画像はイメージ（AI生成のイラスト）</figcaption></figure>
+<div class="key"><p class="lead">残り2枚の全990通りを数えた実測です。フラッシュドロー（アウツ9枚）がフロップからリバーまでで勝つ確率は、相手がトップペアなら38.9%、ツーペアなら32.8%、セットなら27.4%でした。アウツ表の35.0%は「アウツを引く確率」で、相手の手が強くなるほど、引いても負ける回が増えます。</p></div>
+<p>この記事では、フロップで持つ5種類のドローが「最後に勝つ確率」を、相手の手別に数えました。「フラッシュドローは35%」と覚えていても、相手がセットなのか、トップペアなのかで、実際の数字は大きく動きます。その差を、数字で確かめる記事です。数字は、僕が作った判定プログラムで全部数えた実測値で、すべて仮想チップを使った練習用の例です。</p>
+<p>アウツそのものの数え方は<a href="/outs/">アウツの数え方と4-2の法則</a>、アウツから必要勝率を出す方法は<a href="/potodds/">ポットオッズの計算</a>に書きました。この記事は、その続きとして「相手の手が分かっているとき、アウツ表の数字はどれだけずれるか」を扱います。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-scn">使った5つのドローと相手の手</a></li>
+<li><a href="#h-eq">ドローが勝つ確率の一覧</a></li>
+<li><a href="#h-fd">フラッシュドローを相手の手別に見る</a></li>
+<li><a href="#h-lose">アウツを引いたのに負ける割合</a></li>
+<li><a href="#h-combo">コンボドローは、セットに強いか</a></li>
+<li><a href="#h-oc">オーバーカード2枚は、ペアに強くない</a></li>
+<li><a href="#h-limit">この数字の使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方と、確かめたこと</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li>全数え上げの実測では、フラッシュドローが勝つ確率は、相手がトップペアで38.9%、オーバーペアで39.3%、ツーペアで32.8%、セットで27.4%です。アウツ表の35.0%より高い相手も、低い相手もあります。</li>
+<li>実測では、フラッシュ＋両面（アウツ15枚）は、トップペアに56.8%、セットに40.3%です。アウツ表の54.1%は、トップペアとオーバーペアのときだけ上回ります。</li>
+<li>実測で、アウツを引いたのに負ける割合は、フラッシュドロー（相手がセット）で32.2%、ツーペアで18.9%、トップペアなら2.2%です。</li>
+<li>実測で、オーバーカード2枚（アウツ6枚）は、ペアに対しては約23〜25%ですが、ツーペアには4.9%、セットには1.6%しかありません。</li>
+<li>両面ドロー（アウツ8枚）がトップペアに勝つ確率は34.2%、ガットショット（アウツ4枚）は20.3%です。</li>
+</ul>
+<p>※具体的なボードと手札を1組ずつ決めて、残り2枚の全990通りを数えた値です。ボードや相手の手札が変わると、数ポイント動きます。アウツ表の値は、未見カード47枚で数える表の値です。</p>
+
+<h2 id="h-scn">使った5つのドローと相手の手</h2>
+<p>フロップの3枚と、自分と相手の手札を決めます。残りのカード（45枚）から、ターンとリバーに出る2枚の組み合わせ990通りを、すべて数えました。相手の手は、トップペア・オーバーペア・ツーペア・セットの4種類です。</p>
+<div class="tw rw"><table><caption>使った手札とボード（全部で5つのドロー）</caption><tr><th scope="col">ドロー</th><th scope="col" style="white-space:nowrap">アウツ</th><th scope="col">ボード</th><th scope="col" style="white-space:nowrap">自分の手札</th><th scope="col">相手の手札（トップペア／オーバーペア／ツーペア／セット）</th></tr><tr><th scope="row">フラッシュ<br>ドロー</th><td class="num">9枚</td><td><span style="white-space:nowrap">J♥ 8♦ 3♥</span></td><td>7♥ 6♥</td><td>J♠ Q♣／A♠ A♣／J♠ 8♣／J♠ J♣</td></tr><tr><th scope="row">両面<br>ストレート<br>ドロー</th><td class="num">8枚</td><td><span style="white-space:nowrap">J♥ 8♦ 3♣</span></td><td>T♠ 9♠</td><td>J♠ A♣／A♠ A♣／J♠ 8♣／J♠ J♣</td></tr><tr><th scope="row">ガット<br>ショット</th><td class="num">4枚</td><td><span style="white-space:nowrap">J♥ 8♦ 3♣</span></td><td>9♠ 7♠</td><td>J♠ A♣／A♠ A♣／J♠ 8♣／J♠ J♣</td></tr><tr><th scope="row">フラッシュ<br>＋両面</th><td class="num">15枚</td><td><span style="white-space:nowrap">J♥ 8♦ 3♥</span></td><td>T♥ 9♥</td><td>J♠ A♣／A♠ A♣／J♠ 8♣／J♠ J♣</td></tr><tr><th scope="row">オーバー<br>カード2枚</th><td class="num">6枚</td><td><span style="white-space:nowrap">J♥ 8♦ 3♣</span></td><td>A♠ K♠</td><td>J♠ T♣／Q♠ Q♣／J♠ 8♣／J♠ J♣</td></tr></table></div>
+<p>※ボードの1枚目のJ♥は全ドロー共通です。トップペアはJのペア、オーバーペアはAのペア（オーバーカード2枚の場合はQのペア）、ツーペアはJと8、セットはJ3枚です。「アウツ」は、ドローが完成するカードの枚数で、相手の手札に含まれる分は引きません。</p>
+
+<h2 id="h-eq">ドローが勝つ確率の一覧</h2>
+<p>自分が最後に勝つ確率は、ターンとリバーのどちらかでアウツを引く確率（アウツ表の値）と、相手の手によって、次のようになりました。</p>
+<div class="tw rw"><table><caption>ドローが最後に勝つ確率（％）：残り2枚の全990通りを数えた値</caption><tr><th scope="col">ドロー</th><th scope="col">アウツ表<br>の値</th><th scope="col">対トップ<br>ペア</th><th scope="col">対オーバー<br>ペア</th><th scope="col">対ツーペア</th><th scope="col">対セット</th></tr><tr><th scope="row">フラッシュ<br>ドロー</th><td class="num">35.0</td><td class="num">38.9</td><td class="num">39.3</td><td class="num">32.8</td><td class="num">27.4</td></tr><tr><th scope="row">両面<br>ストレート<br>ドロー</th><td class="num">31.5</td><td class="num">34.2</td><td class="num">34.2</td><td class="num">30.1</td><td class="num">25.9</td></tr><tr><th scope="row">ガット<br>ショット</th><td class="num">16.5</td><td class="num">20.3</td><td class="num">20.3</td><td class="num">17.8</td><td class="num">15.4</td></tr><tr><th scope="row">フラッシュ<br>＋両面</th><td class="num">54.1</td><td class="num">56.8</td><td class="num">56.3</td><td class="num">48.2</td><td class="num">40.3</td></tr><tr><th scope="row">オーバー<br>カード2枚</th><td class="num">24.1</td><td class="num">23.3</td><td class="num">24.7</td><td class="num">4.9</td><td class="num">1.6</td></tr></table></div>
+<p>※勝つ確率（％）。引き分けは、20組すべてで0回でした。アウツ表の値は、フラッシュ・両面・ガットショット・コンボは pokerskill.com の表（未見47枚）、オーバーカード2枚は同じ式（1−C(41,2)/C(47,2)）で計算しました。</p>
+<ul>
+<li><strong>ペア1つの相手には、アウツ表より高く出ます。</strong>フラッシュドローは対トップペアで38.9%（表は35.0%）、ガットショットは20.3%（表は16.5%）です。理由の1つは、表が未見47枚で数えるのに対し、ここは相手の2枚が見えていて残りが45枚であることです。もう1つは、アウツを引かなくても勝つ回があることです（対トップペアのフラッシュドローで3.3%、ガットショットで3.1%）。</li>
+<li><strong>ツーペアとセットには、表より低く出ます。</strong>フラッシュドロー対セットは27.4%、両面ドロー対セットは25.9%です。</li>
+<li><strong>相手がトップペアでもオーバーペアでも、数字はほとんど変わりません。</strong>フラッシュドローで38.9%と39.3%、両面ドローは同じ34.2%です。ペア1つの相手には、ペアの強さより、アウツの数が効きます。</li>
+</ul>
+
+<h2 id="h-fd">フラッシュドローを相手の手別に見る</h2>
+<p><strong>フラッシュドローが勝つ確率は、相手がペア1つなら約39%、ツーペアで33%、セットで27%まで下がります。</strong></p>
+<figure><div class="bg"><p class="bn">フラッシュドローが勝つ（対トップペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:38.89%"></i></span><span class="bv">38.9%</span></div></div><div class="bg"><p class="bn">フラッシュドローが勝つ（対オーバーペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:39.29%"></i></span><span class="bv">39.3%</span></div></div><div class="bg"><p class="bn">フラッシュドローが勝つ（対ツーペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:32.83%"></i></span><span class="bv">32.8%</span></div></div><div class="bg"><p class="bn">フラッシュドローが勝つ（対セット）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:27.37%"></i></span><span class="bv">27.4%</span></div></div><figcaption>※フラッシュドロー（7♥ 6♥）がフロップからリバーまでで勝つ確率。アウツ表の値は35.0%。バーは0〜100%。</figcaption></figure>
+<ul>
+<li>対トップペアは38.9%で、ターンかリバーでハートが出る確率（36.4%）より約2.5ポイント高くなります。ハートを引かなくても勝つ回が3.3%あるためです。</li>
+<li>対ツーペアは32.8%です。フルハウスを作られる回があり、ハートが出たのに負けた回が全体の6.9%あります。</li>
+<li>対セットは27.4%です。ボードがペアになると、相手のフルハウスやフォーカードがフラッシュより強くなります。</li>
+</ul>
+
+<h2 id="h-lose">アウツを引いたのに負ける割合</h2>
+<p><strong>相手の手が強いほど、アウツを引いても勝てない回が増えます。フラッシュドロー（対セット）では、完成した回の32%で負けます。</strong>アウツを引いた回のうち、最後に相手に負けた回の割合を並べます。</p>
+<div class="tw rw"><table><caption>アウツを引いたのに負ける割合（％）：アウツを引いた回のうち、相手に負けた回</caption><tr><th scope="col">ドロー</th><th scope="col">対トップ<br>ペア</th><th scope="col">対オーバー<br>ペア</th><th scope="col">対ツーペア</th><th scope="col">対セット</th></tr><tr><th scope="row">フラッシュ<br>ドロー</th><td class="num">2.2</td><td class="num">3.6</td><td class="num">18.9</td><td class="num">32.2</td></tr><tr><th scope="row">両面<br>ストレート<br>ドロー</th><td class="num">0.0</td><td class="num">0.0</td><td class="num">9.9</td><td class="num">21.0</td></tr><tr><th scope="row">ガット<br>ショット</th><td class="num">0.0</td><td class="num">0.0</td><td class="num">9.4</td><td class="num">20.0</td></tr><tr><th scope="row">フラッシュ<br>＋両面</th><td class="num">1.4</td><td class="num">2.3</td><td class="num">15.1</td><td class="num">28.1</td></tr><tr><th scope="row">オーバー<br>カード2枚</th><td class="num">12.0</td><td class="num">4.8</td><td class="num">86.7</td><td class="num">100.0</td></tr></table></div>
+<p>※割合（％）の分母は、ターンかリバーでアウツを1枚以上引いた回です。990通りのうち、フラッシュドローは360通り、両面ドローは324通り、ガットショットは170通りで、アウツを引きます（この数は、組み合わせの式 1−C(45−アウツ,2)/C(45,2) と一致しました）。</p>
+<ul>
+<li><strong>ペア1つの相手には、ほぼ負けません。</strong>フラッシュ・両面・ガットショットは、対トップペアで2.2%・0.0%・0.0%です。</li>
+<li><strong>ツーペアには約10〜19%、セットには約20〜32%の割合で負けます。</strong>負けた回は、ツーペア・セットの相手に対する全ドロー（コンボ含む）で、相手がフルハウスかフォーカードになった回でした（全回を調べて確認）。</li>
+<li><strong>同じ相手なら、フラッシュドローのほうが、ストレートドローより負ける割合が高く出ました。</strong>相手がセットのとき、フラッシュ32.2%、両面21.0%、ガットショット20.0%です。この差の原因までは、この記事では切り分けていません。</li>
+</ul>
+
+<h2 id="h-combo">コンボドローは、セットに強いか</h2>
+<p><strong>フラッシュ＋両面（アウツ15枚）は、対トップペアで56.8%、対セットで40.3%です。</strong>セットに対して、約4割は残ります。</p>
+<figure><div class="bg"><p class="bn">コンボドローが勝つ（対トップペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:56.77%"></i></span><span class="bv">56.8%</span></div></div><div class="bg"><p class="bn">コンボドローが勝つ（対オーバーペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:56.26%"></i></span><span class="bv">56.3%</span></div></div><div class="bg"><p class="bn">コンボドローが勝つ（対ツーペア）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:48.18%"></i></span><span class="bv">48.2%</span></div></div><div class="bg"><p class="bn">コンボドローが勝つ（対セット）</p><div class="br"><span class="bl">勝率</span><span class="bt"><i style="width:40.30%"></i></span><span class="bv">40.3%</span></div></div><figcaption>※フラッシュ＋両面（T♥ 9♥）。アウツ表の値は54.1%。バーは0〜100%。</figcaption></figure>
+<ul>
+<li>対トップペア・オーバーペアは56.8%・56.3%で、アウツ表（54.1%）より少し高く出ます。</li>
+<li>対ツーペア・セットは48.2%・40.3%で、表より低く出ます。アウツ15枚を引く回の約28%（対セット）は、フルハウスなどで負けます。</li>
+<li>同じアウツ15枚でも、ターンの時点では減ります。この記事はフロップから、残り2枚を見る場合の数字です。</li>
+</ul>
+
+<h2 id="h-oc">オーバーカード2枚は、ペアに強くない</h2>
+<p><strong>オーバーカード2枚（アウツ6枚）は、ペア1つの相手に23.3〜24.7%、ツーペアには4.9%、セットには1.6%です。</strong></p>
+<ul>
+<li>6枚のうちのどれかを引く確率は25.2%ですが、ペアに当たるだけでは、相手のペア（対トップペアならJ、対オーバーペアならQ）に勝つ回に限られます。対トップペアで12.0%、対オーバーペアで4.8%は、アウツを引いても負けます。</li>
+<li>相手がツーペア以上のとき、ペアを作っても負けます。対ツーペアで86.7%、対セットで100.0%が、アウツを引いたのに負ける回です。</li>
+<li>オーバーカード2枚は、「ドロー」と呼ばれても、ストレートやフラッシュを作るドローとは性質が違います。</li>
+</ul>
+
+<h2 id="h-limit">この数字の使いどころと限界</h2>
+<ul>
+<li><strong>具体的なカード1組での値です。</strong>ボードがペアになりやすいか、バックドアのドローが付くかで、数ポイント動きます。この記事の値は「相手の手が決まっているとき、アウツ表からどれだけずれるか」を見るためのものです。</li>
+<li><strong>相手の手札が分かっている前提です。</strong>実戦では、相手の手札は分かりません。相手が持ちうる手の範囲で平均した勝率は、この表の値とは別物です。</li>
+<li><strong>ターンとリバーのベットは、考えていません。</strong>ここで出したのはフロップからリバーまでのチェックダウンの勝率で、実際のお金の損得は、ベットの大きさで変わります。</li>
+<li><strong>引き分けは0回でした。</strong>この20組では、同点で分け合う回はありませんでした。</li>
+<li><strong>これは確率の仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</strong>実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方と、確かめたこと</h2>
+<p>20組（5つのドロー×相手の4種類の手）それぞれで、フロップ・自分・相手のカードを決めました。残りの45枚から2枚を選ぶ全990通りを数えています。乱数は使っていません。各通りで、7枚から最強の5枚を選んで、自分と相手の役を比べています。</p>
+<p>確かめたこと。</p>
+<ol>
+<li><strong>別の実装と、全20組で完全に一致。</strong>Python（役を数字の並びにして比べる方式）と、C言語（7枚から5枚を全21通り総当たりで判定し、ターンとリバーを順序つきで全列挙して2で割る方式）の2つで数えました。20組すべてで、勝ち・引き分け・負けの回数が一致しました（不一致0）。</li>
+<li><strong>公開されている1件の数字と一致。</strong>try-poker.com の例（9♥8♥ 対 K♠Q♣、ボードK♥7♥2♣）で、同じプログラムを走らせると39.8%になり、記事の「39.8%」と一致しました。</li>
+<li><strong>アウツを引く回数が式と一致。</strong>「アウツを1枚以上引く通り数」は、組み合わせの式 990−C(45−アウツ,2) と、5つのドロー全部で一致しました。</li>
+<li><strong>勝ち・負けの内訳が合計と合う。</strong>各組で、「アウツを引いて勝つ」＋「引かずに勝つ」が勝ちの総数と一致し、4つの内訳の合計が990通りになりました。</li>
+</ol>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>pokerskill.com「ポーカーの確率表：アウツ・ポットオッズ・エクイティ」<a href="https://www.pokerskill.com/charts/odds/">https://www.pokerskill.com/charts/odds/</a> （アウツ4・8・9・15枚のフロップからリバーまでの確率 16.5・31.5・35.0・54.1%。ドローと完成役の組み合わせ別の勝率は無し。2026年11月23日に確認）</li>
+<li>try-poker.com「Flush Draw in Poker」<a href="https://try-poker.com/flush-draw-the-unfinished-poker-hand/">https://try-poker.com/flush-draw-the-unfinished-poker-hand/</a> （9♥8♥ 対 K♠Q♣・ボードK♥7♥2♣で39.8%。ほかの相手の手との比較は無し。2026年11月23日に確認）</li>
+<li>riverodds.app「Poker Hand Matchup Odds」<a href="https://riverodds.app/poker-hand-matchups/">https://riverodds.app/poker-hand-matchups/</a> （ドロー対完成役の勝率を6組で掲載。カードの細部が不明な組があり、記事の数字とは照合していない。2026年11月23日に確認）</li>
+<li>ameblo「シチュエーションごとの勝率B フロップ編」<a href="https://ameblo.jp/aquapoker/entry-11527050903.html">https://ameblo.jp/aquapoker/entry-11527050903.html</a> （日本語・ワンペア対フラッシュドローの勝率を数字で掲載。計算条件は不明。検索結果の説明文で確認し、ページ本文は読んでいない）</li>
+</ul>
+<p>検索した範囲では、ドロー5種類を相手の手4種類別に、アウツを引いても負ける割合まで数字で示した日本語のページは見つかりませんでした（網羅的な調査ではありません）。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>フラッシュドローが勝つ確率は、対トップペア38.9%、対ツーペア32.8%、対セット27.4%と、相手の手で動きます。</li>
+<li>アウツを引いても、相手がツーペア以上だと10〜32%の割合で負けます。</li>
+<li>アウツ表は、相手の手が決まっていないときの目安です。相手の手が見えているときは、この記事の表のように下がります。</li>
+</ul>
+<p>次の1アクションは、<a href="/potodds/">ポットオッズの計算</a>で、自分のドローの勝率と、相手のベットに必要な勝率を比べることです。続きは次の3本です。</p>
+<ul>
+<li><a href="/outs/">アウツの数え方と4-2の法則</a></li>
+<li><a href="/flop-hit/">フロップでセットやペアが当たる確率</a></li>
+<li><a href="/winning-hand/">勝つ役は何か（人数別の勝者の役の分布）</a></li>
+</ul>
+<p><a class="cta" href="/potodds/">ポットオッズの計算へ</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>フラッシュドローが最後に勝つ確率は、本当は何%ですか？</h3>
+<p>相手の手で変わります（実測）。この記事の1組では、相手がトップペアなら38.9%、ツーペアなら32.8%、セットなら27.4%でした。アウツ表の35.0%は、アウツ9枚のどれかを引く確率で、相手の手は考えていません。</p>
+<h3>アウツを引いたのに負けることはありますか？</h3>
+<p>あります（実測）。相手がセットのとき、フラッシュドローは完成した回の32.2%で負けました。ボードがペアになって、相手のフルハウスやフォーカードになるためです。相手がトップペアなら、2.2%です。</p>
+<h3>フラッシュ＋両面のコンボドローは、どのくらい強いですか？</h3>
+<p>実測では、アウツ15枚のコンボドローは、トップペアに56.8%、セットに40.3%でした。アウツ表の54.1%は、相手がペア1つのときだけ上回ります。</p>
+<h3>オーバーカード2枚は、ペアにどのくらい勝てますか？</h3>
+<p>この記事の1組の実測では、相手のトップペアに23.3%、オーバーペアに24.7%でした。ツーペアには4.9%、セットには1.6%しかありません。</p>
+<h3>この数字は実戦でそのまま使えますか？</h3>
+<p>使えません。相手の手札が分かっている前提の、フロップからリバーまでの勝率です。実戦では相手の手札が分からないので、持ちうる手の範囲で考える必要があります。この表は、アウツ表のずれの大きさを知るための目安として読んでください。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
