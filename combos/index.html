@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ポーカーのコンボ数とブロッカー：AKは16通り、自分がAを持つと相手は12通りに</title>
+<title>ポーカーのコンボ数とブロッカー：AKは16通り、Aを1枚持つと相手のAKは12通りに</title>
 <link rel="canonical" href="https://rule.shoubu-lab.com/combos/">
 <meta property="og:site_name" content="ポーカー・トレーナー">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="スターティングハンド1326通りの内訳（AA6・AKs4・AKo12）と、自分の手札・フロップを見たあとに相手のAA・KK・AKが何通りに減るかを全部数えた表。Aを1枚持つとAAは6→3通りで408回に1回、KKを持つとAAは6通りのままで、確率はわずかに上がる。フラッシュのブロッカーも。">
-<meta property="og:title" content="ポーカーのコンボ数とブロッカー：AKは16通り、自分がAを持つと相手は12通りに">
+<meta property="og:title" content="ポーカーのコンボ数とブロッカー：AKは16通り、Aを1枚持つと相手のAKは12通りに">
 <meta property="og:image" content="https://rule.shoubu-lab.com/og_combos.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -17,7 +17,7 @@
 <meta property="og:description" content="スターティングハンド1326通りの内訳（AA6・AKs4・AKo12）と、自分の手札・フロップを見たあとに相手のAA・KK・AKが何通りに減るかを全部数えた表。Aを1枚持つとAAは6→3通りで408回に1回、KKを持つとAAは6通りのままで、確率はわずかに上がる。フラッシュのブロッカーも。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://rule.shoubu-lab.com/combos/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ポーカーのコンボ数とブロッカー：AKは16通り、自分がAを持つと相手は12通りに","description":"スターティングハンド1326通りの内訳（AA6・AKs4・AKo12）と、自分の手札・フロップを見たあとに相手のAA・KK・AKが何通りに減るかを全部数えた表。Aを1枚持つとAAは6→3通りで408回に1回、KKを持つとAAは6通りのままで、確率はわずかに上がる。フラッシュのブロッカーも。","mainEntityOfPage":"https://rule.shoubu-lab.com/combos/","inLanguage":"ja","datePublished":"2026-11-25T11:00:00+09:00","dateModified":"2026-11-25T11:00:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ポーカーのコンボ数とブロッカー：AKは16通り、Aを1枚持つと相手のAKは12通りに","description":"スターティングハンド1326通りの内訳（AA6・AKs4・AKo12）と、自分の手札・フロップを見たあとに相手のAA・KK・AKが何通りに減るかを全部数えた表。Aを1枚持つとAAは6→3通りで408回に1回、KKを持つとAAは6通りのままで、確率はわずかに上がる。フラッシュのブロッカーも。","mainEntityOfPage":"https://rule.shoubu-lab.com/combos/","inLanguage":"ja","datePublished":"2026-11-25T11:00:00+09:00","dateModified":"2026-11-25T11:00:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
 <link rel="stylesheet" href="/_legal.css">
 <!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
 <script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
@@ -178,7 +178,7 @@ h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
 <h2 id="h-limit">この数字の使いどころと限界</h2>
 <ul>
 <li>相手の手札を、すべて同じ重みで数えています。実戦では、相手が持つハンドに偏りがあります。たとえば、AQoをコールしない相手に、AQoの通り数を数えても意味がありません。この表は「持てる上限」を知るためのものです。</li>
-<li>通り数は、確率ではありません。確率にするには、相手の合計で割ります。この記事の表3で、その計算をしました。</li>
+<li>通り数は、確率ではありません。確率にするには、相手の合計で割ります。この記事の確率の表で、その計算をしました。</li>
 <li><strong>これは確率の仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</strong>実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
 </ul>
 
