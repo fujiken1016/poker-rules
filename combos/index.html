@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ポーカーのコンボ数とブロッカー：AKは16通り、自分がAを持つと相手は12通りに</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/combos/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="スターティングハンド1326通りの内訳（AA6・AKs4・AKo12）と、自分の手札・フロップを見たあとに相手のAA・KK・AKが何通りに減るかを全部数えた表。Aを1枚持つとAAは6→3通りで408回に1回、KKを持つとAAは6通りのままで、確率はわずかに上がる。フラッシュのブロッカーも。">
+<meta property="og:title" content="ポーカーのコンボ数とブロッカー：AKは16通り、自分がAを持つと相手は12通りに">
+<meta property="og:image" content="https://rule.shoubu-lab.com/og_combos.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://rule.shoubu-lab.com/og_combos.jpg">
+<meta property="og:description" content="スターティングハンド1326通りの内訳（AA6・AKs4・AKo12）と、自分の手札・フロップを見たあとに相手のAA・KK・AKが何通りに減るかを全部数えた表。Aを1枚持つとAAは6→3通りで408回に1回、KKを持つとAAは6通りのままで、確率はわずかに上がる。フラッシュのブロッカーも。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/combos/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ポーカーのコンボ数とブロッカー：AKは16通り、自分がAを持つと相手は12通りに","description":"スターティングハンド1326通りの内訳（AA6・AKs4・AKo12）と、自分の手札・フロップを見たあとに相手のAA・KK・AKが何通りに減るかを全部数えた表。Aを1枚持つとAAは6→3通りで408回に1回、KKを持つとAAは6通りのままで、確率はわずかに上がる。フラッシュのブロッカーも。","mainEntityOfPage":"https://rule.shoubu-lab.com/combos/","inLanguage":"ja","datePublished":"2026-11-25T11:00:00+09:00","dateModified":"2026-11-25T11:00:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月25日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>ポーカーのコンボ数は？AKは16通り、自分の手札で相手のハンドが何通り減るか</h1>
+<figure class="eye"><img src="/img/eye_table.webp" srcset="/img/eye_table-640.webp 640w, /img/eye_table.webp 1024w" sizes="(max-width:760px) 100vw, 728px" width="1024" height="576" fetchpriority="high" alt="緑のフェルトのポーカーテーブルを真上から見た図"><figcaption>画像はイメージ（AI生成のイラスト）</figcaption></figure>
+<div class="key"><p class="lead">結論：AAは6通り、AKは16通りです。自分がAKoを持つと、相手のAAは3通り、AKは9通りに減ります。数字は、ポーカーの組み合わせを全部数え上げた計算です。自分がKKを持つと、相手のAAは6通りのままで、相手の手の合計だけが1,225通りに減るので、AAの確率は少し上がります。</p></div>
+<p>「AKは16通り」「Aを持つと12通り」という数字は、ポーカーのレンジを読む人が毎回使います。ただ、自分の手札や場のカードで、相手のAAやKKが何通りに変わるかを、ハンド別にまとめた表は見つかりませんでした。この記事では、それを全部数えて表にしました。</p><p>用語を先に決めます。コンボとは、同じ強さのハンドのカードの組み合わせ数です。ブロッカーとは、自分が持っているカードのうち、相手のコンボを減らすカードのことです。数え方は難しくありません。自分が見えているカードを引いて、残りで数えるだけです。</p><p>確率の計算は<a href="/outs/">アウツの数え方</a>と<a href="/flop-hit/">フロップのヒット確率</a>、強さの比較は<a href="/hands/">169通りの勝率表</a>に書きました。この記事は、その手前の「相手が何を持てるか」の数え方を扱います。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-base">何も見えていないときの数え方</a></li>
+<li><a href="#h-hero">自分の手札を見ると、相手のハンドは何通りに減るか</a></li>
+<li><a href="#h-prob">AAを持たれている確率は、どう変わるか</a></li>
+<li><a href="#h-board">フロップが出ると、さらに減る</a></li>
+<li><a href="#h-flush">フラッシュのブロッカー：A♥を持つと何が変わるか</a></li>
+<li><a href="#h-limit">この数字の使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方と、確かめたこと</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<ul>
+<li>何も見えていないとき、AAは6通り、AKsは4通り、AKoは12通り、AK全体は16通りです。スターティングハンドは全部で1,326通りです。</li>
+<li>自分がAKoを持つと、相手のAAは3通り、AKは9通り（AKsが2、AKoが7）に減ります。相手の手の合計も1,225通りに減ります。</li>
+<li>自分がKKを持っていても、相手のAAは6通りのままです。合計が1,225通りに減るので、AAの確率は0.452%から0.490%へ、わずかに上がります。</li>
+<li>フロップがA♠K♥2♦なら、相手のAAは3通り、KKは3通り、AKは9通りです。</li>
+<li>フロップがK♥9♥4♥のとき、相手のフラッシュは45通りです。自分がA♥を持つと36通りに減り、ナッツ（A♥を含むフラッシュ）は0通りになります。</li>
+</ul>
+<p>※相手の手札を、持てるものすべて同じ重みで数えた値です。実戦の相手は、持ちうる手に偏りがあります。数え方は「この数字の数え方と、確かめたこと」に書きました。</p>
+
+<h2 id="h-base">何も見えていないときの数え方</h2>
+<p><strong>ポケットペアは6通り、スーテッドは4通り、オフスートは12通りで、合計は1,326通りです。</strong>カードは1つの数字に4枚（♠♥♦♣）あるので、AAは4枚から2枚を選ぶ組み合わせで6通りです。AKsは、同じマークのAとKを選ぶので4通りです。AKoは、違うマークのAとKを選ぶので4×3＝12通りです。</p>
+<div class="tw rw"><table><caption>スターティングハンド1326通りの内訳（169種類）</caption><tr><th scope="col">種類</th><th scope="col">1種類あたりの通り</th><th scope="col">種類数</th><th scope="col">通り数の合計</th></tr><tr><th scope="row">ポケットペア（AAなど）</th><td class="num">6</td><td class="num">13</td><td class="num">78</td></tr><tr><th scope="row">スーテッド（AKsなど）</th><td class="num">4</td><td class="num">78</td><td class="num">312</td></tr><tr><th scope="row">オフスート（AKoなど）</th><td class="num">12</td><td class="num">78</td><td class="num">936</td></tr><tr><th scope="row">合計</th><td class="num">―</td><td class="num">169</td><td class="num">1,326</td></tr></table></div>
+<p>※169種類は、ポケットペア13種類、スーテッド78種類、オフスート78種類です。通り数の合計は、78＋312＋936＝1,326です。</p>
+<p>AKは、AKsとAKoを合わせて16通りです。式にすると、Aが4枚、Kが4枚で、4×4＝16です。ここから、見えているカードを引いていくのが、ブロッカーの数え方です。</p>
+
+<h2 id="h-hero">自分の手札を見ると、相手のハンドは何通りに減るか</h2>
+<p><strong>自分がAを1枚持つと、相手のAAは6通りから3通りに、AKは16通りから12通りに減ります。AKを両方持つと、相手のAKは9通りまで減ります。</strong>自分の手札2枚を引いた残り50枚で、相手の2枚を数えた値が次の表です。</p>
+<div class="tw rw"><table><caption>自分の手札を見たとき、相手が持てるハンドの通り数</caption><tr><th scope="col">自分の手札</th><th scope="col" style="white-space:nowrap">相手のAA</th><th scope="col" style="white-space:nowrap">相手のKK</th><th scope="col" style="white-space:nowrap">相手のQQ</th><th scope="col" style="white-space:nowrap">相手のAKs</th><th scope="col" style="white-space:nowrap">相手のAKo</th><th scope="col" style="white-space:nowrap">相手の合計</th></tr><tr><th scope="row">何も見えていない</th><td class="num">6</td><td class="num">6</td><td class="num">6</td><td class="num">4</td><td class="num">12</td><td class="num">1,326</td></tr><tr><th scope="row">自分がAA</th><td class="num">1</td><td class="num">6</td><td class="num">6</td><td class="num">2</td><td class="num">6</td><td class="num">1,225</td></tr><tr><th scope="row">自分がKK</th><td class="num">6</td><td class="num">1</td><td class="num">6</td><td class="num">2</td><td class="num">6</td><td class="num">1,225</td></tr><tr><th scope="row">自分がQQ</th><td class="num">6</td><td class="num">6</td><td class="num">1</td><td class="num">4</td><td class="num">12</td><td class="num">1,225</td></tr><tr><th scope="row">自分がAKs</th><td class="num">3</td><td class="num">3</td><td class="num">6</td><td class="num">3</td><td class="num">6</td><td class="num">1,225</td></tr><tr><th scope="row">自分がAKo</th><td class="num">3</td><td class="num">3</td><td class="num">6</td><td class="num">2</td><td class="num">7</td><td class="num">1,225</td></tr><tr><th scope="row">自分がAQo</th><td class="num">3</td><td class="num">6</td><td class="num">3</td><td class="num">3</td><td class="num">9</td><td class="num">1,225</td></tr><tr><th scope="row">自分がKQs</th><td class="num">6</td><td class="num">3</td><td class="num">3</td><td class="num">3</td><td class="num">9</td><td class="num">1,225</td></tr><tr><th scope="row">自分が77・JTs・72o（A・K・Qを持たない手）</th><td class="num">6</td><td class="num">6</td><td class="num">6</td><td class="num">4</td><td class="num">12</td><td class="num">1,225</td></tr></table></div>
+<p>※相手の合計は、自分の2枚を引いた残りの50枚から2枚を選ぶ組み合わせで、50×49÷2＝1,225通りです。AAを持っているとAAは1通り、KKを持っていてもAAは6通りです。</p>
+<ul>
+<li>Aを1枚持つと、相手のAAは半分になります。AKo、AKs、AQoのどれでも、AAは6通りから3通りです。</li>
+<li>AAを持つと、相手のAAは1通りです。残りのAが2枚だけなので、組み合わせは1通りしかありません。</li>
+<li>AKを両方持つと、相手のAKは9通りになります。残りのAが3枚、Kが3枚で、3×3＝9通りです。この9通りのうち、スーテッドは、自分がAKsなら3通り、AKoなら2通りです。</li>
+<li>A・K・Qを持たない手では、AA・KK・QQ・AKは何も減りません。77でも、JTsでも、72oでも、表の値は同じ6・6・6・4・12です。</li>
+</ul>
+
+<h2 id="h-prob">AAを持たれている確率は、どう変わるか</h2>
+<p><strong>AAを持たれている確率は、何も見えていないと0.452%（221回に1回）です。自分がAKoなら0.245%（408回に1回）に半分近く下がります。</strong>ただし、KKを持っているときは、下がりません。</p>
+<div class="tw rw"><table><caption>相手がAAを持っている確率（相手の手札を無作為に1つ選んだとき）</caption><tr><th scope="col">自分の手札</th><th scope="col">相手のAAの通り数</th><th scope="col">相手の合計</th><th scope="col">確率</th><th scope="col">何回に1回</th></tr><tr><th scope="row">何も見えていない</th><td class="num">6</td><td class="num">1,326</td><td class="num">0.452%</td><td class="num">221回</td></tr><tr><th scope="row">自分がAKo（Aを1枚持つ）</th><td class="num">3</td><td class="num">1,225</td><td class="num">0.245%</td><td class="num">408回</td></tr><tr><th scope="row">自分がKK</th><td class="num">6</td><td class="num">1,225</td><td class="num">0.490%</td><td class="num">204回</td></tr><tr><th scope="row">自分がAA</th><td class="num">1</td><td class="num">1,225</td><td class="num">0.082%</td><td class="num">1,225回</td></tr></table></div>
+<p>※確率＝相手のAAの通り数÷相手の合計。相手の手札を、残りのカードから無作為に選ぶ場合の値です。</p>
+<figure><div class="bg"><p class="bn">何も見えていない</p><div class="br"><span class="bl">相手のAA</span><span class="bt"><i style="width:100.00%"></i></span><span class="bv">100%</span></div></div><div class="bg"><p class="bn">自分がAKo（Aを1枚持つ）</p><div class="br"><span class="bl">相手のAA</span><span class="bt"><i style="width:50.00%"></i></span><span class="bv">50%</span></div></div><div class="bg"><p class="bn">自分がKK</p><div class="br"><span class="bl">相手のAA</span><span class="bt"><i style="width:100.00%"></i></span><span class="bv">100%</span></div></div><div class="bg"><p class="bn">自分がAA</p><div class="br"><span class="bl">相手のAA</span><span class="bt"><i style="width:16.67%"></i></span><span class="bv">17%</span></div></div><figcaption>※相手のAAの通り数が、何も見えていないときの6通りの何%に残るか。KKを持っていてもAAの通り数は減りません。</figcaption></figure>
+<ul>
+<li>KKを持つと、相手のAAは6通りのままです。合計だけが1,326通りから1,225通りに減るので、確率は0.452%から0.490%へ上がります。</li>
+<li>AAを持つと、相手のAAは0.082%（1,225回に1回）です。自分のAAが、相手のAAをほぼ消します。</li>
+<li>「自分がKKだと、相手のAAが減る」と思いがちですが、減るのはKKのほうです（6通りから1通り）。</li>
+</ul>
+
+<h2 id="h-board">フロップが出ると、さらに減る</h2>
+<p><strong>フロップにAが1枚出ると、相手のAAは3通り、AKは12通りに減ります。AとKの両方が出ると、AKは9通りです。</strong>自分の手札は考えず、フロップの3枚だけを引いた表です（残り49枚、相手の合計は1,176通り）。</p>
+<div class="tw rw"><table><caption>フロップが出たときの、相手のハンドの通り数（自分の手札は考えない）</caption><tr><th scope="col">フロップ</th><th scope="col" style="white-space:nowrap">AA</th><th scope="col" style="white-space:nowrap">KK</th><th scope="col" style="white-space:nowrap">AK（sとo合計）</th><th scope="col" style="white-space:nowrap">AQ（同）</th><th scope="col" style="white-space:nowrap">77</th><th scope="col">相手の合計</th></tr><tr><th scope="row">A♠7♦2♣</th><td class="num">3</td><td class="num">6</td><td class="num">12</td><td class="num">12</td><td class="num">3</td><td class="num">1,176</td></tr><tr><th scope="row">K♠9♥4♦</th><td class="num">6</td><td class="num">3</td><td class="num">12</td><td class="num">16</td><td class="num">6</td><td class="num">1,176</td></tr><tr><th scope="row">A♠K♥2♦</th><td class="num">3</td><td class="num">3</td><td class="num">9</td><td class="num">12</td><td class="num">6</td><td class="num">1,176</td></tr></table></div>
+<p>※AK、AQは、スーテッドとオフスートの合計です。77は、フロップに7が1枚あるときだけ3通りになります。</p>
+<ul>
+<li>フロップがA♠7♦2♣のとき、AAは3通り、AKは12通りです。AAは、3通りしか残りません。</li>
+<li>フロップがK♠9♥4♦のとき、KKは3通り、AAは6通りのままです。</li>
+<li>フロップがA♠K♥2♦のとき、AAは3通り、KKも3通り、AKは9通りです。9通りのうち、スーテッドが2通り、オフスートが7通りです。</li>
+<li>ボードに出たカードも、自分の手札のカードも、相手は持てません。両方を引いて数えます。</li>
+</ul>
+
+<h2 id="h-flush">フラッシュのブロッカー：A♥を持つと何が変わるか</h2>
+<p><strong>フロップがK♥9♥4♥のとき、相手がフラッシュを持てるのは45通りです。自分がハートを1枚持つと36通り、2枚持つと28通りに減ります。</strong>ハートは13枚で、3枚がフロップに出ているので、残りは10枚です。10枚から2枚を選ぶ組み合わせが、10×9÷2＝45通りです。</p>
+<div class="tw rw"><table><caption>フロップがK♥9♥4♥のとき、相手が持てるフラッシュの通り数</caption><tr><th scope="col">自分の手札</th><th scope="col">相手のフラッシュ</th><th scope="col">うちナッツ（A♥を含む）</th></tr><tr><th scope="row">何も見えていない（ボードだけ）</th><td class="num">45</td><td class="num">9</td></tr><tr><th scope="row">ハートなし（7♠7♦）</th><td class="num">45</td><td class="num">9</td></tr><tr><th scope="row">ハート1枚（7♥ 2♠）</th><td class="num">36</td><td class="num">8</td></tr><tr><th scope="row">ハート1枚がA♥（A♥ 2♠）</th><td class="num">36</td><td class="num">0</td></tr><tr><th scope="row">ハート2枚（7♥ 2♥）</th><td class="num">28</td><td class="num">7</td></tr><tr><th scope="row">ハート2枚にA♥（A♥ 2♥）</th><td class="num">28</td><td class="num">0</td></tr></table></div>
+<p>※フラッシュは、ハートを2枚持つ手の通り数です（ストレートフラッシュの可能性は、このボードでは考えていません）。ナッツは、A♥を含む手です。</p>
+<ul>
+<li>A♥を持つと、相手のナッツフラッシュは0通りになります。フラッシュの総数は、7♥を持つ場合と同じ36通りで、減り方は変わりません。変わるのは、ナッツがなくなることです。</li>
+<li>A♥以外のハートを1枚持つと、フラッシュは45→36通り、ナッツは9→8通りに減ります。ナッツは1通りしか減りません。</li>
+<li>自分がハートを2枚持つと、フラッシュは28通りで、ボードだけのときの約6割（62%）です。</li>
+</ul>
+<p>相手のコンボを減らす考え方は、自分が持っているカードで「相手が持てなくなる強い手」を探すことです。ここで数えたのは通り数だけです。ブロッカーを持っているとき、どう打つかは、この記事の範囲外です。</p>
+
+<h2 id="h-limit">この数字の使いどころと限界</h2>
+<ul>
+<li>相手の手札を、すべて同じ重みで数えています。実戦では、相手が持つハンドに偏りがあります。たとえば、AQoをコールしない相手に、AQoの通り数を数えても意味がありません。この表は「持てる上限」を知るためのものです。</li>
+<li>通り数は、確率ではありません。確率にするには、相手の合計で割ります。この記事の表3で、その計算をしました。</li>
+<li><strong>これは確率の仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</strong>実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方と、確かめたこと</h2>
+<p>52枚のカードから、自分の手札とボードの見えているカードを引きます。残りのカードから2枚を選ぶ組み合わせを、すべて並べて、ハンドの種類（AA・AKs・AKoなど）ごとに数えました。乱数は使っていません。</p>
+<p>確かめたこと。</p>
+<ol>
+<li>式と全数え上げが、全169種類で一致しました。何も見えていない状態で、ポケットペアは6、スーテッドは4、オフスートは12になりました。合計は1,326で、78＋312＋936と一致しました。</li>
+<li>公開されている数字と、4つの数字で一致しました。thepokerbank.com の例（手札K♠Q♦・ボードK♥T♣4♦で、相手のAKが8通り・TTが3通り）と、別のボードA♠T♦2♣（自分の手札は見ない場合）でAKが12通り・TTが3通りという値です。</li>
+<li>日本語の解説と一致しました。note.com の翻訳記事にある、ボードA♠K♥2♦でAAが3通り、AKが9通り（AKsが2、AKoが7）、AQが12通りという数字と、同じ値になりました。</li>
+<li>相手の合計が、式と一致しました。自分の手札を見たあとは1,225通り、フロップを見たあとは1,176通りで、50×49÷2、49×48÷2と一致しました。</li>
+</ol>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>thepokerbank.com「Hand Combinations (Combinatorics)」<a href="https://www.thepokerbank.com/strategy/mathematics/hand-combinations/">https://www.thepokerbank.com/strategy/mathematics/hand-combinations/</a> （1326通り、AA6・AK16・スーテッド4・オフスート12。ボード別の例は載るが、自分の手札別の表は無し。2026年11月25日に確認）</li>
+<li>note.com「【翻訳】A Beginner’s Guide to Poker Combinatorics」<a href="https://note.com/2022abc/n/n16688a8f1e54">https://note.com/2022abc/n/n16688a8f1e54</a> （ボードのデッドカードとAAの3通り・AKの9通りの例。自分の手札別の表は本文に無し。2026年11月25日に確認）</li>
+</ul>
+<p>検索した範囲では、自分のハンド別に、相手のAA・KK・AKのコンボ数を並べた日本語の表は見つかりませんでした（網羅的な調査ではありません）。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>AAは6通り、AKは16通りです。Aを1枚持つと、相手のAAは3通り、AKは12通りに減ります。</li>
+<li>KKを持っても、相手のAAは減りません。AAの確率は、わずかに上がります。</li>
+<li>フラッシュのブロッカーは、相手の通り数を減らします。A♥を持つと、ナッツフラッシュが0通りになります。</li>
+</ul>
+<p>次の1アクションは、<a href="/hand-range/">スターティングハンド上位何%</a>で、相手のレンジが全体の何通りにあたるか確かめることです。続きは次の3本です。</p>
+<ul>
+<li><a href="/hands/">169通りの対ランダム勝率表</a></li>
+<li><a href="/board-texture/">フロップ・ターン・リバーのボードの出方</a></li>
+<li><a href="/preflop-equity/">プリフロップの勝率（AA対KKなど）</a></li>
+</ul>
+<p><a class="cta" href="/hand-range/">スターティングハンド上位何%を見る</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<h3>ポーカーでAKは何通りですか？</h3>
+<p>AKは全部で16通りです。内訳は、同じマークのAKs（スーテッド）が4通り、違うマークのAKo（オフスート）が12通りです。AAは6通りです。</p>
+<h3>自分がAを持つと、相手のAAは何通りに減りますか？</h3>
+<p>AAは6通りから3通りに減ります。自分がAKoを持つ場合、相手のAKも16通りから9通りに減ります（AKsが2通り、AKoが7通り）。</p>
+<h3>自分がKKを持つと、相手のAAは減りますか？</h3>
+<p>減りません。相手のAAは6通りのままです。相手の手の合計が1,326通りから1,225通りに減るので、AAを持たれている確率は0.452%から0.490%へ、わずかに上がります。</p>
+<h3>ブロッカーとは何ですか？</h3>
+<p>自分が持っているカードのうち、相手が持てるコンボを減らすカードのことです。たとえばA♥を持つと、相手はA♥を含むハンド（ナッツフラッシュなど）を持てません。</p>
+<h3>この数字は実戦でそのまま使えますか？</h3>
+<p>使えません。相手の手札を、持てるものすべて同じ重みで数えた値です。実戦では、相手が持つハンドに偏りがあるので、「持てる上限」を知る目安として読んでください。</p>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
