@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ホールデムの最終役の確率｜AAの36%はワンペアのまま、AKsの最終役がフラッシュは6.5%</title>
+<link rel="canonical" href="https://rule.shoubu-lab.com/final-hand/">
+<meta property="og:site_name" content="ポーカー・トレーナー">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="ホールデムで、手札169種類ごとに「リバーを開き終えたときの最終役」の確率を全2,118,760通りのボードで数えた表。AAは36.0%がワンペアのまま・ツーペア以上は64.0%、AKsの最終役がフラッシュは6.5%（AKoは2.0%）、JTsはストレートが8.6%。">
+<meta property="og:title" content="ホールデムの最終役の確率｜AAの36%はワンペアのまま、AKsの最終役がフラッシュは6.5%">
+<meta property="og:image" content="https://rule.shoubu-lab.com/og_final_hand.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:image" content="https://rule.shoubu-lab.com/og_final_hand.jpg">
+<meta property="og:description" content="ホールデムで、手札169種類ごとに「リバーを開き終えたときの最終役」の確率を全2,118,760通りのボードで数えた表。AAは36.0%がワンペアのまま・ツーペア以上は64.0%、AKsの最終役がフラッシュは6.5%（AKoは2.0%）、JTsはストレートが8.6%。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://rule.shoubu-lab.com/final-hand/">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"ホールデムの最終役の確率｜AAの36%はワンペアのまま、AKsの最終役がフラッシュは6.5%","description":"ホールデムで、手札169種類ごとに「リバーを開き終えたときの最終役」の確率を全2,118,760通りのボードで数えた表。AAは36.0%がワンペアのまま・ツーペア以上は64.0%、AKsの最終役がフラッシュは6.5%（AKoは2.0%）、JTsはストレートが8.6%。","mainEntityOfPage":"https://rule.shoubu-lab.com/final-hand/","inLanguage":"ja","datePublished":"2026-11-28T19:30:00+09:00","dateModified":"2026-11-28T19:30:00+09:00","author":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"},"publisher":{"@type":"Organization","name":"勝負ラボ（Shoubu Lab）","url":"https://rule.shoubu-lab.com/about"}}</script>
+<link rel="stylesheet" href="/_legal.css">
+<!-- GA4 host-guard J347: 本番ホスト以外(localhost/pages.dev/プレビュー)では計測を送らない -->
+<script>(function(){var w=window;w.dataLayer=w.dataLayer||[];w.gtag=function(){w.dataLayer.push(arguments);};if(!/(^|\.)shoubu-lab\.com$/.test(location.hostname))return;gtag('js',new Date());gtag('config','G-2VF02QTTNV');var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=G-2VF02QTTNV';document.head.appendChild(s);})();</script>
+<script src="/oc.js" defer></script>
+<style>
+/* === 勝負ラボ 共通ツールナビ (SL-TOOLS-NAV v1) === */
+.sl-tools{
+  --slt-ink:var(--text,var(--ink,var(--txt,var(--d-text,#eef2ff))));
+  --slt-sub:var(--sub,var(--ink-dim,var(--d-text-muted,#8b96c9)));
+  --slt-line:var(--border,var(--line,var(--d-line,#2a3566)));
+  --slt-acc:var(--gold,var(--warn,#ffd23e));
+  margin:32px 0 20px;padding:18px 0 2px;
+  border-top:1px solid var(--slt-line);
+}
+.sl-tools__lead{margin:0 0 12px;padding:0;font-size:16px;font-weight:700;line-height:1.3;color:var(--slt-acc);}
+.sl-tools__list{list-style:none;margin:0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+.sl-tools__list li{margin:0;padding:0;}
+.sl-tools__list li::before{content:none;}
+.sl-tools a,.sl-tools .sl-tools__cur{
+  display:flex;flex-direction:column;justify-content:center;gap:3px;
+  min-height:48px;padding:11px 14px;border-radius:12px;
+  border:1px solid var(--slt-line);background:rgba(0,0,0,.28);
+  color:var(--slt-ink);text-decoration:none;margin:0;
+}
+.sl-tools a:hover{border-color:var(--slt-acc);background:rgba(0,0,0,.45);}
+.sl-tools .sl-tools__cur{border-style:dashed;}
+.sl-tools__t{font-size:16px;font-weight:700;line-height:1.3;}
+.sl-tools__d{font-size:14px;line-height:1.8;color:var(--slt-sub);}
+@media(max-width:420px){.sl-tools__list{grid-template-columns:1fr;}}
+</style>
+<style>
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.tw table{min-width:560px;margin:0}
+.tw.w2 table{min-width:420px}
+.tw::before{content:"表は横にスクロールできます →";display:block;font-size:.875rem;line-height:1.8;color:var(--sub)}
+
+.tw.st td,.tw.st th,.tw.w2 th{white-space:nowrap}
+.tw caption{text-align:left}
+.num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.cd{white-space:nowrap}
+.r{color:#ff8f9a}
+.lead{font-size:1.0625rem}
+.meta{color:var(--sub);font-size:.9375rem;margin:0 0 20px}
+.key{background:var(--panel2);border-radius:16px;padding:14px 16px;margin:0 0 16px}
+.key p{margin:0}
+.cta{display:inline-block;min-height:56px;line-height:56px;padding:0 28px;border-radius:9999px;background:var(--cyan);color:#101018;font-weight:700;text-decoration:none}
+.bg{margin:0 0 14px}
+.bn{margin:0 0 2px;font-weight:700;font-size:1rem}
+.br{display:flex;align-items:center;gap:8px;font-size:.9375rem;line-height:1.7}
+.bl{flex:0 0 5.8em;color:var(--sub)}
+.bt{flex:1;display:block;background:var(--panel2);border-radius:9999px;height:10px;overflow:hidden}
+.bt i{display:block;height:10px;border-radius:9999px;background:var(--cyan)}
+.bv{flex:0 0 5.6em;text-align:right;font-variant-numeric:tabular-nums}
+figure{margin:8px 0 16px}
+figcaption{color:var(--sub);font-size:.9375rem;margin-top:6px}
+.toc{background:var(--panel);border-radius:16px;padding:14px 16px;margin:0 0 8px}
+.tocT{font-weight:700;margin:0 0 4px}
+.toc ol{margin:0;padding-left:22px}
+.toc a{display:inline-block;padding:10px 0}
+/* J363: 見出し・目次の改行（文節で折る・孤立文字を防ぐ）／PCの本文行長を45字以内に */
+h2,h3,.toc a{word-break:auto-phrase;text-wrap:pretty}
+@media(min-width:900px){article>p,article>ul,article>ol{max-width:44em}}
+@media(min-width:640px){.tw.st th,.tw.st td{padding:10px 8px}}
+.src li{overflow-wrap:anywhere}
+.tw.nr th[scope=row]{white-space:nowrap}
+.ex{margin:0 0 6px;font-weight:700}
+/* wave3: 行見出しを折り返して、数字の列を最初の画面に出す */
+.tw.rw th,.tw.rw td{white-space:normal}
+.tw.rw td.num{white-space:nowrap}
+.tw.rw th[scope=row]{min-width:8.5em;max-width:13em}
+.tw.rw th[scope=col]{min-width:4.5em;vertical-align:bottom}
+.tw.rw caption{white-space:normal;min-width:16em}
+
+/* J701: 数字を大きく出すタイル（D7） */
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:8px 0 16px}
+.tl{background:var(--panel2);border-radius:16px;padding:14px 16px}
+.tl p{margin:0}
+.tn{font-size:2.25rem;line-height:1.2;font-weight:700;color:var(--cyan);font-variant-numeric:tabular-nums}
+.tt{font-size:.9375rem;line-height:1.7;color:var(--sub)}
+.tiles figcaption{grid-column:1/-1}
+.cm{display:block;font-size:.875rem;font-weight:400;color:var(--sub)}
+@media(max-width:420px){.tn{font-size:2rem}}
+</style>
+</head>
+<body>
+<header><a href="/">ポーカー・トレーナー ♥♠</a></header>
+<main>
+<article>
+<p class="meta">公開 2026年11月28日｜<a href="/about">勝負ラボ（Shoubu Lab）個人運営</a>｜学習用の解説です。お金を賭けることは<a href="/disclaimer">勧めません</a></p>
+<h1>手札別・リバーまでの最終役の確率｜AAはワンペアのままが36%、スーテッドのフラッシュは6.5%</h1>
+<figure class="eye"><img src="/img/eye_table.webp" srcset="/img/eye_table-640.webp 640w, /img/eye_table.webp 1024w" sizes="(max-width:760px) 100vw, 728px" width="1024" height="576" fetchpriority="high" alt="緑のフェルトのポーカーテーブルを真上から見た図"><figcaption>画像はイメージ（AI生成のイラスト）</figcaption></figure>
+<div class="key"><p class="lead">結論：AAでも、リバーまで開いた最終役がワンペアのままの確率は36.0%です。ツーペア以上は64.0%。AKsの最終役がフラッシュになる確率は6.5%で、同じAKでもオフスート（AKo）の2.0%の約3.3倍です。数字は、ボードの全2,118,760通りを数え上げた値です。</p></div>
+<p>「スーテッドは何%でフラッシュになるのか」「AAは最後に何の役になるのか」。この数字は、ポーカーの確率の解説にあまり載っていません。載っているのは、手札を決めずに7枚を配ったときの確率（フラッシュが3.03%など）です。</p><p>この記事では、手札169種類ごとに、リバーまで全部開いたときの最終役を数えて表にしました。同じ数え方で、全169種類を平均すると、公開されている7枚の確率と全部の役で一致します。</p><p>勝率は<a href="/hands/">169通りの勝率表</a>、7枚の役の出方は<a href="/yaku/">ポーカーの役の強さ一覧</a>、フロップまでの話は<a href="/flop-hit/">フロップのヒット確率</a>に書きました。この記事は、その間の「手札を決めたうえで、最後に何の役になるか」を扱います。</p>
+<nav class="toc" aria-label="目次"><p class="tocT">目次</p><ol>
+<li><a href="#h-concl">先に結論です。</a></li>
+<li><a href="#h-table">代表9ハンドの最終役の表</a></li>
+<li><a href="#h-pair">ペアの手：AAでも36%はワンペアのまま</a></li>
+<li><a href="#h-suit">スーテッド：フラッシュは約3.3倍</a></li>
+<li><a href="#h-conn">つながり：JToのストレートは9.2%</a></li>
+<li><a href="#h-limit">この数字の使いどころと限界</a></li>
+<li><a href="#h-how">この数字の数え方と、確かめたこと</a></li>
+<li><a href="#h-src">参考にした資料</a></li>
+<li><a href="#h-end">まとめと次の一歩</a></li>
+<li><a href="#h-faq">よくある質問</a></li>
+</ol></nav>
+
+<h2 id="h-concl">先に結論です。</h2>
+<figure class="tiles"><div class="tl"><p class="tn">36.0%</p><p class="tt">AAがワンペアのまま終わる確率</p></div><div class="tl"><p class="tn">64.0%</p><p class="tt">AAがツーペア以上になる確率</p></div><div class="tl"><p class="tn">6.5%</p><p class="tt">AKsの最終役がフラッシュの確率</p></div><div class="tl"><p class="tn">2.0%</p><p class="tt">AKoの最終役がフラッシュの確率</p></div><figcaption>リバー（5枚目のボード）まで全部開いたあとの最終役。全2,118,760通りのボードを数えた値です。</figcaption></figure>
+<ul>
+<li>AAの最終役は、ワンペアのままが36.0%、ツーペアが39.7%、スリーカードが11.8%、フルハウスが8.5%です。ツーペア以上は64.0%です。</li>
+<li>AKsの最終役がフラッシュになるのは6.53%、AKoは1.96%です。スーテッドは、オフスートの約3.3倍です。</li>
+<li>JTsの最終役がストレートになるのは8.62%、AAは1.22%です。つながったハンドは、AAの約7倍のストレートになります。</li>
+</ul>
+<p>※最終役は、手札2枚とボード5枚の合計7枚から作れる、いちばん強い役です。ボードだけでできた役も含みます。相手の手や、リバーまで残るかどうかは考えていません。</p>
+
+<h2 id="h-table">代表9ハンドの最終役の表</h2>
+<p><strong>AAとJTsの「ツーペア以上」はそれぞれ64.0%と43.6%で、72oは34.2%です。</strong>9つのハンドを、役ごとに並べたのが次の表です。カッコ内は、そのハンドの組み合わせ数です。</p>
+<div class="tw rw"><table><caption>手札別・リバーまでに最終役が各役になる確率（%）</caption><tr><th scope="col">手札</th><th scope="col" style="white-space:nowrap">ハイカード</th><th scope="col" style="white-space:nowrap">ワンペア</th><th scope="col" style="white-space:nowrap">ツーペア</th><th scope="col" style="white-space:nowrap">スリーカード</th><th scope="col" style="white-space:nowrap">ストレート</th><th scope="col" style="white-space:nowrap">フラッシュ</th><th scope="col" style="white-space:nowrap">フルハウス</th><th scope="col" style="white-space:nowrap">フォーカード</th><th scope="col" style="white-space:nowrap">ストレートフラッシュ</th></tr><tr><th scope="row">AA<span class="cm">（6通り）</span></th><td class="num">0.00</td><td class="num">35.98</td><td class="num">39.67</td><td class="num">11.77</td><td class="num">1.22</td><td class="num">1.96</td><td class="num">8.55</td><td class="num">0.84</td><td class="num">0.01</td></tr><tr><th scope="row">77<span class="cm">（6通り）</span></th><td class="num">0.00</td><td class="num">35.18</td><td class="num">39.45</td><td class="num">11.70</td><td class="num">2.30</td><td class="num">1.95</td><td class="num">8.55</td><td class="num">0.84</td><td class="num">0.02</td></tr><tr><th scope="row">AKs<span class="cm">（4通り）</span></th><td class="num">18.22</td><td class="num">43.27</td><td class="num">22.14</td><td class="num">4.34</td><td class="num">3.09</td><td class="num">6.53</td><td class="num">2.22</td><td class="num">0.13</td><td class="num">0.05</td></tr><tr><th scope="row">AKo<span class="cm">（12通り）</span></th><td class="num">19.72</td><td class="num">45.57</td><td class="num">22.66</td><td class="num">4.43</td><td class="num">3.30</td><td class="num">1.96</td><td class="num">2.22</td><td class="num">0.13</td><td class="num">0.01</td></tr><tr><th scope="row">JTs<span class="cm">（4通り）</span></th><td class="num">15.85</td><td class="num">40.57</td><td class="num">21.77</td><td class="num">4.26</td><td class="num">8.62</td><td class="num">6.38</td><td class="num">2.22</td><td class="num">0.13</td><td class="num">0.20</td></tr><tr><th scope="row">54s<span class="cm">（4通り）</span></th><td class="num">15.85</td><td class="num">40.57</td><td class="num">21.77</td><td class="num">4.26</td><td class="num">8.62</td><td class="num">6.38</td><td class="num">2.22</td><td class="num">0.13</td><td class="num">0.20</td></tr><tr><th scope="row">A5s<span class="cm">（4通り）</span></th><td class="num">17.58</td><td class="num">42.87</td><td class="num">22.14</td><td class="num">4.34</td><td class="num">4.14</td><td class="num">6.52</td><td class="num">2.22</td><td class="num">0.13</td><td class="num">0.06</td></tr><tr><th scope="row">T9o<span class="cm">（12通り）</span></th><td class="num">17.19</td><td class="num">42.73</td><td class="num">22.27</td><td class="num">4.35</td><td class="num">9.13</td><td class="num">1.95</td><td class="num">2.22</td><td class="num">0.13</td><td class="num">0.02</td></tr><tr><th scope="row">72o<span class="cm">（12通り）</span></th><td class="num">19.76</td><td class="num">46.00</td><td class="num">22.79</td><td class="num">4.45</td><td class="num">2.67</td><td class="num">1.96</td><td class="num">2.22</td><td class="num">0.13</td><td class="num">0.02</td></tr></table></div>
+<p>※各行の合計は100%です（四捨五入で±0.01ずれます）。ストレートフラッシュはロイヤルフラッシュを含みます。ペアの手（AA・77）は、ハイカードの欄が0です。</p>
+<ul>
+<li>ハイカードで終わるのは、72oが19.8%、AKoが19.7%、JTsが15.8%です。ペアの手は0%です。</li>
+<li>AKo・72oの最終役は、ほぼ同じ分布です。違いはストレートで、AKoが3.30%、72oが2.67%です。</li>
+<li>フォーカードは、ペアのハンドが0.84%、ペア以外は0.13%です。</li>
+</ul>
+<p>この表の数字を、全部の手札で平均したのが下の表です。公開されている7枚の度数と、全部の役で一致しました。</p>
+<div class="tw rw"><table><caption>全169種類を平均した値（Wikipediaの7枚の度数と全役で一致）</caption><tr><th scope="col">役</th><th scope="col">度数（7枚の組み合わせ）</th><th scope="col">確率</th></tr><tr><th scope="row">ハイカード</th><td class="num">23,294,460</td><td class="num">17.412%</td></tr><tr><th scope="row">ワンペア</th><td class="num">58,627,800</td><td class="num">43.823%</td></tr><tr><th scope="row">ツーペア</th><td class="num">31,433,400</td><td class="num">23.496%</td></tr><tr><th scope="row">スリーカード</th><td class="num">6,461,620</td><td class="num">4.830%</td></tr><tr><th scope="row">ストレート</th><td class="num">6,180,020</td><td class="num">4.619%</td></tr><tr><th scope="row">フラッシュ</th><td class="num">4,047,644</td><td class="num">3.025%</td></tr><tr><th scope="row">フルハウス</th><td class="num">3,473,184</td><td class="num">2.596%</td></tr><tr><th scope="row">フォーカード</th><td class="num">224,848</td><td class="num">0.168%</td></tr><tr><th scope="row">ストレートフラッシュ</th><td class="num">41,584</td><td class="num">0.031%</td></tr></table></div>
+<p>※度数は7枚の組み合わせ（133,784,560通り）の中の件数です。手札2枚の選び方は21通りあるので、この記事の数え上げの合計は、この度数の21倍になります。</p>
+
+<h2 id="h-pair">ペアの手：AAでも36%はワンペアのまま</h2>
+<p><strong>AAの最終役は、36.0%がワンペアのままです。ツーペア以上になるのは64.0%です。</strong>ペアを持っていると、ボードにペアが出るか、同じ数字が出ないと、役は強くなりません。</p>
+<figure><div class="bg"><p class="bn">AA</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:64.02%"></i></span><span class="bv">64.0%</span></div></div><div class="bg"><p class="bn">77</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:64.82%"></i></span><span class="bv">64.8%</span></div></div><div class="bg"><p class="bn">JTs</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:43.58%"></i></span><span class="bv">43.6%</span></div></div><div class="bg"><p class="bn">AKs</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:38.51%"></i></span><span class="bv">38.5%</span></div></div><div class="bg"><p class="bn">AKo</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:34.71%"></i></span><span class="bv">34.7%</span></div></div><div class="bg"><p class="bn">72o</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:34.24%"></i></span><span class="bv">34.2%</span></div></div><figcaption>※最終役がツーペア以上になる確率。バーは0〜100%。ペアの手（AA・77）は、他の手より約30ポイント高い。</figcaption></figure>
+<ul>
+<li>AAのツーペア以上は64.0%、77は64.8%で、ほぼ同じです。AKsは38.5%、72oは34.2%です。</li>
+<li>ペアの手は、ツーペア以上になる確率が、そうでない手より約30ポイント高くなります。</li>
+<li>AAとKKと22は、役の確率が全部同じです。ペアの数字が大きくても、最終役の確率は変わりません。</li>
+</ul>
+<p>変わるのはストレートだけです。TT・55が2.35%で最も高く、AA・KK・22が1.22%で最も低くなります。</p>
+<figure><div class="bg"><p class="bn">AA・KK・22</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:1.22%"></i></span><span class="bv">1.22%</span></div></div><div class="bg"><p class="bn">QQ・33</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:1.59%"></i></span><span class="bv">1.59%</span></div></div><div class="bg"><p class="bn">JJ・44</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:1.97%"></i></span><span class="bv">1.97%</span></div></div><div class="bg"><p class="bn">TT・55</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:2.35%"></i></span><span class="bv">2.35%</span></div></div><div class="bg"><p class="bn">99・88・77・66</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:2.30%"></i></span><span class="bv">2.30%</span></div></div><figcaption>※ペアの手の最終役がストレートになる確率。ペアの位置で変わる。</figcaption></figure>
+<div class="tw rw"><table><caption>ペアの手の最終役（ペアの位置で変わるのはストレートだけ）</caption><tr><th scope="col" style="white-space:nowrap">ペア</th><th scope="col" style="white-space:nowrap">ワンペア</th><th scope="col" style="white-space:nowrap">ツーペア</th><th scope="col" style="white-space:nowrap">スリーカード</th><th scope="col" style="white-space:nowrap">ストレート</th><th scope="col" style="white-space:nowrap">フルハウス</th></tr><tr><th scope="row" style="white-space:nowrap">AA・KK・22</th><td class="num">35.98</td><td class="num">39.67</td><td class="num">11.77</td><td class="num">1.22</td><td class="num">8.55</td></tr><tr><th scope="row" style="white-space:nowrap">QQ・33</th><td class="num">35.70</td><td class="num">39.60</td><td class="num">11.75</td><td class="num">1.59</td><td class="num">8.55</td></tr><tr><th scope="row" style="white-space:nowrap">JJ・44</th><td class="num">35.42</td><td class="num">39.52</td><td class="num">11.73</td><td class="num">1.97</td><td class="num">8.55</td></tr><tr><th scope="row" style="white-space:nowrap">TT・55</th><td class="num">35.14</td><td class="num">39.45</td><td class="num">11.70</td><td class="num">2.35</td><td class="num">8.55</td></tr><tr><th scope="row" style="white-space:nowrap">99・88・77・66</th><td class="num">35.18</td><td class="num">39.45</td><td class="num">11.70</td><td class="num">2.30</td><td class="num">8.55</td></tr></table></div>
+<p>※AA・KK・22のストレートは1.22%、TT・55は2.35%、99・88・77・66は2.30%です。表の他の列（ワンペア・ツーペアなど）は、同じグループなら完全に同じ値です。</p>
+
+<h2 id="h-suit">スーテッド：フラッシュは約3.3倍</h2>
+<p><strong>スーテッドの最終役がフラッシュになるのは約6.5%、オフスートは約2.0%です。</strong>AKsなら6.53%、AKoなら1.96%です。</p>
+<figure><div class="bg"><p class="bn">AKs（スーテッド）</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:6.53%"></i></span><span class="bv">6.53%</span></div></div><div class="bg"><p class="bn">JTs（スーテッド）</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:6.38%"></i></span><span class="bv">6.38%</span></div></div><div class="bg"><p class="bn">A5s（スーテッド）</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:6.52%"></i></span><span class="bv">6.52%</span></div></div><div class="bg"><p class="bn">AKo（オフスート）</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:1.96%"></i></span><span class="bv">1.96%</span></div></div><div class="bg"><p class="bn">72o（オフスート）</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:1.96%"></i></span><span class="bv">1.96%</span></div></div><div class="bg"><p class="bn">AA（ペア）</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:1.96%"></i></span><span class="bv">1.96%</span></div></div><figcaption>※最終役がフラッシュ（ストレートフラッシュは別）になる確率。バーは0〜100%。</figcaption></figure>
+<ul>
+<li>オフスートがフラッシュになる（約2.0%）のは、ボードに同じマークが4枚以上出たときだけです。</li>
+<li>スーテッドは、ボードに同じマークが3枚出れば完成します。フラッシュに入る分、ストレートなど他の役が少し減ります。</li>
+<li>AKsとJTsのフラッシュは、6.53%と6.38%でほぼ同じです。フラッシュの確率は、数字の大きさでは決まりません。</li>
+</ul>
+<p>スーテッドの価値を、フラッシュの確率だけで見ると、約4.6ポイントの上乗せです。ストレートフラッシュは、JTsで0.20%です。</p>
+
+<h2 id="h-conn">つながり：JToのストレートは9.2%</h2>
+<p><strong>最終役がストレートになる確率が最も高いのは、JToなどの9.18%です。最も低いのはAA・KK・22の1.22%です。</strong>ストレートの確率は、手札のつながり方で決まります。</p>
+<figure><div class="bg"><p class="bn">JTo</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:9.18%"></i></span><span class="bv">9.18%</span></div></div><div class="bg"><p class="bn">JTs</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:8.62%"></i></span><span class="bv">8.62%</span></div></div><div class="bg"><p class="bn">54s</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:8.62%"></i></span><span class="bv">8.62%</span></div></div><div class="bg"><p class="bn">AKo</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:3.30%"></i></span><span class="bv">3.30%</span></div></div><div class="bg"><p class="bn">AKs</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:3.09%"></i></span><span class="bv">3.09%</span></div></div><div class="bg"><p class="bn">72o</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:2.67%"></i></span><span class="bv">2.67%</span></div></div><div class="bg"><p class="bn">AA</p><div class="br"><span class="bl"></span><span class="bt"><i style="width:1.22%"></i></span><span class="bv">1.22%</span></div></div><figcaption>※最終役がストレート（フラッシュやストレートフラッシュに入るものは除く）になる確率。バーは0〜100%。</figcaption></figure>
+<ul>
+<li>JToは9.18%、JTsは8.62%です。同じつながりでも、スーテッドは約0.6ポイント少なくなります。</li>
+<li>少ない理由は、ストレートの一部が、フラッシュやストレートフラッシュとして数えられるからです。</li>
+<li>AKo・AKsのストレートは、3.30%と3.09%です。AとKは端の数字で、ストレートに使える並びが少ないハンドです。</li>
+<li>72oは2.67%で、AKoより約0.6ポイント低くなります。</li>
+</ul>
+<p>169種類のハンドは、最終役の確率が完全に同じになるものを1つにまとめると、72通りになります。ペア・スーテッド・つながり方の3つが、確率の違いのほとんどを決めています。</p>
+
+<h2 id="h-limit">この数字の使いどころと限界</h2>
+<ul>
+<li>最終役の確率は、リバーを見るまでの確率です。実戦では、フロップやターンで降りることがあるので、ここで数えた役を見られるとは限りません。</li>
+<li>相手の役は考えていません。強い役でも、相手がもっと強い役なら負けます。勝つかどうかは<a href="/hands/">169通りの勝率表</a>と<a href="/winning-hand/">勝つ役の分布</a>を見てください。</li>
+<li>ボードだけでできる役（ボードにフルハウスなど）も数えています。手札が役に関わらないことがあります。</li>
+<li><strong>これは確率の仕組みを知るための解説で、お金を賭けて勝つための方法ではありません。</strong>実際の判断練習は、仮想チップで遊べる<a href="/">ポーカー・トレーナー</a>でできます。</li>
+</ul>
+
+<h2 id="h-how">この数字の数え方と、確かめたこと</h2>
+<p>手札2枚を決めて、残りの50枚から5枚を選ぶ組み合わせ（2,118,760通り）を全部並べ、7枚から作れる最強の役を数えました。乱数は使っていません。169種類のうち、同じ形（ペア・スーテッド・オフスート）の手は、マークを入れ替えても同じ数になります。</p>
+<p>確かめたこと。</p>
+<ol>
+<li>全169種類で、9つの役の件数の合計が2,118,760通りになりました。ハンドの組み合わせ数の合計も1,326通りです。</li>
+<li>別の方法で数え直しました。C言語の数え上げとは別に、Pythonで別の判定プログラムを書き、AA・22・65oの3つを数え直して、9つの役の件数が全部一致しました。</li>
+<li>全169種類を、組み合わせ数で重みづけして足すと、Wikipedia「Poker probability」の7枚の度数（ハイカード23,294,460など）と、全部の役で一致しました。手札2枚の選び方は21通りなので、数え上げの合計は度数の21倍になります。</li>
+</ol>
+
+<h2 id="h-src">参考にした資料</h2>
+<ul class="src">
+<li>Wikipedia「Poker probability」<a href="https://en.wikipedia.org/wiki/Poker_probability">https://en.wikipedia.org/wiki/Poker_probability</a> （ホールデムの7枚のbest-5の度数と確率。2026年11月28日に確認）</li>
+<li>wkwkcorp.com「ポーカーの確率を徹底解説！テキサスホールデムの確率を覚えよう」<a href="https://wkwkcorp.com/poker-probability/">https://wkwkcorp.com/poker-probability/</a> （全体の役の確率とスターティングハンドの配られる確率の表。手札別の最終役の表は無し。2026年11月28日に確認）</li>
+</ul>
+<p>検索した範囲では、手札ごとに最終役の確率を並べた日本語の表は見つかりませんでした（網羅的な調査ではありません）。</p>
+
+<h2 id="h-end">まとめと次の一歩</h2>
+<ul>
+<li>AAの最終役は、36.0%がワンペアのままです。ツーペア以上は64.0%です。</li>
+<li>スーテッドの最終役がフラッシュになる確率は約6.5%で、オフスートの約3.3倍です。</li>
+<li>ストレートは、つながったハンド（JToで9.2%）が高く、AA・KK・22（1.2%）が低くなります。</li>
+</ul>
+<p>次の1アクションは、<a href="/hands/">169通りの勝率表</a>で、気になるハンドの勝率と、この表の最終役を見比べることです。続きは次の3本です。</p>
+<ul>
+<li><a href="/yaku/">ポーカーの役の強さ一覧と、出る確率</a></li>
+<li><a href="/flop-hit/">ポケットペアがフロップでセットになる確率</a></li>
+<li><a href="/combos/">コンボ数とブロッカー</a></li>
+</ul>
+<p><a class="cta" href="/hands/">169通りの勝率表を見る</a></p>
+
+<h2 id="h-faq">よくある質問</h2>
+<ul class="faq">
+<li><strong>AAは、リバーまでに何の役になりますか？</strong><br>ワンペアのままが36.0%、ツーペアが39.7%、スリーカードが11.8%、フルハウスが8.5%です。ツーペア以上は64.0%です。</li>
+<li><strong>スーテッドはリバーまでに何%でフラッシュになりますか？</strong><br>最終役がフラッシュ（ストレートフラッシュは別）になるのは約6.5%です（AKs6.53%・JTs6.38%）。オフスートは約2.0%です。</li>
+<li><strong>ストレートになる確率がいちばん高い手札は？</strong><br>JToなど、つながったオフスートで9.18%です。同じつながりでスーテッドだと、ストレートの一部がフラッシュに入るので、JTsは8.62%に下がります。</li>
+<li><strong>AAとKKで最終役の確率は違いますか？</strong><br>違いません。AA・KK・22は、9つの役すべてで同じ確率です。ペアの数字が大きいかどうかは、最終役の確率に関係しません。</li>
+<li><strong>この数字は実戦でそのまま使えますか？</strong><br>そのままは使えません。リバーまで見るときの確率で、相手の役は考えていません。勝つ確率は別の表を見てください。</li>
+</ul>
+</article>
+</main>
+<!-- SL-TOOLS-NAV v1 -->
+<nav class="sl-tools" aria-label="勝負ラボのツール">
+  <p class="sl-tools__lead">勝負ラボのツール</p>
+  <ul class="sl-tools__list">
+  <li><a href="https://shoubu-lab.com/" data-sl="gto"><span class="sl-tools__t">GTO Coach</span><span class="sl-tools__d">ポーカーの正解手を全ストリートで練習</span></a></li>
+  <li><a href="https://rule.shoubu-lab.com/" data-sl="rule"><span class="sl-tools__t">ポーカー ルール入門</span><span class="sl-tools__d">役・進行・用語をゼロから対人デビューまで</span></a></li>
+  <li><a href="https://bj.shoubu-lab.com/" data-sl="bj"><span class="sl-tools__t">ブラックジャック</span><span class="sl-tools__d">ベーシックストラテジー＆カウンティング</span></a></li>
+  <li><a href="https://shoubu-lab.com/betting/" data-sl="betting"><span class="sl-tools__t">ベッティングシステム</span><span class="sl-tools__d">マーチンゲール法ほか5法の破綻を実測</span></a></li>
+  <li><a href="https://shoubu-lab.com/edge/" data-sl="edge"><span class="sl-tools__t">還元率ランキング</span><span class="sl-tools__d">控除率・期待値・ケリー基準の計算機</span></a></li>
+  <li><a href="https://shoubu-lab.com/koei/" data-sl="koei"><span class="sl-tools__t">公営競技の資金管理</span><span class="sl-tools__d">競馬・競艇で同じ手法を検証する</span></a></li>
+  <li><a href="https://shoubu-lab.com/hall/" data-sl="hall"><span class="sl-tools__t">ホールデータラボ</span><span class="sl-tools__d">城南8店の実測値と、外れた検証記録</span></a></li>
+  </ul>
+</nav>
+<script>
+/* SL-TOOLS-NAV v1: ツール間の回遊をGA4に送る */
+document.addEventListener('click',function(e){
+  var a=e.target&&e.target.closest?e.target.closest('.sl-tools a[data-sl]'):null;
+  if(!a||typeof window.gtag!=='function')return;
+  window.gtag('event','tool_nav_click',{tool:a.getAttribute('data-sl'),from_host:location.hostname,link_url:a.href});
+},true);
+</script>
+<footer>
+<a href="/">ホーム</a>｜<a href="/privacy">プライバシーポリシー</a>｜<a href="/disclaimer">免責事項</a>｜<a href="/about">運営者情報</a>｜<a href="/contact">お問い合わせ</a>
+</footer>
+</body>
+</html>
